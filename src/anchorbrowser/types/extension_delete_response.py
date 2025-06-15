@@ -3,17 +3,10 @@
 from typing import Optional
 
 from .._models import BaseModel
+from .shared.success_response import SuccessResponse
 
-__all__ = ["ExtensionDeleteResponse", "Data", "DataData"]
-
-
-class DataData(BaseModel):
-    status: Optional[str] = None
-
-
-class Data(BaseModel):
-    data: Optional[DataData] = None
+__all__ = ["ExtensionDeleteResponse"]
 
 
 class ExtensionDeleteResponse(BaseModel):
-    data: Optional[Data] = None
+    data: Optional[SuccessResponse] = None

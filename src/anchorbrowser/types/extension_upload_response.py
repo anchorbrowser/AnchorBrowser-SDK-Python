@@ -1,31 +1,14 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import Optional
 from datetime import datetime
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .extension_manifest import ExtensionManifest
 
-__all__ = ["ExtensionUploadResponse", "Data", "DataManifest"]
-
-
-class DataManifest(BaseModel):
-    description: Optional[str] = None
-
-    manifest_version: Optional[int] = None
-
-    name: Optional[str] = None
-
-    permissions: Optional[List[str]] = None
-
-    version: Optional[str] = None
-
-    if TYPE_CHECKING:
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> object: ...
+__all__ = ["ExtensionUploadResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -35,7 +18,7 @@ class Data(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """Timestamp when the extension was created"""
 
-    manifest: Optional[DataManifest] = None
+    manifest: Optional[ExtensionManifest] = None
 
     name: Optional[str] = None
     """Extension name"""

@@ -34,10 +34,10 @@ client = Anchorbrowser(
     api_key=os.environ.get("ANCHORBROWSER_API_KEY"),  # This is the default and can be omitted
 )
 
-profile = client.profiles.create(
+success_response = client.profiles.create(
     name="REPLACE_ME",
 )
-print(profile.data)
+print(success_response.data)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -60,10 +60,10 @@ client = AsyncAnchorbrowser(
 
 
 async def main() -> None:
-    profile = await client.profiles.create(
+    success_response = await client.profiles.create(
         name="REPLACE_ME",
     )
-    print(profile.data)
+    print(success_response.data)
 
 
 asyncio.run(main())

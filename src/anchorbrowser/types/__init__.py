@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .shared import SuccessResponse as SuccessResponse
+from .extension_manifest import ExtensionManifest as ExtensionManifest
 from .session_goto_params import SessionGotoParams as SessionGotoParams
 from .session_paste_params import SessionPasteParams as SessionPasteParams
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
@@ -14,11 +16,7 @@ from .session_scroll_params import SessionScrollParams as SessionScrollParams
 from .session_paste_response import SessionPasteResponse as SessionPasteResponse
 from .extension_list_response import ExtensionListResponse as ExtensionListResponse
 from .extension_upload_params import ExtensionUploadParams as ExtensionUploadParams
-from .profile_create_response import ProfileCreateResponse as ProfileCreateResponse
-from .profile_delete_response import ProfileDeleteResponse as ProfileDeleteResponse
-from .profile_update_response import ProfileUpdateResponse as ProfileUpdateResponse
 from .session_create_response import SessionCreateResponse as SessionCreateResponse
-from .session_delete_response import SessionDeleteResponse as SessionDeleteResponse
 from .session_scroll_response import SessionScrollResponse as SessionScrollResponse
 from .extension_delete_response import ExtensionDeleteResponse as ExtensionDeleteResponse
 from .extension_upload_response import ExtensionUploadResponse as ExtensionUploadResponse

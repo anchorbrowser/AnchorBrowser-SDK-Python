@@ -76,8 +76,8 @@ from ...types.session_copy_response import SessionCopyResponse
 from ...types.session_goto_response import SessionGotoResponse
 from ...types.session_paste_response import SessionPasteResponse
 from ...types.session_create_response import SessionCreateResponse
-from ...types.session_delete_response import SessionDeleteResponse
 from ...types.session_scroll_response import SessionScrollResponse
+from ...types.shared.success_response import SuccessResponse
 from ...types.session_drag_and_drop_response import SessionDragAndDropResponse
 from ...types.session_retrieve_downloads_response import SessionRetrieveDownloadsResponse
 
@@ -178,7 +178,7 @@ class SessionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SessionDeleteResponse:
+    ) -> SuccessResponse:
         """
         Deletes the browser session associated with the provided browser session ID.
         Requires a valid API key for authentication.
@@ -199,7 +199,7 @@ class SessionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionDeleteResponse,
+            cast_to=SuccessResponse,
         )
 
     def copy(
@@ -589,7 +589,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SessionDeleteResponse:
+    ) -> SuccessResponse:
         """
         Deletes the browser session associated with the provided browser session ID.
         Requires a valid API key for authentication.
@@ -610,7 +610,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionDeleteResponse,
+            cast_to=SuccessResponse,
         )
 
     async def copy(

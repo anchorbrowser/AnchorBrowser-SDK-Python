@@ -2,14 +2,14 @@
 
 from typing import Optional
 
-from .._models import BaseModel
+from ..._models import BaseModel
 
-__all__ = ["ProfileDeleteResponse", "Data"]
+__all__ = ["SuccessResponse", "Data"]
 
 
 class Data(BaseModel):
     status: Optional[str] = None
 
 
-class ProfileDeleteResponse(BaseModel):
+class SuccessResponse(BaseModel):
     data: Optional[Data] = None
