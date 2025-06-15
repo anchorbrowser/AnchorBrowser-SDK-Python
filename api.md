@@ -1,24 +1,24 @@
+# Shared Types
+
+```python
+from anchorbrowser.types import SuccessResponse
+```
+
 # Profiles
 
 Types:
 
 ```python
-from anchorbrowser.types import (
-    ProfileCreateResponse,
-    ProfileRetrieveResponse,
-    ProfileUpdateResponse,
-    ProfileListResponse,
-    ProfileDeleteResponse,
-)
+from anchorbrowser.types import ProfileRetrieveResponse, ProfileListResponse
 ```
 
 Methods:
 
-- <code title="post /v1/profiles">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">create</a>(\*\*<a href="src/anchorbrowser/types/profile_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/profile_create_response.py">ProfileCreateResponse</a></code>
+- <code title="post /v1/profiles">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">create</a>(\*\*<a href="src/anchorbrowser/types/profile_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="get /v1/profiles/{name}">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">retrieve</a>(name) -> <a href="./src/anchorbrowser/types/profile_retrieve_response.py">ProfileRetrieveResponse</a></code>
-- <code title="put /v1/profiles/{name}">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">update</a>(name, \*\*<a href="src/anchorbrowser/types/profile_update_params.py">params</a>) -> <a href="./src/anchorbrowser/types/profile_update_response.py">ProfileUpdateResponse</a></code>
+- <code title="put /v1/profiles/{name}">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">update</a>(name, \*\*<a href="src/anchorbrowser/types/profile_update_params.py">params</a>) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="get /v1/profiles">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">list</a>() -> <a href="./src/anchorbrowser/types/profile_list_response.py">ProfileListResponse</a></code>
-- <code title="delete /v1/profiles/{name}">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">delete</a>(name) -> <a href="./src/anchorbrowser/types/profile_delete_response.py">ProfileDeleteResponse</a></code>
+- <code title="delete /v1/profiles/{name}">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">delete</a>(name) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 
 # Sessions
 
@@ -27,7 +27,6 @@ Types:
 ```python
 from anchorbrowser.types import (
     SessionCreateResponse,
-    SessionDeleteResponse,
     SessionCopyResponse,
     SessionDragAndDropResponse,
     SessionGotoResponse,
@@ -40,7 +39,7 @@ from anchorbrowser.types import (
 Methods:
 
 - <code title="post /v1/sessions">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">create</a>(\*\*<a href="src/anchorbrowser/types/session_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_create_response.py">SessionCreateResponse</a></code>
-- <code title="delete /v1/sessions/{session_id}">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">delete</a>(session_id) -> <a href="./src/anchorbrowser/types/session_delete_response.py">SessionDeleteResponse</a></code>
+- <code title="delete /v1/sessions/{session_id}">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">delete</a>(session_id) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/copy">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">copy</a>(session_id) -> <a href="./src/anchorbrowser/types/session_copy_response.py">SessionCopyResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/drag-and-drop">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">drag_and_drop</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_drag_and_drop_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_drag_and_drop_response.py">SessionDragAndDropResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/goto">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">goto</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_goto_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_goto_response.py">SessionGotoResponse</a></code>
@@ -54,12 +53,12 @@ Methods:
 Types:
 
 ```python
-from anchorbrowser.types.sessions import AllDeleteAllResponse, AllRetrieveStatusResponse
+from anchorbrowser.types.sessions import AllRetrieveStatusResponse
 ```
 
 Methods:
 
-- <code title="delete /v1/sessions/all">client.sessions.all.<a href="./src/anchorbrowser/resources/sessions/all.py">delete_all</a>() -> <a href="./src/anchorbrowser/types/sessions/all_delete_all_response.py">AllDeleteAllResponse</a></code>
+- <code title="delete /v1/sessions/all">client.sessions.all.<a href="./src/anchorbrowser/resources/sessions/all.py">delete_all</a>() -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="get /v1/sessions/all/status">client.sessions.all.<a href="./src/anchorbrowser/resources/sessions/all.py">retrieve_status</a>() -> <a href="./src/anchorbrowser/types/sessions/all_retrieve_status_response.py">AllRetrieveStatusResponse</a></code>
 
 ## Recordings
@@ -154,6 +153,7 @@ Types:
 
 ```python
 from anchorbrowser.types import (
+    ExtensionManifest,
     ExtensionRetrieveResponse,
     ExtensionListResponse,
     ExtensionDeleteResponse,

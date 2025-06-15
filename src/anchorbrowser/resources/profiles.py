@@ -19,9 +19,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.profile_list_response import ProfileListResponse
-from ..types.profile_create_response import ProfileCreateResponse
-from ..types.profile_delete_response import ProfileDeleteResponse
-from ..types.profile_update_response import ProfileUpdateResponse
+from ..types.shared.success_response import SuccessResponse
 from ..types.profile_retrieve_response import ProfileRetrieveResponse
 
 __all__ = ["ProfilesResource", "AsyncProfilesResource"]
@@ -61,7 +59,7 @@ class ProfilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProfileCreateResponse:
+    ) -> SuccessResponse:
         """Creates a new profile from a browser session.
 
         A Profile stores cookies, local
@@ -104,7 +102,7 @@ class ProfilesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProfileCreateResponse,
+            cast_to=SuccessResponse,
         )
 
     def retrieve(
@@ -154,7 +152,7 @@ class ProfilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProfileUpdateResponse:
+    ) -> SuccessResponse:
         """
         Updates the description or data of an existing profile using a browser session.
 
@@ -193,7 +191,7 @@ class ProfilesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProfileUpdateResponse,
+            cast_to=SuccessResponse,
         )
 
     def list(
@@ -225,7 +223,7 @@ class ProfilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProfileDeleteResponse:
+    ) -> SuccessResponse:
         """
         Deletes an existing profile by its name.
 
@@ -245,7 +243,7 @@ class ProfilesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProfileDeleteResponse,
+            cast_to=SuccessResponse,
         )
 
 
@@ -283,7 +281,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProfileCreateResponse:
+    ) -> SuccessResponse:
         """Creates a new profile from a browser session.
 
         A Profile stores cookies, local
@@ -326,7 +324,7 @@ class AsyncProfilesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProfileCreateResponse,
+            cast_to=SuccessResponse,
         )
 
     async def retrieve(
@@ -376,7 +374,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProfileUpdateResponse:
+    ) -> SuccessResponse:
         """
         Updates the description or data of an existing profile using a browser session.
 
@@ -415,7 +413,7 @@ class AsyncProfilesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProfileUpdateResponse,
+            cast_to=SuccessResponse,
         )
 
     async def list(
@@ -447,7 +445,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProfileDeleteResponse:
+    ) -> SuccessResponse:
         """
         Deletes an existing profile by its name.
 
@@ -467,7 +465,7 @@ class AsyncProfilesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProfileDeleteResponse,
+            cast_to=SuccessResponse,
         )
 
 

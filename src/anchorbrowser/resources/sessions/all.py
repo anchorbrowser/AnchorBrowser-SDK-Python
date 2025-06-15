@@ -14,7 +14,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.sessions.all_delete_all_response import AllDeleteAllResponse
+from ...types.shared.success_response import SuccessResponse
 from ...types.sessions.all_retrieve_status_response import AllRetrieveStatusResponse
 
 __all__ = ["AllResource", "AsyncAllResource"]
@@ -49,14 +49,14 @@ class AllResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AllDeleteAllResponse:
+    ) -> SuccessResponse:
         """Terminates all active browser sessions associated with the provided API key."""
         return self._delete(
             "/v1/sessions/all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AllDeleteAllResponse,
+            cast_to=SuccessResponse,
         )
 
     def retrieve_status(
@@ -111,14 +111,14 @@ class AsyncAllResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AllDeleteAllResponse:
+    ) -> SuccessResponse:
         """Terminates all active browser sessions associated with the provided API key."""
         return await self._delete(
             "/v1/sessions/all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AllDeleteAllResponse,
+            cast_to=SuccessResponse,
         )
 
     async def retrieve_status(

@@ -9,7 +9,8 @@ import pytest
 
 from tests.utils import assert_matches_type
 from anchorbrowser import Anchorbrowser, AsyncAnchorbrowser
-from anchorbrowser.types.sessions import AllDeleteAllResponse, AllRetrieveStatusResponse
+from anchorbrowser.types.shared import SuccessResponse
+from anchorbrowser.types.sessions import AllRetrieveStatusResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,7 +22,7 @@ class TestAll:
     @parametrize
     def test_method_delete_all(self, client: Anchorbrowser) -> None:
         all = client.sessions.all.delete_all()
-        assert_matches_type(AllDeleteAllResponse, all, path=["response"])
+        assert_matches_type(SuccessResponse, all, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -31,7 +32,7 @@ class TestAll:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         all = response.parse()
-        assert_matches_type(AllDeleteAllResponse, all, path=["response"])
+        assert_matches_type(SuccessResponse, all, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -41,7 +42,7 @@ class TestAll:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             all = response.parse()
-            assert_matches_type(AllDeleteAllResponse, all, path=["response"])
+            assert_matches_type(SuccessResponse, all, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -81,7 +82,7 @@ class TestAsyncAll:
     @parametrize
     async def test_method_delete_all(self, async_client: AsyncAnchorbrowser) -> None:
         all = await async_client.sessions.all.delete_all()
-        assert_matches_type(AllDeleteAllResponse, all, path=["response"])
+        assert_matches_type(SuccessResponse, all, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -91,7 +92,7 @@ class TestAsyncAll:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         all = await response.parse()
-        assert_matches_type(AllDeleteAllResponse, all, path=["response"])
+        assert_matches_type(SuccessResponse, all, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -101,7 +102,7 @@ class TestAsyncAll:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             all = await response.parse()
-            assert_matches_type(AllDeleteAllResponse, all, path=["response"])
+            assert_matches_type(SuccessResponse, all, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

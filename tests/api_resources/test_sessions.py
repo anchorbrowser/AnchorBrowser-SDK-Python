@@ -16,7 +16,6 @@ from anchorbrowser.types import (
     SessionGotoResponse,
     SessionPasteResponse,
     SessionCreateResponse,
-    SessionDeleteResponse,
     SessionScrollResponse,
     SessionDragAndDropResponse,
     SessionRetrieveDownloadsResponse,
@@ -27,6 +26,7 @@ from anchorbrowser._response import (
     StreamedBinaryAPIResponse,
     AsyncStreamedBinaryAPIResponse,
 )
+from anchorbrowser.types.shared import SuccessResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -104,7 +104,7 @@ class TestSessions:
         session = client.sessions.delete(
             "session_id",
         )
-        assert_matches_type(SessionDeleteResponse, session, path=["response"])
+        assert_matches_type(SuccessResponse, session, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -116,7 +116,7 @@ class TestSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = response.parse()
-        assert_matches_type(SessionDeleteResponse, session, path=["response"])
+        assert_matches_type(SuccessResponse, session, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -128,7 +128,7 @@ class TestSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = response.parse()
-            assert_matches_type(SessionDeleteResponse, session, path=["response"])
+            assert_matches_type(SuccessResponse, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -588,7 +588,7 @@ class TestAsyncSessions:
         session = await async_client.sessions.delete(
             "session_id",
         )
-        assert_matches_type(SessionDeleteResponse, session, path=["response"])
+        assert_matches_type(SuccessResponse, session, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -600,7 +600,7 @@ class TestAsyncSessions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         session = await response.parse()
-        assert_matches_type(SessionDeleteResponse, session, path=["response"])
+        assert_matches_type(SuccessResponse, session, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -612,7 +612,7 @@ class TestAsyncSessions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             session = await response.parse()
-            assert_matches_type(SessionDeleteResponse, session, path=["response"])
+            assert_matches_type(SuccessResponse, session, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

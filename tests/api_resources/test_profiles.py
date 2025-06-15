@@ -11,11 +11,9 @@ from tests.utils import assert_matches_type
 from anchorbrowser import Anchorbrowser, AsyncAnchorbrowser
 from anchorbrowser.types import (
     ProfileListResponse,
-    ProfileCreateResponse,
-    ProfileDeleteResponse,
-    ProfileUpdateResponse,
     ProfileRetrieveResponse,
 )
+from anchorbrowser.types.shared import SuccessResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -29,7 +27,7 @@ class TestProfiles:
         profile = client.profiles.create(
             name="my-profile",
         )
-        assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -41,7 +39,7 @@ class TestProfiles:
             source="session",
             store_cache=True,
         )
-        assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -53,7 +51,7 @@ class TestProfiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         profile = response.parse()
-        assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -65,7 +63,7 @@ class TestProfiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             profile = response.parse()
-            assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+            assert_matches_type(SuccessResponse, profile, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -117,7 +115,7 @@ class TestProfiles:
         profile = client.profiles.update(
             name="my-profile",
         )
-        assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -129,7 +127,7 @@ class TestProfiles:
             source="session",
             store_cache=True,
         )
-        assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -141,7 +139,7 @@ class TestProfiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         profile = response.parse()
-        assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -153,7 +151,7 @@ class TestProfiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             profile = response.parse()
-            assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
+            assert_matches_type(SuccessResponse, profile, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -199,7 +197,7 @@ class TestProfiles:
         profile = client.profiles.delete(
             "my-profile",
         )
-        assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -211,7 +209,7 @@ class TestProfiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         profile = response.parse()
-        assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -223,7 +221,7 @@ class TestProfiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             profile = response.parse()
-            assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+            assert_matches_type(SuccessResponse, profile, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -245,7 +243,7 @@ class TestAsyncProfiles:
         profile = await async_client.profiles.create(
             name="my-profile",
         )
-        assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -257,7 +255,7 @@ class TestAsyncProfiles:
             source="session",
             store_cache=True,
         )
-        assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -269,7 +267,7 @@ class TestAsyncProfiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         profile = await response.parse()
-        assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -281,7 +279,7 @@ class TestAsyncProfiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             profile = await response.parse()
-            assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+            assert_matches_type(SuccessResponse, profile, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -333,7 +331,7 @@ class TestAsyncProfiles:
         profile = await async_client.profiles.update(
             name="my-profile",
         )
-        assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -345,7 +343,7 @@ class TestAsyncProfiles:
             source="session",
             store_cache=True,
         )
-        assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -357,7 +355,7 @@ class TestAsyncProfiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         profile = await response.parse()
-        assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -369,7 +367,7 @@ class TestAsyncProfiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             profile = await response.parse()
-            assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
+            assert_matches_type(SuccessResponse, profile, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -415,7 +413,7 @@ class TestAsyncProfiles:
         profile = await async_client.profiles.delete(
             "my-profile",
         )
-        assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -427,7 +425,7 @@ class TestAsyncProfiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         profile = await response.parse()
-        assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+        assert_matches_type(SuccessResponse, profile, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -439,7 +437,7 @@ class TestAsyncProfiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             profile = await response.parse()
-            assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+            assert_matches_type(SuccessResponse, profile, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
