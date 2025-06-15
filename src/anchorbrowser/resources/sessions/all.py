@@ -15,7 +15,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.shared.success_response import SuccessResponse
-from ...types.sessions.all_retrieve_status_response import AllRetrieveStatusResponse
+from ...types.sessions.all_status_response import AllStatusResponse
 
 __all__ = ["AllResource", "AsyncAllResource"]
 
@@ -40,7 +40,7 @@ class AllResource(SyncAPIResource):
         """
         return AllResourceWithStreamingResponse(self)
 
-    def delete_all(
+    def delete(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -59,7 +59,7 @@ class AllResource(SyncAPIResource):
             cast_to=SuccessResponse,
         )
 
-    def retrieve_status(
+    def status(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -68,7 +68,7 @@ class AllResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AllRetrieveStatusResponse:
+    ) -> AllStatusResponse:
         """
         Retrieves status information for all browser sessions associated with the API
         key.
@@ -78,7 +78,7 @@ class AllResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AllRetrieveStatusResponse,
+            cast_to=AllStatusResponse,
         )
 
 
@@ -102,7 +102,7 @@ class AsyncAllResource(AsyncAPIResource):
         """
         return AsyncAllResourceWithStreamingResponse(self)
 
-    async def delete_all(
+    async def delete(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -121,7 +121,7 @@ class AsyncAllResource(AsyncAPIResource):
             cast_to=SuccessResponse,
         )
 
-    async def retrieve_status(
+    async def status(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -130,7 +130,7 @@ class AsyncAllResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AllRetrieveStatusResponse:
+    ) -> AllStatusResponse:
         """
         Retrieves status information for all browser sessions associated with the API
         key.
@@ -140,7 +140,7 @@ class AsyncAllResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AllRetrieveStatusResponse,
+            cast_to=AllStatusResponse,
         )
 
 
@@ -148,11 +148,11 @@ class AllResourceWithRawResponse:
     def __init__(self, all: AllResource) -> None:
         self._all = all
 
-        self.delete_all = to_raw_response_wrapper(
-            all.delete_all,
+        self.delete = to_raw_response_wrapper(
+            all.delete,
         )
-        self.retrieve_status = to_raw_response_wrapper(
-            all.retrieve_status,
+        self.status = to_raw_response_wrapper(
+            all.status,
         )
 
 
@@ -160,11 +160,11 @@ class AsyncAllResourceWithRawResponse:
     def __init__(self, all: AsyncAllResource) -> None:
         self._all = all
 
-        self.delete_all = async_to_raw_response_wrapper(
-            all.delete_all,
+        self.delete = async_to_raw_response_wrapper(
+            all.delete,
         )
-        self.retrieve_status = async_to_raw_response_wrapper(
-            all.retrieve_status,
+        self.status = async_to_raw_response_wrapper(
+            all.status,
         )
 
 
@@ -172,11 +172,11 @@ class AllResourceWithStreamingResponse:
     def __init__(self, all: AllResource) -> None:
         self._all = all
 
-        self.delete_all = to_streamed_response_wrapper(
-            all.delete_all,
+        self.delete = to_streamed_response_wrapper(
+            all.delete,
         )
-        self.retrieve_status = to_streamed_response_wrapper(
-            all.retrieve_status,
+        self.status = to_streamed_response_wrapper(
+            all.status,
         )
 
 
@@ -184,9 +184,9 @@ class AsyncAllResourceWithStreamingResponse:
     def __init__(self, all: AsyncAllResource) -> None:
         self._all = all
 
-        self.delete_all = async_to_streamed_response_wrapper(
-            all.delete_all,
+        self.delete = async_to_streamed_response_wrapper(
+            all.delete,
         )
-        self.retrieve_status = async_to_streamed_response_wrapper(
-            all.retrieve_status,
+        self.status = async_to_streamed_response_wrapper(
+            all.status,
         )

@@ -42,7 +42,7 @@ class PrimaryResource(SyncAPIResource):
         """
         return PrimaryResourceWithStreamingResponse(self)
 
-    def retrieve_fetch(
+    def get(
         self,
         session_id: str,
         *,
@@ -99,7 +99,7 @@ class AsyncPrimaryResource(AsyncAPIResource):
         """
         return AsyncPrimaryResourceWithStreamingResponse(self)
 
-    async def retrieve_fetch(
+    async def get(
         self,
         session_id: str,
         *,
@@ -140,8 +140,8 @@ class PrimaryResourceWithRawResponse:
     def __init__(self, primary: PrimaryResource) -> None:
         self._primary = primary
 
-        self.retrieve_fetch = to_custom_raw_response_wrapper(
-            primary.retrieve_fetch,
+        self.get = to_custom_raw_response_wrapper(
+            primary.get,
             BinaryAPIResponse,
         )
 
@@ -150,8 +150,8 @@ class AsyncPrimaryResourceWithRawResponse:
     def __init__(self, primary: AsyncPrimaryResource) -> None:
         self._primary = primary
 
-        self.retrieve_fetch = async_to_custom_raw_response_wrapper(
-            primary.retrieve_fetch,
+        self.get = async_to_custom_raw_response_wrapper(
+            primary.get,
             AsyncBinaryAPIResponse,
         )
 
@@ -160,8 +160,8 @@ class PrimaryResourceWithStreamingResponse:
     def __init__(self, primary: PrimaryResource) -> None:
         self._primary = primary
 
-        self.retrieve_fetch = to_custom_streamed_response_wrapper(
-            primary.retrieve_fetch,
+        self.get = to_custom_streamed_response_wrapper(
+            primary.get,
             StreamedBinaryAPIResponse,
         )
 
@@ -170,7 +170,7 @@ class AsyncPrimaryResourceWithStreamingResponse:
     def __init__(self, primary: AsyncPrimaryResource) -> None:
         self._primary = primary
 
-        self.retrieve_fetch = async_to_custom_streamed_response_wrapper(
-            primary.retrieve_fetch,
+        self.get = async_to_custom_streamed_response_wrapper(
+            primary.get,
             AsyncStreamedBinaryAPIResponse,
         )

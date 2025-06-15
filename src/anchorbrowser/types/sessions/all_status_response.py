@@ -5,7 +5,7 @@ from datetime import datetime
 
 from ..._models import BaseModel
 
-__all__ = ["AllRetrieveStatusResponse", "Data", "DataItem"]
+__all__ = ["AllStatusResponse", "Data", "DataItem"]
 
 
 class DataItem(BaseModel):
@@ -26,5 +26,5 @@ class Data(BaseModel):
     items: Optional[List[DataItem]] = None
 
 
-class AllRetrieveStatusResponse(BaseModel):
+class AllStatusResponse(BaseModel):
     data: Optional[Data] = None

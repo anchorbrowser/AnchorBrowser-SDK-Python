@@ -26,11 +26,11 @@ class TestPrimary:
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_method_retrieve_fetch(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
+    def test_method_get(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
         respx_mock.get("/v1/sessions/session_id/recordings/primary/fetch").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
-        primary = client.sessions.recordings.primary.retrieve_fetch(
+        primary = client.sessions.recordings.primary.get(
             "session_id",
         )
         assert primary.is_closed
@@ -41,12 +41,12 @@ class TestPrimary:
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_raw_response_retrieve_fetch(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
+    def test_raw_response_get(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
         respx_mock.get("/v1/sessions/session_id/recordings/primary/fetch").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
 
-        primary = client.sessions.recordings.primary.with_raw_response.retrieve_fetch(
+        primary = client.sessions.recordings.primary.with_raw_response.get(
             "session_id",
         )
 
@@ -58,11 +58,11 @@ class TestPrimary:
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_streaming_response_retrieve_fetch(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
+    def test_streaming_response_get(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
         respx_mock.get("/v1/sessions/session_id/recordings/primary/fetch").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
-        with client.sessions.recordings.primary.with_streaming_response.retrieve_fetch(
+        with client.sessions.recordings.primary.with_streaming_response.get(
             "session_id",
         ) as primary:
             assert not primary.is_closed
@@ -77,9 +77,9 @@ class TestPrimary:
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_path_params_retrieve_fetch(self, client: Anchorbrowser) -> None:
+    def test_path_params_get(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            client.sessions.recordings.primary.with_raw_response.retrieve_fetch(
+            client.sessions.recordings.primary.with_raw_response.get(
                 "",
             )
 
@@ -90,11 +90,11 @@ class TestAsyncPrimary:
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_method_retrieve_fetch(self, async_client: AsyncAnchorbrowser, respx_mock: MockRouter) -> None:
+    async def test_method_get(self, async_client: AsyncAnchorbrowser, respx_mock: MockRouter) -> None:
         respx_mock.get("/v1/sessions/session_id/recordings/primary/fetch").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
-        primary = await async_client.sessions.recordings.primary.retrieve_fetch(
+        primary = await async_client.sessions.recordings.primary.get(
             "session_id",
         )
         assert primary.is_closed
@@ -105,12 +105,12 @@ class TestAsyncPrimary:
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_raw_response_retrieve_fetch(self, async_client: AsyncAnchorbrowser, respx_mock: MockRouter) -> None:
+    async def test_raw_response_get(self, async_client: AsyncAnchorbrowser, respx_mock: MockRouter) -> None:
         respx_mock.get("/v1/sessions/session_id/recordings/primary/fetch").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
 
-        primary = await async_client.sessions.recordings.primary.with_raw_response.retrieve_fetch(
+        primary = await async_client.sessions.recordings.primary.with_raw_response.get(
             "session_id",
         )
 
@@ -122,13 +122,11 @@ class TestAsyncPrimary:
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_streaming_response_retrieve_fetch(
-        self, async_client: AsyncAnchorbrowser, respx_mock: MockRouter
-    ) -> None:
+    async def test_streaming_response_get(self, async_client: AsyncAnchorbrowser, respx_mock: MockRouter) -> None:
         respx_mock.get("/v1/sessions/session_id/recordings/primary/fetch").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
-        async with async_client.sessions.recordings.primary.with_streaming_response.retrieve_fetch(
+        async with async_client.sessions.recordings.primary.with_streaming_response.get(
             "session_id",
         ) as primary:
             assert not primary.is_closed
@@ -143,8 +141,8 @@ class TestAsyncPrimary:
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_path_params_retrieve_fetch(self, async_client: AsyncAnchorbrowser) -> None:
+    async def test_path_params_get(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            await async_client.sessions.recordings.primary.with_raw_response.retrieve_fetch(
+            await async_client.sessions.recordings.primary.with_raw_response.get(
                 "",
             )
