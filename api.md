@@ -53,13 +53,13 @@ Methods:
 Types:
 
 ```python
-from anchorbrowser.types.sessions import AllRetrieveStatusResponse
+from anchorbrowser.types.sessions import AllStatusResponse
 ```
 
 Methods:
 
-- <code title="delete /v1/sessions/all">client.sessions.all.<a href="./src/anchorbrowser/resources/sessions/all.py">delete_all</a>() -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
-- <code title="get /v1/sessions/all/status">client.sessions.all.<a href="./src/anchorbrowser/resources/sessions/all.py">retrieve_status</a>() -> <a href="./src/anchorbrowser/types/sessions/all_retrieve_status_response.py">AllRetrieveStatusResponse</a></code>
+- <code title="delete /v1/sessions/all">client.sessions.all.<a href="./src/anchorbrowser/resources/sessions/all.py">delete</a>() -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
+- <code title="get /v1/sessions/all/status">client.sessions.all.<a href="./src/anchorbrowser/resources/sessions/all.py">status</a>() -> <a href="./src/anchorbrowser/types/sessions/all_status_response.py">AllStatusResponse</a></code>
 
 ## Recordings
 
@@ -83,7 +83,7 @@ Methods:
 
 Methods:
 
-- <code title="get /v1/sessions/{session_id}/recordings/primary/fetch">client.sessions.recordings.primary.<a href="./src/anchorbrowser/resources/sessions/recordings/primary.py">retrieve_fetch</a>(session_id) -> BinaryAPIResponse</code>
+- <code title="get /v1/sessions/{session_id}/recordings/primary/fetch">client.sessions.recordings.primary.<a href="./src/anchorbrowser/resources/sessions/recordings/primary.py">get</a>(session_id) -> BinaryAPIResponse</code>
 
 ## Mouse
 
