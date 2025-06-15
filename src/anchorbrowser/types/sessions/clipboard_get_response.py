@@ -4,9 +4,9 @@ from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["ClipboardListResponse"]
+__all__ = ["ClipboardGetResponse"]
 
 
-class ClipboardListResponse(BaseModel):
+class ClipboardGetResponse(BaseModel):
     text: Optional[str] = None
     """Text content of the clipboard"""

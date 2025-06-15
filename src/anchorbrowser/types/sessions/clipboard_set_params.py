@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ClipboardCreateParams"]
+__all__ = ["ClipboardSetParams"]
 
 
-class ClipboardCreateParams(TypedDict, total=False):
+class ClipboardSetParams(TypedDict, total=False):
     text: Required[str]
     """Text to set in the clipboard"""

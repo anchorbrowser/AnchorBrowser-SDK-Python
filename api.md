@@ -125,13 +125,13 @@ Methods:
 Types:
 
 ```python
-from anchorbrowser.types.sessions import ClipboardCreateResponse, ClipboardListResponse
+from anchorbrowser.types.sessions import ClipboardGetResponse, ClipboardSetResponse
 ```
 
 Methods:
 
-- <code title="post /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">create</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/clipboard_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/clipboard_create_response.py">ClipboardCreateResponse</a></code>
-- <code title="get /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">list</a>(session_id) -> <a href="./src/anchorbrowser/types/sessions/clipboard_list_response.py">ClipboardListResponse</a></code>
+- <code title="get /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">get</a>(session_id) -> <a href="./src/anchorbrowser/types/sessions/clipboard_get_response.py">ClipboardGetResponse</a></code>
+- <code title="post /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">set</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/clipboard_set_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/clipboard_set_response.py">ClipboardSetResponse</a></code>
 
 # Tools
 

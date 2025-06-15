@@ -4,8 +4,8 @@ from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["ClipboardCreateResponse"]
+__all__ = ["ClipboardSetResponse"]
 
 
-class ClipboardCreateResponse(BaseModel):
+class ClipboardSetResponse(BaseModel):
     status: Optional[str] = None
