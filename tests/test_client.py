@@ -23,9 +23,7 @@ from pydantic import ValidationError
 
 from anchorbrowser import Anchorbrowser, AsyncAnchorbrowser, APIResponseValidationError
 from anchorbrowser._types import Omit
-from anchorbrowser._utils import maybe_transform
 from anchorbrowser._models import BaseModel, FinalRequestOptions
-from anchorbrowser._constants import RAW_RESPONSE_HEADER
 from anchorbrowser._exceptions import APIStatusError, APITimeoutError, AnchorbrowserError, APIResponseValidationError
 from anchorbrowser._base_client import (
     DEFAULT_TIMEOUT,
@@ -35,7 +33,6 @@ from anchorbrowser._base_client import (
     DefaultAsyncHttpxClient,
     make_request_options,
 )
-from anchorbrowser.types.profile_create_params import ProfileCreateParams
 
 from .utils import update_env
 
@@ -725,32 +722,21 @@ class TestAnchorbrowser:
 
     @mock.patch("anchorbrowser._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Anchorbrowser) -> None:
         respx_mock.post("/v1/profiles").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.post(
-                "/v1/profiles",
-                body=cast(object, maybe_transform(dict(name="REPLACE_ME"), ProfileCreateParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            client.profiles.with_streaming_response.create(name="my-profile").__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("anchorbrowser._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Anchorbrowser) -> None:
         respx_mock.post("/v1/profiles").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.post(
-                "/v1/profiles",
-                body=cast(object, maybe_transform(dict(name="REPLACE_ME"), ProfileCreateParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            client.profiles.with_streaming_response.create(name="my-profile").__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1554,32 +1540,25 @@ class TestAsyncAnchorbrowser:
 
     @mock.patch("anchorbrowser._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncAnchorbrowser
+    ) -> None:
         respx_mock.post("/v1/profiles").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.post(
-                "/v1/profiles",
-                body=cast(object, maybe_transform(dict(name="REPLACE_ME"), ProfileCreateParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            await async_client.profiles.with_streaming_response.create(name="my-profile").__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("anchorbrowser._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncAnchorbrowser
+    ) -> None:
         respx_mock.post("/v1/profiles").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.post(
-                "/v1/profiles",
-                body=cast(object, maybe_transform(dict(name="REPLACE_ME"), ProfileCreateParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            await async_client.profiles.with_streaming_response.create(name="my-profile").__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
