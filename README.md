@@ -86,7 +86,6 @@ pip install 'anchorbrowser[aiohttp] @ git+ssh://git@github.com/stainless-sdks/an
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from anchorbrowser import DefaultAioHttpClient
 from anchorbrowser import AsyncAnchorbrowser
@@ -94,7 +93,7 @@ from anchorbrowser import AsyncAnchorbrowser
 
 async def main() -> None:
     async with AsyncAnchorbrowser(
-        api_key=os.environ.get("ANCHORBROWSER_API_KEY"),  # This is the default and can be omitted
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         success_response = await client.profiles.create(
