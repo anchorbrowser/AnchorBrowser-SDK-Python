@@ -16,12 +16,9 @@ The REST API documentation can be found on [docs.anchorbrowser.io](https://docs.
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/anchorbrowser/AnchorBrowser-SDK-Python.git
+# install from PyPI
+pip install --pre anchorbrowser
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install --pre anchorbrowser`
 
 ## Usage
 
@@ -79,8 +76,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from the production repo
-pip install 'anchorbrowser[aiohttp] @ git+ssh://git@github.com/anchorbrowser/AnchorBrowser-SDK-Python.git'
+# install from PyPI
+pip install --pre anchorbrowser[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
