@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-07-23)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **agent:** add Agent and Browser resources for AI task execution ([36eab12](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/36eab12a4d3ea747a6f863c3c43cc51a03461ba4))
+
+
+### Bug Fixes
+
+* **parsing:** parse extra field types ([0348a34](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/0348a34079f2fc5ecf9ad5d5eaf1fed486d0263c))
+
+
+### Refactors
+
+* add type hints to agent and browser resource methods for improved clarity ([047d45c](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/047d45c79efd205353f21b9ec6d9960d332ddc94))
+
 ## 0.1.0-alpha.1 (2025-07-22)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)

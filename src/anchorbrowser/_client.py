@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import tools, profiles, extensions
+from .resources import agent, tools, browser, profiles, extensions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
@@ -48,6 +48,8 @@ class Anchorbrowser(SyncAPIClient):
     sessions: sessions.SessionsResource
     tools: tools.ToolsResource
     extensions: extensions.ExtensionsResource
+    browser: browser.BrowserResource
+    agent: agent.AgentResource
     with_raw_response: AnchorbrowserWithRawResponse
     with_streaming_response: AnchorbrowserWithStreamedResponse
 
@@ -109,6 +111,8 @@ class Anchorbrowser(SyncAPIClient):
         self.sessions = sessions.SessionsResource(self)
         self.tools = tools.ToolsResource(self)
         self.extensions = extensions.ExtensionsResource(self)
+        self.browser = browser.BrowserResource(self)
+        self.agent = agent.AgentResource(self)
         self.with_raw_response = AnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AnchorbrowserWithStreamedResponse(self)
 
@@ -222,6 +226,8 @@ class AsyncAnchorbrowser(AsyncAPIClient):
     sessions: sessions.AsyncSessionsResource
     tools: tools.AsyncToolsResource
     extensions: extensions.AsyncExtensionsResource
+    browser: browser.AsyncBrowserResource
+    agent: agent.AsyncAgentResource
     with_raw_response: AsyncAnchorbrowserWithRawResponse
     with_streaming_response: AsyncAnchorbrowserWithStreamedResponse
 
@@ -283,6 +289,8 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         self.sessions = sessions.AsyncSessionsResource(self)
         self.tools = tools.AsyncToolsResource(self)
         self.extensions = extensions.AsyncExtensionsResource(self)
+        self.browser = browser.AsyncBrowserResource(self)
+        self.agent = agent.AsyncAgentResource(self)
         self.with_raw_response = AsyncAnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AsyncAnchorbrowserWithStreamedResponse(self)
 
@@ -397,7 +405,8 @@ class AnchorbrowserWithRawResponse:
         self.sessions = sessions.SessionsResourceWithRawResponse(client.sessions)
         self.tools = tools.ToolsResourceWithRawResponse(client.tools)
         self.extensions = extensions.ExtensionsResourceWithRawResponse(client.extensions)
-
+        self.browser = browser.BrowserResourceWithRawResponse(client.browser)
+        self.agent = agent.AgentResourceWithRawResponse(client.agent)
 
 class AsyncAnchorbrowserWithRawResponse:
     def __init__(self, client: AsyncAnchorbrowser) -> None:
@@ -405,7 +414,8 @@ class AsyncAnchorbrowserWithRawResponse:
         self.sessions = sessions.AsyncSessionsResourceWithRawResponse(client.sessions)
         self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
         self.extensions = extensions.AsyncExtensionsResourceWithRawResponse(client.extensions)
-
+        self.browser = browser.AsyncBrowserResourceWithRawResponse(client.browser)
+        self.agent = agent.AsyncAgentResourceWithRawResponse(client.agent)
 
 class AnchorbrowserWithStreamedResponse:
     def __init__(self, client: Anchorbrowser) -> None:
@@ -413,7 +423,8 @@ class AnchorbrowserWithStreamedResponse:
         self.sessions = sessions.SessionsResourceWithStreamingResponse(client.sessions)
         self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
         self.extensions = extensions.ExtensionsResourceWithStreamingResponse(client.extensions)
-
+        self.browser = browser.BrowserResourceWithStreamingResponse(client.browser)
+        self.agent = agent.AgentResourceWithStreamingResponse(client.agent)
 
 class AsyncAnchorbrowserWithStreamedResponse:
     def __init__(self, client: AsyncAnchorbrowser) -> None:
@@ -421,7 +432,8 @@ class AsyncAnchorbrowserWithStreamedResponse:
         self.sessions = sessions.AsyncSessionsResourceWithStreamingResponse(client.sessions)
         self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
         self.extensions = extensions.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
-
+        self.browser = browser.AsyncBrowserResourceWithStreamingResponse(client.browser)
+        self.agent = agent.AsyncAgentResourceWithStreamingResponse(client.agent)
 
 Client = Anchorbrowser
 
