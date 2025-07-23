@@ -28,7 +28,7 @@ def create_task_payload(prompt: str, output_schema: Optional[Dict[str, Any]] = N
 def on_agent_step_sync(on_agent_step: Callable[[str], None], browser_setup: BrowserSetup) -> Future[None]:
     import websockets
 
-    async def websocket_listener():
+    async def websocket_listener() -> None:
         ws_url = get_agent_ws_url(browser_setup.base_url, browser_setup.session_id)
         try:
             async with websockets.connect(ws_url) as ws:
@@ -37,7 +37,7 @@ def on_agent_step_sync(on_agent_step: Callable[[str], None], browser_setup: Brow
         except Exception as e:
             future.set_exception(e)
 
-    def run_in_thread():
+    def run_in_thread() -> None:
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         try:
@@ -60,7 +60,7 @@ def on_agent_step_sync(on_agent_step: Callable[[str], None], browser_setup: Brow
 def on_agent_step_async(on_agent_step: Callable[[str], None], browser_setup: BrowserSetup) -> None:
     import websockets
 
-    async def websocket_listener():
+    async def websocket_listener() -> None:
         ws_url = get_agent_ws_url(browser_setup.base_url, browser_setup.session_id)
         async with websockets.connect(ws_url) as ws:
             async for ws_msg in ws:

@@ -81,7 +81,7 @@ class AgentResource(SyncAPIResource):
                 if on_agent_step:
                     on_agent_step_sync(on_agent_step, browser_setup)
             task_payload = create_task_payload(prompt, output_schema)
-            task_result = browser_setup.ai.evaluate(task_payload)
+            task_result = str(browser_setup.ai.evaluate(task_payload))
             return task_result
 
     def browser_task(
@@ -130,7 +130,7 @@ class AgentResource(SyncAPIResource):
                 if on_agent_step:
                     on_agent_step_sync(on_agent_step, browser_setup)
             task_payload = create_task_payload(prompt, output_schema)
-            task_result = browser_setup.ai.evaluate(task_payload)
+            task_result = str(browser_setup.ai.evaluate(task_payload))
             return BrowserTaskResponse(
                 session_id=session.data.id,
                 task_result_task=task_result,
@@ -201,7 +201,7 @@ class AsyncAgentResource(AsyncAPIResource):
                     on_agent_step_async(on_agent_step, browser_setup)
             task_payload = create_task_payload(prompt, output_schema)
             task_result = await (await browser_setup.async_ai).evaluate(task_payload)
-            return task_result
+            return str(task_result)
 
     async def browser_task(
         self,

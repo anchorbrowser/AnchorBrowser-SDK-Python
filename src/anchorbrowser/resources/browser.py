@@ -1,5 +1,10 @@
 from __future__ import annotations
 
+from contextlib import _GeneratorContextManager, _AsyncGeneratorContextManager
+
+from playwright.sync_api import Browser
+from playwright.async_api import Browser as AsyncBrowser
+
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -36,7 +41,7 @@ class BrowserResource(SyncAPIResource):
         """
         return BrowserResourceWithStreamingResponse(self)
 
-    def connect(self, session_id: str):
+    def connect(self, session_id: str) -> _GeneratorContextManager[Browser]:
         """Connect to a browser session.
 
         Args:
@@ -47,7 +52,7 @@ class BrowserResource(SyncAPIResource):
         """
         return get_playwright_chromium_from_cdp_url(str(self._client.base_url), session_id, self._client.api_key)
 
-    def create(self):
+    def create(self) -> _GeneratorContextManager[Browser]:
         session = self._client.sessions.create()
         if not session.data or not session.data.id:
             raise ValueError("Failed to create session")
@@ -74,7 +79,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         """
         return AsyncBrowserResourceWithStreamingResponse(self)
 
-    async def connect(self, session_id: str):
+    async def connect(self, session_id: str) -> _AsyncGeneratorContextManager[AsyncBrowser]:
         """Connect to a browser session.
 
         Args:
@@ -85,7 +90,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         """
         return get_async_playwright_chromium_from_cdp_url(str(self._client.base_url), session_id, self._client.api_key)
 
-    async def create(self):
+    async def create(self) -> _AsyncGeneratorContextManager[AsyncBrowser]:
         """Create a new browser session.
 
         Returns:
