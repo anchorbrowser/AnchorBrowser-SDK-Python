@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2025-07-25)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Chores
+
+* **project:** add settings file for vscode ([700d561](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/700d5613b0d22d41afa095b4dc4e62d8cfb822ae))
+
 ## 0.1.0-alpha.2 (2025-07-23)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
