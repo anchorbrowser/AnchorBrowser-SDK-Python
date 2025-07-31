@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.4 (2025-07-31)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Features
+
+* **client:** support file upload requests ([591695c](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/591695c764b2c8c741b23f98491855fd470138a6))
+
 ## 0.1.0-alpha.3 (2025-07-25)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
