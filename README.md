@@ -17,7 +17,7 @@ The REST API documentation can be found on [docs.anchorbrowser.io](https://docs.
 
 ```sh
 # install from PyPI
-pip install --pre anchorbrowser
+pip install anchorbrowser
 ```
 
 ## Usage
@@ -77,7 +77,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre anchorbrowser[aiohttp]
+pip install anchorbrowser[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
