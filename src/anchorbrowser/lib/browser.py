@@ -53,7 +53,7 @@ def get_cdp_url(api_base_url: str, session_id: str, api_key: str) -> str:
 
 
 def get_agent_ws_url(api_base_url: str, session_id: str) -> str:
-    return f"{api_base_url.replace('https://', 'wss://').replace('api.', 'connect.')}/ws?sessionId={session_id}"
+    return f"{api_base_url.replace('https://', 'wss://')}/ws?sessionId={session_id}"
 
 
 def get_ai_service_worker(browser_context: "BrowserContext") -> Optional["Worker"]:
