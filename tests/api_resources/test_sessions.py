@@ -47,13 +47,14 @@ class TestSessions:
             browser={
                 "adblock": {"active": False},
                 "captcha_solver": {"active": False},
+                "extensions": ["550e8400-e29b-41d4-a716-446655440000", "6ba7b810-9dad-11d1-80b4-00c04fd430c8"],
+                "fullscreen": {"active": False},
                 "headless": {"active": True},
                 "p2p_download": {"active": False},
                 "popup_blocker": {"active": False},
                 "profile": {
                     "name": "my-profile",
                     "persist": True,
-                    "store_cache": True,
                 },
                 "viewport": {
                     "height": 900,
@@ -61,11 +62,12 @@ class TestSessions:
                 },
             },
             session={
+                "initial_url": "https://anchorbrowser.io",
                 "live_view": {"read_only": False},
                 "proxy": {
+                    "active": True,
+                    "country_code": "af",
                     "type": "anchor_residential",
-                    "active": False,
-                    "country_code": "uk",
                 },
                 "recording": {"active": False},
                 "timeout": {
@@ -533,13 +535,14 @@ class TestAsyncSessions:
             browser={
                 "adblock": {"active": False},
                 "captcha_solver": {"active": False},
+                "extensions": ["550e8400-e29b-41d4-a716-446655440000", "6ba7b810-9dad-11d1-80b4-00c04fd430c8"],
+                "fullscreen": {"active": False},
                 "headless": {"active": True},
                 "p2p_download": {"active": False},
                 "popup_blocker": {"active": False},
                 "profile": {
                     "name": "my-profile",
                     "persist": True,
-                    "store_cache": True,
                 },
                 "viewport": {
                     "height": 900,
@@ -547,11 +550,12 @@ class TestAsyncSessions:
                 },
             },
             session={
+                "initial_url": "https://anchorbrowser.io",
                 "live_view": {"read_only": False},
                 "proxy": {
+                    "active": True,
+                    "country_code": "af",
                     "type": "anchor_residential",
-                    "active": False,
-                    "country_code": "uk",
                 },
                 "recording": {"active": False},
                 "timeout": {

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = [
@@ -10,6 +10,7 @@ __all__ = [
     "Browser",
     "BrowserAdblock",
     "BrowserCaptchaSolver",
+    "BrowserFullscreen",
     "BrowserHeadless",
     "BrowserP2pDownload",
     "BrowserPopupBlocker",
@@ -18,9 +19,8 @@ __all__ = [
     "Session",
     "SessionLiveView",
     "SessionProxy",
-    "SessionProxyAnchorResidentialProxyType",
-    "SessionProxyAnchorMobileProxyType",
-    "SessionProxyCustomProxyType",
+    "SessionProxyAnchorProxy",
+    "SessionProxyCustomProxy",
     "SessionRecording",
     "SessionTimeout",
 ]
@@ -44,6 +44,14 @@ class BrowserCaptchaSolver(TypedDict, total=False):
     """Enable or disable captcha-solving.
 
     Requires proxy to be active. Defaults to `false`.
+    """
+
+
+class BrowserFullscreen(TypedDict, total=False):
+    active: bool
+    """Enable or disable fullscreen mode.
+
+    When enabled, the browser will start in fullscreen mode. Defaults to `false`.
     """
 
 
@@ -79,12 +87,6 @@ class BrowserProfile(TypedDict, total=False):
     browser session ends. Defaults to `false`.
     """
 
-    store_cache: bool
-    """
-    Indicates whether the browser session cache should be saved when the browser
-    session ends. Defaults to `false`.
-    """
-
 
 class BrowserViewport(TypedDict, total=False):
     height: int
@@ -100,6 +102,15 @@ class Browser(TypedDict, total=False):
 
     captcha_solver: BrowserCaptchaSolver
     """Configuration for captcha-solving."""
+
+    extensions: List[str]
+    """Array of extension IDs to load in the browser session.
+
+    Extensions must be previously uploaded using the Extensions API.
+    """
+
+    fullscreen: BrowserFullscreen
+    """Configuration for fullscreen mode."""
 
     headless: BrowserHeadless
     """Configuration for headless mode."""
@@ -122,27 +133,216 @@ class SessionLiveView(TypedDict, total=False):
     """Enable or disable read-only mode for live viewing. Defaults to `false`."""
 
 
-class SessionProxyAnchorResidentialProxyType(TypedDict, total=False):
-    type: Required[Literal["anchor_residential"]]
+class SessionProxyAnchorProxy(TypedDict, total=False):
+    active: Required[bool]
 
-    active: bool
-    """Enable or disable proxy usage. Defaults to `false`."""
+    country_code: Literal[
+        "af",
+        "al",
+        "dz",
+        "ad",
+        "ao",
+        "ag",
+        "ar",
+        "am",
+        "aw",
+        "au",
+        "at",
+        "az",
+        "bs",
+        "bh",
+        "bd",
+        "bb",
+        "by",
+        "be",
+        "bz",
+        "bj",
+        "bm",
+        "bo",
+        "ba",
+        "bw",
+        "br",
+        "bn",
+        "bg",
+        "bf",
+        "bi",
+        "kh",
+        "cm",
+        "ca",
+        "cv",
+        "td",
+        "cl",
+        "cn",
+        "co",
+        "cg",
+        "cr",
+        "ci",
+        "hr",
+        "cu",
+        "cy",
+        "cz",
+        "dk",
+        "dj",
+        "dm",
+        "do",
+        "ec",
+        "eg",
+        "sv",
+        "gq",
+        "ee",
+        "sz",
+        "et",
+        "fj",
+        "fi",
+        "fr",
+        "pf",
+        "ga",
+        "gm",
+        "ge",
+        "de",
+        "gh",
+        "gr",
+        "gd",
+        "gt",
+        "gn",
+        "gy",
+        "ht",
+        "hn",
+        "hk",
+        "hu",
+        "is",
+        "in",
+        "id",
+        "ir",
+        "iq",
+        "ie",
+        "il",
+        "it",
+        "jm",
+        "jp",
+        "jo",
+        "kz",
+        "ke",
+        "kw",
+        "kg",
+        "la",
+        "lv",
+        "lb",
+        "ls",
+        "lr",
+        "ly",
+        "lt",
+        "lu",
+        "mk",
+        "mg",
+        "mw",
+        "my",
+        "mv",
+        "ml",
+        "mt",
+        "mr",
+        "mx",
+        "md",
+        "mn",
+        "me",
+        "ma",
+        "mz",
+        "mm",
+        "na",
+        "np",
+        "nl",
+        "nc",
+        "nz",
+        "ni",
+        "ne",
+        "ng",
+        "no",
+        "om",
+        "pk",
+        "pa",
+        "pg",
+        "py",
+        "pe",
+        "ph",
+        "pl",
+        "pt",
+        "pr",
+        "qa",
+        "ro",
+        "ru",
+        "rw",
+        "lc",
+        "ws",
+        "sm",
+        "sa",
+        "sn",
+        "rs",
+        "sl",
+        "sg",
+        "sk",
+        "si",
+        "so",
+        "za",
+        "kr",
+        "ss",
+        "es",
+        "lk",
+        "sd",
+        "sr",
+        "se",
+        "ch",
+        "sy",
+        "st",
+        "tw",
+        "tj",
+        "tz",
+        "th",
+        "tl",
+        "tr",
+        "tg",
+        "tt",
+        "tn",
+        "tm",
+        "ug",
+        "ua",
+        "gb",
+        "us",
+        "uy",
+        "uz",
+        "vu",
+        "ve",
+        "vn",
+        "ye",
+        "zm",
+        "zw",
+        "bt",
+        "gw",
+        "mu",
+        "ae",
+        "as",
+        "fo",
+        "gf",
+        "gi",
+        "gp",
+        "gg",
+        "li",
+        "mq",
+        "mc",
+        "sc",
+        "tc",
+    ]
+    """Supported country codes ISO 2 lowercase
 
-    country_code: Literal["us", "uk", "fr", "it", "jp", "au", "de", "fi", "ca"]
-    """Country code for residential proxy"""
+    **On change make sure to update the Proxy type.**
+    """
+
+    type: Literal["anchor_residential", "anchor_mobile", "anchor_gov"]
+    """**On change make sure to update the country_code.**"""
 
 
-class SessionProxyAnchorMobileProxyType(TypedDict, total=False):
-    type: Required[Literal["anchor_mobile"]]
+class SessionProxyCustomProxy(TypedDict, total=False):
+    active: Required[bool]
 
-    active: bool
-    """Enable or disable proxy usage. Defaults to `false`."""
-
-    country_code: Literal["us", "uk", "fr", "it", "jp", "au", "de", "fi", "ca"]
-    """Country code for mobile proxy"""
-
-
-class SessionProxyCustomProxyType(TypedDict, total=False):
     password: Required[str]
     """Proxy password"""
 
@@ -154,13 +354,8 @@ class SessionProxyCustomProxyType(TypedDict, total=False):
     username: Required[str]
     """Proxy username"""
 
-    active: bool
-    """Enable or disable proxy usage. Defaults to `false`."""
 
-
-SessionProxy: TypeAlias = Union[
-    SessionProxyAnchorResidentialProxyType, SessionProxyAnchorMobileProxyType, SessionProxyCustomProxyType
-]
+SessionProxy: TypeAlias = Union[SessionProxyAnchorProxy, SessionProxyCustomProxy]
 
 
 class SessionRecording(TypedDict, total=False):
@@ -183,11 +378,17 @@ class SessionTimeout(TypedDict, total=False):
 
 
 class Session(TypedDict, total=False):
+    initial_url: str
+    """The URL to navigate to when the browser session starts.
+
+    If not provided, the browser will load an empty page.
+    """
+
     live_view: SessionLiveView
     """Configuration for live viewing the browser session."""
 
     proxy: SessionProxy
-    """Configuration options for proxy usage."""
+    """Proxy Documentation available at [Proxy Documentation](/advanced/proxy)"""
 
     recording: SessionRecording
     """Configuration for session recording."""

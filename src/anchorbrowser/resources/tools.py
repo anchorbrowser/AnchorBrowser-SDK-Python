@@ -56,7 +56,11 @@ class ToolsResource(SyncAPIResource):
         *,
         session_id: str | NotGiven = NOT_GIVEN,
         format: Literal["html", "markdown"] | NotGiven = NOT_GIVEN,
+        new_page: bool | NotGiven = NOT_GIVEN,
+        page_index: int | NotGiven = NOT_GIVEN,
+        return_partial_on_timeout: bool | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
+        wait: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -74,8 +78,17 @@ class ToolsResource(SyncAPIResource):
 
           format: The output format of the content.
 
+          new_page: Whether to create a new page for the content.
+
+          page_index: The index of the page to fetch content from. **Overides new_page**.
+
+          return_partial_on_timeout: Whether to return partial content if the content is not loaded within the 20
+              seconds.
+
           url: The URL of the webpage to fetch content from. When left empty, the current
               webpage is used.
+
+          wait: The time to wait for **dynamic** content to load in **milliseconds**.
 
           extra_headers: Send extra headers
 
@@ -91,7 +104,11 @@ class ToolsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "format": format,
+                    "new_page": new_page,
+                    "page_index": page_index,
+                    "return_partial_on_timeout": return_partial_on_timeout,
                     "url": url,
+                    "wait": wait,
                 },
                 tool_fetch_webpage_params.ToolFetchWebpageParams,
             ),
@@ -110,7 +127,11 @@ class ToolsResource(SyncAPIResource):
         *,
         prompt: str,
         session_id: str | NotGiven = NOT_GIVEN,
+        agent: Literal["browser-use", "openai-cua"] | NotGiven = NOT_GIVEN,
+        highlight_elements: bool | NotGiven = NOT_GIVEN,
+        model: str | NotGiven = NOT_GIVEN,
         output_schema: object | NotGiven = NOT_GIVEN,
+        provider: Literal["openai", "gemini", "groq", "azure", "xai"] | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -129,7 +150,17 @@ class ToolsResource(SyncAPIResource):
               sessions. When passed, the tool will be executed on the provided browser
               session.
 
+          agent: The AI agent to use for task completion. Defaults to browser-use.
+
+          highlight_elements: Whether to highlight elements during task execution for better visibility.
+
+          model: The specific model to use for task completion. see our
+              [models](/agentic-browser-control/ai-task-completion#available-models) page for
+              more information.
+
           output_schema: JSON Schema defining the expected structure of the output data.
+
+          provider: The AI provider to use for task completion.
 
           url: The URL of the webpage. If not provided, the tool will use the current page in
               the session.
@@ -147,7 +178,11 @@ class ToolsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "prompt": prompt,
+                    "agent": agent,
+                    "highlight_elements": highlight_elements,
+                    "model": model,
                     "output_schema": output_schema,
+                    "provider": provider,
                     "url": url,
                 },
                 tool_perform_web_task_params.ToolPerformWebTaskParams,
@@ -272,7 +307,11 @@ class AsyncToolsResource(AsyncAPIResource):
         *,
         session_id: str | NotGiven = NOT_GIVEN,
         format: Literal["html", "markdown"] | NotGiven = NOT_GIVEN,
+        new_page: bool | NotGiven = NOT_GIVEN,
+        page_index: int | NotGiven = NOT_GIVEN,
+        return_partial_on_timeout: bool | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
+        wait: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -290,8 +329,17 @@ class AsyncToolsResource(AsyncAPIResource):
 
           format: The output format of the content.
 
+          new_page: Whether to create a new page for the content.
+
+          page_index: The index of the page to fetch content from. **Overides new_page**.
+
+          return_partial_on_timeout: Whether to return partial content if the content is not loaded within the 20
+              seconds.
+
           url: The URL of the webpage to fetch content from. When left empty, the current
               webpage is used.
+
+          wait: The time to wait for **dynamic** content to load in **milliseconds**.
 
           extra_headers: Send extra headers
 
@@ -307,7 +355,11 @@ class AsyncToolsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "format": format,
+                    "new_page": new_page,
+                    "page_index": page_index,
+                    "return_partial_on_timeout": return_partial_on_timeout,
                     "url": url,
+                    "wait": wait,
                 },
                 tool_fetch_webpage_params.ToolFetchWebpageParams,
             ),
@@ -328,7 +380,11 @@ class AsyncToolsResource(AsyncAPIResource):
         *,
         prompt: str,
         session_id: str | NotGiven = NOT_GIVEN,
+        agent: Literal["browser-use", "openai-cua"] | NotGiven = NOT_GIVEN,
+        highlight_elements: bool | NotGiven = NOT_GIVEN,
+        model: str | NotGiven = NOT_GIVEN,
         output_schema: object | NotGiven = NOT_GIVEN,
+        provider: Literal["openai", "gemini", "groq", "azure", "xai"] | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -347,7 +403,17 @@ class AsyncToolsResource(AsyncAPIResource):
               sessions. When passed, the tool will be executed on the provided browser
               session.
 
+          agent: The AI agent to use for task completion. Defaults to browser-use.
+
+          highlight_elements: Whether to highlight elements during task execution for better visibility.
+
+          model: The specific model to use for task completion. see our
+              [models](/agentic-browser-control/ai-task-completion#available-models) page for
+              more information.
+
           output_schema: JSON Schema defining the expected structure of the output data.
+
+          provider: The AI provider to use for task completion.
 
           url: The URL of the webpage. If not provided, the tool will use the current page in
               the session.
@@ -365,7 +431,11 @@ class AsyncToolsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "prompt": prompt,
+                    "agent": agent,
+                    "highlight_elements": highlight_elements,
+                    "model": model,
                     "output_schema": output_schema,
+                    "provider": provider,
                     "url": url,
                 },
                 tool_perform_web_task_params.ToolPerformWebTaskParams,

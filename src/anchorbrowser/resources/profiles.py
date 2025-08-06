@@ -49,10 +49,10 @@ class ProfilesResource(SyncAPIResource):
         self,
         *,
         name: str,
+        dedicated_sticky_ip: bool | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
         session_id: str | NotGiven = NOT_GIVEN,
         source: Literal["session"] | NotGiven = NOT_GIVEN,
-        store_cache: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -68,6 +68,8 @@ class ProfilesResource(SyncAPIResource):
         Args:
           name: The name of the profile.
 
+          dedicated_sticky_ip: Whether to use a dedicated sticky IP for this profile. Defaults to false.
+
           description: A description of the profile.
 
           session_id: The browser session ID is required if the source is set to `session`. The
@@ -75,9 +77,6 @@ class ProfilesResource(SyncAPIResource):
               session terminates.
 
           source: The source of the profile data. currently only `session` is supported.
-
-          store_cache: Indicates whether the browser session cache should be saved when the browser
-              session ends. Defaults to `false`.
 
           extra_headers: Send extra headers
 
@@ -92,10 +91,10 @@ class ProfilesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "name": name,
+                    "dedicated_sticky_ip": dedicated_sticky_ip,
                     "description": description,
                     "session_id": session_id,
                     "source": source,
-                    "store_cache": store_cache,
                 },
                 profile_create_params.ProfileCreateParams,
             ),
@@ -145,7 +144,6 @@ class ProfilesResource(SyncAPIResource):
         description: str | NotGiven = NOT_GIVEN,
         session_id: str | NotGiven = NOT_GIVEN,
         source: Literal["session"] | NotGiven = NOT_GIVEN,
-        store_cache: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -164,9 +162,6 @@ class ProfilesResource(SyncAPIResource):
 
           source: The source of the profile data. Currently, only `session` is supported.
 
-          store_cache: Indicates whether the browser session cache should be saved when the browser
-              session ends. Defaults to `false`.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -184,7 +179,6 @@ class ProfilesResource(SyncAPIResource):
                     "description": description,
                     "session_id": session_id,
                     "source": source,
-                    "store_cache": store_cache,
                 },
                 profile_update_params.ProfileUpdateParams,
             ),
@@ -271,10 +265,10 @@ class AsyncProfilesResource(AsyncAPIResource):
         self,
         *,
         name: str,
+        dedicated_sticky_ip: bool | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
         session_id: str | NotGiven = NOT_GIVEN,
         source: Literal["session"] | NotGiven = NOT_GIVEN,
-        store_cache: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -290,6 +284,8 @@ class AsyncProfilesResource(AsyncAPIResource):
         Args:
           name: The name of the profile.
 
+          dedicated_sticky_ip: Whether to use a dedicated sticky IP for this profile. Defaults to false.
+
           description: A description of the profile.
 
           session_id: The browser session ID is required if the source is set to `session`. The
@@ -297,9 +293,6 @@ class AsyncProfilesResource(AsyncAPIResource):
               session terminates.
 
           source: The source of the profile data. currently only `session` is supported.
-
-          store_cache: Indicates whether the browser session cache should be saved when the browser
-              session ends. Defaults to `false`.
 
           extra_headers: Send extra headers
 
@@ -314,10 +307,10 @@ class AsyncProfilesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "name": name,
+                    "dedicated_sticky_ip": dedicated_sticky_ip,
                     "description": description,
                     "session_id": session_id,
                     "source": source,
-                    "store_cache": store_cache,
                 },
                 profile_create_params.ProfileCreateParams,
             ),
@@ -367,7 +360,6 @@ class AsyncProfilesResource(AsyncAPIResource):
         description: str | NotGiven = NOT_GIVEN,
         session_id: str | NotGiven = NOT_GIVEN,
         source: Literal["session"] | NotGiven = NOT_GIVEN,
-        store_cache: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -386,9 +378,6 @@ class AsyncProfilesResource(AsyncAPIResource):
 
           source: The source of the profile data. Currently, only `session` is supported.
 
-          store_cache: Indicates whether the browser session cache should be saved when the browser
-              session ends. Defaults to `false`.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -406,7 +395,6 @@ class AsyncProfilesResource(AsyncAPIResource):
                     "description": description,
                     "session_id": session_id,
                     "source": source,
-                    "store_cache": store_cache,
                 },
                 profile_update_params.ProfileUpdateParams,
             ),

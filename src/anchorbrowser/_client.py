@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import tools, profiles, extensions
+from .resources import tools, events, profiles, extensions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
@@ -48,6 +48,7 @@ class Anchorbrowser(SyncAPIClient):
     sessions: sessions.SessionsResource
     tools: tools.ToolsResource
     extensions: extensions.ExtensionsResource
+    events: events.EventsResource
     with_raw_response: AnchorbrowserWithRawResponse
     with_streaming_response: AnchorbrowserWithStreamedResponse
 
@@ -109,6 +110,7 @@ class Anchorbrowser(SyncAPIClient):
         self.sessions = sessions.SessionsResource(self)
         self.tools = tools.ToolsResource(self)
         self.extensions = extensions.ExtensionsResource(self)
+        self.events = events.EventsResource(self)
         self.with_raw_response = AnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AnchorbrowserWithStreamedResponse(self)
 
@@ -222,6 +224,7 @@ class AsyncAnchorbrowser(AsyncAPIClient):
     sessions: sessions.AsyncSessionsResource
     tools: tools.AsyncToolsResource
     extensions: extensions.AsyncExtensionsResource
+    events: events.AsyncEventsResource
     with_raw_response: AsyncAnchorbrowserWithRawResponse
     with_streaming_response: AsyncAnchorbrowserWithStreamedResponse
 
@@ -283,6 +286,7 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         self.sessions = sessions.AsyncSessionsResource(self)
         self.tools = tools.AsyncToolsResource(self)
         self.extensions = extensions.AsyncExtensionsResource(self)
+        self.events = events.AsyncEventsResource(self)
         self.with_raw_response = AsyncAnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AsyncAnchorbrowserWithStreamedResponse(self)
 
@@ -397,6 +401,7 @@ class AnchorbrowserWithRawResponse:
         self.sessions = sessions.SessionsResourceWithRawResponse(client.sessions)
         self.tools = tools.ToolsResourceWithRawResponse(client.tools)
         self.extensions = extensions.ExtensionsResourceWithRawResponse(client.extensions)
+        self.events = events.EventsResourceWithRawResponse(client.events)
 
 
 class AsyncAnchorbrowserWithRawResponse:
@@ -405,6 +410,7 @@ class AsyncAnchorbrowserWithRawResponse:
         self.sessions = sessions.AsyncSessionsResourceWithRawResponse(client.sessions)
         self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
         self.extensions = extensions.AsyncExtensionsResourceWithRawResponse(client.extensions)
+        self.events = events.AsyncEventsResourceWithRawResponse(client.events)
 
 
 class AnchorbrowserWithStreamedResponse:
@@ -413,6 +419,7 @@ class AnchorbrowserWithStreamedResponse:
         self.sessions = sessions.SessionsResourceWithStreamingResponse(client.sessions)
         self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
         self.extensions = extensions.ExtensionsResourceWithStreamingResponse(client.extensions)
+        self.events = events.EventsResourceWithStreamingResponse(client.events)
 
 
 class AsyncAnchorbrowserWithStreamedResponse:
@@ -421,6 +428,7 @@ class AsyncAnchorbrowserWithStreamedResponse:
         self.sessions = sessions.AsyncSessionsResourceWithStreamingResponse(client.sessions)
         self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
         self.extensions = extensions.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
+        self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
 
 
 Client = Anchorbrowser

@@ -19,8 +19,23 @@ class ToolFetchWebpageParams(TypedDict, total=False):
     format: Literal["html", "markdown"]
     """The output format of the content."""
 
+    new_page: bool
+    """Whether to create a new page for the content."""
+
+    page_index: int
+    """The index of the page to fetch content from. **Overides new_page**."""
+
+    return_partial_on_timeout: bool
+    """
+    Whether to return partial content if the content is not loaded within the 20
+    seconds.
+    """
+
     url: str
     """The URL of the webpage to fetch content from.
 
     When left empty, the current webpage is used.
     """
+
+    wait: int
+    """The time to wait for **dynamic** content to load in **milliseconds**."""

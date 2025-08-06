@@ -4,8 +4,10 @@ from __future__ import annotations
 
 from .shared import SuccessResponse as SuccessResponse
 from .extension_manifest import ExtensionManifest as ExtensionManifest
+from .event_signal_params import EventSignalParams as EventSignalParams
 from .session_goto_params import SessionGotoParams as SessionGotoParams
 from .session_paste_params import SessionPasteParams as SessionPasteParams
+from .event_wait_for_params import EventWaitForParams as EventWaitForParams
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_list_response import ProfileListResponse as ProfileListResponse
 from .profile_update_params import ProfileUpdateParams as ProfileUpdateParams
@@ -14,6 +16,7 @@ from .session_create_params import SessionCreateParams as SessionCreateParams
 from .session_goto_response import SessionGotoResponse as SessionGotoResponse
 from .session_scroll_params import SessionScrollParams as SessionScrollParams
 from .session_paste_response import SessionPasteResponse as SessionPasteResponse
+from .event_wait_for_response import EventWaitForResponse as EventWaitForResponse
 from .extension_list_response import ExtensionListResponse as ExtensionListResponse
 from .extension_upload_params import ExtensionUploadParams as ExtensionUploadParams
 from .session_create_response import SessionCreateResponse as SessionCreateResponse

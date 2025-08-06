@@ -34,10 +34,10 @@ class TestProfiles:
     def test_method_create_with_all_params(self, client: Anchorbrowser) -> None:
         profile = client.profiles.create(
             name="my-profile",
+            dedicated_sticky_ip=False,
             description="This is my profile description.",
             session_id="550e8400-e29b-41d4-a716-446655440000",
             source="session",
-            store_cache=True,
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
@@ -125,7 +125,6 @@ class TestProfiles:
             description="Updated profile description.",
             session_id="550e8400-e29b-41d4-a716-446655440000",
             source="session",
-            store_cache=True,
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
@@ -252,10 +251,10 @@ class TestAsyncProfiles:
     async def test_method_create_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         profile = await async_client.profiles.create(
             name="my-profile",
+            dedicated_sticky_ip=False,
             description="This is my profile description.",
             session_id="550e8400-e29b-41d4-a716-446655440000",
             source="session",
-            store_cache=True,
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
@@ -343,7 +342,6 @@ class TestAsyncProfiles:
             description="Updated profile description.",
             session_id="550e8400-e29b-41d4-a716-446655440000",
             source="session",
-            store_cache=True,
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 

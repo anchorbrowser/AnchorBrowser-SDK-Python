@@ -133,6 +133,21 @@ Methods:
 - <code title="get /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">get</a>(session_id) -> <a href="./src/anchorbrowser/types/sessions/clipboard_get_response.py">ClipboardGetResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">set</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/clipboard_set_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/clipboard_set_response.py">ClipboardSetResponse</a></code>
 
+## Agent
+
+### Files
+
+Types:
+
+```python
+from anchorbrowser.types.sessions.agent import FileListResponse, FileUploadResponse
+```
+
+Methods:
+
+- <code title="get /v1/sessions/{sessionId}/agent/files">client.sessions.agent.files.<a href="./src/anchorbrowser/resources/sessions/agent/files.py">list</a>(session_id) -> <a href="./src/anchorbrowser/types/sessions/agent/file_list_response.py">FileListResponse</a></code>
+- <code title="post /v1/sessions/{sessionId}/agent/files">client.sessions.agent.files.<a href="./src/anchorbrowser/resources/sessions/agent/files.py">upload</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/agent/file_upload_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/agent/file_upload_response.py">FileUploadResponse</a></code>
+
 # Tools
 
 Types:
@@ -167,3 +182,16 @@ Methods:
 - <code title="get /v1/extensions">client.extensions.<a href="./src/anchorbrowser/resources/extensions.py">list</a>() -> <a href="./src/anchorbrowser/types/extension_list_response.py">ExtensionListResponse</a></code>
 - <code title="delete /v1/extensions/{id}">client.extensions.<a href="./src/anchorbrowser/resources/extensions.py">delete</a>(id) -> <a href="./src/anchorbrowser/types/extension_delete_response.py">ExtensionDeleteResponse</a></code>
 - <code title="post /v1/extensions">client.extensions.<a href="./src/anchorbrowser/resources/extensions.py">upload</a>(\*\*<a href="src/anchorbrowser/types/extension_upload_params.py">params</a>) -> <a href="./src/anchorbrowser/types/extension_upload_response.py">ExtensionUploadResponse</a></code>
+
+# Events
+
+Types:
+
+```python
+from anchorbrowser.types import EventWaitForResponse
+```
+
+Methods:
+
+- <code title="post /v1/events/{event_name}">client.events.<a href="./src/anchorbrowser/resources/events.py">signal</a>(event_name, \*\*<a href="src/anchorbrowser/types/event_signal_params.py">params</a>) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
+- <code title="post /v1/events/{event_name}/wait">client.events.<a href="./src/anchorbrowser/resources/events.py">wait_for</a>(event_name, \*\*<a href="src/anchorbrowser/types/event_wait_for_params.py">params</a>) -> <a href="./src/anchorbrowser/types/event_wait_for_response.py">EventWaitForResponse</a></code>

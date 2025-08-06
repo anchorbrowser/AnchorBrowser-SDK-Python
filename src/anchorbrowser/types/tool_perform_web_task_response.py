@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Union, Optional
+from typing import Optional
 
 from .._models import BaseModel
 
@@ -8,8 +8,8 @@ __all__ = ["ToolPerformWebTaskResponse", "Data"]
 
 
 class Data(BaseModel):
-    result: Union[str, Dict[str, object], None] = None
-    """The outcome or answer as a string"""
+    result: Optional[str] = None
+    """The outcome or answer produced by the autonomous task."""
 
 
 class ToolPerformWebTaskResponse(BaseModel):

@@ -39,7 +39,11 @@ class TestTools:
         tool = client.tools.fetch_webpage(
             session_id="sessionId",
             format="markdown",
+            new_page=True,
+            page_index=0,
+            return_partial_on_timeout=True,
             url="https://anchorbrowser.io",
+            wait=0,
         )
         assert_matches_type(str, tool, path=["response"])
 
@@ -79,6 +83,9 @@ class TestTools:
         tool = client.tools.perform_web_task(
             prompt="Collect the node names and their CPU average %",
             session_id="sessionId",
+            agent="openai-cua",
+            highlight_elements=True,
+            model="gpt-4o",
             output_schema={
                 "type": "object",
                 "properties": {
@@ -97,6 +104,7 @@ class TestTools:
                 },
                 "required": ["nodes_cpu_usage"],
             },
+            provider="openai",
             url="https://anchorbrowser.io",
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
@@ -205,7 +213,11 @@ class TestAsyncTools:
         tool = await async_client.tools.fetch_webpage(
             session_id="sessionId",
             format="markdown",
+            new_page=True,
+            page_index=0,
+            return_partial_on_timeout=True,
             url="https://anchorbrowser.io",
+            wait=0,
         )
         assert_matches_type(str, tool, path=["response"])
 
@@ -245,6 +257,9 @@ class TestAsyncTools:
         tool = await async_client.tools.perform_web_task(
             prompt="Collect the node names and their CPU average %",
             session_id="sessionId",
+            agent="openai-cua",
+            highlight_elements=True,
+            model="gpt-4o",
             output_schema={
                 "type": "object",
                 "properties": {
@@ -263,6 +278,7 @@ class TestAsyncTools:
                 },
                 "required": ["nodes_cpu_usage"],
             },
+            provider="openai",
             url="https://anchorbrowser.io",
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
