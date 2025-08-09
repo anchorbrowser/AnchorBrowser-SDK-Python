@@ -10,6 +10,7 @@ __all__ = [
     "Browser",
     "BrowserAdblock",
     "BrowserCaptchaSolver",
+    "BrowserDisableWebSecurity",
     "BrowserFullscreen",
     "BrowserHeadless",
     "BrowserP2pDownload",
@@ -44,6 +45,15 @@ class BrowserCaptchaSolver(TypedDict, total=False):
     """Enable or disable captcha-solving.
 
     Requires proxy to be active. Defaults to `false`.
+    """
+
+
+class BrowserDisableWebSecurity(TypedDict, total=False):
+    active: bool
+    """Whether to disable web security features (CORS, same-origin policy, etc.).
+
+    Allows accessing iframes and resources from different origins. Defaults to
+    `false`.
     """
 
 
@@ -102,6 +112,9 @@ class Browser(TypedDict, total=False):
 
     captcha_solver: BrowserCaptchaSolver
     """Configuration for captcha-solving."""
+
+    disable_web_security: BrowserDisableWebSecurity
+    """Configuration for disabling web security features."""
 
     extensions: List[str]
     """Array of extension IDs to load in the browser session.

@@ -47,6 +47,7 @@ class TestSessions:
             browser={
                 "adblock": {"active": False},
                 "captcha_solver": {"active": False},
+                "disable_web_security": {"active": False},
                 "extensions": ["550e8400-e29b-41d4-a716-446655440000", "6ba7b810-9dad-11d1-80b4-00c04fd430c8"],
                 "fullscreen": {"active": False},
                 "headless": {"active": True},
@@ -535,6 +536,7 @@ class TestAsyncSessions:
             browser={
                 "adblock": {"active": False},
                 "captcha_solver": {"active": False},
+                "disable_web_security": {"active": False},
                 "extensions": ["550e8400-e29b-41d4-a716-446655440000", "6ba7b810-9dad-11d1-80b4-00c04fd430c8"],
                 "fullscreen": {"active": False},
                 "headless": {"active": True},
