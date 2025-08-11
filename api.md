@@ -135,6 +135,11 @@ Methods:
 
 ## Agent
 
+Methods:
+
+- <code title="post /v1/sessions/{session_id}/agent/pause">client.sessions.agent.<a href="./src/anchorbrowser/resources/sessions/agent/agent.py">pause</a>(session_id) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
+- <code title="post /v1/sessions/{session_id}/agent/resume">client.sessions.agent.<a href="./src/anchorbrowser/resources/sessions/agent/agent.py">resume</a>(session_id) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
+
 ### Files
 
 Types:
