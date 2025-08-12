@@ -18,7 +18,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestEvents:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_signal(self, client: Anchorbrowser) -> None:
         event = client.events.signal(
@@ -31,7 +31,7 @@ class TestEvents:
         )
         assert_matches_type(SuccessResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_signal(self, client: Anchorbrowser) -> None:
         response = client.events.with_raw_response.signal(
@@ -48,7 +48,7 @@ class TestEvents:
         event = response.parse()
         assert_matches_type(SuccessResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_signal(self, client: Anchorbrowser) -> None:
         with client.events.with_streaming_response.signal(
@@ -67,7 +67,7 @@ class TestEvents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_signal(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_name` but received ''"):
@@ -80,7 +80,7 @@ class TestEvents:
                 },
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_wait_for(self, client: Anchorbrowser) -> None:
         event = client.events.wait_for(
@@ -88,7 +88,7 @@ class TestEvents:
         )
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_wait_for_with_all_params(self, client: Anchorbrowser) -> None:
         event = client.events.wait_for(
@@ -97,7 +97,7 @@ class TestEvents:
         )
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_wait_for(self, client: Anchorbrowser) -> None:
         response = client.events.with_raw_response.wait_for(
@@ -109,7 +109,7 @@ class TestEvents:
         event = response.parse()
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_wait_for(self, client: Anchorbrowser) -> None:
         with client.events.with_streaming_response.wait_for(
@@ -123,7 +123,7 @@ class TestEvents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_wait_for(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_name` but received ''"):
@@ -137,7 +137,7 @@ class TestAsyncEvents:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_signal(self, async_client: AsyncAnchorbrowser) -> None:
         event = await async_client.events.signal(
@@ -150,7 +150,7 @@ class TestAsyncEvents:
         )
         assert_matches_type(SuccessResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_signal(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.events.with_raw_response.signal(
@@ -167,7 +167,7 @@ class TestAsyncEvents:
         event = await response.parse()
         assert_matches_type(SuccessResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_signal(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.events.with_streaming_response.signal(
@@ -186,7 +186,7 @@ class TestAsyncEvents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_signal(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_name` but received ''"):
@@ -199,7 +199,7 @@ class TestAsyncEvents:
                 },
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_wait_for(self, async_client: AsyncAnchorbrowser) -> None:
         event = await async_client.events.wait_for(
@@ -207,7 +207,7 @@ class TestAsyncEvents:
         )
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_wait_for_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         event = await async_client.events.wait_for(
@@ -216,7 +216,7 @@ class TestAsyncEvents:
         )
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_wait_for(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.events.with_raw_response.wait_for(
@@ -228,7 +228,7 @@ class TestAsyncEvents:
         event = await response.parse()
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_wait_for(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.events.with_streaming_response.wait_for(
@@ -242,7 +242,7 @@ class TestAsyncEvents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_wait_for(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_name` but received ''"):

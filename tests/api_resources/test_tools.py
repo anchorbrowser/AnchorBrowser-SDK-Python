@@ -27,13 +27,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestTools:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_fetch_webpage(self, client: Anchorbrowser) -> None:
         tool = client.tools.fetch_webpage()
         assert_matches_type(str, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_fetch_webpage_with_all_params(self, client: Anchorbrowser) -> None:
         tool = client.tools.fetch_webpage(
@@ -47,7 +47,7 @@ class TestTools:
         )
         assert_matches_type(str, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_fetch_webpage(self, client: Anchorbrowser) -> None:
         response = client.tools.with_raw_response.fetch_webpage()
@@ -57,7 +57,7 @@ class TestTools:
         tool = response.parse()
         assert_matches_type(str, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_fetch_webpage(self, client: Anchorbrowser) -> None:
         with client.tools.with_streaming_response.fetch_webpage() as response:
@@ -69,7 +69,7 @@ class TestTools:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_perform_web_task(self, client: Anchorbrowser) -> None:
         tool = client.tools.perform_web_task(
@@ -77,7 +77,7 @@ class TestTools:
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_perform_web_task_with_all_params(self, client: Anchorbrowser) -> None:
         tool = client.tools.perform_web_task(
@@ -109,7 +109,7 @@ class TestTools:
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_perform_web_task(self, client: Anchorbrowser) -> None:
         response = client.tools.with_raw_response.perform_web_task(
@@ -121,7 +121,7 @@ class TestTools:
         tool = response.parse()
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_perform_web_task(self, client: Anchorbrowser) -> None:
         with client.tools.with_streaming_response.perform_web_task(
@@ -135,7 +135,6 @@ class TestTools:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_method_screenshot_webpage(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
@@ -146,7 +145,6 @@ class TestTools:
         assert cast(Any, tool.is_closed) is True
         assert isinstance(tool, BinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_method_screenshot_webpage_with_all_params(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
@@ -167,7 +165,6 @@ class TestTools:
         assert cast(Any, tool.is_closed) is True
         assert isinstance(tool, BinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response_screenshot_webpage(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
@@ -180,7 +177,6 @@ class TestTools:
         assert tool.json() == {"foo": "bar"}
         assert isinstance(tool, BinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_streaming_response_screenshot_webpage(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
@@ -201,13 +197,13 @@ class TestAsyncTools:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_fetch_webpage(self, async_client: AsyncAnchorbrowser) -> None:
         tool = await async_client.tools.fetch_webpage()
         assert_matches_type(str, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_fetch_webpage_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         tool = await async_client.tools.fetch_webpage(
@@ -221,7 +217,7 @@ class TestAsyncTools:
         )
         assert_matches_type(str, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_fetch_webpage(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.tools.with_raw_response.fetch_webpage()
@@ -231,7 +227,7 @@ class TestAsyncTools:
         tool = await response.parse()
         assert_matches_type(str, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_fetch_webpage(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.tools.with_streaming_response.fetch_webpage() as response:
@@ -243,7 +239,7 @@ class TestAsyncTools:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_perform_web_task(self, async_client: AsyncAnchorbrowser) -> None:
         tool = await async_client.tools.perform_web_task(
@@ -251,7 +247,7 @@ class TestAsyncTools:
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_perform_web_task_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         tool = await async_client.tools.perform_web_task(
@@ -283,7 +279,7 @@ class TestAsyncTools:
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_perform_web_task(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.tools.with_raw_response.perform_web_task(
@@ -295,7 +291,7 @@ class TestAsyncTools:
         tool = await response.parse()
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_perform_web_task(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.tools.with_streaming_response.perform_web_task(
@@ -309,7 +305,6 @@ class TestAsyncTools:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_method_screenshot_webpage(self, async_client: AsyncAnchorbrowser, respx_mock: MockRouter) -> None:
@@ -320,7 +315,6 @@ class TestAsyncTools:
         assert cast(Any, tool.is_closed) is True
         assert isinstance(tool, AsyncBinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_method_screenshot_webpage_with_all_params(
@@ -343,7 +337,6 @@ class TestAsyncTools:
         assert cast(Any, tool.is_closed) is True
         assert isinstance(tool, AsyncBinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_raw_response_screenshot_webpage(
@@ -358,7 +351,6 @@ class TestAsyncTools:
         assert await tool.json() == {"foo": "bar"}
         assert isinstance(tool, AsyncBinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_streaming_response_screenshot_webpage(
