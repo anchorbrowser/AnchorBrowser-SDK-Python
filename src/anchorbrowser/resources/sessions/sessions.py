@@ -457,6 +457,7 @@ class SessionsResource(SyncAPIResource):
         y: int,
         delta_x: int | NotGiven = NOT_GIVEN,
         steps: int | NotGiven = NOT_GIVEN,
+        use_os: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -478,6 +479,8 @@ class SessionsResource(SyncAPIResource):
 
           steps: Number of steps to break the scroll into for smoother scrolling
 
+          use_os: Whether to use the OS scroll or the Playwright scroll
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -497,6 +500,7 @@ class SessionsResource(SyncAPIResource):
                     "y": y,
                     "delta_x": delta_x,
                     "steps": steps,
+                    "use_os": use_os,
                 },
                 session_scroll_params.SessionScrollParams,
             ),
@@ -872,6 +876,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         y: int,
         delta_x: int | NotGiven = NOT_GIVEN,
         steps: int | NotGiven = NOT_GIVEN,
+        use_os: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -893,6 +898,8 @@ class AsyncSessionsResource(AsyncAPIResource):
 
           steps: Number of steps to break the scroll into for smoother scrolling
 
+          use_os: Whether to use the OS scroll or the Playwright scroll
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -912,6 +919,7 @@ class AsyncSessionsResource(AsyncAPIResource):
                     "y": y,
                     "delta_x": delta_x,
                     "steps": steps,
+                    "use_os": use_os,
                 },
                 session_scroll_params.SessionScrollParams,
             ),

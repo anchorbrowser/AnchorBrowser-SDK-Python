@@ -467,6 +467,7 @@ class TestSessions:
             y=0,
             delta_x=0,
             steps=10,
+            use_os=False,
         )
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
@@ -956,6 +957,7 @@ class TestAsyncSessions:
             y=0,
             delta_x=0,
             steps=10,
+            use_os=False,
         )
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
