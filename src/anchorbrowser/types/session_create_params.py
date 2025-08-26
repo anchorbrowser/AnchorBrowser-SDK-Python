@@ -97,6 +97,12 @@ class BrowserProfile(TypedDict, total=False):
     browser session ends. Defaults to `false`.
     """
 
+    reset_preferences: bool
+    """When enabled, resets the profile's preferences on session creation.
+
+    Defaults to `false`.
+    """
+
 
 class BrowserViewport(TypedDict, total=False):
     height: int

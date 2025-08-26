@@ -56,6 +56,7 @@ class TestSessions:
                 "profile": {
                     "name": "my-profile",
                     "persist": True,
+                    "reset_preferences": False,
                 },
                 "viewport": {
                     "height": 900,
@@ -542,6 +543,7 @@ class TestAsyncSessions:
                 "profile": {
                     "name": "my-profile",
                     "persist": True,
+                    "reset_preferences": False,
                 },
                 "viewport": {
                     "height": 900,
