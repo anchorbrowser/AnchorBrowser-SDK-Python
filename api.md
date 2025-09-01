@@ -27,6 +27,7 @@ Types:
 ```python
 from anchorbrowser.types import (
     SessionCreateResponse,
+    SessionRetrieveResponse,
     SessionCopyResponse,
     SessionDragAndDropResponse,
     SessionGotoResponse,
@@ -39,6 +40,7 @@ from anchorbrowser.types import (
 Methods:
 
 - <code title="post /v1/sessions">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">create</a>(\*\*<a href="src/anchorbrowser/types/session_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_create_response.py">SessionCreateResponse</a></code>
+- <code title="get /v1/sessions/{session_id}">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">retrieve</a>(session_id) -> <a href="./src/anchorbrowser/types/session_retrieve_response.py">SessionRetrieveResponse</a></code>
 - <code title="delete /v1/sessions/{session_id}">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">delete</a>(session_id) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/copy">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">copy</a>(session_id) -> <a href="./src/anchorbrowser/types/session_copy_response.py">SessionCopyResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/drag-and-drop">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">drag_and_drop</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_drag_and_drop_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_drag_and_drop_response.py">SessionDragAndDropResponse</a></code>

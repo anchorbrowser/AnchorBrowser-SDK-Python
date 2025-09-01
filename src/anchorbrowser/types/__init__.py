@@ -24,6 +24,7 @@ from .session_scroll_response import SessionScrollResponse as SessionScrollRespo
 from .extension_delete_response import ExtensionDeleteResponse as ExtensionDeleteResponse
 from .extension_upload_response import ExtensionUploadResponse as ExtensionUploadResponse
 from .profile_retrieve_response import ProfileRetrieveResponse as ProfileRetrieveResponse
+from .session_retrieve_response import SessionRetrieveResponse as SessionRetrieveResponse
 from .tool_fetch_webpage_params import ToolFetchWebpageParams as ToolFetchWebpageParams
 from .extension_retrieve_response import ExtensionRetrieveResponse as ExtensionRetrieveResponse
 from .tool_fetch_webpage_response import ToolFetchWebpageResponse as ToolFetchWebpageResponse
