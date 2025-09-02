@@ -69,8 +69,10 @@ class TestSessions:
                 "live_view": {"read_only": False},
                 "proxy": {
                     "active": True,
+                    "city": "city",
                     "country_code": "af",
-                    "type": "anchor_residential",
+                    "region": "region",
+                    "type": "anchor_proxy",
                 },
                 "recording": {"active": False},
                 "timeout": {
@@ -598,8 +600,10 @@ class TestAsyncSessions:
                 "live_view": {"read_only": False},
                 "proxy": {
                     "active": True,
+                    "city": "city",
                     "country_code": "af",
-                    "type": "anchor_residential",
+                    "region": "region",
+                    "type": "anchor_proxy",
                 },
                 "recording": {"active": False},
                 "timeout": {
