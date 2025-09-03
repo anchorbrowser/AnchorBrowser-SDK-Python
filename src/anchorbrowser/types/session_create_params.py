@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = [
     "SessionCreateParams",
@@ -122,7 +124,7 @@ class Browser(TypedDict, total=False):
     disable_web_security: BrowserDisableWebSecurity
     """Configuration for disabling web security features."""
 
-    extensions: List[str]
+    extensions: SequenceNotStr[str]
     """Array of extension IDs to load in the browser session.
 
     Extensions must be previously uploaded using the Extensions API.
