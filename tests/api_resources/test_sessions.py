@@ -18,6 +18,7 @@ from anchorbrowser.types import (
     SessionCreateResponse,
     SessionScrollResponse,
     SessionRetrieveResponse,
+    SessionUploadFileResponse,
     SessionDragAndDropResponse,
     SessionRetrieveDownloadsResponse,
 )
@@ -560,6 +561,52 @@ class TestSessions:
                 y=0,
             )
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_upload_file(self, client: Anchorbrowser) -> None:
+        session = client.sessions.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        )
+        assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_upload_file(self, client: Anchorbrowser) -> None:
+        response = client.sessions.with_raw_response.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = response.parse()
+        assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_upload_file(self, client: Anchorbrowser) -> None:
+        with client.sessions.with_streaming_response.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = response.parse()
+            assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_upload_file(self, client: Anchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            client.sessions.with_raw_response.upload_file(
+                session_id="",
+                file=b"raw file contents",
+            )
+
 
 class TestAsyncSessions:
     parametrize = pytest.mark.parametrize(
@@ -1093,4 +1140,50 @@ class TestAsyncSessions:
                 delta_y=100,
                 x=0,
                 y=0,
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
+        session = await async_client.sessions.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        )
+        assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
+        response = await async_client.sessions.with_raw_response.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = await response.parse()
+        assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
+        async with async_client.sessions.with_streaming_response.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = await response.parse()
+            assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            await async_client.sessions.with_raw_response.upload_file(
+                session_id="",
+                file=b"raw file contents",
             )

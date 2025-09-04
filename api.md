@@ -34,6 +34,7 @@ from anchorbrowser.types import (
     SessionPasteResponse,
     SessionRetrieveDownloadsResponse,
     SessionScrollResponse,
+    SessionUploadFileResponse,
 )
 ```
 
@@ -49,6 +50,7 @@ Methods:
 - <code title="get /v1/sessions/{session_id}/downloads">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">retrieve_downloads</a>(session_id) -> <a href="./src/anchorbrowser/types/session_retrieve_downloads_response.py">SessionRetrieveDownloadsResponse</a></code>
 - <code title="get /v1/sessions/{sessionId}/screenshot">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">retrieve_screenshot</a>(session_id) -> BinaryAPIResponse</code>
 - <code title="post /v1/sessions/{sessionId}/scroll">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">scroll</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_scroll_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_scroll_response.py">SessionScrollResponse</a></code>
+- <code title="post /v1/sessions/{sessionId}/uploads">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">upload_file</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_upload_file_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_upload_file_response.py">SessionUploadFileResponse</a></code>
 
 ## All
 

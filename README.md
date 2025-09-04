@@ -136,7 +136,7 @@ from anchorbrowser import Anchorbrowser
 
 client = Anchorbrowser()
 
-client.sessions.agent.files.upload(
+client.sessions.upload_file(
     session_id="550e8400-e29b-41d4-a716-446655440000",
     file=Path("/path/to/file"),
 )
