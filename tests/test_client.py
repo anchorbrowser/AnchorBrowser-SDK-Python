@@ -37,7 +37,7 @@ from anchorbrowser._base_client import (
 from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "sk-1jdfiaj0advpoaskdfpoks"
+api_key = "Your API Key"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -85,9 +85,9 @@ class TestAnchorbrowser:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(api_key="another sk-1jdfiaj0advpoaskdfpoks")
-        assert copied.api_key == "another sk-1jdfiaj0advpoaskdfpoks"
-        assert self.client.api_key == "sk-1jdfiaj0advpoaskdfpoks"
+        copied = self.client.copy(api_key="another Your API Key")
+        assert copied.api_key == "another Your API Key"
+        assert self.client.api_key == "Your API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -900,9 +900,9 @@ class TestAsyncAnchorbrowser:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(api_key="another sk-1jdfiaj0advpoaskdfpoks")
-        assert copied.api_key == "another sk-1jdfiaj0advpoaskdfpoks"
-        assert self.client.api_key == "sk-1jdfiaj0advpoaskdfpoks"
+        copied = self.client.copy(api_key="another Your API Key")
+        assert copied.api_key == "another Your API Key"
+        assert self.client.api_key == "Your API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
