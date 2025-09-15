@@ -89,6 +89,7 @@ from ...types.session_create_response import SessionCreateResponse
 from ...types.session_scroll_response import SessionScrollResponse
 from ...types.shared.success_response import SuccessResponse
 from ...types.session_retrieve_response import SessionRetrieveResponse
+from ...types.session_list_pages_response import SessionListPagesResponse
 from ...types.session_upload_file_response import SessionUploadFileResponse
 from ...types.session_drag_and_drop_response import SessionDragAndDropResponse
 from ...types.session_retrieve_downloads_response import SessionRetrieveDownloadsResponse
@@ -377,6 +378,39 @@ class SessionsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SessionGotoResponse,
+        )
+
+    def list_pages(
+        self,
+        session_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SessionListPagesResponse:
+        """
+        Retrieves a list of pages associated with a specific browser session.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._get(
+            f"/v1/sessions/{session_id}/pages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SessionListPagesResponse,
         )
 
     def paste(
@@ -879,6 +913,39 @@ class AsyncSessionsResource(AsyncAPIResource):
             cast_to=SessionGotoResponse,
         )
 
+    async def list_pages(
+        self,
+        session_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SessionListPagesResponse:
+        """
+        Retrieves a list of pages associated with a specific browser session.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._get(
+            f"/v1/sessions/{session_id}/pages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SessionListPagesResponse,
+        )
+
     async def paste(
         self,
         session_id: str,
@@ -1118,6 +1185,9 @@ class SessionsResourceWithRawResponse:
         self.goto = to_raw_response_wrapper(
             sessions.goto,
         )
+        self.list_pages = to_raw_response_wrapper(
+            sessions.list_pages,
+        )
         self.paste = to_raw_response_wrapper(
             sessions.paste,
         )
@@ -1181,6 +1251,9 @@ class AsyncSessionsResourceWithRawResponse:
         )
         self.goto = async_to_raw_response_wrapper(
             sessions.goto,
+        )
+        self.list_pages = async_to_raw_response_wrapper(
+            sessions.list_pages,
         )
         self.paste = async_to_raw_response_wrapper(
             sessions.paste,
@@ -1246,6 +1319,9 @@ class SessionsResourceWithStreamingResponse:
         self.goto = to_streamed_response_wrapper(
             sessions.goto,
         )
+        self.list_pages = to_streamed_response_wrapper(
+            sessions.list_pages,
+        )
         self.paste = to_streamed_response_wrapper(
             sessions.paste,
         )
@@ -1309,6 +1385,9 @@ class AsyncSessionsResourceWithStreamingResponse:
         )
         self.goto = async_to_streamed_response_wrapper(
             sessions.goto,
+        )
+        self.list_pages = async_to_streamed_response_wrapper(
+            sessions.list_pages,
         )
         self.paste = async_to_streamed_response_wrapper(
             sessions.paste,

@@ -31,6 +31,7 @@ from anchorbrowser.types import (
     SessionCopyResponse,
     SessionDragAndDropResponse,
     SessionGotoResponse,
+    SessionListPagesResponse,
     SessionPasteResponse,
     SessionRetrieveDownloadsResponse,
     SessionScrollResponse,
@@ -46,6 +47,7 @@ Methods:
 - <code title="post /v1/sessions/{sessionId}/copy">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">copy</a>(session_id) -> <a href="./src/anchorbrowser/types/session_copy_response.py">SessionCopyResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/drag-and-drop">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">drag_and_drop</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_drag_and_drop_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_drag_and_drop_response.py">SessionDragAndDropResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/goto">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">goto</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_goto_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_goto_response.py">SessionGotoResponse</a></code>
+- <code title="get /v1/sessions/{session_id}/pages">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">list_pages</a>(session_id) -> <a href="./src/anchorbrowser/types/session_list_pages_response.py">SessionListPagesResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/paste">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">paste</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_paste_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_paste_response.py">SessionPasteResponse</a></code>
 - <code title="get /v1/sessions/{session_id}/downloads">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">retrieve_downloads</a>(session_id) -> <a href="./src/anchorbrowser/types/session_retrieve_downloads_response.py">SessionRetrieveDownloadsResponse</a></code>
 - <code title="get /v1/sessions/{sessionId}/screenshot">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">retrieve_screenshot</a>(session_id) -> BinaryAPIResponse</code>
