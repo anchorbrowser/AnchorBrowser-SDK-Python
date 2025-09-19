@@ -7,7 +7,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import tool_fetch_webpage_params, tool_perform_web_task_params, tool_screenshot_webpage_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -54,19 +54,19 @@ class ToolsResource(SyncAPIResource):
     def fetch_webpage(
         self,
         *,
-        session_id: str | NotGiven = NOT_GIVEN,
-        format: Literal["html", "markdown"] | NotGiven = NOT_GIVEN,
-        new_page: bool | NotGiven = NOT_GIVEN,
-        page_index: int | NotGiven = NOT_GIVEN,
-        return_partial_on_timeout: bool | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
-        wait: int | NotGiven = NOT_GIVEN,
+        session_id: str | Omit = omit,
+        format: Literal["html", "markdown"] | Omit = omit,
+        new_page: bool | Omit = omit,
+        page_index: int | Omit = omit,
+        return_partial_on_timeout: bool | Omit = omit,
+        url: str | Omit = omit,
+        wait: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Retrieve the rendered content of a webpage, optionally formatted as Markdown or
@@ -126,19 +126,19 @@ class ToolsResource(SyncAPIResource):
         self,
         *,
         prompt: str,
-        session_id: str | NotGiven = NOT_GIVEN,
-        agent: Literal["browser-use", "openai-cua"] | NotGiven = NOT_GIVEN,
-        highlight_elements: bool | NotGiven = NOT_GIVEN,
-        model: str | NotGiven = NOT_GIVEN,
-        output_schema: object | NotGiven = NOT_GIVEN,
-        provider: Literal["openai", "gemini", "groq", "azure", "xai"] | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
+        session_id: str | Omit = omit,
+        agent: Literal["browser-use", "openai-cua"] | Omit = omit,
+        highlight_elements: bool | Omit = omit,
+        model: str | Omit = omit,
+        output_schema: object | Omit = omit,
+        provider: Literal["openai", "gemini", "groq", "azure", "xai"] | Omit = omit,
+        url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ToolPerformWebTaskResponse:
         """
         Start from a URL and perform the given task.
@@ -202,21 +202,21 @@ class ToolsResource(SyncAPIResource):
     def screenshot_webpage(
         self,
         *,
-        session_id: str | NotGiven = NOT_GIVEN,
-        capture_full_height: bool | NotGiven = NOT_GIVEN,
-        height: int | NotGiven = NOT_GIVEN,
-        image_quality: int | NotGiven = NOT_GIVEN,
-        s3_target_address: str | NotGiven = NOT_GIVEN,
-        scroll_all_content: bool | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
-        wait: int | NotGiven = NOT_GIVEN,
-        width: int | NotGiven = NOT_GIVEN,
+        session_id: str | Omit = omit,
+        capture_full_height: bool | Omit = omit,
+        height: int | Omit = omit,
+        image_quality: int | Omit = omit,
+        s3_target_address: str | Omit = omit,
+        scroll_all_content: bool | Omit = omit,
+        url: str | Omit = omit,
+        wait: int | Omit = omit,
+        width: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BinaryAPIResponse:
         """
         This endpoint captures a screenshot of the specified webpage using Chromium.
@@ -305,19 +305,19 @@ class AsyncToolsResource(AsyncAPIResource):
     async def fetch_webpage(
         self,
         *,
-        session_id: str | NotGiven = NOT_GIVEN,
-        format: Literal["html", "markdown"] | NotGiven = NOT_GIVEN,
-        new_page: bool | NotGiven = NOT_GIVEN,
-        page_index: int | NotGiven = NOT_GIVEN,
-        return_partial_on_timeout: bool | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
-        wait: int | NotGiven = NOT_GIVEN,
+        session_id: str | Omit = omit,
+        format: Literal["html", "markdown"] | Omit = omit,
+        new_page: bool | Omit = omit,
+        page_index: int | Omit = omit,
+        return_partial_on_timeout: bool | Omit = omit,
+        url: str | Omit = omit,
+        wait: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Retrieve the rendered content of a webpage, optionally formatted as Markdown or
@@ -379,19 +379,19 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         *,
         prompt: str,
-        session_id: str | NotGiven = NOT_GIVEN,
-        agent: Literal["browser-use", "openai-cua"] | NotGiven = NOT_GIVEN,
-        highlight_elements: bool | NotGiven = NOT_GIVEN,
-        model: str | NotGiven = NOT_GIVEN,
-        output_schema: object | NotGiven = NOT_GIVEN,
-        provider: Literal["openai", "gemini", "groq", "azure", "xai"] | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
+        session_id: str | Omit = omit,
+        agent: Literal["browser-use", "openai-cua"] | Omit = omit,
+        highlight_elements: bool | Omit = omit,
+        model: str | Omit = omit,
+        output_schema: object | Omit = omit,
+        provider: Literal["openai", "gemini", "groq", "azure", "xai"] | Omit = omit,
+        url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ToolPerformWebTaskResponse:
         """
         Start from a URL and perform the given task.
@@ -455,21 +455,21 @@ class AsyncToolsResource(AsyncAPIResource):
     async def screenshot_webpage(
         self,
         *,
-        session_id: str | NotGiven = NOT_GIVEN,
-        capture_full_height: bool | NotGiven = NOT_GIVEN,
-        height: int | NotGiven = NOT_GIVEN,
-        image_quality: int | NotGiven = NOT_GIVEN,
-        s3_target_address: str | NotGiven = NOT_GIVEN,
-        scroll_all_content: bool | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
-        wait: int | NotGiven = NOT_GIVEN,
-        width: int | NotGiven = NOT_GIVEN,
+        session_id: str | Omit = omit,
+        capture_full_height: bool | Omit = omit,
+        height: int | Omit = omit,
+        image_quality: int | Omit = omit,
+        s3_target_address: str | Omit = omit,
+        scroll_all_content: bool | Omit = omit,
+        url: str | Omit = omit,
+        wait: int | Omit = omit,
+        width: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncBinaryAPIResponse:
         """
         This endpoint captures a screenshot of the specified webpage using Chromium.

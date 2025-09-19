@@ -31,7 +31,7 @@ from ...types import (
     session_upload_file_params,
     session_drag_and_drop_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
+from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
 from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .keyboard import (
     KeyboardResource,
@@ -144,14 +144,14 @@ class SessionsResource(SyncAPIResource):
     def create(
         self,
         *,
-        browser: session_create_params.Browser | NotGiven = NOT_GIVEN,
-        session: session_create_params.Session | NotGiven = NOT_GIVEN,
+        browser: session_create_params.Browser | Omit = omit,
+        session: session_create_params.Session | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCreateResponse:
         """
         Allocates a new browser session for the user, with optional configurations for
@@ -194,7 +194,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionRetrieveResponse:
         """
         Retrieves detailed information about a specific browser session.
@@ -227,7 +227,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SuccessResponse:
         """
         Deletes the browser session associated with the provided browser session ID.
@@ -261,7 +261,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCopyResponse:
         """
         Copies the currently selected text to the clipboard
@@ -293,13 +293,13 @@ class SessionsResource(SyncAPIResource):
         end_y: int,
         start_x: int,
         start_y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionDragAndDropResponse:
         """
         Performs a drag and drop operation from start coordinates to end coordinates
@@ -353,7 +353,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionGotoResponse:
         """
         Navigates the browser session to the specified URL
@@ -389,7 +389,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionListPagesResponse:
         """
         Retrieves a list of pages associated with a specific browser session.
@@ -423,7 +423,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionPasteResponse:
         """
         Pastes text at the current cursor position
@@ -459,7 +459,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionRetrieveDownloadsResponse:
         """Retrieves metadata of files downloaded during a browser session.
 
@@ -494,7 +494,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BinaryAPIResponse:
         """
         Takes a screenshot of the current browser session and returns it as an image.
@@ -526,15 +526,15 @@ class SessionsResource(SyncAPIResource):
         delta_y: int,
         x: int,
         y: int,
-        delta_x: int | NotGiven = NOT_GIVEN,
-        steps: int | NotGiven = NOT_GIVEN,
-        use_os: bool | NotGiven = NOT_GIVEN,
+        delta_x: int | Omit = omit,
+        steps: int | Omit = omit,
+        use_os: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionScrollResponse:
         """
         Performs a scroll action at the specified coordinates
@@ -591,7 +591,7 @@ class SessionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionUploadFileResponse:
         """
         Upload files directly to a browser session for use with web forms and file
@@ -677,14 +677,14 @@ class AsyncSessionsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        browser: session_create_params.Browser | NotGiven = NOT_GIVEN,
-        session: session_create_params.Session | NotGiven = NOT_GIVEN,
+        browser: session_create_params.Browser | Omit = omit,
+        session: session_create_params.Session | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCreateResponse:
         """
         Allocates a new browser session for the user, with optional configurations for
@@ -727,7 +727,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionRetrieveResponse:
         """
         Retrieves detailed information about a specific browser session.
@@ -760,7 +760,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SuccessResponse:
         """
         Deletes the browser session associated with the provided browser session ID.
@@ -794,7 +794,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionCopyResponse:
         """
         Copies the currently selected text to the clipboard
@@ -826,13 +826,13 @@ class AsyncSessionsResource(AsyncAPIResource):
         end_y: int,
         start_x: int,
         start_y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionDragAndDropResponse:
         """
         Performs a drag and drop operation from start coordinates to end coordinates
@@ -886,7 +886,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionGotoResponse:
         """
         Navigates the browser session to the specified URL
@@ -922,7 +922,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionListPagesResponse:
         """
         Retrieves a list of pages associated with a specific browser session.
@@ -956,7 +956,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionPasteResponse:
         """
         Pastes text at the current cursor position
@@ -992,7 +992,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionRetrieveDownloadsResponse:
         """Retrieves metadata of files downloaded during a browser session.
 
@@ -1027,7 +1027,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncBinaryAPIResponse:
         """
         Takes a screenshot of the current browser session and returns it as an image.
@@ -1059,15 +1059,15 @@ class AsyncSessionsResource(AsyncAPIResource):
         delta_y: int,
         x: int,
         y: int,
-        delta_x: int | NotGiven = NOT_GIVEN,
-        steps: int | NotGiven = NOT_GIVEN,
-        use_os: bool | NotGiven = NOT_GIVEN,
+        delta_x: int | Omit = omit,
+        steps: int | Omit = omit,
+        use_os: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionScrollResponse:
         """
         Performs a scroll action at the specified coordinates
@@ -1124,7 +1124,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SessionUploadFileResponse:
         """
         Upload files directly to a browser session for use with web forms and file
