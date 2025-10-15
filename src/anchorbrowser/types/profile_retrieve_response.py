@@ -28,9 +28,6 @@ class Data(BaseModel):
     status: Optional[str] = None
     """The current status of the profile."""
 
-    store_cache: Optional[bool] = None
-    """Whether the profile stores browser cache."""
-
 
 class ProfileRetrieveResponse(BaseModel):
     data: Optional[Data] = None

@@ -21,7 +21,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestProfiles:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Anchorbrowser) -> None:
         profile = client.profiles.create(
@@ -29,19 +29,19 @@ class TestProfiles:
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Anchorbrowser) -> None:
         profile = client.profiles.create(
             name="my-profile",
+            dedicated_sticky_ip=False,
             description="This is my profile description.",
             session_id="550e8400-e29b-41d4-a716-446655440000",
             source="session",
-            store_cache=True,
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Anchorbrowser) -> None:
         response = client.profiles.with_raw_response.create(
@@ -53,7 +53,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Anchorbrowser) -> None:
         with client.profiles.with_streaming_response.create(
@@ -67,7 +67,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Anchorbrowser) -> None:
         profile = client.profiles.retrieve(
@@ -75,7 +75,7 @@ class TestProfiles:
         )
         assert_matches_type(ProfileRetrieveResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Anchorbrowser) -> None:
         response = client.profiles.with_raw_response.retrieve(
@@ -87,7 +87,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(ProfileRetrieveResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Anchorbrowser) -> None:
         with client.profiles.with_streaming_response.retrieve(
@@ -101,7 +101,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `name` but received ''"):
@@ -109,7 +109,7 @@ class TestProfiles:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Anchorbrowser) -> None:
         profile = client.profiles.update(
@@ -117,7 +117,7 @@ class TestProfiles:
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Anchorbrowser) -> None:
         profile = client.profiles.update(
@@ -125,11 +125,10 @@ class TestProfiles:
             description="Updated profile description.",
             session_id="550e8400-e29b-41d4-a716-446655440000",
             source="session",
-            store_cache=True,
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Anchorbrowser) -> None:
         response = client.profiles.with_raw_response.update(
@@ -141,7 +140,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Anchorbrowser) -> None:
         with client.profiles.with_streaming_response.update(
@@ -155,7 +154,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `name` but received ''"):
@@ -163,13 +162,13 @@ class TestProfiles:
                 name="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Anchorbrowser) -> None:
         profile = client.profiles.list()
         assert_matches_type(ProfileListResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Anchorbrowser) -> None:
         response = client.profiles.with_raw_response.list()
@@ -179,7 +178,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(ProfileListResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Anchorbrowser) -> None:
         with client.profiles.with_streaming_response.list() as response:
@@ -191,7 +190,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Anchorbrowser) -> None:
         profile = client.profiles.delete(
@@ -199,7 +198,7 @@ class TestProfiles:
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Anchorbrowser) -> None:
         response = client.profiles.with_raw_response.delete(
@@ -211,7 +210,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Anchorbrowser) -> None:
         with client.profiles.with_streaming_response.delete(
@@ -225,7 +224,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `name` but received ''"):
@@ -239,7 +238,7 @@ class TestAsyncProfiles:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncAnchorbrowser) -> None:
         profile = await async_client.profiles.create(
@@ -247,19 +246,19 @@ class TestAsyncProfiles:
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         profile = await async_client.profiles.create(
             name="my-profile",
+            dedicated_sticky_ip=False,
             description="This is my profile description.",
             session_id="550e8400-e29b-41d4-a716-446655440000",
             source="session",
-            store_cache=True,
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.profiles.with_raw_response.create(
@@ -271,7 +270,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.profiles.with_streaming_response.create(
@@ -285,7 +284,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         profile = await async_client.profiles.retrieve(
@@ -293,7 +292,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(ProfileRetrieveResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.profiles.with_raw_response.retrieve(
@@ -305,7 +304,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(ProfileRetrieveResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.profiles.with_streaming_response.retrieve(
@@ -319,7 +318,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `name` but received ''"):
@@ -327,7 +326,7 @@ class TestAsyncProfiles:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncAnchorbrowser) -> None:
         profile = await async_client.profiles.update(
@@ -335,7 +334,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         profile = await async_client.profiles.update(
@@ -343,11 +342,10 @@ class TestAsyncProfiles:
             description="Updated profile description.",
             session_id="550e8400-e29b-41d4-a716-446655440000",
             source="session",
-            store_cache=True,
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.profiles.with_raw_response.update(
@@ -359,7 +357,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.profiles.with_streaming_response.update(
@@ -373,7 +371,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `name` but received ''"):
@@ -381,13 +379,13 @@ class TestAsyncProfiles:
                 name="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncAnchorbrowser) -> None:
         profile = await async_client.profiles.list()
         assert_matches_type(ProfileListResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.profiles.with_raw_response.list()
@@ -397,7 +395,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(ProfileListResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.profiles.with_streaming_response.list() as response:
@@ -409,7 +407,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncAnchorbrowser) -> None:
         profile = await async_client.profiles.delete(
@@ -417,7 +415,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.profiles.with_raw_response.delete(
@@ -429,7 +427,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(SuccessResponse, profile, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.profiles.with_streaming_response.delete(
@@ -443,7 +441,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `name` but received ''"):

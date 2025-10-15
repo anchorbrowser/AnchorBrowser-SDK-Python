@@ -40,7 +40,7 @@ print(success_response.data)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `ANCHORBROWSER_API_KEY="My API Key"` to your `.env` file
+to add `ANCHORBROWSER_API_KEY="Your API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -90,7 +90,7 @@ from anchorbrowser import AsyncAnchorbrowser
 
 async def main() -> None:
     async with AsyncAnchorbrowser(
-        api_key="My API Key",
+        api_key="Your API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         success_response = await client.profiles.create(
@@ -136,9 +136,8 @@ from anchorbrowser import Anchorbrowser
 
 client = Anchorbrowser()
 
-client.extensions.upload(
+client.sessions.upload_file(
     file=Path("/path/to/file"),
-    name="My Custom Extension",
 )
 ```
 

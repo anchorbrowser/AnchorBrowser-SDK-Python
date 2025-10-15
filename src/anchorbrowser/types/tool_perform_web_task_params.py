@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -20,8 +20,24 @@ class ToolPerformWebTaskParams(TypedDict, total=False):
     session.
     """
 
+    agent: Literal["browser-use", "openai-cua"]
+    """The AI agent to use for task completion. Defaults to browser-use."""
+
+    highlight_elements: bool
+    """Whether to highlight elements during task execution for better visibility."""
+
+    model: str
+    """The specific model to use for task completion.
+
+    see our [models](/agentic-browser-control/ai-task-completion#available-models)
+    page for more information.
+    """
+
     output_schema: object
     """JSON Schema defining the expected structure of the output data."""
+
+    provider: Literal["openai", "gemini", "groq", "azure", "xai"]
+    """The AI provider to use for task completion."""
 
     url: str
     """The URL of the webpage.
