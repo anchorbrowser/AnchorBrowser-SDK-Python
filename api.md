@@ -27,26 +27,32 @@ Types:
 ```python
 from anchorbrowser.types import (
     SessionCreateResponse,
+    SessionRetrieveResponse,
     SessionCopyResponse,
     SessionDragAndDropResponse,
     SessionGotoResponse,
+    SessionListPagesResponse,
     SessionPasteResponse,
     SessionRetrieveDownloadsResponse,
     SessionScrollResponse,
+    SessionUploadFileResponse,
 )
 ```
 
 Methods:
 
 - <code title="post /v1/sessions">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">create</a>(\*\*<a href="src/anchorbrowser/types/session_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_create_response.py">SessionCreateResponse</a></code>
+- <code title="get /v1/sessions/{session_id}">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">retrieve</a>(session_id) -> <a href="./src/anchorbrowser/types/session_retrieve_response.py">SessionRetrieveResponse</a></code>
 - <code title="delete /v1/sessions/{session_id}">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">delete</a>(session_id) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/copy">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">copy</a>(session_id) -> <a href="./src/anchorbrowser/types/session_copy_response.py">SessionCopyResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/drag-and-drop">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">drag_and_drop</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_drag_and_drop_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_drag_and_drop_response.py">SessionDragAndDropResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/goto">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">goto</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_goto_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_goto_response.py">SessionGotoResponse</a></code>
+- <code title="get /v1/sessions/{session_id}/pages">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">list_pages</a>(session_id) -> <a href="./src/anchorbrowser/types/session_list_pages_response.py">SessionListPagesResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/paste">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">paste</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_paste_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_paste_response.py">SessionPasteResponse</a></code>
 - <code title="get /v1/sessions/{session_id}/downloads">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">retrieve_downloads</a>(session_id) -> <a href="./src/anchorbrowser/types/session_retrieve_downloads_response.py">SessionRetrieveDownloadsResponse</a></code>
 - <code title="get /v1/sessions/{sessionId}/screenshot">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">retrieve_screenshot</a>(session_id) -> BinaryAPIResponse</code>
 - <code title="post /v1/sessions/{sessionId}/scroll">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">scroll</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_scroll_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_scroll_response.py">SessionScrollResponse</a></code>
+- <code title="post /v1/sessions/{sessionId}/uploads">client.sessions.<a href="./src/anchorbrowser/resources/sessions/sessions.py">upload_file</a>(session_id, \*\*<a href="src/anchorbrowser/types/session_upload_file_params.py">params</a>) -> <a href="./src/anchorbrowser/types/session_upload_file_response.py">SessionUploadFileResponse</a></code>
 
 ## All
 
@@ -133,6 +139,26 @@ Methods:
 - <code title="get /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">get</a>(session_id) -> <a href="./src/anchorbrowser/types/sessions/clipboard_get_response.py">ClipboardGetResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">set</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/clipboard_set_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/clipboard_set_response.py">ClipboardSetResponse</a></code>
 
+## Agent
+
+Methods:
+
+- <code title="post /v1/sessions/{session_id}/agent/pause">client.sessions.agent.<a href="./src/anchorbrowser/resources/sessions/agent/agent.py">pause</a>(session_id) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
+- <code title="post /v1/sessions/{session_id}/agent/resume">client.sessions.agent.<a href="./src/anchorbrowser/resources/sessions/agent/agent.py">resume</a>(session_id) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
+
+### Files
+
+Types:
+
+```python
+from anchorbrowser.types.sessions.agent import FileListResponse, FileUploadResponse
+```
+
+Methods:
+
+- <code title="get /v1/sessions/{sessionId}/agent/files">client.sessions.agent.files.<a href="./src/anchorbrowser/resources/sessions/agent/files.py">list</a>(session_id) -> <a href="./src/anchorbrowser/types/sessions/agent/file_list_response.py">FileListResponse</a></code>
+- <code title="post /v1/sessions/{sessionId}/agent/files">client.sessions.agent.files.<a href="./src/anchorbrowser/resources/sessions/agent/files.py">upload</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/agent/file_upload_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/agent/file_upload_response.py">FileUploadResponse</a></code>
+
 # Tools
 
 Types:
@@ -167,3 +193,16 @@ Methods:
 - <code title="get /v1/extensions">client.extensions.<a href="./src/anchorbrowser/resources/extensions.py">list</a>() -> <a href="./src/anchorbrowser/types/extension_list_response.py">ExtensionListResponse</a></code>
 - <code title="delete /v1/extensions/{id}">client.extensions.<a href="./src/anchorbrowser/resources/extensions.py">delete</a>(id) -> <a href="./src/anchorbrowser/types/extension_delete_response.py">ExtensionDeleteResponse</a></code>
 - <code title="post /v1/extensions">client.extensions.<a href="./src/anchorbrowser/resources/extensions.py">upload</a>(\*\*<a href="src/anchorbrowser/types/extension_upload_params.py">params</a>) -> <a href="./src/anchorbrowser/types/extension_upload_response.py">ExtensionUploadResponse</a></code>
+
+# Events
+
+Types:
+
+```python
+from anchorbrowser.types import EventWaitForResponse
+```
+
+Methods:
+
+- <code title="post /v1/events/{event_name}">client.events.<a href="./src/anchorbrowser/resources/events.py">signal</a>(event_name, \*\*<a href="src/anchorbrowser/types/event_signal_params.py">params</a>) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
+- <code title="post /v1/events/{event_name}/wait">client.events.<a href="./src/anchorbrowser/resources/events.py">wait_for</a>(event_name, \*\*<a href="src/anchorbrowser/types/event_wait_for_params.py">params</a>) -> <a href="./src/anchorbrowser/types/event_wait_for_response.py">EventWaitForResponse</a></code>

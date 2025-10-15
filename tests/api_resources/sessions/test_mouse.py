@@ -23,7 +23,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestMouse:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_click(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.click(
@@ -33,7 +33,7 @@ class TestMouse:
         )
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_click_with_all_params(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.click(
@@ -44,7 +44,7 @@ class TestMouse:
         )
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_click(self, client: Anchorbrowser) -> None:
         response = client.sessions.mouse.with_raw_response.click(
@@ -58,7 +58,7 @@ class TestMouse:
         mouse = response.parse()
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_click(self, client: Anchorbrowser) -> None:
         with client.sessions.mouse.with_streaming_response.click(
@@ -74,7 +74,7 @@ class TestMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_click(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -84,7 +84,7 @@ class TestMouse:
                 y=0,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_double_click(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.double_click(
@@ -94,7 +94,7 @@ class TestMouse:
         )
         assert_matches_type(MouseDoubleClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_double_click_with_all_params(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.double_click(
@@ -105,7 +105,7 @@ class TestMouse:
         )
         assert_matches_type(MouseDoubleClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_double_click(self, client: Anchorbrowser) -> None:
         response = client.sessions.mouse.with_raw_response.double_click(
@@ -119,7 +119,7 @@ class TestMouse:
         mouse = response.parse()
         assert_matches_type(MouseDoubleClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_double_click(self, client: Anchorbrowser) -> None:
         with client.sessions.mouse.with_streaming_response.double_click(
@@ -135,7 +135,7 @@ class TestMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_double_click(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -145,7 +145,7 @@ class TestMouse:
                 y=0,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_down(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.down(
@@ -155,7 +155,7 @@ class TestMouse:
         )
         assert_matches_type(MouseDownResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_down_with_all_params(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.down(
@@ -166,7 +166,7 @@ class TestMouse:
         )
         assert_matches_type(MouseDownResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_down(self, client: Anchorbrowser) -> None:
         response = client.sessions.mouse.with_raw_response.down(
@@ -180,7 +180,7 @@ class TestMouse:
         mouse = response.parse()
         assert_matches_type(MouseDownResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_down(self, client: Anchorbrowser) -> None:
         with client.sessions.mouse.with_streaming_response.down(
@@ -196,7 +196,7 @@ class TestMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_down(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -206,7 +206,7 @@ class TestMouse:
                 y=0,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_move(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.move(
@@ -216,7 +216,7 @@ class TestMouse:
         )
         assert_matches_type(MouseMoveResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_move(self, client: Anchorbrowser) -> None:
         response = client.sessions.mouse.with_raw_response.move(
@@ -230,7 +230,7 @@ class TestMouse:
         mouse = response.parse()
         assert_matches_type(MouseMoveResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_move(self, client: Anchorbrowser) -> None:
         with client.sessions.mouse.with_streaming_response.move(
@@ -246,7 +246,7 @@ class TestMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_move(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -256,7 +256,7 @@ class TestMouse:
                 y=0,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_up(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.up(
@@ -266,7 +266,7 @@ class TestMouse:
         )
         assert_matches_type(MouseUpResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_up_with_all_params(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.up(
@@ -277,7 +277,7 @@ class TestMouse:
         )
         assert_matches_type(MouseUpResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_up(self, client: Anchorbrowser) -> None:
         response = client.sessions.mouse.with_raw_response.up(
@@ -291,7 +291,7 @@ class TestMouse:
         mouse = response.parse()
         assert_matches_type(MouseUpResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_up(self, client: Anchorbrowser) -> None:
         with client.sessions.mouse.with_streaming_response.up(
@@ -307,7 +307,7 @@ class TestMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_up(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -323,7 +323,7 @@ class TestAsyncMouse:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_click(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.click(
@@ -333,7 +333,7 @@ class TestAsyncMouse:
         )
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_click_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.click(
@@ -344,7 +344,7 @@ class TestAsyncMouse:
         )
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_click(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.mouse.with_raw_response.click(
@@ -358,7 +358,7 @@ class TestAsyncMouse:
         mouse = await response.parse()
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_click(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.mouse.with_streaming_response.click(
@@ -374,7 +374,7 @@ class TestAsyncMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_click(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -384,7 +384,7 @@ class TestAsyncMouse:
                 y=0,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_double_click(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.double_click(
@@ -394,7 +394,7 @@ class TestAsyncMouse:
         )
         assert_matches_type(MouseDoubleClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_double_click_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.double_click(
@@ -405,7 +405,7 @@ class TestAsyncMouse:
         )
         assert_matches_type(MouseDoubleClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_double_click(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.mouse.with_raw_response.double_click(
@@ -419,7 +419,7 @@ class TestAsyncMouse:
         mouse = await response.parse()
         assert_matches_type(MouseDoubleClickResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_double_click(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.mouse.with_streaming_response.double_click(
@@ -435,7 +435,7 @@ class TestAsyncMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_double_click(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -445,7 +445,7 @@ class TestAsyncMouse:
                 y=0,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_down(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.down(
@@ -455,7 +455,7 @@ class TestAsyncMouse:
         )
         assert_matches_type(MouseDownResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_down_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.down(
@@ -466,7 +466,7 @@ class TestAsyncMouse:
         )
         assert_matches_type(MouseDownResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_down(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.mouse.with_raw_response.down(
@@ -480,7 +480,7 @@ class TestAsyncMouse:
         mouse = await response.parse()
         assert_matches_type(MouseDownResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_down(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.mouse.with_streaming_response.down(
@@ -496,7 +496,7 @@ class TestAsyncMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_down(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -506,7 +506,7 @@ class TestAsyncMouse:
                 y=0,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_move(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.move(
@@ -516,7 +516,7 @@ class TestAsyncMouse:
         )
         assert_matches_type(MouseMoveResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_move(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.mouse.with_raw_response.move(
@@ -530,7 +530,7 @@ class TestAsyncMouse:
         mouse = await response.parse()
         assert_matches_type(MouseMoveResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_move(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.mouse.with_streaming_response.move(
@@ -546,7 +546,7 @@ class TestAsyncMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_move(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -556,7 +556,7 @@ class TestAsyncMouse:
                 y=0,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_up(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.up(
@@ -566,7 +566,7 @@ class TestAsyncMouse:
         )
         assert_matches_type(MouseUpResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_up_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.up(
@@ -577,7 +577,7 @@ class TestAsyncMouse:
         )
         assert_matches_type(MouseUpResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_up(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.mouse.with_raw_response.up(
@@ -591,7 +591,7 @@ class TestAsyncMouse:
         mouse = await response.parse()
         assert_matches_type(MouseUpResponse, mouse, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_up(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.mouse.with_streaming_response.up(
@@ -607,7 +607,7 @@ class TestAsyncMouse:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_up(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):

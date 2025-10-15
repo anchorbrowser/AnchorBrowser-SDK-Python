@@ -22,7 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestExtensions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Anchorbrowser) -> None:
         extension = client.extensions.retrieve(
@@ -30,7 +30,7 @@ class TestExtensions:
         )
         assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Anchorbrowser) -> None:
         response = client.extensions.with_raw_response.retrieve(
@@ -42,7 +42,7 @@ class TestExtensions:
         extension = response.parse()
         assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Anchorbrowser) -> None:
         with client.extensions.with_streaming_response.retrieve(
@@ -56,7 +56,7 @@ class TestExtensions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -64,13 +64,13 @@ class TestExtensions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Anchorbrowser) -> None:
         extension = client.extensions.list()
         assert_matches_type(ExtensionListResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Anchorbrowser) -> None:
         response = client.extensions.with_raw_response.list()
@@ -80,7 +80,7 @@ class TestExtensions:
         extension = response.parse()
         assert_matches_type(ExtensionListResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Anchorbrowser) -> None:
         with client.extensions.with_streaming_response.list() as response:
@@ -92,7 +92,7 @@ class TestExtensions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Anchorbrowser) -> None:
         extension = client.extensions.delete(
@@ -100,7 +100,7 @@ class TestExtensions:
         )
         assert_matches_type(ExtensionDeleteResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Anchorbrowser) -> None:
         response = client.extensions.with_raw_response.delete(
@@ -112,7 +112,7 @@ class TestExtensions:
         extension = response.parse()
         assert_matches_type(ExtensionDeleteResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Anchorbrowser) -> None:
         with client.extensions.with_streaming_response.delete(
@@ -126,7 +126,7 @@ class TestExtensions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -134,7 +134,7 @@ class TestExtensions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_upload(self, client: Anchorbrowser) -> None:
         extension = client.extensions.upload(
@@ -143,7 +143,7 @@ class TestExtensions:
         )
         assert_matches_type(ExtensionUploadResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_upload(self, client: Anchorbrowser) -> None:
         response = client.extensions.with_raw_response.upload(
@@ -156,7 +156,7 @@ class TestExtensions:
         extension = response.parse()
         assert_matches_type(ExtensionUploadResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_upload(self, client: Anchorbrowser) -> None:
         with client.extensions.with_streaming_response.upload(
@@ -177,7 +177,7 @@ class TestAsyncExtensions:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         extension = await async_client.extensions.retrieve(
@@ -185,7 +185,7 @@ class TestAsyncExtensions:
         )
         assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.extensions.with_raw_response.retrieve(
@@ -197,7 +197,7 @@ class TestAsyncExtensions:
         extension = await response.parse()
         assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.extensions.with_streaming_response.retrieve(
@@ -211,7 +211,7 @@ class TestAsyncExtensions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -219,13 +219,13 @@ class TestAsyncExtensions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncAnchorbrowser) -> None:
         extension = await async_client.extensions.list()
         assert_matches_type(ExtensionListResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.extensions.with_raw_response.list()
@@ -235,7 +235,7 @@ class TestAsyncExtensions:
         extension = await response.parse()
         assert_matches_type(ExtensionListResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.extensions.with_streaming_response.list() as response:
@@ -247,7 +247,7 @@ class TestAsyncExtensions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncAnchorbrowser) -> None:
         extension = await async_client.extensions.delete(
@@ -255,7 +255,7 @@ class TestAsyncExtensions:
         )
         assert_matches_type(ExtensionDeleteResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.extensions.with_raw_response.delete(
@@ -267,7 +267,7 @@ class TestAsyncExtensions:
         extension = await response.parse()
         assert_matches_type(ExtensionDeleteResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.extensions.with_streaming_response.delete(
@@ -281,7 +281,7 @@ class TestAsyncExtensions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -289,7 +289,7 @@ class TestAsyncExtensions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_upload(self, async_client: AsyncAnchorbrowser) -> None:
         extension = await async_client.extensions.upload(
@@ -298,7 +298,7 @@ class TestAsyncExtensions:
         )
         assert_matches_type(ExtensionUploadResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_upload(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.extensions.with_raw_response.upload(
@@ -311,7 +311,7 @@ class TestAsyncExtensions:
         extension = await response.parse()
         assert_matches_type(ExtensionUploadResponse, extension, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_upload(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.extensions.with_streaming_response.upload(

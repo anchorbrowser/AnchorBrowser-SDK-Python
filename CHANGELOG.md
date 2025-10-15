@@ -1,82 +1,49 @@
 # Changelog
 
-## 0.1.0 (2025-08-04)
+## 0.1.1 (2025-10-11)
 
-Full Changelog: [v0.1.0-alpha.3...v0.1.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0-alpha.3...v0.1.0)
-
-### Features
-
-* **client:** support file upload requests ([1d061c7](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/1d061c76863effca616217013dbd3b123d38ff67))
-
-## 0.1.0-alpha.3 (2025-07-25)
-
-Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
-
-### Chores
-
-* **project:** add settings file for vscode ([700d561](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/700d5613b0d22d41afa095b4dc4e62d8cfb822ae))
-
-## 0.1.0-alpha.2 (2025-07-23)
-
-Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0...v0.1.1)
 
 ### Features
 
-* **agent:** add Agent and Browser resources for AI task execution ([36eab12](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/36eab12a4d3ea747a6f863c3c43cc51a03461ba4))
+* Add disable_web_security ([cefa8d4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/cefa8d4ae15c0ec2d39543b67ac3dde4bc1da791))
+* added additional fetch-webpage options ([c7eead2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/c7eead27ece65dd5c41860d9080f2167017f9da2))
+* added agent pause and continue ([49a1a49](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/49a1a49c98831a12d031064ff251c81a83932651))
+* Added OpenAPI specification for file uploads to browser sessions, inc… ([205c296](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/205c29632e3a19a1555b37b83cf8b0e2fca88843))
+* added use os for scroll ([71bc128](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/71bc128ffde6bdf309d56fbfb6f1d44e7b46c1bf))
+* **api:** manual updates ([41b55e3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/41b55e3455ee8543f057191346995ff6f2fbb4df))
+* **api:** manual updates ([171046c](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/171046c5f8dfbcd3f632e15e0d5bdae2d478af31))
+* **api:** manual updates ([342688b](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/342688b498fc4aba7fcb0eb4cc54ea5be9051f35))
+* BRO-622 update openapi spec with session get ([3c5ee34](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/3c5ee34dca0be7b44be1e4977290f8cb80a847b7))
+* BRO-764 City based proxy ([936ffb8](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/936ffb8d46ee08a7edd345323a7adc4271b58f75))
+* improve future compat with pydantic v3 ([4e5c038](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/4e5c038e9edcad6b418a32846813f76f67ff47c0))
+* **types:** replace List[str] with SequenceNotStr in params ([0c39bce](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/0c39bce296ccf2143b9cc8d89bab75d53d3f1acc))
 
 
 ### Bug Fixes
 
-* **parsing:** parse extra field types ([0348a34](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/0348a34079f2fc5ecf9ad5d5eaf1fed486d0263c))
-
-
-### Refactors
-
-* add type hints to agent and browser resource methods for improved clarity ([047d45c](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/047d45c79efd205353f21b9ec6d9960d332ddc94))
-
-## 0.1.0-alpha.1 (2025-07-22)
-
-Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
-
-### Features
-
-* **api:** update via SDK Studio ([aae0b21](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/aae0b2165a6e1d5752caae8f7ccc2a9803fa0e81))
-* **api:** update via SDK Studio ([4bc1b11](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/4bc1b11fe99772232badf8edd0cbc5f42786d5ab))
-* **api:** update via SDK Studio ([36c7b5d](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/36c7b5d7d35c515def4505bed61642a3a2b99bb0))
-* **api:** update via SDK Studio ([de3b1cb](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/de3b1cb78e3089c9d4467ce44cb6bd278defa9dd))
-* **api:** update via SDK Studio ([16a14ae](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/16a14aeece153205879d85d7d65eeb24ba14710d))
-* clean up environment call outs ([e3b0db4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/e3b0db42d94a9addd13907a9534fbcba1a13bd1a))
-* **client:** add support for aiohttp ([eb810df](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/eb810df52b8d0edfdc4d74949f12a3719465958e))
-
-
-### Bug Fixes
-
-* **ci:** correct conditional ([74e90a4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/74e90a4749ce0c8966e5b5f2a6b2120741031601))
-* **client:** don't send Content-Type header on GET requests ([8bb8fc4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/8bb8fc43c4f49b519d431826b23325c1b7f841c3))
-* **parsing:** correctly handle nested discriminated unions ([9664c69](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/9664c696f73468a579ec87a7faaeeef9c6ede277))
-* **parsing:** ignore empty metadata ([b3d415d](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/b3d415d8f3f05794e646968b21f3ad28f4652001))
-* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([174dbf2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/174dbf26c1ffa0a33390a359bfc00d1c1dc2b4f2))
+* avoid newer type syntax ([f78c034](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/f78c034003d403087c556a4c18d9438637311a07))
+* **compat:** compat with `pydantic&lt;2.8.0` when using additional fields ([53b002f](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/53b002f642874a7518ffc4a49f822e25ec6c83a0))
 
 
 ### Chores
 
-* change publish docs url ([5662a25](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/5662a2553ef5c8646d818cea97f95bf4a3f03f24))
-* **ci:** change upload type ([6246e63](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/6246e63a1735788dc76d302b093a42c063bc94ee))
-* **ci:** enable for pull requests ([7da816f](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/7da816f307b68431eb5ceeb1aad2bd37bda04acf))
-* **ci:** only run for pushes and fork pull requests ([fad4348](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/fad4348ddbe022b93b8379064d91a4fdbcadb528))
-* configure new SDK language ([f87cd53](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/f87cd53bf4539fb7ca20186221f7e62bd99a0063))
-* **internal:** bump pinned h11 dep ([e85f2f1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/e85f2f1d727ef7e7555ce2152f0c7c6fa735df19))
-* **internal:** codegen related update ([813ecf6](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/813ecf6bb7c1089271535ac91266d5c44a2bf1a0))
-* **internal:** update conftest.py ([5d6fe7f](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/5d6fe7f72c136e58b2ac50f8e853c7bd56a91b5b))
-* **package:** mark python 3.13 as supported ([14c652e](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/14c652e67860243ec945d12eb2d9db6fa8070e2f))
-* **readme:** fix version rendering on pypi ([4029dea](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/4029dea3455d630d095526cb62eda9910356628a))
-* **readme:** update badges ([4cf2b25](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/4cf2b25723384e3e99bab05db2c1f44f3227e260))
-* **tests:** add tests for httpx client instantiation & proxies ([948c071](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/948c071f0b5083cb63402e35fdf3de750919f684))
-* **tests:** skip some failing tests on the latest python versions ([cd1c00c](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/cd1c00c96b61adc92c8072ebb34c56e3607db945))
-* update SDK settings ([607f825](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/607f8254e2ce04ae90a6801cb273e11eddf4c5d7))
-* update SDK settings ([75484da](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/75484da80e2128d0907f658bf5db8d4cf6b4c215))
+* do not install brew dependencies in ./scripts/bootstrap by default ([75a97d0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/75a97d04851d9cda1c1680c07efd24ed66b1bb6f))
+* **internal:** add Sequence related utils ([d2c8ffc](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/d2c8ffc2d93043c6ef7b99d172542adb7c0bea0a))
+* **internal:** change ci workflow machines ([31cfb87](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/31cfb877b7bd28f3726c996d778db040c27bda10))
+* **internal:** codegen related update ([2103cfa](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/2103cfa93c032268d647554707d6bd11015e8ffd))
+* **internal:** codegen related update ([bf5c542](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/bf5c5420a54af077edeb4c465254e39553859dc2))
+* **internal:** detect missing future annotations with ruff ([8658af6](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/8658af6f33402b406e084607981a9fb0d052ec6f))
+* **internal:** fix ruff target version ([3e2468a](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/3e2468a77261ccbf3420521293241253b269dd9d))
+* **internal:** move mypy configurations to `pyproject.toml` file ([b42de93](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/b42de93096441c5b36b32bfeb36d8fd6383c3c55))
+* **internal:** update comment in script ([a58dcb2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/a58dcb25c04d22f93f495ff95dce45d15fd26571))
+* **internal:** update pydantic dependency ([765c63f](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/765c63f233924e94f42d7b12a7d58341de6b8adb))
+* **internal:** update pyright exclude list ([eeadbf8](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/eeadbf8cf3a12f552bb2ce88a64e15491815a1f8))
+* **types:** change optional parameter type from NotGiven to Omit ([f84b4e0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/f84b4e01b536f0f34703562c891d45a1b68ef9db))
+* update @stainless-api/prism-cli to v5.15.0 ([88b661e](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/88b661e22651c660b72239df4a00f83a063e5e93))
+* update github action ([bc5a5df](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/bc5a5df363f929149198bb713d26bb529c29d12d))
 
 
 ### Documentation
 
-* **client:** fix httpx.Timeout documentation reference ([7ac2730](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/7ac27300a8082c206a8573b90553de758bc9c349))
+* add reset_preferences option to session profile configuration i… ([a35fb22](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/a35fb2285e3c1225512860c9f957450ddb4cf896))

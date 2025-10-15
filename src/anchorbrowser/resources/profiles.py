@@ -7,7 +7,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import profile_create_params, profile_update_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -49,16 +49,16 @@ class ProfilesResource(SyncAPIResource):
         self,
         *,
         name: str,
-        description: str | NotGiven = NOT_GIVEN,
-        session_id: str | NotGiven = NOT_GIVEN,
-        source: Literal["session"] | NotGiven = NOT_GIVEN,
-        store_cache: bool | NotGiven = NOT_GIVEN,
+        dedicated_sticky_ip: bool | Omit = omit,
+        description: str | Omit = omit,
+        session_id: str | Omit = omit,
+        source: Literal["session"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SuccessResponse:
         """Creates a new profile from a browser session.
 
@@ -68,6 +68,8 @@ class ProfilesResource(SyncAPIResource):
         Args:
           name: The name of the profile.
 
+          dedicated_sticky_ip: Whether to use a dedicated sticky IP for this profile. Defaults to false.
+
           description: A description of the profile.
 
           session_id: The browser session ID is required if the source is set to `session`. The
@@ -75,9 +77,6 @@ class ProfilesResource(SyncAPIResource):
               session terminates.
 
           source: The source of the profile data. currently only `session` is supported.
-
-          store_cache: Indicates whether the browser session cache should be saved when the browser
-              session ends. Defaults to `false`.
 
           extra_headers: Send extra headers
 
@@ -92,10 +91,10 @@ class ProfilesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "name": name,
+                    "dedicated_sticky_ip": dedicated_sticky_ip,
                     "description": description,
                     "session_id": session_id,
                     "source": source,
-                    "store_cache": store_cache,
                 },
                 profile_create_params.ProfileCreateParams,
             ),
@@ -114,7 +113,7 @@ class ProfilesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileRetrieveResponse:
         """
         Retrieves details of a specific profile by its name.
@@ -142,16 +141,15 @@ class ProfilesResource(SyncAPIResource):
         self,
         name: str,
         *,
-        description: str | NotGiven = NOT_GIVEN,
-        session_id: str | NotGiven = NOT_GIVEN,
-        source: Literal["session"] | NotGiven = NOT_GIVEN,
-        store_cache: bool | NotGiven = NOT_GIVEN,
+        description: str | Omit = omit,
+        session_id: str | Omit = omit,
+        source: Literal["session"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SuccessResponse:
         """
         Updates the description or data of an existing profile using a browser session.
@@ -163,9 +161,6 @@ class ProfilesResource(SyncAPIResource):
               browser session must belong to the user and be active.
 
           source: The source of the profile data. Currently, only `session` is supported.
-
-          store_cache: Indicates whether the browser session cache should be saved when the browser
-              session ends. Defaults to `false`.
 
           extra_headers: Send extra headers
 
@@ -184,7 +179,6 @@ class ProfilesResource(SyncAPIResource):
                     "description": description,
                     "session_id": session_id,
                     "source": source,
-                    "store_cache": store_cache,
                 },
                 profile_update_params.ProfileUpdateParams,
             ),
@@ -202,7 +196,7 @@ class ProfilesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileListResponse:
         """Fetches all stored profiles."""
         return self._get(
@@ -222,7 +216,7 @@ class ProfilesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SuccessResponse:
         """
         Deletes an existing profile by its name.
@@ -271,16 +265,16 @@ class AsyncProfilesResource(AsyncAPIResource):
         self,
         *,
         name: str,
-        description: str | NotGiven = NOT_GIVEN,
-        session_id: str | NotGiven = NOT_GIVEN,
-        source: Literal["session"] | NotGiven = NOT_GIVEN,
-        store_cache: bool | NotGiven = NOT_GIVEN,
+        dedicated_sticky_ip: bool | Omit = omit,
+        description: str | Omit = omit,
+        session_id: str | Omit = omit,
+        source: Literal["session"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SuccessResponse:
         """Creates a new profile from a browser session.
 
@@ -290,6 +284,8 @@ class AsyncProfilesResource(AsyncAPIResource):
         Args:
           name: The name of the profile.
 
+          dedicated_sticky_ip: Whether to use a dedicated sticky IP for this profile. Defaults to false.
+
           description: A description of the profile.
 
           session_id: The browser session ID is required if the source is set to `session`. The
@@ -297,9 +293,6 @@ class AsyncProfilesResource(AsyncAPIResource):
               session terminates.
 
           source: The source of the profile data. currently only `session` is supported.
-
-          store_cache: Indicates whether the browser session cache should be saved when the browser
-              session ends. Defaults to `false`.
 
           extra_headers: Send extra headers
 
@@ -314,10 +307,10 @@ class AsyncProfilesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "name": name,
+                    "dedicated_sticky_ip": dedicated_sticky_ip,
                     "description": description,
                     "session_id": session_id,
                     "source": source,
-                    "store_cache": store_cache,
                 },
                 profile_create_params.ProfileCreateParams,
             ),
@@ -336,7 +329,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileRetrieveResponse:
         """
         Retrieves details of a specific profile by its name.
@@ -364,16 +357,15 @@ class AsyncProfilesResource(AsyncAPIResource):
         self,
         name: str,
         *,
-        description: str | NotGiven = NOT_GIVEN,
-        session_id: str | NotGiven = NOT_GIVEN,
-        source: Literal["session"] | NotGiven = NOT_GIVEN,
-        store_cache: bool | NotGiven = NOT_GIVEN,
+        description: str | Omit = omit,
+        session_id: str | Omit = omit,
+        source: Literal["session"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SuccessResponse:
         """
         Updates the description or data of an existing profile using a browser session.
@@ -385,9 +377,6 @@ class AsyncProfilesResource(AsyncAPIResource):
               browser session must belong to the user and be active.
 
           source: The source of the profile data. Currently, only `session` is supported.
-
-          store_cache: Indicates whether the browser session cache should be saved when the browser
-              session ends. Defaults to `false`.
 
           extra_headers: Send extra headers
 
@@ -406,7 +395,6 @@ class AsyncProfilesResource(AsyncAPIResource):
                     "description": description,
                     "session_id": session_id,
                     "source": source,
-                    "store_cache": store_cache,
                 },
                 profile_update_params.ProfileUpdateParams,
             ),
@@ -424,7 +412,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileListResponse:
         """Fetches all stored profiles."""
         return await self._get(
@@ -444,7 +432,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SuccessResponse:
         """
         Deletes an existing profile by its name.

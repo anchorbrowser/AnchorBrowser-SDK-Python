@@ -5,10 +5,10 @@ from datetime import datetime
 
 from ..._models import BaseModel
 
-__all__ = ["RecordingListResponse", "Data", "DataData", "DataDataItem"]
+__all__ = ["RecordingListResponse", "Data", "DataItem"]
 
 
-class DataDataItem(BaseModel):
+class DataItem(BaseModel):
     id: Optional[str] = None
     """Unique identifier for the recording"""
 
@@ -31,15 +31,11 @@ class DataDataItem(BaseModel):
     """Suggested filename for the recording"""
 
 
-class DataData(BaseModel):
+class Data(BaseModel):
     count: Optional[int] = None
     """Total number of video recordings"""
 
-    items: Optional[List[DataDataItem]] = None
-
-
-class Data(BaseModel):
-    data: Optional[DataData] = None
+    items: Optional[List[DataItem]] = None
 
 
 class RecordingListResponse(BaseModel):

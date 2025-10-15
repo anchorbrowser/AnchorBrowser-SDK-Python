@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestKeyboard:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_shortcut(self, client: Anchorbrowser) -> None:
         keyboard = client.sessions.keyboard.shortcut(
@@ -29,7 +29,7 @@ class TestKeyboard:
         )
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_shortcut_with_all_params(self, client: Anchorbrowser) -> None:
         keyboard = client.sessions.keyboard.shortcut(
@@ -39,7 +39,7 @@ class TestKeyboard:
         )
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_shortcut(self, client: Anchorbrowser) -> None:
         response = client.sessions.keyboard.with_raw_response.shortcut(
@@ -52,7 +52,7 @@ class TestKeyboard:
         keyboard = response.parse()
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_shortcut(self, client: Anchorbrowser) -> None:
         with client.sessions.keyboard.with_streaming_response.shortcut(
@@ -67,7 +67,7 @@ class TestKeyboard:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_shortcut(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -76,7 +76,7 @@ class TestKeyboard:
                 keys=["Ctrl", "a"],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_type(self, client: Anchorbrowser) -> None:
         keyboard = client.sessions.keyboard.type(
@@ -85,7 +85,7 @@ class TestKeyboard:
         )
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_type_with_all_params(self, client: Anchorbrowser) -> None:
         keyboard = client.sessions.keyboard.type(
@@ -95,7 +95,7 @@ class TestKeyboard:
         )
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_type(self, client: Anchorbrowser) -> None:
         response = client.sessions.keyboard.with_raw_response.type(
@@ -108,7 +108,7 @@ class TestKeyboard:
         keyboard = response.parse()
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_type(self, client: Anchorbrowser) -> None:
         with client.sessions.keyboard.with_streaming_response.type(
@@ -123,7 +123,7 @@ class TestKeyboard:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_type(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -138,7 +138,7 @@ class TestAsyncKeyboard:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_shortcut(self, async_client: AsyncAnchorbrowser) -> None:
         keyboard = await async_client.sessions.keyboard.shortcut(
@@ -147,7 +147,7 @@ class TestAsyncKeyboard:
         )
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_shortcut_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         keyboard = await async_client.sessions.keyboard.shortcut(
@@ -157,7 +157,7 @@ class TestAsyncKeyboard:
         )
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_shortcut(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.keyboard.with_raw_response.shortcut(
@@ -170,7 +170,7 @@ class TestAsyncKeyboard:
         keyboard = await response.parse()
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_shortcut(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.keyboard.with_streaming_response.shortcut(
@@ -185,7 +185,7 @@ class TestAsyncKeyboard:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_shortcut(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -194,7 +194,7 @@ class TestAsyncKeyboard:
                 keys=["Ctrl", "a"],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_type(self, async_client: AsyncAnchorbrowser) -> None:
         keyboard = await async_client.sessions.keyboard.type(
@@ -203,7 +203,7 @@ class TestAsyncKeyboard:
         )
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_type_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         keyboard = await async_client.sessions.keyboard.type(
@@ -213,7 +213,7 @@ class TestAsyncKeyboard:
         )
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_type(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.keyboard.with_raw_response.type(
@@ -226,7 +226,7 @@ class TestAsyncKeyboard:
         keyboard = await response.parse()
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_type(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.keyboard.with_streaming_response.type(
@@ -241,7 +241,7 @@ class TestAsyncKeyboard:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_type(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):

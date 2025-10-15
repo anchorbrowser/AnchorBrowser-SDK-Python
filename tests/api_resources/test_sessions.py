@@ -17,6 +17,9 @@ from anchorbrowser.types import (
     SessionPasteResponse,
     SessionCreateResponse,
     SessionScrollResponse,
+    SessionRetrieveResponse,
+    SessionListPagesResponse,
+    SessionUploadFileResponse,
     SessionDragAndDropResponse,
     SessionRetrieveDownloadsResponse,
 )
@@ -34,26 +37,29 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSessions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Anchorbrowser) -> None:
         session = client.sessions.create()
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Anchorbrowser) -> None:
         session = client.sessions.create(
             browser={
                 "adblock": {"active": False},
                 "captcha_solver": {"active": False},
+                "disable_web_security": {"active": False},
+                "extensions": ["550e8400-e29b-41d4-a716-446655440000", "6ba7b810-9dad-11d1-80b4-00c04fd430c8"],
+                "fullscreen": {"active": False},
                 "headless": {"active": True},
                 "p2p_download": {"active": False},
                 "popup_blocker": {"active": False},
                 "profile": {
                     "name": "my-profile",
                     "persist": True,
-                    "store_cache": True,
+                    "reset_preferences": False,
                 },
                 "viewport": {
                     "height": 900,
@@ -61,11 +67,14 @@ class TestSessions:
                 },
             },
             session={
+                "initial_url": "https://anchorbrowser.io",
                 "live_view": {"read_only": False},
                 "proxy": {
-                    "type": "anchor_residential",
-                    "active": False,
-                    "country_code": "uk",
+                    "active": True,
+                    "city": "city",
+                    "country_code": "af",
+                    "region": "region",
+                    "type": "anchor_proxy",
                 },
                 "recording": {"active": False},
                 "timeout": {
@@ -76,7 +85,7 @@ class TestSessions:
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.create()
@@ -86,7 +95,7 @@ class TestSessions:
         session = response.parse()
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.create() as response:
@@ -98,7 +107,49 @@ class TestSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve(self, client: Anchorbrowser) -> None:
+        session = client.sessions.retrieve(
+            "session_id",
+        )
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve(self, client: Anchorbrowser) -> None:
+        response = client.sessions.with_raw_response.retrieve(
+            "session_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = response.parse()
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Anchorbrowser) -> None:
+        with client.sessions.with_streaming_response.retrieve(
+            "session_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = response.parse()
+            assert_matches_type(SessionRetrieveResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_retrieve(self, client: Anchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            client.sessions.with_raw_response.retrieve(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Anchorbrowser) -> None:
         session = client.sessions.delete(
@@ -106,7 +157,7 @@ class TestSessions:
         )
         assert_matches_type(SuccessResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.delete(
@@ -118,7 +169,7 @@ class TestSessions:
         session = response.parse()
         assert_matches_type(SuccessResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.delete(
@@ -132,7 +183,7 @@ class TestSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -140,7 +191,7 @@ class TestSessions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_copy(self, client: Anchorbrowser) -> None:
         session = client.sessions.copy(
@@ -148,7 +199,7 @@ class TestSessions:
         )
         assert_matches_type(SessionCopyResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_copy(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.copy(
@@ -160,7 +211,7 @@ class TestSessions:
         session = response.parse()
         assert_matches_type(SessionCopyResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_copy(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.copy(
@@ -174,7 +225,7 @@ class TestSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_copy(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -182,7 +233,7 @@ class TestSessions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_drag_and_drop(self, client: Anchorbrowser) -> None:
         session = client.sessions.drag_and_drop(
@@ -194,7 +245,7 @@ class TestSessions:
         )
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_drag_and_drop_with_all_params(self, client: Anchorbrowser) -> None:
         session = client.sessions.drag_and_drop(
@@ -207,7 +258,7 @@ class TestSessions:
         )
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_drag_and_drop(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.drag_and_drop(
@@ -223,7 +274,7 @@ class TestSessions:
         session = response.parse()
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_drag_and_drop(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.drag_and_drop(
@@ -241,7 +292,7 @@ class TestSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_drag_and_drop(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -253,7 +304,7 @@ class TestSessions:
                 start_y=200,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_goto(self, client: Anchorbrowser) -> None:
         session = client.sessions.goto(
@@ -262,7 +313,7 @@ class TestSessions:
         )
         assert_matches_type(SessionGotoResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_goto(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.goto(
@@ -275,7 +326,7 @@ class TestSessions:
         session = response.parse()
         assert_matches_type(SessionGotoResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_goto(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.goto(
@@ -290,7 +341,7 @@ class TestSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_goto(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -299,7 +350,49 @@ class TestSessions:
                 url="https://www.google.com",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_pages(self, client: Anchorbrowser) -> None:
+        session = client.sessions.list_pages(
+            "session_id",
+        )
+        assert_matches_type(SessionListPagesResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_list_pages(self, client: Anchorbrowser) -> None:
+        response = client.sessions.with_raw_response.list_pages(
+            "session_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = response.parse()
+        assert_matches_type(SessionListPagesResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_list_pages(self, client: Anchorbrowser) -> None:
+        with client.sessions.with_streaming_response.list_pages(
+            "session_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = response.parse()
+            assert_matches_type(SessionListPagesResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_list_pages(self, client: Anchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            client.sessions.with_raw_response.list_pages(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_paste(self, client: Anchorbrowser) -> None:
         session = client.sessions.paste(
@@ -308,7 +401,7 @@ class TestSessions:
         )
         assert_matches_type(SessionPasteResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_paste(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.paste(
@@ -321,7 +414,7 @@ class TestSessions:
         session = response.parse()
         assert_matches_type(SessionPasteResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_paste(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.paste(
@@ -336,7 +429,7 @@ class TestSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_paste(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -345,7 +438,7 @@ class TestSessions:
                 text="Text pasted via API",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_downloads(self, client: Anchorbrowser) -> None:
         session = client.sessions.retrieve_downloads(
@@ -353,7 +446,7 @@ class TestSessions:
         )
         assert_matches_type(SessionRetrieveDownloadsResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve_downloads(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.retrieve_downloads(
@@ -365,7 +458,7 @@ class TestSessions:
         session = response.parse()
         assert_matches_type(SessionRetrieveDownloadsResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_downloads(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.retrieve_downloads(
@@ -379,7 +472,7 @@ class TestSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve_downloads(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -387,7 +480,6 @@ class TestSessions:
                 "",
             )
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_method_retrieve_screenshot(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
@@ -402,7 +494,6 @@ class TestSessions:
         assert cast(Any, session.is_closed) is True
         assert isinstance(session, BinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response_retrieve_screenshot(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
@@ -419,7 +510,6 @@ class TestSessions:
         assert session.json() == {"foo": "bar"}
         assert isinstance(session, BinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_streaming_response_retrieve_screenshot(self, client: Anchorbrowser, respx_mock: MockRouter) -> None:
@@ -438,7 +528,6 @@ class TestSessions:
 
         assert cast(Any, session.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_path_params_retrieve_screenshot(self, client: Anchorbrowser) -> None:
@@ -447,7 +536,7 @@ class TestSessions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_scroll(self, client: Anchorbrowser) -> None:
         session = client.sessions.scroll(
@@ -458,7 +547,7 @@ class TestSessions:
         )
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_scroll_with_all_params(self, client: Anchorbrowser) -> None:
         session = client.sessions.scroll(
@@ -468,10 +557,11 @@ class TestSessions:
             y=0,
             delta_x=0,
             steps=10,
+            use_os=False,
         )
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_scroll(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.scroll(
@@ -486,7 +576,7 @@ class TestSessions:
         session = response.parse()
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_scroll(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.scroll(
@@ -503,7 +593,7 @@ class TestSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_scroll(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -514,32 +604,81 @@ class TestSessions:
                 y=0,
             )
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_upload_file(self, client: Anchorbrowser) -> None:
+        session = client.sessions.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        )
+        assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_upload_file(self, client: Anchorbrowser) -> None:
+        response = client.sessions.with_raw_response.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = response.parse()
+        assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_upload_file(self, client: Anchorbrowser) -> None:
+        with client.sessions.with_streaming_response.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = response.parse()
+            assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_upload_file(self, client: Anchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            client.sessions.with_raw_response.upload_file(
+                session_id="",
+                file=b"raw file contents",
+            )
+
 
 class TestAsyncSessions:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.create()
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.create(
             browser={
                 "adblock": {"active": False},
                 "captcha_solver": {"active": False},
+                "disable_web_security": {"active": False},
+                "extensions": ["550e8400-e29b-41d4-a716-446655440000", "6ba7b810-9dad-11d1-80b4-00c04fd430c8"],
+                "fullscreen": {"active": False},
                 "headless": {"active": True},
                 "p2p_download": {"active": False},
                 "popup_blocker": {"active": False},
                 "profile": {
                     "name": "my-profile",
                     "persist": True,
-                    "store_cache": True,
+                    "reset_preferences": False,
                 },
                 "viewport": {
                     "height": 900,
@@ -547,11 +686,14 @@ class TestAsyncSessions:
                 },
             },
             session={
+                "initial_url": "https://anchorbrowser.io",
                 "live_view": {"read_only": False},
                 "proxy": {
-                    "type": "anchor_residential",
-                    "active": False,
-                    "country_code": "uk",
+                    "active": True,
+                    "city": "city",
+                    "country_code": "af",
+                    "region": "region",
+                    "type": "anchor_proxy",
                 },
                 "recording": {"active": False},
                 "timeout": {
@@ -562,7 +704,7 @@ class TestAsyncSessions:
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.create()
@@ -572,7 +714,7 @@ class TestAsyncSessions:
         session = await response.parse()
         assert_matches_type(SessionCreateResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.create() as response:
@@ -584,7 +726,49 @@ class TestAsyncSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
+        session = await async_client.sessions.retrieve(
+            "session_id",
+        )
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
+        response = await async_client.sessions.with_raw_response.retrieve(
+            "session_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = await response.parse()
+        assert_matches_type(SessionRetrieveResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
+        async with async_client.sessions.with_streaming_response.retrieve(
+            "session_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = await response.parse()
+            assert_matches_type(SessionRetrieveResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            await async_client.sessions.with_raw_response.retrieve(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.delete(
@@ -592,7 +776,7 @@ class TestAsyncSessions:
         )
         assert_matches_type(SuccessResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.delete(
@@ -604,7 +788,7 @@ class TestAsyncSessions:
         session = await response.parse()
         assert_matches_type(SuccessResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.delete(
@@ -618,7 +802,7 @@ class TestAsyncSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -626,7 +810,7 @@ class TestAsyncSessions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_copy(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.copy(
@@ -634,7 +818,7 @@ class TestAsyncSessions:
         )
         assert_matches_type(SessionCopyResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_copy(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.copy(
@@ -646,7 +830,7 @@ class TestAsyncSessions:
         session = await response.parse()
         assert_matches_type(SessionCopyResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_copy(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.copy(
@@ -660,7 +844,7 @@ class TestAsyncSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_copy(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -668,7 +852,7 @@ class TestAsyncSessions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_drag_and_drop(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.drag_and_drop(
@@ -680,7 +864,7 @@ class TestAsyncSessions:
         )
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_drag_and_drop_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.drag_and_drop(
@@ -693,7 +877,7 @@ class TestAsyncSessions:
         )
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_drag_and_drop(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.drag_and_drop(
@@ -709,7 +893,7 @@ class TestAsyncSessions:
         session = await response.parse()
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_drag_and_drop(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.drag_and_drop(
@@ -727,7 +911,7 @@ class TestAsyncSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_drag_and_drop(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -739,7 +923,7 @@ class TestAsyncSessions:
                 start_y=200,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_goto(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.goto(
@@ -748,7 +932,7 @@ class TestAsyncSessions:
         )
         assert_matches_type(SessionGotoResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_goto(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.goto(
@@ -761,7 +945,7 @@ class TestAsyncSessions:
         session = await response.parse()
         assert_matches_type(SessionGotoResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_goto(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.goto(
@@ -776,7 +960,7 @@ class TestAsyncSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_goto(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -785,7 +969,49 @@ class TestAsyncSessions:
                 url="https://www.google.com",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_pages(self, async_client: AsyncAnchorbrowser) -> None:
+        session = await async_client.sessions.list_pages(
+            "session_id",
+        )
+        assert_matches_type(SessionListPagesResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_list_pages(self, async_client: AsyncAnchorbrowser) -> None:
+        response = await async_client.sessions.with_raw_response.list_pages(
+            "session_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = await response.parse()
+        assert_matches_type(SessionListPagesResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_pages(self, async_client: AsyncAnchorbrowser) -> None:
+        async with async_client.sessions.with_streaming_response.list_pages(
+            "session_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = await response.parse()
+            assert_matches_type(SessionListPagesResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_list_pages(self, async_client: AsyncAnchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            await async_client.sessions.with_raw_response.list_pages(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_paste(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.paste(
@@ -794,7 +1020,7 @@ class TestAsyncSessions:
         )
         assert_matches_type(SessionPasteResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_paste(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.paste(
@@ -807,7 +1033,7 @@ class TestAsyncSessions:
         session = await response.parse()
         assert_matches_type(SessionPasteResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_paste(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.paste(
@@ -822,7 +1048,7 @@ class TestAsyncSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_paste(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -831,7 +1057,7 @@ class TestAsyncSessions:
                 text="Text pasted via API",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_downloads(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.retrieve_downloads(
@@ -839,7 +1065,7 @@ class TestAsyncSessions:
         )
         assert_matches_type(SessionRetrieveDownloadsResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_downloads(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.retrieve_downloads(
@@ -851,7 +1077,7 @@ class TestAsyncSessions:
         session = await response.parse()
         assert_matches_type(SessionRetrieveDownloadsResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_downloads(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.retrieve_downloads(
@@ -865,7 +1091,7 @@ class TestAsyncSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve_downloads(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -873,7 +1099,6 @@ class TestAsyncSessions:
                 "",
             )
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_method_retrieve_screenshot(self, async_client: AsyncAnchorbrowser, respx_mock: MockRouter) -> None:
@@ -888,7 +1113,6 @@ class TestAsyncSessions:
         assert cast(Any, session.is_closed) is True
         assert isinstance(session, AsyncBinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_raw_response_retrieve_screenshot(
@@ -907,7 +1131,6 @@ class TestAsyncSessions:
         assert await session.json() == {"foo": "bar"}
         assert isinstance(session, AsyncBinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_streaming_response_retrieve_screenshot(
@@ -928,7 +1151,6 @@ class TestAsyncSessions:
 
         assert cast(Any, session.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_path_params_retrieve_screenshot(self, async_client: AsyncAnchorbrowser) -> None:
@@ -937,7 +1159,7 @@ class TestAsyncSessions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_scroll(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.scroll(
@@ -948,7 +1170,7 @@ class TestAsyncSessions:
         )
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_scroll_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.scroll(
@@ -958,10 +1180,11 @@ class TestAsyncSessions:
             y=0,
             delta_x=0,
             steps=10,
+            use_os=False,
         )
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_scroll(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.scroll(
@@ -976,7 +1199,7 @@ class TestAsyncSessions:
         session = await response.parse()
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_scroll(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.scroll(
@@ -993,7 +1216,7 @@ class TestAsyncSessions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_scroll(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -1002,4 +1225,50 @@ class TestAsyncSessions:
                 delta_y=100,
                 x=0,
                 y=0,
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
+        session = await async_client.sessions.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        )
+        assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
+        response = await async_client.sessions.with_raw_response.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = await response.parse()
+        assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
+        async with async_client.sessions.with_streaming_response.upload_file(
+            session_id="550e8400-e29b-41d4-a716-446655440000",
+            file=b"raw file contents",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = await response.parse()
+            assert_matches_type(SessionUploadFileResponse, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            await async_client.sessions.with_raw_response.upload_file(
+                session_id="",
+                file=b"raw file contents",
             )

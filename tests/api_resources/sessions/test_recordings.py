@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestRecordings:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Anchorbrowser) -> None:
         recording = client.sessions.recordings.list(
@@ -25,7 +25,7 @@ class TestRecordings:
         )
         assert_matches_type(RecordingListResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Anchorbrowser) -> None:
         response = client.sessions.recordings.with_raw_response.list(
@@ -37,7 +37,7 @@ class TestRecordings:
         recording = response.parse()
         assert_matches_type(RecordingListResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Anchorbrowser) -> None:
         with client.sessions.recordings.with_streaming_response.list(
@@ -51,7 +51,7 @@ class TestRecordings:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -59,7 +59,7 @@ class TestRecordings:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_pause(self, client: Anchorbrowser) -> None:
         recording = client.sessions.recordings.pause(
@@ -67,7 +67,7 @@ class TestRecordings:
         )
         assert_matches_type(RecordingPauseResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_pause(self, client: Anchorbrowser) -> None:
         response = client.sessions.recordings.with_raw_response.pause(
@@ -79,7 +79,7 @@ class TestRecordings:
         recording = response.parse()
         assert_matches_type(RecordingPauseResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_pause(self, client: Anchorbrowser) -> None:
         with client.sessions.recordings.with_streaming_response.pause(
@@ -93,7 +93,7 @@ class TestRecordings:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_pause(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -101,7 +101,7 @@ class TestRecordings:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_resume(self, client: Anchorbrowser) -> None:
         recording = client.sessions.recordings.resume(
@@ -109,7 +109,7 @@ class TestRecordings:
         )
         assert_matches_type(RecordingResumeResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_resume(self, client: Anchorbrowser) -> None:
         response = client.sessions.recordings.with_raw_response.resume(
@@ -121,7 +121,7 @@ class TestRecordings:
         recording = response.parse()
         assert_matches_type(RecordingResumeResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_resume(self, client: Anchorbrowser) -> None:
         with client.sessions.recordings.with_streaming_response.resume(
@@ -135,7 +135,7 @@ class TestRecordings:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_resume(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -149,7 +149,7 @@ class TestAsyncRecordings:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncAnchorbrowser) -> None:
         recording = await async_client.sessions.recordings.list(
@@ -157,7 +157,7 @@ class TestAsyncRecordings:
         )
         assert_matches_type(RecordingListResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.recordings.with_raw_response.list(
@@ -169,7 +169,7 @@ class TestAsyncRecordings:
         recording = await response.parse()
         assert_matches_type(RecordingListResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.recordings.with_streaming_response.list(
@@ -183,7 +183,7 @@ class TestAsyncRecordings:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -191,7 +191,7 @@ class TestAsyncRecordings:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_pause(self, async_client: AsyncAnchorbrowser) -> None:
         recording = await async_client.sessions.recordings.pause(
@@ -199,7 +199,7 @@ class TestAsyncRecordings:
         )
         assert_matches_type(RecordingPauseResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_pause(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.recordings.with_raw_response.pause(
@@ -211,7 +211,7 @@ class TestAsyncRecordings:
         recording = await response.parse()
         assert_matches_type(RecordingPauseResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_pause(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.recordings.with_streaming_response.pause(
@@ -225,7 +225,7 @@ class TestAsyncRecordings:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_pause(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -233,7 +233,7 @@ class TestAsyncRecordings:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_resume(self, async_client: AsyncAnchorbrowser) -> None:
         recording = await async_client.sessions.recordings.resume(
@@ -241,7 +241,7 @@ class TestAsyncRecordings:
         )
         assert_matches_type(RecordingResumeResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_resume(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.recordings.with_raw_response.resume(
@@ -253,7 +253,7 @@ class TestAsyncRecordings:
         recording = await response.parse()
         assert_matches_type(RecordingResumeResponse, recording, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_resume(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.recordings.with_streaming_response.resume(
@@ -267,7 +267,7 @@ class TestAsyncRecordings:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_resume(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):

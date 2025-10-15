@@ -4,13 +4,14 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["ToolPerformWebTaskResponse", "Data"]
+__all__ = ["SessionUploadFileResponse", "Data"]
 
 
 class Data(BaseModel):
-    result: Optional[str] = None
-    """The outcome or answer produced by the autonomous task."""
+    message: Optional[str] = None
+
+    status: Optional[str] = None
 
 
-class ToolPerformWebTaskResponse(BaseModel):
+class SessionUploadFileResponse(BaseModel):
     data: Optional[Data] = None

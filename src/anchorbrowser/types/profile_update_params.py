@@ -19,9 +19,3 @@ class ProfileUpdateParams(TypedDict, total=False):
 
     source: Literal["session"]
     """The source of the profile data. Currently, only `session` is supported."""
-
-    store_cache: bool
-    """
-    Indicates whether the browser session cache should be saved when the browser
-    session ends. Defaults to `false`.
-    """

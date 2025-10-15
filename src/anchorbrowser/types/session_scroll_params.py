@@ -24,3 +24,6 @@ class SessionScrollParams(TypedDict, total=False):
 
     steps: int
     """Number of steps to break the scroll into for smoother scrolling"""
+
+    use_os: Annotated[bool, PropertyInfo(alias="useOs")]
+    """Whether to use the OS scroll or the Playwright scroll"""

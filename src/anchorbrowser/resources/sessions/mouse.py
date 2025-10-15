@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -59,13 +59,13 @@ class MouseResource(SyncAPIResource):
         *,
         x: int,
         y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseClickResponse:
         """
         Performs a mouse click at the specified coordinates
@@ -109,13 +109,13 @@ class MouseResource(SyncAPIResource):
         *,
         x: int,
         y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseDoubleClickResponse:
         """
         Performs a double click at the specified coordinates
@@ -159,13 +159,13 @@ class MouseResource(SyncAPIResource):
         *,
         x: int,
         y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseDownResponse:
         """
         Performs a mouse button down action at the specified coordinates
@@ -214,7 +214,7 @@ class MouseResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseMoveResponse:
         """
         Moves the mouse cursor to the specified coordinates
@@ -255,13 +255,13 @@ class MouseResource(SyncAPIResource):
         *,
         x: int,
         y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseUpResponse:
         """
         Performs a mouse button up action at the specified coordinates
@@ -326,13 +326,13 @@ class AsyncMouseResource(AsyncAPIResource):
         *,
         x: int,
         y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseClickResponse:
         """
         Performs a mouse click at the specified coordinates
@@ -376,13 +376,13 @@ class AsyncMouseResource(AsyncAPIResource):
         *,
         x: int,
         y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseDoubleClickResponse:
         """
         Performs a double click at the specified coordinates
@@ -426,13 +426,13 @@ class AsyncMouseResource(AsyncAPIResource):
         *,
         x: int,
         y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseDownResponse:
         """
         Performs a mouse button down action at the specified coordinates
@@ -481,7 +481,7 @@ class AsyncMouseResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseMoveResponse:
         """
         Moves the mouse cursor to the specified coordinates
@@ -522,13 +522,13 @@ class AsyncMouseResource(AsyncAPIResource):
         *,
         x: int,
         y: int,
-        button: Literal["left", "middle", "right"] | NotGiven = NOT_GIVEN,
+        button: Literal["left", "middle", "right"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MouseUpResponse:
         """
         Performs a mouse button up action at the specified coordinates

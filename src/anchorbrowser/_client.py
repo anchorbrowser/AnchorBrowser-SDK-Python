@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Union, Mapping
+from typing import Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -11,17 +11,17 @@ import httpx
 from . import _exceptions
 from ._qs import Querystring
 from ._types import (
-    NOT_GIVEN,
     Omit,
     Timeout,
     NotGiven,
     Transport,
     ProxiesTypes,
     RequestOptions,
+    not_given,
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import agent, tools, browser, profiles, extensions
+from .resources import tools, events, profiles, extensions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
@@ -50,6 +50,7 @@ class Anchorbrowser(SyncAPIClient):
     extensions: extensions.ExtensionsResource
     browser: browser.BrowserResource
     agent: agent.AgentResource
+    events: events.EventsResource
     with_raw_response: AnchorbrowserWithRawResponse
     with_streaming_response: AnchorbrowserWithStreamedResponse
 
@@ -61,7 +62,7 @@ class Anchorbrowser(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -113,6 +114,7 @@ class Anchorbrowser(SyncAPIClient):
         self.extensions = extensions.ExtensionsResource(self)
         self.browser = browser.BrowserResource(self)
         self.agent = agent.AgentResource(self)
+        self.events = events.EventsResource(self)
         self.with_raw_response = AnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AnchorbrowserWithStreamedResponse(self)
 
@@ -141,9 +143,9 @@ class Anchorbrowser(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -228,6 +230,7 @@ class AsyncAnchorbrowser(AsyncAPIClient):
     extensions: extensions.AsyncExtensionsResource
     browser: browser.AsyncBrowserResource
     agent: agent.AsyncAgentResource
+    events: events.AsyncEventsResource
     with_raw_response: AsyncAnchorbrowserWithRawResponse
     with_streaming_response: AsyncAnchorbrowserWithStreamedResponse
 
@@ -239,7 +242,7 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -291,6 +294,7 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         self.extensions = extensions.AsyncExtensionsResource(self)
         self.browser = browser.AsyncBrowserResource(self)
         self.agent = agent.AsyncAgentResource(self)
+        self.events = events.AsyncEventsResource(self)
         self.with_raw_response = AsyncAnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AsyncAnchorbrowserWithStreamedResponse(self)
 
@@ -319,9 +323,9 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -407,6 +411,8 @@ class AnchorbrowserWithRawResponse:
         self.extensions = extensions.ExtensionsResourceWithRawResponse(client.extensions)
         self.browser = browser.BrowserResourceWithRawResponse(client.browser)
         self.agent = agent.AgentResourceWithRawResponse(client.agent)
+        self.events = events.EventsResourceWithRawResponse(client.events)
+
 
 class AsyncAnchorbrowserWithRawResponse:
     def __init__(self, client: AsyncAnchorbrowser) -> None:
@@ -416,6 +422,8 @@ class AsyncAnchorbrowserWithRawResponse:
         self.extensions = extensions.AsyncExtensionsResourceWithRawResponse(client.extensions)
         self.browser = browser.AsyncBrowserResourceWithRawResponse(client.browser)
         self.agent = agent.AsyncAgentResourceWithRawResponse(client.agent)
+        self.events = events.AsyncEventsResourceWithRawResponse(client.events)
+
 
 class AnchorbrowserWithStreamedResponse:
     def __init__(self, client: Anchorbrowser) -> None:
@@ -425,6 +433,8 @@ class AnchorbrowserWithStreamedResponse:
         self.extensions = extensions.ExtensionsResourceWithStreamingResponse(client.extensions)
         self.browser = browser.BrowserResourceWithStreamingResponse(client.browser)
         self.agent = agent.AgentResourceWithStreamingResponse(client.agent)
+        self.events = events.EventsResourceWithStreamingResponse(client.events)
+
 
 class AsyncAnchorbrowserWithStreamedResponse:
     def __init__(self, client: AsyncAnchorbrowser) -> None:
@@ -434,6 +444,8 @@ class AsyncAnchorbrowserWithStreamedResponse:
         self.extensions = extensions.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
         self.browser = browser.AsyncBrowserResourceWithStreamingResponse(client.browser)
         self.agent = agent.AsyncAgentResourceWithStreamingResponse(client.agent)
+        self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
+
 
 Client = Anchorbrowser
 

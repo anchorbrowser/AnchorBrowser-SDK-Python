@@ -5,11 +5,15 @@ from __future__ import annotations
 from typing import Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
+
 __all__ = [
     "SessionCreateParams",
     "Browser",
     "BrowserAdblock",
     "BrowserCaptchaSolver",
+    "BrowserDisableWebSecurity",
+    "BrowserFullscreen",
     "BrowserHeadless",
     "BrowserP2pDownload",
     "BrowserPopupBlocker",
@@ -18,9 +22,8 @@ __all__ = [
     "Session",
     "SessionLiveView",
     "SessionProxy",
-    "SessionProxyAnchorResidentialProxyType",
-    "SessionProxyAnchorMobileProxyType",
-    "SessionProxyCustomProxyType",
+    "SessionProxyAnchorProxy",
+    "SessionProxyCustomProxy",
     "SessionRecording",
     "SessionTimeout",
 ]
@@ -44,6 +47,23 @@ class BrowserCaptchaSolver(TypedDict, total=False):
     """Enable or disable captcha-solving.
 
     Requires proxy to be active. Defaults to `false`.
+    """
+
+
+class BrowserDisableWebSecurity(TypedDict, total=False):
+    active: bool
+    """Whether to disable web security features (CORS, same-origin policy, etc.).
+
+    Allows accessing iframes and resources from different origins. Defaults to
+    `false`.
+    """
+
+
+class BrowserFullscreen(TypedDict, total=False):
+    active: bool
+    """Enable or disable fullscreen mode.
+
+    When enabled, the browser will start in fullscreen mode. Defaults to `false`.
     """
 
 
@@ -79,10 +99,10 @@ class BrowserProfile(TypedDict, total=False):
     browser session ends. Defaults to `false`.
     """
 
-    store_cache: bool
-    """
-    Indicates whether the browser session cache should be saved when the browser
-    session ends. Defaults to `false`.
+    reset_preferences: bool
+    """When enabled, resets the profile's preferences on session creation.
+
+    Defaults to `false`.
     """
 
 
@@ -100,6 +120,18 @@ class Browser(TypedDict, total=False):
 
     captcha_solver: BrowserCaptchaSolver
     """Configuration for captcha-solving."""
+
+    disable_web_security: BrowserDisableWebSecurity
+    """Configuration for disabling web security features."""
+
+    extensions: SequenceNotStr[str]
+    """Array of extension IDs to load in the browser session.
+
+    Extensions must be previously uploaded using the Extensions API.
+    """
+
+    fullscreen: BrowserFullscreen
+    """Configuration for fullscreen mode."""
 
     headless: BrowserHeadless
     """Configuration for headless mode."""
@@ -122,27 +154,230 @@ class SessionLiveView(TypedDict, total=False):
     """Enable or disable read-only mode for live viewing. Defaults to `false`."""
 
 
-class SessionProxyAnchorResidentialProxyType(TypedDict, total=False):
-    type: Required[Literal["anchor_residential"]]
+class SessionProxyAnchorProxy(TypedDict, total=False):
+    active: Required[bool]
 
-    active: bool
     """Enable or disable proxy usage. Defaults to `false`."""
+    city: str
+    """City name for precise geographic targeting.
 
-    country_code: Literal["us", "uk", "fr", "it", "jp", "au", "de", "fi", "ca"]
-    """Country code for residential proxy"""
+    Supported for anchor_proxy only. Can only be used when region is also provided.
+    Example: "San Francisco", "los-angeles", "london"
+    """
+
+    country_code: Literal[
+        "af",
+        "al",
+        "dz",
+        "ad",
+        "ao",
+        "as",
+        "ag",
+        "ar",
+        "am",
+        "aw",
+        "au",
+        "at",
+        "az",
+        "bs",
+        "bh",
+        "bb",
+        "by",
+        "be",
+        "bz",
+        "bj",
+        "bm",
+        "bo",
+        "ba",
+        "br",
+        "bg",
+        "bf",
+        "cm",
+        "ca",
+        "cv",
+        "td",
+        "cl",
+        "co",
+        "cg",
+        "cr",
+        "ci",
+        "hr",
+        "cu",
+        "cy",
+        "cz",
+        "dk",
+        "dm",
+        "do",
+        "ec",
+        "eg",
+        "sv",
+        "ee",
+        "et",
+        "fo",
+        "fi",
+        "fr",
+        "gf",
+        "pf",
+        "ga",
+        "gm",
+        "ge",
+        "de",
+        "gh",
+        "gi",
+        "gr",
+        "gd",
+        "gp",
+        "gt",
+        "gg",
+        "gn",
+        "gw",
+        "gy",
+        "ht",
+        "hn",
+        "hu",
+        "is",
+        "in",
+        "ir",
+        "iq",
+        "ie",
+        "il",
+        "it",
+        "jm",
+        "jp",
+        "jo",
+        "kz",
+        "kw",
+        "kg",
+        "lv",
+        "lb",
+        "ly",
+        "li",
+        "lt",
+        "lu",
+        "mk",
+        "ml",
+        "mt",
+        "mq",
+        "mr",
+        "mx",
+        "md",
+        "mc",
+        "me",
+        "ma",
+        "nl",
+        "nz",
+        "ni",
+        "ng",
+        "no",
+        "pk",
+        "pa",
+        "py",
+        "pe",
+        "ph",
+        "pl",
+        "pt",
+        "pr",
+        "qa",
+        "ro",
+        "lc",
+        "sm",
+        "sa",
+        "sn",
+        "rs",
+        "sc",
+        "sl",
+        "sk",
+        "si",
+        "so",
+        "za",
+        "kr",
+        "es",
+        "sr",
+        "se",
+        "ch",
+        "sy",
+        "st",
+        "tw",
+        "tj",
+        "tg",
+        "tt",
+        "tn",
+        "tr",
+        "tc",
+        "ua",
+        "ae",
+        "us",
+        "uy",
+        "uz",
+        "ve",
+        "ye",
+        "bd",
+        "bw",
+        "bn",
+        "bi",
+        "kh",
+        "cn",
+        "dj",
+        "gq",
+        "sz",
+        "fj",
+        "hk",
+        "id",
+        "ke",
+        "la",
+        "ls",
+        "lr",
+        "mg",
+        "mw",
+        "my",
+        "mv",
+        "mn",
+        "mz",
+        "mm",
+        "na",
+        "np",
+        "nc",
+        "ne",
+        "om",
+        "pg",
+        "ru",
+        "rw",
+        "ws",
+        "sg",
+        "ss",
+        "lk",
+        "sd",
+        "tz",
+        "th",
+        "tl",
+        "tm",
+        "ug",
+        "gb",
+        "vu",
+        "vn",
+        "zm",
+        "zw",
+        "bt",
+        "mu",
+    ]
+    """Supported country codes ISO 2 lowercase
+
+    **On change make sure to update the Proxy type.**
+    """
+
+    region: str
+    """
+    Region code for more specific geographic targeting. The city parameter can only
+    be used when region is also provided. Example: "ca" for California
+    """
+
+    type: Literal["anchor_proxy", "anchor_residential", "anchor_mobile", "anchor_gov"]
+    """**On change make sure to update the country_code.**"""
 
 
-class SessionProxyAnchorMobileProxyType(TypedDict, total=False):
-    type: Required[Literal["anchor_mobile"]]
+class SessionProxyCustomProxy(TypedDict, total=False):
+    active: Required[bool]
 
-    active: bool
-    """Enable or disable proxy usage. Defaults to `false`."""
-
-    country_code: Literal["us", "uk", "fr", "it", "jp", "au", "de", "fi", "ca"]
-    """Country code for mobile proxy"""
-
-
-class SessionProxyCustomProxyType(TypedDict, total=False):
     password: Required[str]
     """Proxy password"""
 
@@ -154,13 +389,8 @@ class SessionProxyCustomProxyType(TypedDict, total=False):
     username: Required[str]
     """Proxy username"""
 
-    active: bool
-    """Enable or disable proxy usage. Defaults to `false`."""
 
-
-SessionProxy: TypeAlias = Union[
-    SessionProxyAnchorResidentialProxyType, SessionProxyAnchorMobileProxyType, SessionProxyCustomProxyType
-]
+SessionProxy: TypeAlias = Union[SessionProxyAnchorProxy, SessionProxyCustomProxy]
 
 
 class SessionRecording(TypedDict, total=False):
@@ -183,11 +413,17 @@ class SessionTimeout(TypedDict, total=False):
 
 
 class Session(TypedDict, total=False):
+    initial_url: str
+    """The URL to navigate to when the browser session starts.
+
+    If not provided, the browser will load an empty page.
+    """
+
     live_view: SessionLiveView
     """Configuration for live viewing the browser session."""
 
     proxy: SessionProxy
-    """Configuration options for proxy usage."""
+    """Proxy Documentation available at [Proxy Documentation](/advanced/proxy)"""
 
     recording: SessionRecording
     """Configuration for session recording."""
