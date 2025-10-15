@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import tools, events, profiles, extensions, browser, agent
+from .resources import agent, tools, events, browser, profiles, extensions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
