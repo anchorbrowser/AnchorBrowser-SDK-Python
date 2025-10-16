@@ -26,7 +26,7 @@ class TestExtensions:
     @parametrize
     def test_method_retrieve(self, client: Anchorbrowser) -> None:
         extension = client.extensions.retrieve(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
 
@@ -34,7 +34,7 @@ class TestExtensions:
     @parametrize
     def test_raw_response_retrieve(self, client: Anchorbrowser) -> None:
         response = client.extensions.with_raw_response.retrieve(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -46,7 +46,7 @@ class TestExtensions:
     @parametrize
     def test_streaming_response_retrieve(self, client: Anchorbrowser) -> None:
         with client.extensions.with_streaming_response.retrieve(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -96,7 +96,7 @@ class TestExtensions:
     @parametrize
     def test_method_delete(self, client: Anchorbrowser) -> None:
         extension = client.extensions.delete(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExtensionDeleteResponse, extension, path=["response"])
 
@@ -104,7 +104,7 @@ class TestExtensions:
     @parametrize
     def test_raw_response_delete(self, client: Anchorbrowser) -> None:
         response = client.extensions.with_raw_response.delete(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -116,7 +116,7 @@ class TestExtensions:
     @parametrize
     def test_streaming_response_delete(self, client: Anchorbrowser) -> None:
         with client.extensions.with_streaming_response.delete(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -139,7 +139,7 @@ class TestExtensions:
     def test_method_upload(self, client: Anchorbrowser) -> None:
         extension = client.extensions.upload(
             file=b"raw file contents",
-            name="My Custom Extension",
+            name="name",
         )
         assert_matches_type(ExtensionUploadResponse, extension, path=["response"])
 
@@ -148,7 +148,7 @@ class TestExtensions:
     def test_raw_response_upload(self, client: Anchorbrowser) -> None:
         response = client.extensions.with_raw_response.upload(
             file=b"raw file contents",
-            name="My Custom Extension",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -161,7 +161,7 @@ class TestExtensions:
     def test_streaming_response_upload(self, client: Anchorbrowser) -> None:
         with client.extensions.with_streaming_response.upload(
             file=b"raw file contents",
-            name="My Custom Extension",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -181,7 +181,7 @@ class TestAsyncExtensions:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         extension = await async_client.extensions.retrieve(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExtensionRetrieveResponse, extension, path=["response"])
 
@@ -189,7 +189,7 @@ class TestAsyncExtensions:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.extensions.with_raw_response.retrieve(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -201,7 +201,7 @@ class TestAsyncExtensions:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.extensions.with_streaming_response.retrieve(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -251,7 +251,7 @@ class TestAsyncExtensions:
     @parametrize
     async def test_method_delete(self, async_client: AsyncAnchorbrowser) -> None:
         extension = await async_client.extensions.delete(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExtensionDeleteResponse, extension, path=["response"])
 
@@ -259,7 +259,7 @@ class TestAsyncExtensions:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.extensions.with_raw_response.delete(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -271,7 +271,7 @@ class TestAsyncExtensions:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.extensions.with_streaming_response.delete(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -294,7 +294,7 @@ class TestAsyncExtensions:
     async def test_method_upload(self, async_client: AsyncAnchorbrowser) -> None:
         extension = await async_client.extensions.upload(
             file=b"raw file contents",
-            name="My Custom Extension",
+            name="name",
         )
         assert_matches_type(ExtensionUploadResponse, extension, path=["response"])
 
@@ -303,7 +303,7 @@ class TestAsyncExtensions:
     async def test_raw_response_upload(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.extensions.with_raw_response.upload(
             file=b"raw file contents",
-            name="My Custom Extension",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -316,7 +316,7 @@ class TestAsyncExtensions:
     async def test_streaming_response_upload(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.extensions.with_streaming_response.upload(
             file=b"raw file contents",
-            name="My Custom Extension",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

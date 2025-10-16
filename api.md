@@ -16,7 +16,6 @@ Methods:
 
 - <code title="post /v1/profiles">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">create</a>(\*\*<a href="src/anchorbrowser/types/profile_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="get /v1/profiles/{name}">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">retrieve</a>(name) -> <a href="./src/anchorbrowser/types/profile_retrieve_response.py">ProfileRetrieveResponse</a></code>
-- <code title="put /v1/profiles/{name}">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">update</a>(name, \*\*<a href="src/anchorbrowser/types/profile_update_params.py">params</a>) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="get /v1/profiles">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">list</a>() -> <a href="./src/anchorbrowser/types/profile_list_response.py">ProfileListResponse</a></code>
 - <code title="delete /v1/profiles/{name}">client.profiles.<a href="./src/anchorbrowser/resources/profiles.py">delete</a>(name) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 

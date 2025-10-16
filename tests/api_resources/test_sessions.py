@@ -48,27 +48,26 @@ class TestSessions:
     def test_method_create_with_all_params(self, client: Anchorbrowser) -> None:
         session = client.sessions.create(
             browser={
-                "adblock": {"active": False},
-                "captcha_solver": {"active": False},
-                "disable_web_security": {"active": False},
-                "extensions": ["550e8400-e29b-41d4-a716-446655440000", "6ba7b810-9dad-11d1-80b4-00c04fd430c8"],
-                "fullscreen": {"active": False},
+                "adblock": {"active": True},
+                "captcha_solver": {"active": True},
+                "disable_web_security": {"active": True},
+                "extensions": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "fullscreen": {"active": True},
                 "headless": {"active": True},
-                "p2p_download": {"active": False},
-                "popup_blocker": {"active": False},
+                "p2p_download": {"active": True},
+                "popup_blocker": {"active": True},
                 "profile": {
-                    "name": "my-profile",
+                    "name": "name",
                     "persist": True,
-                    "reset_preferences": False,
                 },
                 "viewport": {
-                    "height": 900,
-                    "width": 1440,
+                    "height": 0,
+                    "width": 0,
                 },
             },
             session={
-                "initial_url": "https://anchorbrowser.io",
-                "live_view": {"read_only": False},
+                "initial_url": "https://example.com",
+                "live_view": {"read_only": True},
                 "proxy": {
                     "active": True,
                     "city": "city",
@@ -76,10 +75,10 @@ class TestSessions:
                     "region": "region",
                     "type": "anchor_proxy",
                 },
-                "recording": {"active": False},
+                "recording": {"active": True},
                 "timeout": {
-                    "idle_timeout": 3,
-                    "max_duration": 10,
+                    "idle_timeout": 0,
+                    "max_duration": 0,
                 },
             },
         )
@@ -238,10 +237,10 @@ class TestSessions:
     def test_method_drag_and_drop(self, client: Anchorbrowser) -> None:
         session = client.sessions.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_x=500,
-            end_y=300,
-            start_x=400,
-            start_y=200,
+            end_x=0,
+            end_y=0,
+            start_x=0,
+            start_y=0,
         )
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
@@ -250,10 +249,10 @@ class TestSessions:
     def test_method_drag_and_drop_with_all_params(self, client: Anchorbrowser) -> None:
         session = client.sessions.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_x=500,
-            end_y=300,
-            start_x=400,
-            start_y=200,
+            end_x=0,
+            end_y=0,
+            start_x=0,
+            start_y=0,
             button="left",
         )
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
@@ -263,10 +262,10 @@ class TestSessions:
     def test_raw_response_drag_and_drop(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_x=500,
-            end_y=300,
-            start_x=400,
-            start_y=200,
+            end_x=0,
+            end_y=0,
+            start_x=0,
+            start_y=0,
         )
 
         assert response.is_closed is True
@@ -279,10 +278,10 @@ class TestSessions:
     def test_streaming_response_drag_and_drop(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_x=500,
-            end_y=300,
-            start_x=400,
-            start_y=200,
+            end_x=0,
+            end_y=0,
+            start_x=0,
+            start_y=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -298,10 +297,10 @@ class TestSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.sessions.with_raw_response.drag_and_drop(
                 session_id="",
-                end_x=500,
-                end_y=300,
-                start_x=400,
-                start_y=200,
+                end_x=0,
+                end_y=0,
+                start_x=0,
+                start_y=0,
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -309,7 +308,7 @@ class TestSessions:
     def test_method_goto(self, client: Anchorbrowser) -> None:
         session = client.sessions.goto(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            url="https://www.google.com",
+            url="url",
         )
         assert_matches_type(SessionGotoResponse, session, path=["response"])
 
@@ -318,7 +317,7 @@ class TestSessions:
     def test_raw_response_goto(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.goto(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            url="https://www.google.com",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -331,7 +330,7 @@ class TestSessions:
     def test_streaming_response_goto(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.goto(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            url="https://www.google.com",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -347,7 +346,7 @@ class TestSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.sessions.with_raw_response.goto(
                 session_id="",
-                url="https://www.google.com",
+                url="url",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -397,7 +396,7 @@ class TestSessions:
     def test_method_paste(self, client: Anchorbrowser) -> None:
         session = client.sessions.paste(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text pasted via API",
+            text="text",
         )
         assert_matches_type(SessionPasteResponse, session, path=["response"])
 
@@ -406,7 +405,7 @@ class TestSessions:
     def test_raw_response_paste(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.paste(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text pasted via API",
+            text="text",
         )
 
         assert response.is_closed is True
@@ -419,7 +418,7 @@ class TestSessions:
     def test_streaming_response_paste(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.paste(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text pasted via API",
+            text="text",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -435,7 +434,7 @@ class TestSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.sessions.with_raw_response.paste(
                 session_id="",
-                text="Text pasted via API",
+                text="text",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -541,7 +540,7 @@ class TestSessions:
     def test_method_scroll(self, client: Anchorbrowser) -> None:
         session = client.sessions.scroll(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            delta_y=100,
+            delta_y=0,
             x=0,
             y=0,
         )
@@ -552,12 +551,12 @@ class TestSessions:
     def test_method_scroll_with_all_params(self, client: Anchorbrowser) -> None:
         session = client.sessions.scroll(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            delta_y=100,
+            delta_y=0,
             x=0,
             y=0,
             delta_x=0,
-            steps=10,
-            use_os=False,
+            steps=0,
+            use_os=True,
         )
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
@@ -566,7 +565,7 @@ class TestSessions:
     def test_raw_response_scroll(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.scroll(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            delta_y=100,
+            delta_y=0,
             x=0,
             y=0,
         )
@@ -581,7 +580,7 @@ class TestSessions:
     def test_streaming_response_scroll(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.scroll(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            delta_y=100,
+            delta_y=0,
             x=0,
             y=0,
         ) as response:
@@ -599,7 +598,7 @@ class TestSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.sessions.with_raw_response.scroll(
                 session_id="",
-                delta_y=100,
+                delta_y=0,
                 x=0,
                 y=0,
             )
@@ -608,7 +607,7 @@ class TestSessions:
     @parametrize
     def test_method_upload_file(self, client: Anchorbrowser) -> None:
         session = client.sessions.upload_file(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
         assert_matches_type(SessionUploadFileResponse, session, path=["response"])
@@ -617,7 +616,7 @@ class TestSessions:
     @parametrize
     def test_raw_response_upload_file(self, client: Anchorbrowser) -> None:
         response = client.sessions.with_raw_response.upload_file(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
 
@@ -630,7 +629,7 @@ class TestSessions:
     @parametrize
     def test_streaming_response_upload_file(self, client: Anchorbrowser) -> None:
         with client.sessions.with_streaming_response.upload_file(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         ) as response:
             assert not response.is_closed
@@ -667,27 +666,26 @@ class TestAsyncSessions:
     async def test_method_create_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.create(
             browser={
-                "adblock": {"active": False},
-                "captcha_solver": {"active": False},
-                "disable_web_security": {"active": False},
-                "extensions": ["550e8400-e29b-41d4-a716-446655440000", "6ba7b810-9dad-11d1-80b4-00c04fd430c8"],
-                "fullscreen": {"active": False},
+                "adblock": {"active": True},
+                "captcha_solver": {"active": True},
+                "disable_web_security": {"active": True},
+                "extensions": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "fullscreen": {"active": True},
                 "headless": {"active": True},
-                "p2p_download": {"active": False},
-                "popup_blocker": {"active": False},
+                "p2p_download": {"active": True},
+                "popup_blocker": {"active": True},
                 "profile": {
-                    "name": "my-profile",
+                    "name": "name",
                     "persist": True,
-                    "reset_preferences": False,
                 },
                 "viewport": {
-                    "height": 900,
-                    "width": 1440,
+                    "height": 0,
+                    "width": 0,
                 },
             },
             session={
-                "initial_url": "https://anchorbrowser.io",
-                "live_view": {"read_only": False},
+                "initial_url": "https://example.com",
+                "live_view": {"read_only": True},
                 "proxy": {
                     "active": True,
                     "city": "city",
@@ -695,10 +693,10 @@ class TestAsyncSessions:
                     "region": "region",
                     "type": "anchor_proxy",
                 },
-                "recording": {"active": False},
+                "recording": {"active": True},
                 "timeout": {
-                    "idle_timeout": 3,
-                    "max_duration": 10,
+                    "idle_timeout": 0,
+                    "max_duration": 0,
                 },
             },
         )
@@ -857,10 +855,10 @@ class TestAsyncSessions:
     async def test_method_drag_and_drop(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_x=500,
-            end_y=300,
-            start_x=400,
-            start_y=200,
+            end_x=0,
+            end_y=0,
+            start_x=0,
+            start_y=0,
         )
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
@@ -869,10 +867,10 @@ class TestAsyncSessions:
     async def test_method_drag_and_drop_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_x=500,
-            end_y=300,
-            start_x=400,
-            start_y=200,
+            end_x=0,
+            end_y=0,
+            start_x=0,
+            start_y=0,
             button="left",
         )
         assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
@@ -882,10 +880,10 @@ class TestAsyncSessions:
     async def test_raw_response_drag_and_drop(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_x=500,
-            end_y=300,
-            start_x=400,
-            start_y=200,
+            end_x=0,
+            end_y=0,
+            start_x=0,
+            start_y=0,
         )
 
         assert response.is_closed is True
@@ -898,10 +896,10 @@ class TestAsyncSessions:
     async def test_streaming_response_drag_and_drop(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_x=500,
-            end_y=300,
-            start_x=400,
-            start_y=200,
+            end_x=0,
+            end_y=0,
+            start_x=0,
+            start_y=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -917,10 +915,10 @@ class TestAsyncSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.sessions.with_raw_response.drag_and_drop(
                 session_id="",
-                end_x=500,
-                end_y=300,
-                start_x=400,
-                start_y=200,
+                end_x=0,
+                end_y=0,
+                start_x=0,
+                start_y=0,
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -928,7 +926,7 @@ class TestAsyncSessions:
     async def test_method_goto(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.goto(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            url="https://www.google.com",
+            url="url",
         )
         assert_matches_type(SessionGotoResponse, session, path=["response"])
 
@@ -937,7 +935,7 @@ class TestAsyncSessions:
     async def test_raw_response_goto(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.goto(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            url="https://www.google.com",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -950,7 +948,7 @@ class TestAsyncSessions:
     async def test_streaming_response_goto(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.goto(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            url="https://www.google.com",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -966,7 +964,7 @@ class TestAsyncSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.sessions.with_raw_response.goto(
                 session_id="",
-                url="https://www.google.com",
+                url="url",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -1016,7 +1014,7 @@ class TestAsyncSessions:
     async def test_method_paste(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.paste(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text pasted via API",
+            text="text",
         )
         assert_matches_type(SessionPasteResponse, session, path=["response"])
 
@@ -1025,7 +1023,7 @@ class TestAsyncSessions:
     async def test_raw_response_paste(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.paste(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text pasted via API",
+            text="text",
         )
 
         assert response.is_closed is True
@@ -1038,7 +1036,7 @@ class TestAsyncSessions:
     async def test_streaming_response_paste(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.paste(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text pasted via API",
+            text="text",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1054,7 +1052,7 @@ class TestAsyncSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.sessions.with_raw_response.paste(
                 session_id="",
-                text="Text pasted via API",
+                text="text",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -1164,7 +1162,7 @@ class TestAsyncSessions:
     async def test_method_scroll(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.scroll(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            delta_y=100,
+            delta_y=0,
             x=0,
             y=0,
         )
@@ -1175,12 +1173,12 @@ class TestAsyncSessions:
     async def test_method_scroll_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.scroll(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            delta_y=100,
+            delta_y=0,
             x=0,
             y=0,
             delta_x=0,
-            steps=10,
-            use_os=False,
+            steps=0,
+            use_os=True,
         )
         assert_matches_type(SessionScrollResponse, session, path=["response"])
 
@@ -1189,7 +1187,7 @@ class TestAsyncSessions:
     async def test_raw_response_scroll(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.scroll(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            delta_y=100,
+            delta_y=0,
             x=0,
             y=0,
         )
@@ -1204,7 +1202,7 @@ class TestAsyncSessions:
     async def test_streaming_response_scroll(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.scroll(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            delta_y=100,
+            delta_y=0,
             x=0,
             y=0,
         ) as response:
@@ -1222,7 +1220,7 @@ class TestAsyncSessions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.sessions.with_raw_response.scroll(
                 session_id="",
-                delta_y=100,
+                delta_y=0,
                 x=0,
                 y=0,
             )
@@ -1231,7 +1229,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_method_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.upload_file(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
         assert_matches_type(SessionUploadFileResponse, session, path=["response"])
@@ -1240,7 +1238,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_raw_response_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.with_raw_response.upload_file(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
 
@@ -1253,7 +1251,7 @@ class TestAsyncSessions:
     @parametrize
     async def test_streaming_response_upload_file(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.with_streaming_response.upload_file(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         ) as response:
             assert not response.is_closed
