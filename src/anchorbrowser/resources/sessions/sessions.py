@@ -65,6 +65,14 @@ from ..._response import (
     async_to_custom_raw_response_wrapper,
     async_to_custom_streamed_response_wrapper,
 )
+from .agent.agent import (
+    AgentResource,
+    AsyncAgentResource,
+    AgentResourceWithRawResponse,
+    AsyncAgentResourceWithRawResponse,
+    AgentResourceWithStreamingResponse,
+    AsyncAgentResourceWithStreamingResponse,
+)
 from ..._base_client import make_request_options
 from .recordings.recordings import (
     RecordingsResource,
@@ -109,6 +117,9 @@ class SessionsResource(SyncAPIResource):
     @cached_property
     def clipboard(self) -> ClipboardResource:
         return ClipboardResource(self._client)
+    @cached_property
+    def agent(self) -> AgentResource:
+        return AgentResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> SessionsResourceWithRawResponse:
@@ -638,6 +649,9 @@ class AsyncSessionsResource(AsyncAPIResource):
     @cached_property
     def clipboard(self) -> AsyncClipboardResource:
         return AsyncClipboardResource(self._client)
+    @cached_property
+    def agent(self) -> AsyncAgentResource:
+        return AsyncAgentResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncSessionsResourceWithRawResponse:
@@ -1209,6 +1223,10 @@ class SessionsResourceWithRawResponse:
     def clipboard(self) -> ClipboardResourceWithRawResponse:
         return ClipboardResourceWithRawResponse(self._sessions.clipboard)
 
+    @cached_property
+    def agent(self) -> AgentResourceWithRawResponse:
+        return AgentResourceWithRawResponse(self._sessions.agent)
+
 
 class AsyncSessionsResourceWithRawResponse:
     def __init__(self, sessions: AsyncSessionsResource) -> None:
@@ -1272,6 +1290,9 @@ class AsyncSessionsResourceWithRawResponse:
     def clipboard(self) -> AsyncClipboardResourceWithRawResponse:
         return AsyncClipboardResourceWithRawResponse(self._sessions.clipboard)
 
+    @cached_property
+    def agent(self) -> AsyncAgentResourceWithRawResponse:
+        return AsyncAgentResourceWithRawResponse(self._sessions.agent)
 
 class SessionsResourceWithStreamingResponse:
     def __init__(self, sessions: SessionsResource) -> None:
@@ -1335,6 +1356,9 @@ class SessionsResourceWithStreamingResponse:
     def clipboard(self) -> ClipboardResourceWithStreamingResponse:
         return ClipboardResourceWithStreamingResponse(self._sessions.clipboard)
 
+    @cached_property
+    def agent(self) -> AgentResourceWithStreamingResponse:
+        return AgentResourceWithStreamingResponse(self._sessions.agent)
 
 class AsyncSessionsResourceWithStreamingResponse:
     def __init__(self, sessions: AsyncSessionsResource) -> None:
@@ -1397,3 +1421,7 @@ class AsyncSessionsResourceWithStreamingResponse:
     @cached_property
     def clipboard(self) -> AsyncClipboardResourceWithStreamingResponse:
         return AsyncClipboardResourceWithStreamingResponse(self._sessions.clipboard)
+
+    @cached_property
+    def agent(self) -> AsyncAgentResourceWithStreamingResponse:
+        return AsyncAgentResourceWithStreamingResponse(self._sessions.agent)

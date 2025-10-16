@@ -8,6 +8,14 @@ from .all import (
     AllResourceWithStreamingResponse,
     AsyncAllResourceWithStreamingResponse,
 )
+from .agent import (
+    AgentResource,
+    AsyncAgentResource,
+    AgentResourceWithRawResponse,
+    AsyncAgentResourceWithRawResponse,
+    AgentResourceWithStreamingResponse,
+    AsyncAgentResourceWithStreamingResponse,
+)
 from .mouse import (
     MouseResource,
     AsyncMouseResource,
@@ -78,6 +86,12 @@ __all__ = [
     "AsyncClipboardResource",
     "ClipboardResourceWithRawResponse",
     "AsyncClipboardResourceWithRawResponse",
+    "AgentResource",
+    "AsyncAgentResource",
+    "AgentResourceWithRawResponse",
+    "AsyncAgentResourceWithRawResponse",
+    "AgentResourceWithStreamingResponse",
+    "AsyncAgentResourceWithStreamingResponse",
     "ClipboardResourceWithStreamingResponse",
     "AsyncClipboardResourceWithStreamingResponse",
     "SessionsResource",
