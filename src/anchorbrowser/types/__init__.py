@@ -10,7 +10,6 @@ from .session_paste_params import SessionPasteParams as SessionPasteParams
 from .event_wait_for_params import EventWaitForParams as EventWaitForParams
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_list_response import ProfileListResponse as ProfileListResponse
-from .profile_update_params import ProfileUpdateParams as ProfileUpdateParams
 from .session_copy_response import SessionCopyResponse as SessionCopyResponse
 from .session_create_params import SessionCreateParams as SessionCreateParams
 from .session_goto_response import SessionGotoResponse as SessionGotoResponse

@@ -22,7 +22,7 @@ class TestEvents:
     @parametrize
     def test_method_signal(self, client: Anchorbrowser) -> None:
         event = client.events.signal(
-            event_name="workflow_completed",
+            event_name="event_name",
             data={
                 "message": "bar",
                 "result": "bar",
@@ -35,7 +35,7 @@ class TestEvents:
     @parametrize
     def test_raw_response_signal(self, client: Anchorbrowser) -> None:
         response = client.events.with_raw_response.signal(
-            event_name="workflow_completed",
+            event_name="event_name",
             data={
                 "message": "bar",
                 "result": "bar",
@@ -52,7 +52,7 @@ class TestEvents:
     @parametrize
     def test_streaming_response_signal(self, client: Anchorbrowser) -> None:
         with client.events.with_streaming_response.signal(
-            event_name="workflow_completed",
+            event_name="event_name",
             data={
                 "message": "bar",
                 "result": "bar",
@@ -84,7 +84,7 @@ class TestEvents:
     @parametrize
     def test_method_wait_for(self, client: Anchorbrowser) -> None:
         event = client.events.wait_for(
-            event_name="workflow_completed",
+            event_name="event_name",
         )
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
@@ -92,8 +92,8 @@ class TestEvents:
     @parametrize
     def test_method_wait_for_with_all_params(self, client: Anchorbrowser) -> None:
         event = client.events.wait_for(
-            event_name="workflow_completed",
-            timeout_ms=30000,
+            event_name="event_name",
+            timeout_ms=0,
         )
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
@@ -101,7 +101,7 @@ class TestEvents:
     @parametrize
     def test_raw_response_wait_for(self, client: Anchorbrowser) -> None:
         response = client.events.with_raw_response.wait_for(
-            event_name="workflow_completed",
+            event_name="event_name",
         )
 
         assert response.is_closed is True
@@ -113,7 +113,7 @@ class TestEvents:
     @parametrize
     def test_streaming_response_wait_for(self, client: Anchorbrowser) -> None:
         with client.events.with_streaming_response.wait_for(
-            event_name="workflow_completed",
+            event_name="event_name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -141,7 +141,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_method_signal(self, async_client: AsyncAnchorbrowser) -> None:
         event = await async_client.events.signal(
-            event_name="workflow_completed",
+            event_name="event_name",
             data={
                 "message": "bar",
                 "result": "bar",
@@ -154,7 +154,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_raw_response_signal(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.events.with_raw_response.signal(
-            event_name="workflow_completed",
+            event_name="event_name",
             data={
                 "message": "bar",
                 "result": "bar",
@@ -171,7 +171,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_streaming_response_signal(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.events.with_streaming_response.signal(
-            event_name="workflow_completed",
+            event_name="event_name",
             data={
                 "message": "bar",
                 "result": "bar",
@@ -203,7 +203,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_method_wait_for(self, async_client: AsyncAnchorbrowser) -> None:
         event = await async_client.events.wait_for(
-            event_name="workflow_completed",
+            event_name="event_name",
         )
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
@@ -211,8 +211,8 @@ class TestAsyncEvents:
     @parametrize
     async def test_method_wait_for_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         event = await async_client.events.wait_for(
-            event_name="workflow_completed",
-            timeout_ms=30000,
+            event_name="event_name",
+            timeout_ms=0,
         )
         assert_matches_type(EventWaitForResponse, event, path=["response"])
 
@@ -220,7 +220,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_raw_response_wait_for(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.events.with_raw_response.wait_for(
-            event_name="workflow_completed",
+            event_name="event_name",
         )
 
         assert response.is_closed is True
@@ -232,7 +232,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_streaming_response_wait_for(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.events.with_streaming_response.wait_for(
-            event_name="workflow_completed",
+            event_name="event_name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
