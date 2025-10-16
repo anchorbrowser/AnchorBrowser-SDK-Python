@@ -260,6 +260,7 @@ class BaseModel(pydantic.BaseModel):
             exclude_unset: bool = False,
             exclude_defaults: bool = False,
             exclude_none: bool = False,
+            exclude_computed_fields: bool = False,
             round_trip: bool = False,
             warnings: bool | Literal["none", "warn", "error"] = True,
             context: dict[str, Any] | None = None,
@@ -320,11 +321,13 @@ class BaseModel(pydantic.BaseModel):
             exclude_unset: bool = False,
             exclude_defaults: bool = False,
             exclude_none: bool = False,
+            exclude_computed_fields: bool = False,
             round_trip: bool = False,
             warnings: bool | Literal["none", "warn", "error"] = True,
             context: dict[str, Any] | None = None,
             fallback: Callable[[Any], Any] | None = None,
             serialize_as_any: bool = False,
+            ensure_ascii: bool = True,
         ) -> str:
             """Usage docs: https://docs.pydantic.dev/2.4/concepts/serialization/#modelmodel_dump_json
 

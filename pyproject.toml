@@ -8,20 +8,19 @@ authors = [
 { name = "Anchorbrowser", email = "support@anchorbrowser.io" },
 ]
 dependencies = [
-    "httpx>=0.23.0, <1",
+    "httpx>=0.28.1",
     "pydantic>=1.9.0, <3",
-    "typing-extensions>=4.10, <5",
+    "typing-extensions>=4.15.0",
     "anyio>=3.5.0, <5",
     "distro>=1.7.0, <2",
     "sniffio",
     "websockets>=15.0.1",
     "playwright>=1.55.0",
 ]
-requires-python = ">= 3.8"
+requires-python = ">= 3.9"
 classifiers = [
   "Typing :: Typed",
   "Intended Audience :: Developers",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
