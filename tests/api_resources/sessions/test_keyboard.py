@@ -25,7 +25,7 @@ class TestKeyboard:
     def test_method_shortcut(self, client: Anchorbrowser) -> None:
         keyboard = client.sessions.keyboard.shortcut(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            keys=["Ctrl", "a"],
+            keys=["string"],
         )
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
@@ -34,8 +34,8 @@ class TestKeyboard:
     def test_method_shortcut_with_all_params(self, client: Anchorbrowser) -> None:
         keyboard = client.sessions.keyboard.shortcut(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            keys=["Ctrl", "a"],
-            hold_time=100,
+            keys=["string"],
+            hold_time=0,
         )
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
@@ -44,7 +44,7 @@ class TestKeyboard:
     def test_raw_response_shortcut(self, client: Anchorbrowser) -> None:
         response = client.sessions.keyboard.with_raw_response.shortcut(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            keys=["Ctrl", "a"],
+            keys=["string"],
         )
 
         assert response.is_closed is True
@@ -57,7 +57,7 @@ class TestKeyboard:
     def test_streaming_response_shortcut(self, client: Anchorbrowser) -> None:
         with client.sessions.keyboard.with_streaming_response.shortcut(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            keys=["Ctrl", "a"],
+            keys=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -73,7 +73,7 @@ class TestKeyboard:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.sessions.keyboard.with_raw_response.shortcut(
                 session_id="",
-                keys=["Ctrl", "a"],
+                keys=["string"],
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -81,7 +81,7 @@ class TestKeyboard:
     def test_method_type(self, client: Anchorbrowser) -> None:
         keyboard = client.sessions.keyboard.type(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Hello from Session Manager VNC API test!",
+            text="text",
         )
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
@@ -90,8 +90,8 @@ class TestKeyboard:
     def test_method_type_with_all_params(self, client: Anchorbrowser) -> None:
         keyboard = client.sessions.keyboard.type(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Hello from Session Manager VNC API test!",
-            delay=30,
+            text="text",
+            delay=0,
         )
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
@@ -100,7 +100,7 @@ class TestKeyboard:
     def test_raw_response_type(self, client: Anchorbrowser) -> None:
         response = client.sessions.keyboard.with_raw_response.type(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Hello from Session Manager VNC API test!",
+            text="text",
         )
 
         assert response.is_closed is True
@@ -113,7 +113,7 @@ class TestKeyboard:
     def test_streaming_response_type(self, client: Anchorbrowser) -> None:
         with client.sessions.keyboard.with_streaming_response.type(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Hello from Session Manager VNC API test!",
+            text="text",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -129,7 +129,7 @@ class TestKeyboard:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.sessions.keyboard.with_raw_response.type(
                 session_id="",
-                text="Hello from Session Manager VNC API test!",
+                text="text",
             )
 
 
@@ -143,7 +143,7 @@ class TestAsyncKeyboard:
     async def test_method_shortcut(self, async_client: AsyncAnchorbrowser) -> None:
         keyboard = await async_client.sessions.keyboard.shortcut(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            keys=["Ctrl", "a"],
+            keys=["string"],
         )
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
@@ -152,8 +152,8 @@ class TestAsyncKeyboard:
     async def test_method_shortcut_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         keyboard = await async_client.sessions.keyboard.shortcut(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            keys=["Ctrl", "a"],
-            hold_time=100,
+            keys=["string"],
+            hold_time=0,
         )
         assert_matches_type(KeyboardShortcutResponse, keyboard, path=["response"])
 
@@ -162,7 +162,7 @@ class TestAsyncKeyboard:
     async def test_raw_response_shortcut(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.keyboard.with_raw_response.shortcut(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            keys=["Ctrl", "a"],
+            keys=["string"],
         )
 
         assert response.is_closed is True
@@ -175,7 +175,7 @@ class TestAsyncKeyboard:
     async def test_streaming_response_shortcut(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.keyboard.with_streaming_response.shortcut(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            keys=["Ctrl", "a"],
+            keys=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -191,7 +191,7 @@ class TestAsyncKeyboard:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.sessions.keyboard.with_raw_response.shortcut(
                 session_id="",
-                keys=["Ctrl", "a"],
+                keys=["string"],
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -199,7 +199,7 @@ class TestAsyncKeyboard:
     async def test_method_type(self, async_client: AsyncAnchorbrowser) -> None:
         keyboard = await async_client.sessions.keyboard.type(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Hello from Session Manager VNC API test!",
+            text="text",
         )
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
@@ -208,8 +208,8 @@ class TestAsyncKeyboard:
     async def test_method_type_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         keyboard = await async_client.sessions.keyboard.type(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Hello from Session Manager VNC API test!",
-            delay=30,
+            text="text",
+            delay=0,
         )
         assert_matches_type(KeyboardTypeResponse, keyboard, path=["response"])
 
@@ -218,7 +218,7 @@ class TestAsyncKeyboard:
     async def test_raw_response_type(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.keyboard.with_raw_response.type(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Hello from Session Manager VNC API test!",
+            text="text",
         )
 
         assert response.is_closed is True
@@ -231,7 +231,7 @@ class TestAsyncKeyboard:
     async def test_streaming_response_type(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.keyboard.with_streaming_response.type(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Hello from Session Manager VNC API test!",
+            text="text",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -247,5 +247,5 @@ class TestAsyncKeyboard:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.sessions.keyboard.with_raw_response.type(
                 session_id="",
-                text="Hello from Session Manager VNC API test!",
+                text="text",
             )

@@ -21,7 +21,7 @@ class TestFiles:
     @parametrize
     def test_method_list(self, client: Anchorbrowser) -> None:
         file = client.sessions.agent.files.list(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(FileListResponse, file, path=["response"])
 
@@ -29,7 +29,7 @@ class TestFiles:
     @parametrize
     def test_raw_response_list(self, client: Anchorbrowser) -> None:
         response = client.sessions.agent.files.with_raw_response.list(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -41,7 +41,7 @@ class TestFiles:
     @parametrize
     def test_streaming_response_list(self, client: Anchorbrowser) -> None:
         with client.sessions.agent.files.with_streaming_response.list(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -63,7 +63,7 @@ class TestFiles:
     @parametrize
     def test_method_upload(self, client: Anchorbrowser) -> None:
         file = client.sessions.agent.files.upload(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
         assert_matches_type(FileUploadResponse, file, path=["response"])
@@ -72,7 +72,7 @@ class TestFiles:
     @parametrize
     def test_raw_response_upload(self, client: Anchorbrowser) -> None:
         response = client.sessions.agent.files.with_raw_response.upload(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
 
@@ -85,7 +85,7 @@ class TestFiles:
     @parametrize
     def test_streaming_response_upload(self, client: Anchorbrowser) -> None:
         with client.sessions.agent.files.with_streaming_response.upload(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         ) as response:
             assert not response.is_closed
@@ -115,7 +115,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_method_list(self, async_client: AsyncAnchorbrowser) -> None:
         file = await async_client.sessions.agent.files.list(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(FileListResponse, file, path=["response"])
 
@@ -123,7 +123,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.agent.files.with_raw_response.list(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -135,7 +135,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.agent.files.with_streaming_response.list(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -157,7 +157,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_method_upload(self, async_client: AsyncAnchorbrowser) -> None:
         file = await async_client.sessions.agent.files.upload(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
         assert_matches_type(FileUploadResponse, file, path=["response"])
@@ -166,7 +166,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_raw_response_upload(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.agent.files.with_raw_response.upload(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         )
 
@@ -179,7 +179,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_streaming_response_upload(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.agent.files.with_streaming_response.upload(
-            session_id="550e8400-e29b-41d4-a716-446655440000",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             file=b"raw file contents",
         ) as response:
             assert not response.is_closed

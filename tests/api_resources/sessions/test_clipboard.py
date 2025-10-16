@@ -64,7 +64,7 @@ class TestClipboard:
     def test_method_set(self, client: Anchorbrowser) -> None:
         clipboard = client.sessions.clipboard.set(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text from clipboard API",
+            text="text",
         )
         assert_matches_type(ClipboardSetResponse, clipboard, path=["response"])
 
@@ -73,7 +73,7 @@ class TestClipboard:
     def test_raw_response_set(self, client: Anchorbrowser) -> None:
         response = client.sessions.clipboard.with_raw_response.set(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text from clipboard API",
+            text="text",
         )
 
         assert response.is_closed is True
@@ -86,7 +86,7 @@ class TestClipboard:
     def test_streaming_response_set(self, client: Anchorbrowser) -> None:
         with client.sessions.clipboard.with_streaming_response.set(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text from clipboard API",
+            text="text",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -102,7 +102,7 @@ class TestClipboard:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.sessions.clipboard.with_raw_response.set(
                 session_id="",
-                text="Text from clipboard API",
+                text="text",
             )
 
 
@@ -158,7 +158,7 @@ class TestAsyncClipboard:
     async def test_method_set(self, async_client: AsyncAnchorbrowser) -> None:
         clipboard = await async_client.sessions.clipboard.set(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text from clipboard API",
+            text="text",
         )
         assert_matches_type(ClipboardSetResponse, clipboard, path=["response"])
 
@@ -167,7 +167,7 @@ class TestAsyncClipboard:
     async def test_raw_response_set(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.clipboard.with_raw_response.set(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text from clipboard API",
+            text="text",
         )
 
         assert response.is_closed is True
@@ -180,7 +180,7 @@ class TestAsyncClipboard:
     async def test_streaming_response_set(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.clipboard.with_streaming_response.set(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="Text from clipboard API",
+            text="text",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -196,5 +196,5 @@ class TestAsyncClipboard:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.sessions.clipboard.with_raw_response.set(
                 session_id="",
-                text="Text from clipboard API",
+                text="text",
             )

@@ -99,12 +99,6 @@ class BrowserProfile(TypedDict, total=False):
     browser session ends. Defaults to `false`.
     """
 
-    reset_preferences: bool
-    """When enabled, resets the profile's preferences on session creation.
-
-    Defaults to `false`.
-    """
-
 
 class BrowserViewport(TypedDict, total=False):
     height: int
@@ -161,7 +155,6 @@ class SessionProxyAnchorProxy(TypedDict, total=False):
     """City name for precise geographic targeting.
 
     Supported for anchor_proxy only. Can only be used when region is also provided.
-    Example: "San Francisco", "los-angeles", "london"
     """
 
     country_code: Literal[
@@ -367,7 +360,7 @@ class SessionProxyAnchorProxy(TypedDict, total=False):
     region: str
     """
     Region code for more specific geographic targeting. The city parameter can only
-    be used when region is also provided. Example: "ca" for California
+    be used when region is also provided.
     """
 
     type: Literal["anchor_proxy", "anchor_residential", "anchor_mobile", "anchor_gov"]

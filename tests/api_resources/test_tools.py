@@ -38,11 +38,11 @@ class TestTools:
     def test_method_fetch_webpage_with_all_params(self, client: Anchorbrowser) -> None:
         tool = client.tools.fetch_webpage(
             session_id="sessionId",
-            format="markdown",
+            format="html",
             new_page=True,
             page_index=0,
             return_partial_on_timeout=True,
-            url="https://anchorbrowser.io",
+            url="url",
             wait=0,
         )
         assert_matches_type(str, tool, path=["response"])
@@ -73,7 +73,7 @@ class TestTools:
     @parametrize
     def test_method_perform_web_task(self, client: Anchorbrowser) -> None:
         tool = client.tools.perform_web_task(
-            prompt="Collect the node names and their CPU average %",
+            prompt="prompt",
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
@@ -81,31 +81,14 @@ class TestTools:
     @parametrize
     def test_method_perform_web_task_with_all_params(self, client: Anchorbrowser) -> None:
         tool = client.tools.perform_web_task(
-            prompt="Collect the node names and their CPU average %",
+            prompt="prompt",
             session_id="sessionId",
-            agent="openai-cua",
+            agent="browser-use",
             highlight_elements=True,
-            model="gpt-4o",
-            output_schema={
-                "type": "object",
-                "properties": {
-                    "nodes_cpu_usage": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "node": {"type": "string"},
-                                "cluster": {"type": "string"},
-                                "cpu_avg_percentage": {"type": "number"},
-                            },
-                            "required": ["node", "cluster", "cpu_avg_percentage"],
-                        },
-                    }
-                },
-                "required": ["nodes_cpu_usage"],
-            },
+            model="model",
+            output_schema={},
             provider="openai",
-            url="https://anchorbrowser.io",
+            url="url",
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
@@ -113,7 +96,7 @@ class TestTools:
     @parametrize
     def test_raw_response_perform_web_task(self, client: Anchorbrowser) -> None:
         response = client.tools.with_raw_response.perform_web_task(
-            prompt="Collect the node names and their CPU average %",
+            prompt="prompt",
         )
 
         assert response.is_closed is True
@@ -125,7 +108,7 @@ class TestTools:
     @parametrize
     def test_streaming_response_perform_web_task(self, client: Anchorbrowser) -> None:
         with client.tools.with_streaming_response.perform_web_task(
-            prompt="Collect the node names and their CPU average %",
+            prompt="prompt",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -152,13 +135,13 @@ class TestTools:
         tool = client.tools.screenshot_webpage(
             session_id="sessionId",
             capture_full_height=True,
-            height=720,
-            image_quality=70,
-            s3_target_address="https://your-bucket.s3.amazonaws.com/your/object/key?X-Amz-Signature=...",
+            height=0,
+            image_quality=0,
+            s3_target_address="s3_target_address",
             scroll_all_content=True,
-            url="https://anchorbrowser.io",
-            wait=200,
-            width=1280,
+            url="url",
+            wait=0,
+            width=0,
         )
         assert tool.is_closed
         assert tool.json() == {"foo": "bar"}
@@ -208,11 +191,11 @@ class TestAsyncTools:
     async def test_method_fetch_webpage_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         tool = await async_client.tools.fetch_webpage(
             session_id="sessionId",
-            format="markdown",
+            format="html",
             new_page=True,
             page_index=0,
             return_partial_on_timeout=True,
-            url="https://anchorbrowser.io",
+            url="url",
             wait=0,
         )
         assert_matches_type(str, tool, path=["response"])
@@ -243,7 +226,7 @@ class TestAsyncTools:
     @parametrize
     async def test_method_perform_web_task(self, async_client: AsyncAnchorbrowser) -> None:
         tool = await async_client.tools.perform_web_task(
-            prompt="Collect the node names and their CPU average %",
+            prompt="prompt",
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
@@ -251,31 +234,14 @@ class TestAsyncTools:
     @parametrize
     async def test_method_perform_web_task_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         tool = await async_client.tools.perform_web_task(
-            prompt="Collect the node names and their CPU average %",
+            prompt="prompt",
             session_id="sessionId",
-            agent="openai-cua",
+            agent="browser-use",
             highlight_elements=True,
-            model="gpt-4o",
-            output_schema={
-                "type": "object",
-                "properties": {
-                    "nodes_cpu_usage": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "node": {"type": "string"},
-                                "cluster": {"type": "string"},
-                                "cpu_avg_percentage": {"type": "number"},
-                            },
-                            "required": ["node", "cluster", "cpu_avg_percentage"],
-                        },
-                    }
-                },
-                "required": ["nodes_cpu_usage"],
-            },
+            model="model",
+            output_schema={},
             provider="openai",
-            url="https://anchorbrowser.io",
+            url="url",
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
@@ -283,7 +249,7 @@ class TestAsyncTools:
     @parametrize
     async def test_raw_response_perform_web_task(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.tools.with_raw_response.perform_web_task(
-            prompt="Collect the node names and their CPU average %",
+            prompt="prompt",
         )
 
         assert response.is_closed is True
@@ -295,7 +261,7 @@ class TestAsyncTools:
     @parametrize
     async def test_streaming_response_perform_web_task(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.tools.with_streaming_response.perform_web_task(
-            prompt="Collect the node names and their CPU average %",
+            prompt="prompt",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -324,13 +290,13 @@ class TestAsyncTools:
         tool = await async_client.tools.screenshot_webpage(
             session_id="sessionId",
             capture_full_height=True,
-            height=720,
-            image_quality=70,
-            s3_target_address="https://your-bucket.s3.amazonaws.com/your/object/key?X-Amz-Signature=...",
+            height=0,
+            image_quality=0,
+            s3_target_address="s3_target_address",
             scroll_all_content=True,
-            url="https://anchorbrowser.io",
-            wait=200,
-            width=1280,
+            url="url",
+            wait=0,
+            width=0,
         )
         assert tool.is_closed
         assert await tool.json() == {"foo": "bar"}

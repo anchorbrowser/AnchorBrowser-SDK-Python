@@ -137,7 +137,7 @@ from anchorbrowser import Anchorbrowser
 client = Anchorbrowser()
 
 client.sessions.upload_file(
-    session_id="550e8400-e29b-41d4-a716-446655440000",
+    session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
     file=Path("/path/to/file"),
 )
 ```

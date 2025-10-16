@@ -21,7 +21,7 @@ class TestAgent:
     @parametrize
     def test_method_pause(self, client: Anchorbrowser) -> None:
         agent = client.sessions.agent.pause(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
@@ -29,7 +29,7 @@ class TestAgent:
     @parametrize
     def test_raw_response_pause(self, client: Anchorbrowser) -> None:
         response = client.sessions.agent.with_raw_response.pause(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -41,7 +41,7 @@ class TestAgent:
     @parametrize
     def test_streaming_response_pause(self, client: Anchorbrowser) -> None:
         with client.sessions.agent.with_streaming_response.pause(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -63,7 +63,7 @@ class TestAgent:
     @parametrize
     def test_method_resume(self, client: Anchorbrowser) -> None:
         agent = client.sessions.agent.resume(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
@@ -71,7 +71,7 @@ class TestAgent:
     @parametrize
     def test_raw_response_resume(self, client: Anchorbrowser) -> None:
         response = client.sessions.agent.with_raw_response.resume(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -83,7 +83,7 @@ class TestAgent:
     @parametrize
     def test_streaming_response_resume(self, client: Anchorbrowser) -> None:
         with client.sessions.agent.with_streaming_response.resume(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -111,7 +111,7 @@ class TestAsyncAgent:
     @parametrize
     async def test_method_pause(self, async_client: AsyncAnchorbrowser) -> None:
         agent = await async_client.sessions.agent.pause(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
@@ -119,7 +119,7 @@ class TestAsyncAgent:
     @parametrize
     async def test_raw_response_pause(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.agent.with_raw_response.pause(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -131,7 +131,7 @@ class TestAsyncAgent:
     @parametrize
     async def test_streaming_response_pause(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.agent.with_streaming_response.pause(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -153,7 +153,7 @@ class TestAsyncAgent:
     @parametrize
     async def test_method_resume(self, async_client: AsyncAnchorbrowser) -> None:
         agent = await async_client.sessions.agent.resume(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
@@ -161,7 +161,7 @@ class TestAsyncAgent:
     @parametrize
     async def test_raw_response_resume(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.agent.with_raw_response.resume(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -173,7 +173,7 @@ class TestAsyncAgent:
     @parametrize
     async def test_streaming_response_resume(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.agent.with_streaming_response.resume(
-            "550e8400-e29b-41d4-a716-446655440000",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
