@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import agent, tools, events, browser, profiles, extensions, batch_sessions
+from .resources import agent, tools, events, browser, profiles, extensions, integrations, batch_sessions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
@@ -52,6 +52,7 @@ class Anchorbrowser(SyncAPIClient):
     agent: agent.AgentResource
     events: events.EventsResource
     batch_sessions: batch_sessions.BatchSessionsResource
+    integrations: integrations.IntegrationsResource
     with_raw_response: AnchorbrowserWithRawResponse
     with_streaming_response: AnchorbrowserWithStreamedResponse
 
@@ -117,6 +118,7 @@ class Anchorbrowser(SyncAPIClient):
         self.agent = agent.AgentResource(self)
         self.events = events.EventsResource(self)
         self.batch_sessions = batch_sessions.BatchSessionsResource(self)
+        self.integrations = integrations.IntegrationsResource(self)
         self.with_raw_response = AnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AnchorbrowserWithStreamedResponse(self)
 
@@ -234,6 +236,7 @@ class AsyncAnchorbrowser(AsyncAPIClient):
     agent: agent.AsyncAgentResource
     events: events.AsyncEventsResource
     batch_sessions: batch_sessions.AsyncBatchSessionsResource
+    integrations: integrations.AsyncIntegrationsResource
     with_raw_response: AsyncAnchorbrowserWithRawResponse
     with_streaming_response: AsyncAnchorbrowserWithStreamedResponse
 
@@ -299,6 +302,7 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         self.agent = agent.AsyncAgentResource(self)
         self.events = events.AsyncEventsResource(self)
         self.batch_sessions = batch_sessions.AsyncBatchSessionsResource(self)
+        self.integrations = integrations.AsyncIntegrationsResource(self)
         self.with_raw_response = AsyncAnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AsyncAnchorbrowserWithStreamedResponse(self)
 
@@ -417,6 +421,7 @@ class AnchorbrowserWithRawResponse:
         self.agent = agent.AgentResourceWithRawResponse(client.agent)
         self.events = events.EventsResourceWithRawResponse(client.events)
         self.batch_sessions = batch_sessions.BatchSessionsResourceWithRawResponse(client.batch_sessions)
+        self.integrations = integrations.IntegrationsResourceWithRawResponse(client.integrations)
 
 
 class AsyncAnchorbrowserWithRawResponse:
@@ -429,6 +434,7 @@ class AsyncAnchorbrowserWithRawResponse:
         self.agent = agent.AsyncAgentResourceWithRawResponse(client.agent)
         self.events = events.AsyncEventsResourceWithRawResponse(client.events)
         self.batch_sessions = batch_sessions.AsyncBatchSessionsResourceWithRawResponse(client.batch_sessions)
+        self.integrations = integrations.AsyncIntegrationsResourceWithRawResponse(client.integrations)
 
 
 class AnchorbrowserWithStreamedResponse:
@@ -441,6 +447,7 @@ class AnchorbrowserWithStreamedResponse:
         self.agent = agent.AgentResourceWithStreamingResponse(client.agent)
         self.events = events.EventsResourceWithStreamingResponse(client.events)
         self.batch_sessions = batch_sessions.BatchSessionsResourceWithStreamingResponse(client.batch_sessions)
+        self.integrations = integrations.IntegrationsResourceWithStreamingResponse(client.integrations)
 
 
 class AsyncAnchorbrowserWithStreamedResponse:
@@ -453,6 +460,7 @@ class AsyncAnchorbrowserWithStreamedResponse:
         self.agent = agent.AsyncAgentResourceWithStreamingResponse(client.agent)
         self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
         self.batch_sessions = batch_sessions.AsyncBatchSessionsResourceWithStreamingResponse(client.batch_sessions)
+        self.integrations = integrations.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
 
 
 Client = Anchorbrowser
