@@ -205,3 +205,16 @@ Methods:
 
 - <code title="post /v1/events/{event_name}">client.events.<a href="./src/anchorbrowser/resources/events.py">signal</a>(event_name, \*\*<a href="src/anchorbrowser/types/event_signal_params.py">params</a>) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="post /v1/events/{event_name}/wait">client.events.<a href="./src/anchorbrowser/resources/events.py">wait_for</a>(event_name, \*\*<a href="src/anchorbrowser/types/event_wait_for_params.py">params</a>) -> <a href="./src/anchorbrowser/types/event_wait_for_response.py">EventWaitForResponse</a></code>
+
+# BatchSessions
+
+Types:
+
+```python
+from anchorbrowser.types import BatchSessionCreateResponse, BatchSessionRetrieveResponse
+```
+
+Methods:
+
+- <code title="post /v1/batch-sessions">client.batch_sessions.<a href="./src/anchorbrowser/resources/batch_sessions.py">create</a>(\*\*<a href="src/anchorbrowser/types/batch_session_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/batch_session_create_response.py">BatchSessionCreateResponse</a></code>
+- <code title="get /v1/batch-sessions/{batch_id}">client.batch_sessions.<a href="./src/anchorbrowser/resources/batch_sessions.py">retrieve</a>(batch_id) -> <a href="./src/anchorbrowser/types/batch_session_retrieve_response.py">BatchSessionRetrieveResponse</a></code>

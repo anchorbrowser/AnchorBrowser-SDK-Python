@@ -40,6 +40,14 @@ from .extensions import (
     ExtensionsResourceWithStreamingResponse,
     AsyncExtensionsResourceWithStreamingResponse,
 )
+from .batch_sessions import (
+    BatchSessionsResource,
+    AsyncBatchSessionsResource,
+    BatchSessionsResourceWithRawResponse,
+    AsyncBatchSessionsResourceWithRawResponse,
+    BatchSessionsResourceWithStreamingResponse,
+    AsyncBatchSessionsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "ProfilesResource",
@@ -72,4 +80,10 @@ __all__ = [
     "AsyncEventsResourceWithRawResponse",
     "EventsResourceWithStreamingResponse",
     "AsyncEventsResourceWithStreamingResponse",
+    "BatchSessionsResource",
+    "AsyncBatchSessionsResource",
+    "BatchSessionsResourceWithRawResponse",
+    "AsyncBatchSessionsResourceWithRawResponse",
+    "BatchSessionsResourceWithStreamingResponse",
+    "AsyncBatchSessionsResourceWithStreamingResponse",
 ]
