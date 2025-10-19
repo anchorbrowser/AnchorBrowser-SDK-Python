@@ -49,6 +49,13 @@ class TestBatchSessions:
                         "width": 1440,
                     },
                 },
+                "integrations": [
+                    {
+                        "id": "550e8400-e29b-41d4-a716-446655440000",
+                        "configuration": {"load_mode": "all"},
+                        "type": "1PASSWORD",
+                    }
+                ],
                 "session": {
                     "initial_url": "https://example.com",
                     "live_view": {"read_only": True},
@@ -179,6 +186,13 @@ class TestAsyncBatchSessions:
                         "width": 1440,
                     },
                 },
+                "integrations": [
+                    {
+                        "id": "550e8400-e29b-41d4-a716-446655440000",
+                        "configuration": {"load_mode": "all"},
+                        "type": "1PASSWORD",
+                    }
+                ],
                 "session": {
                     "initial_url": "https://example.com",
                     "live_view": {"read_only": True},
