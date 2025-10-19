@@ -40,6 +40,14 @@ from .extensions import (
     ExtensionsResourceWithStreamingResponse,
     AsyncExtensionsResourceWithStreamingResponse,
 )
+from .integrations import (
+    IntegrationsResource,
+    AsyncIntegrationsResource,
+    IntegrationsResourceWithRawResponse,
+    AsyncIntegrationsResourceWithRawResponse,
+    IntegrationsResourceWithStreamingResponse,
+    AsyncIntegrationsResourceWithStreamingResponse,
+)
 from .batch_sessions import (
     BatchSessionsResource,
     AsyncBatchSessionsResource,
@@ -86,4 +94,10 @@ __all__ = [
     "AsyncBatchSessionsResourceWithRawResponse",
     "BatchSessionsResourceWithStreamingResponse",
     "AsyncBatchSessionsResourceWithStreamingResponse",
+    "IntegrationsResource",
+    "AsyncIntegrationsResource",
+    "IntegrationsResourceWithRawResponse",
+    "AsyncIntegrationsResourceWithRawResponse",
+    "IntegrationsResourceWithStreamingResponse",
+    "AsyncIntegrationsResourceWithStreamingResponse",
 ]

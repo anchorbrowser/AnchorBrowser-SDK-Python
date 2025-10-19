@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Dict, Union, Iterable
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
@@ -20,6 +20,10 @@ __all__ = [
     "ConfigurationBrowserPopupBlocker",
     "ConfigurationBrowserProfile",
     "ConfigurationBrowserViewport",
+    "ConfigurationIntegration",
+    "ConfigurationIntegrationConfiguration",
+    "ConfigurationIntegrationConfigurationOnePasswordAllSecretsConfig",
+    "ConfigurationIntegrationConfigurationOnePasswordSpecificSecretsConfig",
     "ConfigurationSession",
     "ConfigurationSessionLiveView",
     "ConfigurationSessionProxy",
@@ -145,6 +149,35 @@ class ConfigurationBrowser(TypedDict, total=False):
 
     viewport: ConfigurationBrowserViewport
     """Configuration for the browser's viewport size."""
+
+
+class ConfigurationIntegrationConfigurationOnePasswordAllSecretsConfig(TypedDict, total=False):
+    load_mode: Required[Literal["all"]]
+    """Load all secrets from 1Password"""
+
+
+class ConfigurationIntegrationConfigurationOnePasswordSpecificSecretsConfig(TypedDict, total=False):
+    load_mode: Required[Literal["specific"]]
+    """Load specific secrets from 1Password"""
+
+    secrets: Required[SequenceNotStr[str]]
+    """Array of secret references to load"""
+
+
+ConfigurationIntegrationConfiguration: TypeAlias = Union[
+    ConfigurationIntegrationConfigurationOnePasswordAllSecretsConfig,
+    ConfigurationIntegrationConfigurationOnePasswordSpecificSecretsConfig,
+]
+
+
+class ConfigurationIntegration(TypedDict, total=False):
+    id: Required[str]
+    """Unique integration ID"""
+
+    configuration: Required[ConfigurationIntegrationConfiguration]
+
+    type: Required[Literal["1PASSWORD"]]
+    """Integration type"""
 
 
 class ConfigurationSessionLiveView(TypedDict, total=False):
@@ -431,6 +464,12 @@ class ConfigurationSession(TypedDict, total=False):
 class Configuration(TypedDict, total=False):
     browser: ConfigurationBrowser
     """Browser-specific configurations."""
+
+    integrations: Iterable[ConfigurationIntegration]
+    """Array of integrations to load in the browser session.
+
+    Integrations must be previously created using the Integrations API.
+    """
 
     session: ConfigurationSession
     """Session-related configurations."""

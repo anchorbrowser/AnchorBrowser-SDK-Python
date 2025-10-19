@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Mapping, cast
+from typing import Mapping, Iterable, cast
 from typing_extensions import Literal
 
 import httpx
@@ -145,6 +145,7 @@ class SessionsResource(SyncAPIResource):
         self,
         *,
         browser: session_create_params.Browser | Omit = omit,
+        integrations: Iterable[session_create_params.Integration] | Omit = omit,
         session: session_create_params.Session | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -159,6 +160,9 @@ class SessionsResource(SyncAPIResource):
 
         Args:
           browser: Browser-specific configurations.
+
+          integrations: Array of integrations to load in the browser session. Integrations must be
+              previously created using the Integrations API.
 
           session: Session-related configurations.
 
@@ -175,6 +179,7 @@ class SessionsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "browser": browser,
+                    "integrations": integrations,
                     "session": session,
                 },
                 session_create_params.SessionCreateParams,
@@ -678,6 +683,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         self,
         *,
         browser: session_create_params.Browser | Omit = omit,
+        integrations: Iterable[session_create_params.Integration] | Omit = omit,
         session: session_create_params.Session | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -692,6 +698,9 @@ class AsyncSessionsResource(AsyncAPIResource):
 
         Args:
           browser: Browser-specific configurations.
+
+          integrations: Array of integrations to load in the browser session. Integrations must be
+              previously created using the Integrations API.
 
           session: Session-related configurations.
 
@@ -708,6 +717,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "browser": browser,
+                    "integrations": integrations,
                     "session": session,
                 },
                 session_create_params.SessionCreateParams,

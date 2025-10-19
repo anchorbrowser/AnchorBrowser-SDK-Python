@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Iterable
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
@@ -19,6 +19,10 @@ __all__ = [
     "BrowserPopupBlocker",
     "BrowserProfile",
     "BrowserViewport",
+    "Integration",
+    "IntegrationConfiguration",
+    "IntegrationConfigurationOnePasswordAllSecretsConfig",
+    "IntegrationConfigurationOnePasswordSpecificSecretsConfig",
     "Session",
     "SessionLiveView",
     "SessionProxy",
@@ -32,6 +36,12 @@ __all__ = [
 class SessionCreateParams(TypedDict, total=False):
     browser: Browser
     """Browser-specific configurations."""
+
+    integrations: Iterable[Integration]
+    """Array of integrations to load in the browser session.
+
+    Integrations must be previously created using the Integrations API.
+    """
 
     session: Session
     """Session-related configurations."""
@@ -141,6 +151,34 @@ class Browser(TypedDict, total=False):
 
     viewport: BrowserViewport
     """Configuration for the browser's viewport size."""
+
+
+class IntegrationConfigurationOnePasswordAllSecretsConfig(TypedDict, total=False):
+    load_mode: Required[Literal["all"]]
+    """Load all secrets from 1Password"""
+
+
+class IntegrationConfigurationOnePasswordSpecificSecretsConfig(TypedDict, total=False):
+    load_mode: Required[Literal["specific"]]
+    """Load specific secrets from 1Password"""
+
+    secrets: Required[SequenceNotStr[str]]
+    """Array of secret references to load"""
+
+
+IntegrationConfiguration: TypeAlias = Union[
+    IntegrationConfigurationOnePasswordAllSecretsConfig, IntegrationConfigurationOnePasswordSpecificSecretsConfig
+]
+
+
+class Integration(TypedDict, total=False):
+    id: Required[str]
+    """Unique integration ID"""
+
+    configuration: Required[IntegrationConfiguration]
+
+    type: Required[Literal["1PASSWORD"]]
+    """Integration type"""
 
 
 class SessionLiveView(TypedDict, total=False):

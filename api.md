@@ -218,3 +218,21 @@ Methods:
 
 - <code title="post /v1/batch-sessions">client.batch_sessions.<a href="./src/anchorbrowser/resources/batch_sessions.py">create</a>(\*\*<a href="src/anchorbrowser/types/batch_session_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/batch_session_create_response.py">BatchSessionCreateResponse</a></code>
 - <code title="get /v1/batch-sessions/{batch_id}">client.batch_sessions.<a href="./src/anchorbrowser/resources/batch_sessions.py">retrieve</a>(batch_id) -> <a href="./src/anchorbrowser/types/batch_session_retrieve_response.py">BatchSessionRetrieveResponse</a></code>
+
+# Integrations
+
+Types:
+
+```python
+from anchorbrowser.types import (
+    IntegrationCreateResponse,
+    IntegrationListResponse,
+    IntegrationDeleteResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/integrations">client.integrations.<a href="./src/anchorbrowser/resources/integrations.py">create</a>(\*\*<a href="src/anchorbrowser/types/integration_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/integration_create_response.py">IntegrationCreateResponse</a></code>
+- <code title="get /v1/integrations">client.integrations.<a href="./src/anchorbrowser/resources/integrations.py">list</a>() -> <a href="./src/anchorbrowser/types/integration_list_response.py">IntegrationListResponse</a></code>
+- <code title="delete /v1/integrations/{integrationId}">client.integrations.<a href="./src/anchorbrowser/resources/integrations.py">delete</a>(integration_id) -> <a href="./src/anchorbrowser/types/integration_delete_response.py">IntegrationDeleteResponse</a></code>
