@@ -13,6 +13,7 @@ __all__ = [
     "BrowserAdblock",
     "BrowserCaptchaSolver",
     "BrowserDisableWebSecurity",
+    "BrowserExtraStealth",
     "BrowserFullscreen",
     "BrowserHeadless",
     "BrowserP2pDownload",
@@ -67,6 +68,11 @@ class BrowserDisableWebSecurity(TypedDict, total=False):
     Allows accessing iframes and resources from different origins. Defaults to
     `false`.
     """
+
+
+class BrowserExtraStealth(TypedDict, total=False):
+    active: bool
+    """Enable or disable extra stealth mode."""
 
 
 class BrowserFullscreen(TypedDict, total=False):
@@ -132,6 +138,12 @@ class Browser(TypedDict, total=False):
     """Array of extension IDs to load in the browser session.
 
     Extensions must be previously uploaded using the Extensions API.
+    """
+
+    extra_stealth: BrowserExtraStealth
+    """
+    Configuration for extra stealth mode to enhance browser fingerprinting
+    protection.
     """
 
     fullscreen: BrowserFullscreen
