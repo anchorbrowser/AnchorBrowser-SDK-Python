@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import tools, events, profiles, extensions, integrations, batch_sessions
+from .resources import tools, events, profiles, extensions, batch_sessions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
@@ -50,7 +50,6 @@ class Anchorbrowser(SyncAPIClient):
     extensions: extensions.ExtensionsResource
     events: events.EventsResource
     batch_sessions: batch_sessions.BatchSessionsResource
-    integrations: integrations.IntegrationsResource
     with_raw_response: AnchorbrowserWithRawResponse
     with_streaming_response: AnchorbrowserWithStreamedResponse
 
@@ -114,7 +113,6 @@ class Anchorbrowser(SyncAPIClient):
         self.extensions = extensions.ExtensionsResource(self)
         self.events = events.EventsResource(self)
         self.batch_sessions = batch_sessions.BatchSessionsResource(self)
-        self.integrations = integrations.IntegrationsResource(self)
         self.with_raw_response = AnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AnchorbrowserWithStreamedResponse(self)
 
@@ -230,7 +228,6 @@ class AsyncAnchorbrowser(AsyncAPIClient):
     extensions: extensions.AsyncExtensionsResource
     events: events.AsyncEventsResource
     batch_sessions: batch_sessions.AsyncBatchSessionsResource
-    integrations: integrations.AsyncIntegrationsResource
     with_raw_response: AsyncAnchorbrowserWithRawResponse
     with_streaming_response: AsyncAnchorbrowserWithStreamedResponse
 
@@ -294,7 +291,6 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         self.extensions = extensions.AsyncExtensionsResource(self)
         self.events = events.AsyncEventsResource(self)
         self.batch_sessions = batch_sessions.AsyncBatchSessionsResource(self)
-        self.integrations = integrations.AsyncIntegrationsResource(self)
         self.with_raw_response = AsyncAnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AsyncAnchorbrowserWithStreamedResponse(self)
 
@@ -411,7 +407,6 @@ class AnchorbrowserWithRawResponse:
         self.extensions = extensions.ExtensionsResourceWithRawResponse(client.extensions)
         self.events = events.EventsResourceWithRawResponse(client.events)
         self.batch_sessions = batch_sessions.BatchSessionsResourceWithRawResponse(client.batch_sessions)
-        self.integrations = integrations.IntegrationsResourceWithRawResponse(client.integrations)
 
 
 class AsyncAnchorbrowserWithRawResponse:
@@ -422,7 +417,6 @@ class AsyncAnchorbrowserWithRawResponse:
         self.extensions = extensions.AsyncExtensionsResourceWithRawResponse(client.extensions)
         self.events = events.AsyncEventsResourceWithRawResponse(client.events)
         self.batch_sessions = batch_sessions.AsyncBatchSessionsResourceWithRawResponse(client.batch_sessions)
-        self.integrations = integrations.AsyncIntegrationsResourceWithRawResponse(client.integrations)
 
 
 class AnchorbrowserWithStreamedResponse:
@@ -433,7 +427,6 @@ class AnchorbrowserWithStreamedResponse:
         self.extensions = extensions.ExtensionsResourceWithStreamingResponse(client.extensions)
         self.events = events.EventsResourceWithStreamingResponse(client.events)
         self.batch_sessions = batch_sessions.BatchSessionsResourceWithStreamingResponse(client.batch_sessions)
-        self.integrations = integrations.IntegrationsResourceWithStreamingResponse(client.integrations)
 
 
 class AsyncAnchorbrowserWithStreamedResponse:
@@ -444,7 +437,6 @@ class AsyncAnchorbrowserWithStreamedResponse:
         self.extensions = extensions.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
         self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
         self.batch_sessions = batch_sessions.AsyncBatchSessionsResourceWithStreamingResponse(client.batch_sessions)
-        self.integrations = integrations.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
 
 
 Client = Anchorbrowser
