@@ -214,3 +214,28 @@ Methods:
 
 - <code title="post /v1/batch-sessions">client.batch_sessions.<a href="./src/anchorbrowser/resources/batch_sessions.py">create</a>(\*\*<a href="src/anchorbrowser/types/batch_session_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/batch_session_create_response.py">BatchSessionCreateResponse</a></code>
 - <code title="get /v1/batch-sessions/{batch_id}">client.batch_sessions.<a href="./src/anchorbrowser/resources/batch_sessions.py">retrieve</a>(batch_id) -> <a href="./src/anchorbrowser/types/batch_session_retrieve_response.py">BatchSessionRetrieveResponse</a></code>
+
+# Task
+
+Types:
+
+```python
+from anchorbrowser.types import TaskCreateResponse, TaskListResponse
+```
+
+Methods:
+
+- <code title="post /v1/task">client.task.<a href="./src/anchorbrowser/resources/task/task.py">create</a>(\*\*<a href="src/anchorbrowser/types/task_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_create_response.py">TaskCreateResponse</a></code>
+- <code title="get /v1/task">client.task.<a href="./src/anchorbrowser/resources/task/task.py">list</a>(\*\*<a href="src/anchorbrowser/types/task_list_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_list_response.py">TaskListResponse</a></code>
+
+## Run
+
+Types:
+
+```python
+from anchorbrowser.types.task import RunExecuteResponse
+```
+
+Methods:
+
+- <code title="post /v1/task/run">client.task.run.<a href="./src/anchorbrowser/resources/task/run.py">execute</a>(\*\*<a href="src/anchorbrowser/types/task/run_execute_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task/run_execute_response.py">RunExecuteResponse</a></code>

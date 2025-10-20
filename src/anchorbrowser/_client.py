@@ -29,6 +29,7 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+from .resources.task import task
 from .resources.sessions import sessions
 
 __all__ = [
@@ -50,6 +51,7 @@ class Anchorbrowser(SyncAPIClient):
     extensions: extensions.ExtensionsResource
     events: events.EventsResource
     batch_sessions: batch_sessions.BatchSessionsResource
+    task: task.TaskResource
     with_raw_response: AnchorbrowserWithRawResponse
     with_streaming_response: AnchorbrowserWithStreamedResponse
 
@@ -113,6 +115,7 @@ class Anchorbrowser(SyncAPIClient):
         self.extensions = extensions.ExtensionsResource(self)
         self.events = events.EventsResource(self)
         self.batch_sessions = batch_sessions.BatchSessionsResource(self)
+        self.task = task.TaskResource(self)
         self.with_raw_response = AnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AnchorbrowserWithStreamedResponse(self)
 
@@ -228,6 +231,7 @@ class AsyncAnchorbrowser(AsyncAPIClient):
     extensions: extensions.AsyncExtensionsResource
     events: events.AsyncEventsResource
     batch_sessions: batch_sessions.AsyncBatchSessionsResource
+    task: task.AsyncTaskResource
     with_raw_response: AsyncAnchorbrowserWithRawResponse
     with_streaming_response: AsyncAnchorbrowserWithStreamedResponse
 
@@ -291,6 +295,7 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         self.extensions = extensions.AsyncExtensionsResource(self)
         self.events = events.AsyncEventsResource(self)
         self.batch_sessions = batch_sessions.AsyncBatchSessionsResource(self)
+        self.task = task.AsyncTaskResource(self)
         self.with_raw_response = AsyncAnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AsyncAnchorbrowserWithStreamedResponse(self)
 
@@ -407,6 +412,7 @@ class AnchorbrowserWithRawResponse:
         self.extensions = extensions.ExtensionsResourceWithRawResponse(client.extensions)
         self.events = events.EventsResourceWithRawResponse(client.events)
         self.batch_sessions = batch_sessions.BatchSessionsResourceWithRawResponse(client.batch_sessions)
+        self.task = task.TaskResourceWithRawResponse(client.task)
 
 
 class AsyncAnchorbrowserWithRawResponse:
@@ -417,6 +423,7 @@ class AsyncAnchorbrowserWithRawResponse:
         self.extensions = extensions.AsyncExtensionsResourceWithRawResponse(client.extensions)
         self.events = events.AsyncEventsResourceWithRawResponse(client.events)
         self.batch_sessions = batch_sessions.AsyncBatchSessionsResourceWithRawResponse(client.batch_sessions)
+        self.task = task.AsyncTaskResourceWithRawResponse(client.task)
 
 
 class AnchorbrowserWithStreamedResponse:
@@ -427,6 +434,7 @@ class AnchorbrowserWithStreamedResponse:
         self.extensions = extensions.ExtensionsResourceWithStreamingResponse(client.extensions)
         self.events = events.EventsResourceWithStreamingResponse(client.events)
         self.batch_sessions = batch_sessions.BatchSessionsResourceWithStreamingResponse(client.batch_sessions)
+        self.task = task.TaskResourceWithStreamingResponse(client.task)
 
 
 class AsyncAnchorbrowserWithStreamedResponse:
@@ -437,6 +445,7 @@ class AsyncAnchorbrowserWithStreamedResponse:
         self.extensions = extensions.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
         self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
         self.batch_sessions = batch_sessions.AsyncBatchSessionsResourceWithStreamingResponse(client.batch_sessions)
+        self.task = task.AsyncTaskResourceWithStreamingResponse(client.task)
 
 
 Client = Anchorbrowser

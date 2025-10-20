@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 from .shared import SuccessResponse as SuccessResponse
+from .task_list_params import TaskListParams as TaskListParams
 from .extension_manifest import ExtensionManifest as ExtensionManifest
+from .task_create_params import TaskCreateParams as TaskCreateParams
+from .task_list_response import TaskListResponse as TaskListResponse
 from .event_signal_params import EventSignalParams as EventSignalParams
 from .session_goto_params import SessionGotoParams as SessionGotoParams
 from .session_paste_params import SessionPasteParams as SessionPasteParams
+from .task_create_response import TaskCreateResponse as TaskCreateResponse
 from .event_wait_for_params import EventWaitForParams as EventWaitForParams
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_list_response import ProfileListResponse as ProfileListResponse
