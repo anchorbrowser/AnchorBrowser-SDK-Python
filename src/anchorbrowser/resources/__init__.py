@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .task import (
+    TaskResource,
+    AsyncTaskResource,
+    TaskResourceWithRawResponse,
+    AsyncTaskResourceWithRawResponse,
+    TaskResourceWithStreamingResponse,
+    AsyncTaskResourceWithStreamingResponse,
+)
 from .tools import (
     ToolsResource,
     AsyncToolsResource,
@@ -86,4 +94,10 @@ __all__ = [
     "AsyncBatchSessionsResourceWithRawResponse",
     "BatchSessionsResourceWithStreamingResponse",
     "AsyncBatchSessionsResourceWithStreamingResponse",
+    "TaskResource",
+    "AsyncTaskResource",
+    "TaskResourceWithRawResponse",
+    "AsyncTaskResourceWithRawResponse",
+    "TaskResourceWithStreamingResponse",
+    "AsyncTaskResourceWithStreamingResponse",
 ]
