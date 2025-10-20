@@ -2,13 +2,9 @@
 
 from __future__ import annotations
 
-from .mouse_up_params import MouseUpParams as MouseUpParams
-from .mouse_down_params import MouseDownParams as MouseDownParams
 from .mouse_move_params import MouseMoveParams as MouseMoveParams
-from .mouse_up_response import MouseUpResponse as MouseUpResponse
 from .mouse_click_params import MouseClickParams as MouseClickParams
 from .all_status_response import AllStatusResponse as AllStatusResponse
-from .mouse_down_response import MouseDownResponse as MouseDownResponse
 from .mouse_move_response import MouseMoveResponse as MouseMoveResponse
 from .clipboard_set_params import ClipboardSetParams as ClipboardSetParams
 from .keyboard_type_params import KeyboardTypeParams as KeyboardTypeParams

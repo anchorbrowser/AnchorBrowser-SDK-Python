@@ -98,9 +98,7 @@ Types:
 from anchorbrowser.types.sessions import (
     MouseClickResponse,
     MouseDoubleClickResponse,
-    MouseDownResponse,
     MouseMoveResponse,
-    MouseUpResponse,
 )
 ```
 
@@ -108,9 +106,7 @@ Methods:
 
 - <code title="post /v1/sessions/{sessionId}/mouse/click">client.sessions.mouse.<a href="./src/anchorbrowser/resources/sessions/mouse.py">click</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/mouse_click_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/mouse_click_response.py">MouseClickResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/mouse/doubleClick">client.sessions.mouse.<a href="./src/anchorbrowser/resources/sessions/mouse.py">double_click</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/mouse_double_click_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/mouse_double_click_response.py">MouseDoubleClickResponse</a></code>
-- <code title="post /v1/sessions/{sessionId}/mouse/down">client.sessions.mouse.<a href="./src/anchorbrowser/resources/sessions/mouse.py">down</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/mouse_down_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/mouse_down_response.py">MouseDownResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/mouse/move">client.sessions.mouse.<a href="./src/anchorbrowser/resources/sessions/mouse.py">move</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/mouse_move_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/mouse_move_response.py">MouseMoveResponse</a></code>
-- <code title="post /v1/sessions/{sessionId}/mouse/up">client.sessions.mouse.<a href="./src/anchorbrowser/resources/sessions/mouse.py">up</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/mouse_up_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/mouse_up_response.py">MouseUpResponse</a></code>
 
 ## Keyboard
 
@@ -218,21 +214,3 @@ Methods:
 
 - <code title="post /v1/batch-sessions">client.batch_sessions.<a href="./src/anchorbrowser/resources/batch_sessions.py">create</a>(\*\*<a href="src/anchorbrowser/types/batch_session_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/batch_session_create_response.py">BatchSessionCreateResponse</a></code>
 - <code title="get /v1/batch-sessions/{batch_id}">client.batch_sessions.<a href="./src/anchorbrowser/resources/batch_sessions.py">retrieve</a>(batch_id) -> <a href="./src/anchorbrowser/types/batch_session_retrieve_response.py">BatchSessionRetrieveResponse</a></code>
-
-# Integrations
-
-Types:
-
-```python
-from anchorbrowser.types import (
-    IntegrationCreateResponse,
-    IntegrationListResponse,
-    IntegrationDeleteResponse,
-)
-```
-
-Methods:
-
-- <code title="post /v1/integrations">client.integrations.<a href="./src/anchorbrowser/resources/integrations.py">create</a>(\*\*<a href="src/anchorbrowser/types/integration_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/integration_create_response.py">IntegrationCreateResponse</a></code>
-- <code title="get /v1/integrations">client.integrations.<a href="./src/anchorbrowser/resources/integrations.py">list</a>() -> <a href="./src/anchorbrowser/types/integration_list_response.py">IntegrationListResponse</a></code>
-- <code title="delete /v1/integrations/{integrationId}">client.integrations.<a href="./src/anchorbrowser/resources/integrations.py">delete</a>(integration_id) -> <a href="./src/anchorbrowser/types/integration_delete_response.py">IntegrationDeleteResponse</a></code>

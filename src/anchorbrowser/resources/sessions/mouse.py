@@ -17,15 +17,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.sessions import (
-    mouse_up_params,
-    mouse_down_params,
-    mouse_move_params,
-    mouse_click_params,
-    mouse_double_click_params,
-)
-from ...types.sessions.mouse_up_response import MouseUpResponse
-from ...types.sessions.mouse_down_response import MouseDownResponse
+from ...types.sessions import mouse_move_params, mouse_click_params, mouse_double_click_params
 from ...types.sessions.mouse_move_response import MouseMoveResponse
 from ...types.sessions.mouse_click_response import MouseClickResponse
 from ...types.sessions.mouse_double_click_response import MouseDoubleClickResponse
@@ -153,56 +145,6 @@ class MouseResource(SyncAPIResource):
             cast_to=MouseDoubleClickResponse,
         )
 
-    def down(
-        self,
-        session_id: str,
-        *,
-        x: int,
-        y: int,
-        button: Literal["left", "middle", "right"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MouseDownResponse:
-        """
-        Performs a mouse button down action at the specified coordinates
-
-        Args:
-          x: X coordinate
-
-          y: Y coordinate
-
-          button: Mouse button to use
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return self._post(
-            f"/v1/sessions/{session_id}/mouse/down",
-            body=maybe_transform(
-                {
-                    "x": x,
-                    "y": y,
-                    "button": button,
-                },
-                mouse_down_params.MouseDownParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=MouseDownResponse,
-        )
-
     def move(
         self,
         session_id: str,
@@ -247,56 +189,6 @@ class MouseResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MouseMoveResponse,
-        )
-
-    def up(
-        self,
-        session_id: str,
-        *,
-        x: int,
-        y: int,
-        button: Literal["left", "middle", "right"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MouseUpResponse:
-        """
-        Performs a mouse button up action at the specified coordinates
-
-        Args:
-          x: X coordinate
-
-          y: Y coordinate
-
-          button: Mouse button to use
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return self._post(
-            f"/v1/sessions/{session_id}/mouse/up",
-            body=maybe_transform(
-                {
-                    "x": x,
-                    "y": y,
-                    "button": button,
-                },
-                mouse_up_params.MouseUpParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=MouseUpResponse,
         )
 
 
@@ -420,56 +312,6 @@ class AsyncMouseResource(AsyncAPIResource):
             cast_to=MouseDoubleClickResponse,
         )
 
-    async def down(
-        self,
-        session_id: str,
-        *,
-        x: int,
-        y: int,
-        button: Literal["left", "middle", "right"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MouseDownResponse:
-        """
-        Performs a mouse button down action at the specified coordinates
-
-        Args:
-          x: X coordinate
-
-          y: Y coordinate
-
-          button: Mouse button to use
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return await self._post(
-            f"/v1/sessions/{session_id}/mouse/down",
-            body=await async_maybe_transform(
-                {
-                    "x": x,
-                    "y": y,
-                    "button": button,
-                },
-                mouse_down_params.MouseDownParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=MouseDownResponse,
-        )
-
     async def move(
         self,
         session_id: str,
@@ -516,56 +358,6 @@ class AsyncMouseResource(AsyncAPIResource):
             cast_to=MouseMoveResponse,
         )
 
-    async def up(
-        self,
-        session_id: str,
-        *,
-        x: int,
-        y: int,
-        button: Literal["left", "middle", "right"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MouseUpResponse:
-        """
-        Performs a mouse button up action at the specified coordinates
-
-        Args:
-          x: X coordinate
-
-          y: Y coordinate
-
-          button: Mouse button to use
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return await self._post(
-            f"/v1/sessions/{session_id}/mouse/up",
-            body=await async_maybe_transform(
-                {
-                    "x": x,
-                    "y": y,
-                    "button": button,
-                },
-                mouse_up_params.MouseUpParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=MouseUpResponse,
-        )
-
 
 class MouseResourceWithRawResponse:
     def __init__(self, mouse: MouseResource) -> None:
@@ -577,14 +369,8 @@ class MouseResourceWithRawResponse:
         self.double_click = to_raw_response_wrapper(
             mouse.double_click,
         )
-        self.down = to_raw_response_wrapper(
-            mouse.down,
-        )
         self.move = to_raw_response_wrapper(
             mouse.move,
-        )
-        self.up = to_raw_response_wrapper(
-            mouse.up,
         )
 
 
@@ -598,14 +384,8 @@ class AsyncMouseResourceWithRawResponse:
         self.double_click = async_to_raw_response_wrapper(
             mouse.double_click,
         )
-        self.down = async_to_raw_response_wrapper(
-            mouse.down,
-        )
         self.move = async_to_raw_response_wrapper(
             mouse.move,
-        )
-        self.up = async_to_raw_response_wrapper(
-            mouse.up,
         )
 
 
@@ -619,14 +399,8 @@ class MouseResourceWithStreamingResponse:
         self.double_click = to_streamed_response_wrapper(
             mouse.double_click,
         )
-        self.down = to_streamed_response_wrapper(
-            mouse.down,
-        )
         self.move = to_streamed_response_wrapper(
             mouse.move,
-        )
-        self.up = to_streamed_response_wrapper(
-            mouse.up,
         )
 
 
@@ -640,12 +414,6 @@ class AsyncMouseResourceWithStreamingResponse:
         self.double_click = async_to_streamed_response_wrapper(
             mouse.double_click,
         )
-        self.down = async_to_streamed_response_wrapper(
-            mouse.down,
-        )
         self.move = async_to_streamed_response_wrapper(
             mouse.move,
-        )
-        self.up = async_to_streamed_response_wrapper(
-            mouse.up,
         )
