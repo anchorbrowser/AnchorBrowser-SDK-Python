@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.2.0 (2025-10-20)
+
+Full Changelog: [v0.1.1...v0.2.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.1...v0.2.0)
+
+### Features
+
+* added batch and cursor rules ([db09e9b](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/db09e9b9fb753744809924e7b7eab822055c4b38))
+* **api:** manual updates ([5847952](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/58479526f72df0bb37f42957243b416418e4f0d8))
+* Bro 908 1 password integration 2 ([a63dc90](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/a63dc908ecf9de43296b3143574b756b6c94089e))
+* BRO-959 us as default proxy country code ([a3d9294](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/a3d9294f0d20e07f49386dd07e8d8344a32d1d10))
+* BRO-976 docs: add extra_stealth to openai and sdk ([d7aea94](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/d7aea94bd209bbafc08777a022203f8ab89697e3))
+
+
+### Bug Fixes
+
+* agent pause resume is back ([77d8397](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/77d8397b3742e77faacb39b89682d4fabaeb7ed1))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([316d40e](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/316d40e4bb48b4c6b2a38afd75b7c855fc80f126))
+
 ## 0.1.1 (2025-10-11)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.0...v0.1.1)
