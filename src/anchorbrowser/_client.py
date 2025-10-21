@@ -29,7 +29,7 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.task import task
+from .resources import task
 from .resources.sessions import sessions
 
 __all__ = [

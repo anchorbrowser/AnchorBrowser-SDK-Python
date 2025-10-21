@@ -6,14 +6,8 @@ from typing_extensions import Literal
 
 import httpx
 
-from .run import (
-    RunResource,
-    AsyncRunResource,
-    RunResourceWithRawResponse,
-    AsyncRunResourceWithRawResponse,
-    RunResourceWithStreamingResponse,
-    AsyncRunResourceWithStreamingResponse,
-)
+from ...types.task import run_execute_params
+from ...types.task.run_execute_response import RunExecuteResponse
 from ...types import task_list_params, task_create_params
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
@@ -33,10 +27,6 @@ __all__ = ["TaskResource", "AsyncTaskResource"]
 
 
 class TaskResource(SyncAPIResource):
-    @cached_property
-    def run(self) -> RunResource:
-        return RunResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> TaskResourceWithRawResponse:
         """
@@ -162,12 +152,70 @@ class TaskResource(SyncAPIResource):
             cast_to=TaskListResponse,
         )
 
+    def run(
+        self,
+        *,
+        task_id: str,
+        inputs: Dict[str, str] | Omit = omit,
+        override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
+        session_id: str | Omit = omit,
+        task_session_id: str | Omit = omit,
+        version: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunExecuteResponse:
+        """Executes a task in a browser session.
+
+        The task can be run with a specific
+        version or the latest version. Optionally, you can provide an existing session
+        ID or let the system create a new one.
+
+        Args:
+          task_id: Task identifier
+
+          inputs: Environment variables for task execution (keys must start with ANCHOR\\__)
+
+          override_browser_configuration: Override browser configuration for this execution
+
+          session_id: Optional existing session ID to use
+
+          task_session_id: Optional task-specific session ID
+
+          version: Version to run (draft, latest, or version number)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/task/run",
+            body=maybe_transform(
+                {
+                    "task_id": task_id,
+                    "inputs": inputs,
+                    "override_browser_configuration": override_browser_configuration,
+                    "session_id": session_id,
+                    "task_session_id": task_session_id,
+                    "version": version,
+                },
+                run_execute_params.RunExecuteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunExecuteResponse,
+        )
+
 
 class AsyncTaskResource(AsyncAPIResource):
-    @cached_property
-    def run(self) -> AsyncRunResource:
-        return AsyncRunResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> AsyncTaskResourceWithRawResponse:
         """
@@ -293,6 +341,68 @@ class AsyncTaskResource(AsyncAPIResource):
             cast_to=TaskListResponse,
         )
 
+    async def run(
+        self,
+        *,
+        task_id: str,
+        inputs: Dict[str, str] | Omit = omit,
+        override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
+        session_id: str | Omit = omit,
+        task_session_id: str | Omit = omit,
+        version: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunExecuteResponse:
+        """Executes a task in a browser session.
+
+        The task can be run with a specific
+        version or the latest version. Optionally, you can provide an existing session
+        ID or let the system create a new one.
+
+        Args:
+          task_id: Task identifier
+
+          inputs: Environment variables for task execution (keys must start with ANCHOR\\__)
+
+          override_browser_configuration: Override browser configuration for this execution
+
+          session_id: Optional existing session ID to use
+
+          task_session_id: Optional task-specific session ID
+
+          version: Version to run (draft, latest, or version number)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/task/run",
+            body=await async_maybe_transform(
+                {
+                    "task_id": task_id,
+                    "inputs": inputs,
+                    "override_browser_configuration": override_browser_configuration,
+                    "session_id": session_id,
+                    "task_session_id": task_session_id,
+                    "version": version,
+                },
+                run_execute_params.RunExecuteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunExecuteResponse,
+        )
+
 
 class TaskResourceWithRawResponse:
     def __init__(self, task: TaskResource) -> None:
@@ -304,10 +414,9 @@ class TaskResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             task.list,
         )
-
-    @cached_property
-    def run(self) -> RunResourceWithRawResponse:
-        return RunResourceWithRawResponse(self._task.run)
+        self.run = to_raw_response_wrapper(
+            task.run,
+        )
 
 
 class AsyncTaskResourceWithRawResponse:
@@ -320,10 +429,9 @@ class AsyncTaskResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             task.list,
         )
-
-    @cached_property
-    def run(self) -> AsyncRunResourceWithRawResponse:
-        return AsyncRunResourceWithRawResponse(self._task.run)
+        self.run = async_to_raw_response_wrapper(
+            task.run,
+        )
 
 
 class TaskResourceWithStreamingResponse:
@@ -336,10 +444,9 @@ class TaskResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             task.list,
         )
-
-    @cached_property
-    def run(self) -> RunResourceWithStreamingResponse:
-        return RunResourceWithStreamingResponse(self._task.run)
+        self.run = to_streamed_response_wrapper(
+            task.run,
+        )
 
 
 class AsyncTaskResourceWithStreamingResponse:
@@ -352,7 +459,6 @@ class AsyncTaskResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             task.list,
         )
-
-    @cached_property
-    def run(self) -> AsyncRunResourceWithStreamingResponse:
-        return AsyncRunResourceWithStreamingResponse(self._task.run)
+        self.run = async_to_streamed_response_wrapper(
+            task.run,
+        )
