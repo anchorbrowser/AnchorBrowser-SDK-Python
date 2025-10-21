@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import agent, tools, events, browser, profiles, extensions, batch_sessions
+from .resources import task, agent, tools, events, browser, profiles, extensions, batch_sessions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
@@ -29,7 +29,6 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources import task
 from .resources.sessions import sessions
 
 __all__ = [
