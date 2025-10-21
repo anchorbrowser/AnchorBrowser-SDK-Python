@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.3.0 (2025-10-21)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.2.0...v0.3.0)
+
+### ⚠ BREAKING CHANGES
+
+* **python:** Use `client.task.run()` instead of `client.task.run.execute()`
+
+### Features
+
+* **python:** move task.run.execute() to task.run() ([7d19ce5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/7d19ce588df9a75d38fc0e53472b126c1b71112c))
+
+
+### Bug Fixes
+
+* reorganize task tests ([c9621f8](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/c9621f84d08522a8aa04bafda00893a026355979))
+* resolve linting errors ([b2e73c8](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/b2e73c8a22b11cb5f4624b6ed3a6687cd9265bc7))
+* resolve linting errors1 ([4544a64](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/4544a6435773a443fdb360e2647762224ac3c50b))
+* resolve linting errors2 ([0405baa](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/0405baa1fb7fb666fe5144e7a5762224cdea6cff))
+
 ## 0.2.0 (2025-10-20)
 
 Full Changelog: [v0.1.1...v0.2.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.1.1...v0.2.0)
