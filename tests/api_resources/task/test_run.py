@@ -20,7 +20,7 @@ class TestRun:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_execute(self, client: Anchorbrowser) -> None:
-        run = client.task.run.execute(
+        run = client.task.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
         )
         assert_matches_type(RunExecuteResponse, run, path=["response"])
@@ -28,7 +28,7 @@ class TestRun:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_execute_with_all_params(self, client: Anchorbrowser) -> None:
-        run = client.task.run.execute(
+        run = client.task.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
             inputs={
                 "ANCHOR_TARGET_URL": "https://example.com",
@@ -59,7 +59,7 @@ class TestRun:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_execute(self, client: Anchorbrowser) -> None:
-        response = client.task.run.with_raw_response.execute(
+        response = client.task.run.with_raw_response.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
         )
 
@@ -71,7 +71,7 @@ class TestRun:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_execute(self, client: Anchorbrowser) -> None:
-        with client.task.run.with_streaming_response.execute(
+        with client.task.run.with_streaming_response.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
         ) as response:
             assert not response.is_closed
@@ -91,7 +91,7 @@ class TestAsyncRun:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_execute(self, async_client: AsyncAnchorbrowser) -> None:
-        run = await async_client.task.run.execute(
+        run = await async_client.task.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
         )
         assert_matches_type(RunExecuteResponse, run, path=["response"])
@@ -99,7 +99,7 @@ class TestAsyncRun:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_execute_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
-        run = await async_client.task.run.execute(
+        run = await async_client.task.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
             inputs={
                 "ANCHOR_TARGET_URL": "https://example.com",
@@ -130,7 +130,7 @@ class TestAsyncRun:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_execute(self, async_client: AsyncAnchorbrowser) -> None:
-        response = await async_client.task.run.with_raw_response.execute(
+        response = await async_client.task.run.with_raw_response.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
         )
 
@@ -142,7 +142,7 @@ class TestAsyncRun:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_execute(self, async_client: AsyncAnchorbrowser) -> None:
-        async with async_client.task.run.with_streaming_response.execute(
+        async with async_client.task.run.with_streaming_response.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
         ) as response:
             assert not response.is_closed
