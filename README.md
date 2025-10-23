@@ -32,10 +32,10 @@ client = Anchorbrowser(
     api_key=os.environ.get("ANCHORBROWSER_API_KEY"),  # This is the default and can be omitted
 )
 
-success_response = client.profiles.create(
-    name="REPLACE_ME",
+session = client.sessions.create(
+    session={"recording": {"active": False}},
 )
-print(success_response.data)
+print(session.data)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -58,10 +58,10 @@ client = AsyncAnchorbrowser(
 
 
 async def main() -> None:
-    success_response = await client.profiles.create(
-        name="REPLACE_ME",
+    session = await client.sessions.create(
+        session={"recording": {"active": False}},
     )
-    print(success_response.data)
+    print(session.data)
 
 
 asyncio.run(main())
@@ -93,10 +93,10 @@ async def main() -> None:
         api_key="Your API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        success_response = await client.profiles.create(
-            name="REPLACE_ME",
+        session = await client.sessions.create(
+            session={"recording": {"active": False}},
         )
-        print(success_response.data)
+        print(session.data)
 
 
 asyncio.run(main())
@@ -160,8 +160,8 @@ from anchorbrowser import Anchorbrowser
 client = Anchorbrowser()
 
 try:
-    client.profiles.create(
-        name="REPLACE_ME",
+    client.sessions.create(
+        session={"recording": {"active": False}},
     )
 except anchorbrowser.APIConnectionError as e:
     print("The server could not be reached")
@@ -205,8 +205,8 @@ client = Anchorbrowser(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).profiles.create(
-    name="REPLACE_ME",
+client.with_options(max_retries=5).sessions.create(
+    session={"recording": {"active": False}},
 )
 ```
 
@@ -230,8 +230,8 @@ client = Anchorbrowser(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).profiles.create(
-    name="REPLACE_ME",
+client.with_options(timeout=5.0).sessions.create(
+    session={"recording": {"active": False}},
 )
 ```
 
@@ -273,13 +273,17 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from anchorbrowser import Anchorbrowser
 
 client = Anchorbrowser()
-response = client.profiles.with_raw_response.create(
-    name="REPLACE_ME",
+response = client.sessions.with_raw_response.create(
+    session={
+        "recording": {
+            "active": False
+        }
+    },
 )
 print(response.headers.get('X-My-Header'))
 
-profile = response.parse()  # get the object that `profiles.create()` would have returned
-print(profile.data)
+session = response.parse()  # get the object that `sessions.create()` would have returned
+print(session.data)
 ```
 
 These methods return an [`APIResponse`](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/tree/main/src/anchorbrowser/_response.py) object.
@@ -293,8 +297,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.profiles.with_streaming_response.create(
-    name="REPLACE_ME",
+with client.sessions.with_streaming_response.create(
+    session={"recording": {"active": False}},
 ) as response:
     print(response.headers.get("X-My-Header"))
 
