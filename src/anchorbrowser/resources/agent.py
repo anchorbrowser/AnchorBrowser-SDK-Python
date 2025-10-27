@@ -72,15 +72,47 @@ class AgentResource(SyncAPIResource):
             api_key=self._client.api_key,
         ) as browser_setup:
             output_schema = None
+            url = None
+            agent = None
+            highlight_elements = None
+            model = None
+            provider = None
+            detect_elements = None
+            extended_system_message = None
+            human_intervention = None
+            max_steps = None
+            secret_values = None
             if task_options:
                 output_schema = task_options.get("output_schema")
                 url = task_options.get("url")
+                agent = task_options.get("agent")
+                highlight_elements = task_options.get("highlight_elements")
+                model = task_options.get("model")
+                provider = task_options.get("provider")
+                detect_elements = task_options.get("detect_elements")
+                extended_system_message = task_options.get("extended_system_message")
+                human_intervention = task_options.get("human_intervention")
+                max_steps = task_options.get("max_steps")
+                secret_values = task_options.get("secret_values")
+                
                 if url:
                     browser_setup.page.goto(url)
                 on_agent_step = task_options.get("on_agent_step")
                 if on_agent_step:
                     on_agent_step_sync(on_agent_step, browser_setup)
-            task_payload = create_task_payload(prompt, output_schema)
+            task_payload = create_task_payload(
+                prompt,
+                output_schema=output_schema,
+                agent=agent,
+                highlight_elements=highlight_elements,
+                model=model,
+                provider=provider,
+                detect_elements=detect_elements,
+                extended_system_message=extended_system_message,
+                human_intervention=human_intervention,
+                max_steps=max_steps,
+                secret_values=secret_values,
+            )
             task_result = str(browser_setup.ai.evaluate(task_payload))
             return task_result
 
@@ -121,15 +153,47 @@ class AgentResource(SyncAPIResource):
             api_key=self._client.api_key,
         ) as browser_setup:
             output_schema = None
+            url = None
+            agent = None
+            highlight_elements = None
+            model = None
+            provider = None
+            detect_elements = None
+            extended_system_message = None
+            human_intervention = None
+            max_steps = None
+            secret_values = None
             if task_options:
                 output_schema = task_options.get("output_schema")
                 url = task_options.get("url")
+                agent = task_options.get("agent")
+                highlight_elements = task_options.get("highlight_elements")
+                model = task_options.get("model")
+                provider = task_options.get("provider")
+                detect_elements = task_options.get("detect_elements")
+                extended_system_message = task_options.get("extended_system_message")
+                human_intervention = task_options.get("human_intervention")
+                max_steps = task_options.get("max_steps")
+                secret_values = task_options.get("secret_values")
+                
                 if url:
                     browser_setup.page.goto(url)
                 on_agent_step = task_options.get("on_agent_step")
                 if on_agent_step:
                     on_agent_step_sync(on_agent_step, browser_setup)
-            task_payload = create_task_payload(prompt, output_schema)
+            task_payload = create_task_payload(
+                prompt,
+                output_schema=output_schema,
+                agent=agent,
+                highlight_elements=highlight_elements,
+                model=model,
+                provider=provider,
+                detect_elements=detect_elements,
+                extended_system_message=extended_system_message,
+                human_intervention=human_intervention,
+                max_steps=max_steps,
+                secret_values=secret_values,
+            )
             task_result = str(browser_setup.ai.evaluate(task_payload))
             return BrowserTaskResponse(
                 session_id=session.data.id,
@@ -191,15 +255,47 @@ class AsyncAgentResource(AsyncAPIResource):
 
         async with browser_setup:
             output_schema = None
+            url = None
+            agent = None
+            highlight_elements = None
+            model = None
+            provider = None
+            detect_elements = None
+            extended_system_message = None
+            human_intervention = None
+            max_steps = None
+            secret_values = None
             if task_options:
                 output_schema = task_options.get("output_schema")
                 url = task_options.get("url")
+                agent = task_options.get("agent")
+                highlight_elements = task_options.get("highlight_elements")
+                model = task_options.get("model")
+                provider = task_options.get("provider")
+                detect_elements = task_options.get("detect_elements")
+                extended_system_message = task_options.get("extended_system_message")
+                human_intervention = task_options.get("human_intervention")
+                max_steps = task_options.get("max_steps")
+                secret_values = task_options.get("secret_values")
+                
                 if url:
                     await (await browser_setup.async_page).goto(url)
                 on_agent_step = task_options.get("on_agent_step")
                 if on_agent_step:
                     on_agent_step_async(on_agent_step, browser_setup)
-            task_payload = create_task_payload(prompt, output_schema)
+            task_payload = create_task_payload(
+                prompt,
+                output_schema=output_schema,
+                agent=agent,
+                highlight_elements=highlight_elements,
+                model=model,
+                provider=provider,
+                detect_elements=detect_elements,
+                extended_system_message=extended_system_message,
+                human_intervention=human_intervention,
+                max_steps=max_steps,
+                secret_values=secret_values,
+            )
             task_result = await (await browser_setup.async_ai).evaluate(task_payload)
             return str(task_result)
 
@@ -240,15 +336,47 @@ class AsyncAgentResource(AsyncAPIResource):
             api_key=self._client.api_key,
         ) as browser_setup:
             output_schema = None
+            url = None
+            agent = None
+            highlight_elements = None
+            model = None
+            provider = None
+            detect_elements = None
+            extended_system_message = None
+            human_intervention = None
+            max_steps = None
+            secret_values = None
             if task_options:
                 output_schema = task_options.get("output_schema")
                 url = task_options.get("url")
+                agent = task_options.get("agent")
+                highlight_elements = task_options.get("highlight_elements")
+                model = task_options.get("model")
+                provider = task_options.get("provider")
+                detect_elements = task_options.get("detect_elements")
+                extended_system_message = task_options.get("extended_system_message")
+                human_intervention = task_options.get("human_intervention")
+                max_steps = task_options.get("max_steps")
+                secret_values = task_options.get("secret_values")
+                
                 if url:
                     await (await browser_setup.async_page).goto(url)
                 on_agent_step = task_options.get("on_agent_step")
                 if on_agent_step:
                     on_agent_step_async(on_agent_step, browser_setup)
-            task_payload = create_task_payload(prompt, output_schema)
+            task_payload = create_task_payload(
+                prompt,
+                output_schema=output_schema,
+                agent=agent,
+                highlight_elements=highlight_elements,
+                model=model,
+                provider=provider,
+                detect_elements=detect_elements,
+                extended_system_message=extended_system_message,
+                human_intervention=human_intervention,
+                max_steps=max_steps,
+                secret_values=secret_values,
+            )
             task_result = await (await browser_setup.async_ai).evaluate(task_payload)
             return BrowserTaskResponse(
                 session_id=session.data.id,

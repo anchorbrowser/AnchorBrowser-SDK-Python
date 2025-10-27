@@ -178,6 +178,15 @@ class AgentTaskParams(TypedDict, total=False):
     url: Optional[str]
     output_schema: Optional[Dict[str, Any]]
     on_agent_step: Optional[Callable[[str], None]]
+    agent: Optional[str]
+    highlight_elements: Optional[bool]
+    model: Optional[str]
+    provider: Optional[str]
+    detect_elements: Optional[bool]
+    extended_system_message: Optional[str]
+    human_intervention: Optional[bool]
+    max_steps: Optional[int]
+    secret_values: Optional[Dict[str, Any]]
 
 
 class BrowserTaskResponse(TypedDict):
