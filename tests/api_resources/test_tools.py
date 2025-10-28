@@ -84,10 +84,14 @@ class TestTools:
             prompt="prompt",
             session_id="sessionId",
             agent="browser-use",
+            detect_elements=True,
             highlight_elements=True,
+            human_intervention=True,
+            max_steps=0,
             model="model",
             output_schema={},
             provider="openai",
+            secret_values={"foo": "string"},
             url="url",
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
@@ -237,10 +241,14 @@ class TestAsyncTools:
             prompt="prompt",
             session_id="sessionId",
             agent="browser-use",
+            detect_elements=True,
             highlight_elements=True,
+            human_intervention=True,
+            max_steps=0,
             model="model",
             output_schema={},
             provider="openai",
+            secret_values={"foo": "string"},
             url="url",
         )
         assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])

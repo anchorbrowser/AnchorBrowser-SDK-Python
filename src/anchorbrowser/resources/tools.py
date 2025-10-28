@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Dict
 from typing_extensions import Literal
 
 import httpx
@@ -128,10 +129,14 @@ class ToolsResource(SyncAPIResource):
         prompt: str,
         session_id: str | Omit = omit,
         agent: Literal["browser-use", "openai-cua"] | Omit = omit,
+        detect_elements: bool | Omit = omit,
         highlight_elements: bool | Omit = omit,
+        human_intervention: bool | Omit = omit,
+        max_steps: int | Omit = omit,
         model: str | Omit = omit,
         output_schema: object | Omit = omit,
         provider: Literal["openai", "gemini", "groq", "azure", "xai"] | Omit = omit,
+        secret_values: Dict[str, str] | Omit = omit,
         url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -152,7 +157,15 @@ class ToolsResource(SyncAPIResource):
 
           agent: The AI agent to use for task completion. Defaults to browser-use.
 
+          detect_elements: Enable element detection for better interaction accuracy. Improves the agent's
+              ability to identify and interact with UI elements.
+
           highlight_elements: Whether to highlight elements during task execution for better visibility.
+
+          human_intervention: Allow human intervention during task execution. When enabled, the agent can
+              request human input for ambiguous situations.
+
+          max_steps: Maximum number of steps the agent can take to complete the task. Defaults to 25.
 
           model: The specific model to use for task completion. see our
               [models](/agentic-browser-control/ai-task-completion#available-models) page for
@@ -161,6 +174,9 @@ class ToolsResource(SyncAPIResource):
           output_schema: JSON Schema defining the expected structure of the output data.
 
           provider: The AI provider to use for task completion.
+
+          secret_values: Secret values to pass to the agent for secure credential handling. Keys and
+              values are passed as environment variables to the agent.
 
           url: The URL of the webpage. If not provided, the tool will use the current page in
               the session.
@@ -179,10 +195,14 @@ class ToolsResource(SyncAPIResource):
                 {
                     "prompt": prompt,
                     "agent": agent,
+                    "detect_elements": detect_elements,
                     "highlight_elements": highlight_elements,
+                    "human_intervention": human_intervention,
+                    "max_steps": max_steps,
                     "model": model,
                     "output_schema": output_schema,
                     "provider": provider,
+                    "secret_values": secret_values,
                     "url": url,
                 },
                 tool_perform_web_task_params.ToolPerformWebTaskParams,
@@ -381,10 +401,14 @@ class AsyncToolsResource(AsyncAPIResource):
         prompt: str,
         session_id: str | Omit = omit,
         agent: Literal["browser-use", "openai-cua"] | Omit = omit,
+        detect_elements: bool | Omit = omit,
         highlight_elements: bool | Omit = omit,
+        human_intervention: bool | Omit = omit,
+        max_steps: int | Omit = omit,
         model: str | Omit = omit,
         output_schema: object | Omit = omit,
         provider: Literal["openai", "gemini", "groq", "azure", "xai"] | Omit = omit,
+        secret_values: Dict[str, str] | Omit = omit,
         url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -405,7 +429,15 @@ class AsyncToolsResource(AsyncAPIResource):
 
           agent: The AI agent to use for task completion. Defaults to browser-use.
 
+          detect_elements: Enable element detection for better interaction accuracy. Improves the agent's
+              ability to identify and interact with UI elements.
+
           highlight_elements: Whether to highlight elements during task execution for better visibility.
+
+          human_intervention: Allow human intervention during task execution. When enabled, the agent can
+              request human input for ambiguous situations.
+
+          max_steps: Maximum number of steps the agent can take to complete the task. Defaults to 25.
 
           model: The specific model to use for task completion. see our
               [models](/agentic-browser-control/ai-task-completion#available-models) page for
@@ -414,6 +446,9 @@ class AsyncToolsResource(AsyncAPIResource):
           output_schema: JSON Schema defining the expected structure of the output data.
 
           provider: The AI provider to use for task completion.
+
+          secret_values: Secret values to pass to the agent for secure credential handling. Keys and
+              values are passed as environment variables to the agent.
 
           url: The URL of the webpage. If not provided, the tool will use the current page in
               the session.
@@ -432,10 +467,14 @@ class AsyncToolsResource(AsyncAPIResource):
                 {
                     "prompt": prompt,
                     "agent": agent,
+                    "detect_elements": detect_elements,
                     "highlight_elements": highlight_elements,
+                    "human_intervention": human_intervention,
+                    "max_steps": max_steps,
                     "model": model,
                     "output_schema": output_schema,
                     "provider": provider,
+                    "secret_values": secret_values,
                     "url": url,
                 },
                 tool_perform_web_task_params.ToolPerformWebTaskParams,

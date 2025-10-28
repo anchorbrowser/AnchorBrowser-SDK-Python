@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Dict
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -23,8 +24,26 @@ class ToolPerformWebTaskParams(TypedDict, total=False):
     agent: Literal["browser-use", "openai-cua"]
     """The AI agent to use for task completion. Defaults to browser-use."""
 
+    detect_elements: bool
+    """Enable element detection for better interaction accuracy.
+
+    Improves the agent's ability to identify and interact with UI elements.
+    """
+
     highlight_elements: bool
     """Whether to highlight elements during task execution for better visibility."""
+
+    human_intervention: bool
+    """Allow human intervention during task execution.
+
+    When enabled, the agent can request human input for ambiguous situations.
+    """
+
+    max_steps: int
+    """Maximum number of steps the agent can take to complete the task.
+
+    Defaults to 25.
+    """
 
     model: str
     """The specific model to use for task completion.
@@ -38,6 +57,12 @@ class ToolPerformWebTaskParams(TypedDict, total=False):
 
     provider: Literal["openai", "gemini", "groq", "azure", "xai"]
     """The AI provider to use for task completion."""
+
+    secret_values: Dict[str, str]
+    """Secret values to pass to the agent for secure credential handling.
+
+    Keys and values are passed as environment variables to the agent.
+    """
 
     url: str
     """The URL of the webpage.
