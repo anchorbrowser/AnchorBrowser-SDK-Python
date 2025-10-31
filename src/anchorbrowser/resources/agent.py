@@ -47,6 +47,7 @@ class AgentResource(SyncAPIResource):
         *,
         session_options: Optional[Session] = None,
         task_options: Optional[AgentTaskParams] = None,
+        session_id: Optional[str] = None,
     ) -> str:
         """Execute an AI agent task within a browser session.
 
@@ -62,12 +63,19 @@ class AgentResource(SyncAPIResource):
         Returns:
             str: The result of the AI agent task execution.
         """
-        session = self._client.sessions.create(session=session_options or {})
-        if not session.data or not session.data.id:
-            raise ValueError("Failed to create session: No session ID returned")
+        if session_id:
+            retrieved_session = self._client.sessions.retrieve(session_id)
+            if not retrieved_session or not retrieved_session or not retrieved_session.session_id:
+                raise ValueError("Failed to retrieve session: No session ID returned")
+            actual_session_id = retrieved_session.session_id
+        else:
+            created_session = self._client.sessions.create(session=session_options or {})
+            if not created_session or not created_session.data or not created_session.data.id:
+                raise ValueError("Failed to create session: No session ID returned")
+            actual_session_id = created_session.data.id
 
         with BrowserSetup(
-            session_id=session.data.id,
+            session_id=actual_session_id,
             base_url=str(self._client.base_url),
             api_key=self._client.api_key,
         ) as browser_setup:
@@ -228,6 +236,7 @@ class AsyncAgentResource(AsyncAPIResource):
         *,
         session_options: Optional[Session] = None,
         task_options: Optional[AgentTaskParams] = None,
+        session_id: Optional[str] = None,
     ) -> str:
         """Execute an AI agent task within a browser session.
 
@@ -243,12 +252,19 @@ class AsyncAgentResource(AsyncAPIResource):
         Returns:
             str: The result of the AI agent task execution.
         """
-        session = await self._client.sessions.create(session=session_options or {})
-        if not session.data or not session.data.id:
-            raise ValueError("Failed to create session: No session ID returned")
+        if session_id:
+            retrieved_session = await self._client.sessions.retrieve(session_id)
+            if not retrieved_session or not retrieved_session.session_id:
+                raise ValueError("Failed to retrieve session: No session ID returned")
+            actual_session_id = retrieved_session.session_id
+        else:
+            created_session = await self._client.sessions.create(session=session_options or {})
+            if not created_session or not created_session.data or not created_session.data.id:
+                raise ValueError("Failed to create session: No session ID returned")
+            actual_session_id = created_session.data.id
 
         browser_setup = BrowserSetup(
-            session_id=session.data.id,
+            session_id=actual_session_id,
             base_url=str(self._client.base_url),
             api_key=self._client.api_key,
         )
