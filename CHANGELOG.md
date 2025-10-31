@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.3 (2025-10-31)
+
+Full Changelog: [v0.3.2...v0.3.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.2...v0.3.3)
+
+### Features
+
+* Enhanced agent features documentation ([6ebf420](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/6ebf4206b4e60185adc696d63c8847dcebd45c83))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([3ff9aa7](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/3ff9aa743c874d2ecdbf3884fc630d1c81abc32c))
+
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([5883b7c](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/5883b7ce49e1d130b094b44bee109b9ae20c27a9))
+
 ## 0.3.2 (2025-10-27)
 
 Full Changelog: [v0.3.1...v0.3.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.1...v0.3.2)
