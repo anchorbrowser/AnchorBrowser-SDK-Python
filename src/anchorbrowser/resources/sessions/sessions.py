@@ -33,7 +33,6 @@ from ...types import (
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
 from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
-from ..._models import construct_type
 from .keyboard import (
     KeyboardResource,
     AsyncKeyboardResource,
@@ -43,6 +42,7 @@ from .keyboard import (
     AsyncKeyboardResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from ..._models import construct_type
 from .clipboard import (
     ClipboardResource,
     AsyncClipboardResource,
