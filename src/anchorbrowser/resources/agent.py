@@ -65,7 +65,7 @@ class AgentResource(SyncAPIResource):
         """
         if session_id:
             retrieved_session = self._client.sessions.retrieve(session_id)
-            if not retrieved_session or not retrieved_session.session_id:
+            if not retrieved_session or not retrieved_session or not retrieved_session.session_id:
                 raise ValueError("Failed to retrieve session: No session ID returned")
             actual_session_id = retrieved_session.session_id
         else:

@@ -222,7 +222,7 @@ class SessionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=dict,  # Get as dict to unwrap
+            cast_to=object,  # Get as raw object (dict) to unwrap
         ))
         
         # Unwrap data field if API returns { data: {...} }
@@ -767,7 +767,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=dict,  # Get as dict to unwrap
+            cast_to=object,  # Get as raw object (dict) to unwrap
         ))
         
         # Unwrap data field if API returns { data: {...} }
