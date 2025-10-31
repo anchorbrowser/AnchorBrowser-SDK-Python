@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.4 (2025-10-31)
+
+Full Changelog: [v0.3.3...v0.3.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.3...v0.3.4)
+
 ## 0.3.3 (2025-10-31)
 
 Full Changelog: [v0.3.2...v0.3.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.2...v0.3.3)
