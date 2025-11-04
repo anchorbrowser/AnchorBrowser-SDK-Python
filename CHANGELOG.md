@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.5 (2025-11-04)
+
+Full Changelog: [v0.3.4...v0.3.5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.4...v0.3.5)
+
+### Chores
+
+* **internal:** grammar fix (it's -&gt; its) ([592da81](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/592da814085e1d7348a4eaefc98ebd987ed0d59f))
+
 ## 0.3.4 (2025-10-31)
 
 Full Changelog: [v0.3.3...v0.3.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.3...v0.3.4)

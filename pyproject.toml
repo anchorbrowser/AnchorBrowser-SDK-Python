@@ -1,6 +1,6 @@
 [project]
 name = "anchorbrowser"
-version = "0.3.4"
+version = "0.3.5"
 description = "The official Python library for the anchorbrowser API"
 dynamic = ["readme"]
 license = "Apache-2.0"
