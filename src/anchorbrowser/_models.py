@@ -784,8 +784,8 @@ class FinalRequestOptions(pydantic.BaseModel):
     url: str
     params: Query = {}
     headers: Union[Headers, NotGiven] = NotGiven()
-    max_retries: Union[int, NotGiven] = NotGiven()
-    timeout: Union[float, Timeout, None, NotGiven] = NotGiven()
+    max_retries: Union[int, NotGiven] = 0
+    timeout: Union[float, Timeout, None, NotGiven] = 1200000
     files: Union[HttpxRequestFiles, None] = None
     idempotency_key: Union[str, None] = None
     post_parser: Union[Callable[[Any], Any], NotGiven] = NotGiven()
