@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.6 (2025-11-11)
+
+Full Changelog: [v0.3.5...v0.3.6](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.5...v0.3.6)
+
+### Features
+
+* max_steps_default ([9cbe618](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/9cbe6182c79f0269e2061fc4a074031d2c112e99))
+
+
+### Bug Fixes
+
+* compat with Python 3.14 ([4bac4f2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/4bac4f2667d41c6d9ecb4ca4df14d50ed5f1bcc7))
+
+
+### Chores
+
+* **package:** drop Python 3.8 support ([7c976b9](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/7c976b92b74eb47f4dccd3891e0e8557b494160d))
+
 ## 0.3.5 (2025-11-04)
 
 Full Changelog: [v0.3.4...v0.3.5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.4...v0.3.5)
