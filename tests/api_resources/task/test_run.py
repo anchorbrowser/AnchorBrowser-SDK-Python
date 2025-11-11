@@ -30,6 +30,7 @@ class TestRun:
     def test_method_execute_with_all_params(self, client: Anchorbrowser) -> None:
         run = client.task.run.execute(
             task_id="550e8400-e29b-41d4-a716-446655440000",
+            async_=True,
             inputs={
                 "ANCHOR_TARGET_URL": "https://example.com",
                 "ANCHOR_MAX_PAGES": "10",
@@ -101,6 +102,7 @@ class TestAsyncRun:
     async def test_method_execute_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         run = await async_client.task.run.execute(
             task_id="550e8400-e29b-41d4-a716-446655440000",
+            async_=True,
             inputs={
                 "ANCHOR_TARGET_URL": "https://example.com",
                 "ANCHOR_MAX_PAGES": "10",

@@ -165,7 +165,8 @@ class ToolsResource(SyncAPIResource):
           human_intervention: Allow human intervention during task execution. When enabled, the agent can
               request human input for ambiguous situations.
 
-          max_steps: Maximum number of steps the agent can take to complete the task. Defaults to 25.
+          max_steps: Maximum number of steps the agent can take to complete the task. Defaults
+              to 200.
 
           model: The specific model to use for task completion. see our
               [models](/agentic-browser-control/ai-task-completion#available-models) page for
@@ -437,7 +438,8 @@ class AsyncToolsResource(AsyncAPIResource):
           human_intervention: Allow human intervention during task execution. When enabled, the agent can
               request human input for ambiguous situations.
 
-          max_steps: Maximum number of steps the agent can take to complete the task. Defaults to 25.
+          max_steps: Maximum number of steps the agent can take to complete the task. Defaults
+              to 200.
 
           model: The specific model to use for task completion. see our
               [models](/agentic-browser-control/ai-task-completion#available-models) page for

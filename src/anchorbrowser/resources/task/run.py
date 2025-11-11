@@ -47,6 +47,7 @@ class RunResource(SyncAPIResource):
         self,
         *,
         task_id: str,
+        async_: bool | Omit = omit,
         inputs: Dict[str, str] | Omit = omit,
         override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
         session_id: str | Omit = omit,
@@ -67,6 +68,8 @@ class RunResource(SyncAPIResource):
 
         Args:
           task_id: Task identifier
+
+          async_: Whether to run the task asynchronously.
 
           inputs: Environment variables for task execution (keys must start with ANCHOR\\__)
 
@@ -91,6 +94,7 @@ class RunResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "task_id": task_id,
+                    "async_": async_,
                     "inputs": inputs,
                     "override_browser_configuration": override_browser_configuration,
                     "session_id": session_id,
@@ -130,6 +134,7 @@ class AsyncRunResource(AsyncAPIResource):
         self,
         *,
         task_id: str,
+        async_: bool | Omit = omit,
         inputs: Dict[str, str] | Omit = omit,
         override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
         session_id: str | Omit = omit,
@@ -150,6 +155,8 @@ class AsyncRunResource(AsyncAPIResource):
 
         Args:
           task_id: Task identifier
+
+          async_: Whether to run the task asynchronously.
 
           inputs: Environment variables for task execution (keys must start with ANCHOR\\__)
 
@@ -174,6 +181,7 @@ class AsyncRunResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "task_id": task_id,
+                    "async_": async_,
                     "inputs": inputs,
                     "override_browser_configuration": override_browser_configuration,
                     "session_id": session_id,
