@@ -23,6 +23,9 @@ class RunExecuteParams(TypedDict, total=False):
     task_id: Required[Annotated[str, PropertyInfo(alias="taskId")]]
     """Task identifier"""
 
+    async_: Annotated[bool, PropertyInfo(alias="async")]
+    """Whether to run the task asynchronously."""
+
     inputs: Dict[str, str]
     """Environment variables for task execution (keys must start with ANCHOR\\__)"""
 
