@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.8 (2025-11-12)
+
+Full Changelog: [v0.3.7...v0.3.8](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.7...v0.3.8)
+
+### Bug Fixes
+
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([fab1433](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/fab1433ffae3fdcbdce4f8cdf5f92aaade6385eb))
+
 ## 0.3.7 (2025-11-11)
 
 Full Changelog: [v0.3.6...v0.3.7](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.6...v0.3.7)
