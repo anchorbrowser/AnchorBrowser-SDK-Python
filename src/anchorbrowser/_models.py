@@ -338,8 +338,7 @@ class BaseModel(pydantic.BaseModel):
             round_trip: bool = False,
             warnings: bool | Literal["none", "warn", "error"] = True,
             fallback: Callable[[Any], Any] | None = None,
-            serialize_as_any: bool = False,
-            ensure_ascii: bool = True,
+            serialize_as_any: bool = False
         ) -> str:
             """Usage docs: https://docs.pydantic.dev/2.4/concepts/serialization/#modelmodel_dump_json
 
