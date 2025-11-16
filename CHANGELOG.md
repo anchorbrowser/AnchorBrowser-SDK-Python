@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.9 (2025-11-16)
+
+Full Changelog: [v0.3.8...v0.3.9](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.8...v0.3.9)
+
+### Features
+
+* BRO-1203 docs: remove sessionId and taskSessionId parameters from run… ([9ae6b61](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/9ae6b61094c9c4668f3409a0a6505c08a4ce7051))
+
 ## 0.3.8 (2025-11-12)
 
 Full Changelog: [v0.3.7...v0.3.8](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.7...v0.3.8)
