@@ -34,12 +34,6 @@ class RunExecuteParams(TypedDict, total=False):
     ]
     """Override browser configuration for this execution"""
 
-    session_id: Annotated[str, PropertyInfo(alias="sessionId")]
-    """Optional existing session ID to use"""
-
-    task_session_id: Annotated[str, PropertyInfo(alias="taskSessionId")]
-    """Optional task-specific session ID"""
-
     version: str
     """Version to run (draft, latest, or version number)"""
 

@@ -50,8 +50,6 @@ class RunResource(SyncAPIResource):
         async_: bool | Omit = omit,
         inputs: Dict[str, str] | Omit = omit,
         override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
-        session_id: str | Omit = omit,
-        task_session_id: str | Omit = omit,
         version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -75,10 +73,6 @@ class RunResource(SyncAPIResource):
 
           override_browser_configuration: Override browser configuration for this execution
 
-          session_id: Optional existing session ID to use
-
-          task_session_id: Optional task-specific session ID
-
           version: Version to run (draft, latest, or version number)
 
           extra_headers: Send extra headers
@@ -97,8 +91,6 @@ class RunResource(SyncAPIResource):
                     "async_": async_,
                     "inputs": inputs,
                     "override_browser_configuration": override_browser_configuration,
-                    "session_id": session_id,
-                    "task_session_id": task_session_id,
                     "version": version,
                 },
                 run_execute_params.RunExecuteParams,
@@ -137,8 +129,6 @@ class AsyncRunResource(AsyncAPIResource):
         async_: bool | Omit = omit,
         inputs: Dict[str, str] | Omit = omit,
         override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
-        session_id: str | Omit = omit,
-        task_session_id: str | Omit = omit,
         version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -162,10 +152,6 @@ class AsyncRunResource(AsyncAPIResource):
 
           override_browser_configuration: Override browser configuration for this execution
 
-          session_id: Optional existing session ID to use
-
-          task_session_id: Optional task-specific session ID
-
           version: Version to run (draft, latest, or version number)
 
           extra_headers: Send extra headers
@@ -184,8 +170,6 @@ class AsyncRunResource(AsyncAPIResource):
                     "async_": async_,
                     "inputs": inputs,
                     "override_browser_configuration": override_browser_configuration,
-                    "session_id": session_id,
-                    "task_session_id": task_session_id,
                     "version": version,
                 },
                 run_execute_params.RunExecuteParams,

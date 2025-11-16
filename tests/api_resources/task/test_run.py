@@ -51,8 +51,6 @@ class TestRun:
                     "max_duration": 0,
                 },
             },
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            task_session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             version="1",
         )
         assert_matches_type(RunExecuteResponse, run, path=["response"])
@@ -123,8 +121,6 @@ class TestAsyncRun:
                     "max_duration": 0,
                 },
             },
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            task_session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             version="1",
         )
         assert_matches_type(RunExecuteResponse, run, path=["response"])
