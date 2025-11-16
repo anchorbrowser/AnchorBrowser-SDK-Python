@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Dict, Union
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from ..._utils import PropertyInfo
+from .._utils import PropertyInfo
 
 __all__ = [
     "RunExecuteParams",
@@ -33,12 +33,6 @@ class RunExecuteParams(TypedDict, total=False):
         OverrideBrowserConfiguration, PropertyInfo(alias="overrideBrowserConfiguration")
     ]
     """Override browser configuration for this execution"""
-
-    session_id: Annotated[str, PropertyInfo(alias="sessionId")]
-    """Optional existing session ID to use"""
-
-    task_session_id: Annotated[str, PropertyInfo(alias="taskSessionId")]
-    """Optional task-specific session ID"""
 
     version: str
     """Version to run (draft, latest, or version number)"""
@@ -325,3 +319,4 @@ class OverrideBrowserConfiguration(TypedDict, total=False):
 
     timeout: OverrideBrowserConfigurationTimeout
     """Timeout configurations for the browser session."""
+

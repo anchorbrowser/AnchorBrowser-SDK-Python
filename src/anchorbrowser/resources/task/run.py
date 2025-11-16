@@ -6,6 +6,7 @@ from typing import Dict
 
 import httpx
 
+from ...types import task_run_params
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -16,9 +17,8 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.task import run_execute_params
 from ..._base_client import make_request_options
-from ...types.task.run_execute_response import RunExecuteResponse
+from ...types.task_run_response import RunExecuteResponse
 
 __all__ = ["RunResource", "AsyncRunResource"]
 
@@ -49,9 +49,7 @@ class RunResource(SyncAPIResource):
         task_id: str,
         async_: bool | Omit = omit,
         inputs: Dict[str, str] | Omit = omit,
-        override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
-        session_id: str | Omit = omit,
-        task_session_id: str | Omit = omit,
+        override_browser_configuration: task_run_params.OverrideBrowserConfiguration | Omit = omit,
         version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -75,10 +73,6 @@ class RunResource(SyncAPIResource):
 
           override_browser_configuration: Override browser configuration for this execution
 
-          session_id: Optional existing session ID to use
-
-          task_session_id: Optional task-specific session ID
-
           version: Version to run (draft, latest, or version number)
 
           extra_headers: Send extra headers
@@ -97,11 +91,9 @@ class RunResource(SyncAPIResource):
                     "async_": async_,
                     "inputs": inputs,
                     "override_browser_configuration": override_browser_configuration,
-                    "session_id": session_id,
-                    "task_session_id": task_session_id,
                     "version": version,
                 },
-                run_execute_params.RunExecuteParams,
+                task_run_params.RunExecuteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -136,9 +128,7 @@ class AsyncRunResource(AsyncAPIResource):
         task_id: str,
         async_: bool | Omit = omit,
         inputs: Dict[str, str] | Omit = omit,
-        override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
-        session_id: str | Omit = omit,
-        task_session_id: str | Omit = omit,
+        override_browser_configuration: task_run_params.OverrideBrowserConfiguration | Omit = omit,
         version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -162,10 +152,6 @@ class AsyncRunResource(AsyncAPIResource):
 
           override_browser_configuration: Override browser configuration for this execution
 
-          session_id: Optional existing session ID to use
-
-          task_session_id: Optional task-specific session ID
-
           version: Version to run (draft, latest, or version number)
 
           extra_headers: Send extra headers
@@ -184,11 +170,9 @@ class AsyncRunResource(AsyncAPIResource):
                     "async_": async_,
                     "inputs": inputs,
                     "override_browser_configuration": override_browser_configuration,
-                    "session_id": session_id,
-                    "task_session_id": task_session_id,
                     "version": version,
                 },
-                run_execute_params.RunExecuteParams,
+                task_run_params.RunExecuteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

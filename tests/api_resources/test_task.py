@@ -10,7 +10,7 @@ import pytest
 from tests.utils import assert_matches_type
 from anchorbrowser import Anchorbrowser, AsyncAnchorbrowser
 from anchorbrowser.types import TaskListResponse, TaskCreateResponse
-from anchorbrowser.types.task import RunExecuteResponse
+from anchorbrowser.types.task_run_response import RunExecuteResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -152,8 +152,6 @@ class TestTask:
                     "max_duration": 0,
                 },
             },
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            task_session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             version="1",
         )
         assert_matches_type(RunExecuteResponse, run, path=["response"])
@@ -196,8 +194,6 @@ class TestTask:
                     "max_duration": 0,
                 },
             },
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            task_session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             version="1",
         )
         assert_matches_type(RunExecuteResponse, run, path=["response"])
@@ -370,8 +366,6 @@ class TestAsyncTask:
                     "max_duration": 0,
                 },
             },
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            task_session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             version="1",
         )
         assert_matches_type(RunExecuteResponse, run, path=["response"])
