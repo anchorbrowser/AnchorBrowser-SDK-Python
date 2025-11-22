@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.10 (2025-11-22)
+
+Full Changelog: [v0.3.9...v0.3.10](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.9...v0.3.10)
+
+### Chores
+
+* add Python 3.14 classifier and testing ([4a00b57](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/4a00b57d3d9ef00df7132fc01211e53630c862ec))
+
 ## 0.3.9 (2025-11-16)
 
 Full Changelog: [v0.3.8...v0.3.9](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.8...v0.3.9)
