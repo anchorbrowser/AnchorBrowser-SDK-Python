@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.11 (2025-11-28)
+
+Full Changelog: [v0.3.10...v0.3.11](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.10...v0.3.11)
+
+### Bug Fixes
+
+* ensure streams are always closed ([89d49bb](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/89d49bb68cf30e8581917468718f36fd0e29a508))
+
+
+### Chores
+
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([bcb31f0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/bcb31f0d220339f4cb119ab87d2c5c30544f009d))
+
 ## 0.3.10 (2025-11-22)
 
 Full Changelog: [v0.3.9...v0.3.10](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.9...v0.3.10)
