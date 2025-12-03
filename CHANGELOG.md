@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.12 (2025-12-03)
+
+Full Changelog: [v0.3.11...v0.3.12](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.11...v0.3.12)
+
+### Chores
+
+* **docs:** use environment variables for authentication in code snippets ([8d13120](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/8d13120a106de59c11150b731c22056d50df1192))
+* update lockfile ([4d3c63b](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/4d3c63b11cacbd6e10f2c837c7e25ce9842b7cc2))
+
 ## 0.3.11 (2025-11-28)
 
 Full Changelog: [v0.3.10...v0.3.11](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.10...v0.3.11)
