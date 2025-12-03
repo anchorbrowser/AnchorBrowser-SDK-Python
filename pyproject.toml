@@ -7,16 +7,18 @@ license = "Apache-2.0"
 authors = [
 { name = "Anchorbrowser", email = "support@anchorbrowser.io" },
 ]
+
 dependencies = [
     "httpx>=0.28.1",
-    "pydantic>=1.9.0, <3",
+  "pydantic>=1.9.0, <3",
     "typing-extensions>=4.15.0",
-    "anyio>=3.5.0, <5",
-    "distro>=1.7.0, <2",
-    "sniffio",
+  "anyio>=3.5.0, <5",
+  "distro>=1.7.0, <2",
+  "sniffio",
     "websockets>=15.0.1",
     "playwright>=1.55.0",
 ]
+
 requires-python = ">= 3.9"
 classifiers = [
   "Typing :: Typed",
