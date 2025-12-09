@@ -39,6 +39,8 @@ class RunExecuteParams(TypedDict, total=False):
 
 
 class OverrideBrowserConfigurationLiveView(TypedDict, total=False):
+    """Configuration for live viewing the browser session."""
+
     read_only: bool
     """Enable or disable read-only mode for live viewing. Defaults to `false`."""
 
@@ -283,11 +285,15 @@ OverrideBrowserConfigurationProxy: TypeAlias = Union[
 
 
 class OverrideBrowserConfigurationRecording(TypedDict, total=False):
+    """Configuration for session recording."""
+
     active: bool
     """Enable or disable video recording of the browser session. Defaults to `true`."""
 
 
 class OverrideBrowserConfigurationTimeout(TypedDict, total=False):
+    """Timeout configurations for the browser session."""
+
     idle_timeout: int
     """
     The amount of time (in minutes) the browser session waits for new connections
@@ -302,6 +308,8 @@ class OverrideBrowserConfigurationTimeout(TypedDict, total=False):
 
 
 class OverrideBrowserConfiguration(TypedDict, total=False):
+    """Override browser configuration for this execution"""
+
     initial_url: str
     """The URL to navigate to when the browser session starts.
 

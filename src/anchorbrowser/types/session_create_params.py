@@ -49,11 +49,15 @@ class SessionCreateParams(TypedDict, total=False):
 
 
 class BrowserAdblock(TypedDict, total=False):
+    """Configuration for ad-blocking."""
+
     active: bool
     """Enable or disable ad-blocking. Defaults to `true`."""
 
 
 class BrowserCaptchaSolver(TypedDict, total=False):
+    """Configuration for captcha-solving."""
+
     active: bool
     """Enable or disable captcha-solving.
 
@@ -62,6 +66,8 @@ class BrowserCaptchaSolver(TypedDict, total=False):
 
 
 class BrowserDisableWebSecurity(TypedDict, total=False):
+    """Configuration for disabling web security features."""
+
     active: bool
     """Whether to disable web security features (CORS, same-origin policy, etc.).
 
@@ -71,11 +77,17 @@ class BrowserDisableWebSecurity(TypedDict, total=False):
 
 
 class BrowserExtraStealth(TypedDict, total=False):
+    """
+    Configuration for extra stealth mode to enhance browser fingerprinting protection.
+    """
+
     active: bool
     """Enable or disable extra stealth mode."""
 
 
 class BrowserFullscreen(TypedDict, total=False):
+    """Configuration for fullscreen mode."""
+
     active: bool
     """Enable or disable fullscreen mode.
 
@@ -84,11 +96,15 @@ class BrowserFullscreen(TypedDict, total=False):
 
 
 class BrowserHeadless(TypedDict, total=False):
+    """Configuration for headless mode."""
+
     active: bool
     """Whether browser should be headless or headful. Defaults to `false`."""
 
 
 class BrowserP2pDownload(TypedDict, total=False):
+    """Configuration for peer-to-peer download capture functionality."""
+
     active: bool
     """Enable or disable P2P downloads.
 
@@ -98,6 +114,8 @@ class BrowserP2pDownload(TypedDict, total=False):
 
 
 class BrowserPopupBlocker(TypedDict, total=False):
+    """Configuration for popup blocking."""
+
     active: bool
     """Blocks popups, including ads and CAPTCHA consent banners.
 
@@ -106,6 +124,8 @@ class BrowserPopupBlocker(TypedDict, total=False):
 
 
 class BrowserProfile(TypedDict, total=False):
+    """Options for managing and persisting browser session profiles."""
+
     name: str
     """The name of the profile to be used during the browser session."""
 
@@ -117,6 +137,8 @@ class BrowserProfile(TypedDict, total=False):
 
 
 class BrowserViewport(TypedDict, total=False):
+    """Configuration for the browser's viewport size."""
+
     height: int
     """Height of the viewport in pixels. Defaults to `900`."""
 
@@ -125,6 +147,8 @@ class BrowserViewport(TypedDict, total=False):
 
 
 class Browser(TypedDict, total=False):
+    """Browser-specific configurations."""
+
     adblock: BrowserAdblock
     """Configuration for ad-blocking."""
 
@@ -194,6 +218,8 @@ class Integration(TypedDict, total=False):
 
 
 class SessionLiveView(TypedDict, total=False):
+    """Configuration for live viewing the browser session."""
+
     read_only: bool
     """Enable or disable read-only mode for live viewing. Defaults to `false`."""
 
@@ -436,11 +462,15 @@ SessionProxy: TypeAlias = Union[SessionProxyAnchorProxy, SessionProxyCustomProxy
 
 
 class SessionRecording(TypedDict, total=False):
+    """Configuration for session recording."""
+
     active: bool
     """Enable or disable video recording of the browser session. Defaults to `true`."""
 
 
 class SessionTimeout(TypedDict, total=False):
+    """Timeout configurations for the browser session."""
+
     idle_timeout: int
     """
     The amount of time (in minutes) the browser session waits for new connections
@@ -455,6 +485,8 @@ class SessionTimeout(TypedDict, total=False):
 
 
 class Session(TypedDict, total=False):
+    """Session-related configurations."""
+
     initial_url: str
     """The URL to navigate to when the browser session starts.
 
