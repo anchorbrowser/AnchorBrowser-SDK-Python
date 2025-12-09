@@ -37,6 +37,8 @@ class TaskCreateParams(TypedDict, total=False):
 
 
 class BrowserConfigurationLiveView(TypedDict, total=False):
+    """Configuration for live viewing the browser session."""
+
     read_only: bool
     """Enable or disable read-only mode for live viewing. Defaults to `false`."""
 
@@ -279,11 +281,15 @@ BrowserConfigurationProxy: TypeAlias = Union[BrowserConfigurationProxyAnchorProx
 
 
 class BrowserConfigurationRecording(TypedDict, total=False):
+    """Configuration for session recording."""
+
     active: bool
     """Enable or disable video recording of the browser session. Defaults to `true`."""
 
 
 class BrowserConfigurationTimeout(TypedDict, total=False):
+    """Timeout configurations for the browser session."""
+
     idle_timeout: int
     """
     The amount of time (in minutes) the browser session waits for new connections
@@ -298,6 +304,8 @@ class BrowserConfigurationTimeout(TypedDict, total=False):
 
 
 class BrowserConfiguration(TypedDict, total=False):
+    """Browser configuration for task execution"""
+
     initial_url: str
     """The URL to navigate to when the browser session starts.
 
