@@ -47,11 +47,15 @@ class BatchSessionCreateParams(TypedDict, total=False):
 
 
 class ConfigurationBrowserAdblock(TypedDict, total=False):
+    """Configuration for ad-blocking."""
+
     active: bool
     """Enable or disable ad-blocking. Defaults to `true`."""
 
 
 class ConfigurationBrowserCaptchaSolver(TypedDict, total=False):
+    """Configuration for captcha-solving."""
+
     active: bool
     """Enable or disable captcha-solving.
 
@@ -60,6 +64,8 @@ class ConfigurationBrowserCaptchaSolver(TypedDict, total=False):
 
 
 class ConfigurationBrowserDisableWebSecurity(TypedDict, total=False):
+    """Configuration for disabling web security features."""
+
     active: bool
     """Whether to disable web security features (CORS, same-origin policy, etc.).
 
@@ -69,11 +75,17 @@ class ConfigurationBrowserDisableWebSecurity(TypedDict, total=False):
 
 
 class ConfigurationBrowserExtraStealth(TypedDict, total=False):
+    """
+    Configuration for extra stealth mode to enhance browser fingerprinting protection.
+    """
+
     active: bool
     """Enable or disable extra stealth mode."""
 
 
 class ConfigurationBrowserFullscreen(TypedDict, total=False):
+    """Configuration for fullscreen mode."""
+
     active: bool
     """Enable or disable fullscreen mode.
 
@@ -82,11 +94,15 @@ class ConfigurationBrowserFullscreen(TypedDict, total=False):
 
 
 class ConfigurationBrowserHeadless(TypedDict, total=False):
+    """Configuration for headless mode."""
+
     active: bool
     """Whether browser should be headless or headful. Defaults to `false`."""
 
 
 class ConfigurationBrowserP2pDownload(TypedDict, total=False):
+    """Configuration for peer-to-peer download capture functionality."""
+
     active: bool
     """Enable or disable P2P downloads.
 
@@ -96,6 +112,8 @@ class ConfigurationBrowserP2pDownload(TypedDict, total=False):
 
 
 class ConfigurationBrowserPopupBlocker(TypedDict, total=False):
+    """Configuration for popup blocking."""
+
     active: bool
     """Blocks popups, including ads and CAPTCHA consent banners.
 
@@ -104,6 +122,8 @@ class ConfigurationBrowserPopupBlocker(TypedDict, total=False):
 
 
 class ConfigurationBrowserProfile(TypedDict, total=False):
+    """Options for managing and persisting browser session profiles."""
+
     name: str
     """The name of the profile to be used during the browser session."""
 
@@ -115,6 +135,8 @@ class ConfigurationBrowserProfile(TypedDict, total=False):
 
 
 class ConfigurationBrowserViewport(TypedDict, total=False):
+    """Configuration for the browser's viewport size."""
+
     height: int
     """Height of the viewport in pixels. Defaults to `900`."""
 
@@ -123,6 +145,8 @@ class ConfigurationBrowserViewport(TypedDict, total=False):
 
 
 class ConfigurationBrowser(TypedDict, total=False):
+    """Browser-specific configurations."""
+
     adblock: ConfigurationBrowserAdblock
     """Configuration for ad-blocking."""
 
@@ -193,6 +217,8 @@ class ConfigurationIntegration(TypedDict, total=False):
 
 
 class ConfigurationSessionLiveView(TypedDict, total=False):
+    """Configuration for live viewing the browser session."""
+
     read_only: bool
     """Enable or disable read-only mode for live viewing. Defaults to `false`."""
 
@@ -435,11 +461,15 @@ ConfigurationSessionProxy: TypeAlias = Union[ConfigurationSessionProxyAnchorProx
 
 
 class ConfigurationSessionRecording(TypedDict, total=False):
+    """Configuration for session recording."""
+
     active: bool
     """Enable or disable video recording of the browser session. Defaults to `true`."""
 
 
 class ConfigurationSessionTimeout(TypedDict, total=False):
+    """Timeout configurations for the browser session."""
+
     idle_timeout: int
     """
     The amount of time (in minutes) the browser session waits for new connections
@@ -454,6 +484,8 @@ class ConfigurationSessionTimeout(TypedDict, total=False):
 
 
 class ConfigurationSession(TypedDict, total=False):
+    """Session-related configurations."""
+
     initial_url: str
     """The URL to navigate to when the browser session starts.
 
@@ -474,6 +506,8 @@ class ConfigurationSession(TypedDict, total=False):
 
 
 class Configuration(TypedDict, total=False):
+    """Configuration that applies to all sessions in the batch"""
+
     browser: ConfigurationBrowser
     """Browser-specific configurations."""
 

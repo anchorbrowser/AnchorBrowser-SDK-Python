@@ -23,6 +23,8 @@ __all__ = [
 
 
 class DataTaskBrowserConfigurationLiveView(BaseModel):
+    """Configuration for live viewing the browser session."""
+
     read_only: Optional[bool] = None
     """Enable or disable read-only mode for live viewing. Defaults to `false`."""
 
@@ -269,11 +271,15 @@ DataTaskBrowserConfigurationProxy: TypeAlias = Union[
 
 
 class DataTaskBrowserConfigurationRecording(BaseModel):
+    """Configuration for session recording."""
+
     active: Optional[bool] = None
     """Enable or disable video recording of the browser session. Defaults to `true`."""
 
 
 class DataTaskBrowserConfigurationTimeout(BaseModel):
+    """Timeout configurations for the browser session."""
+
     idle_timeout: Optional[int] = None
     """
     The amount of time (in minutes) the browser session waits for new connections
@@ -288,6 +294,8 @@ class DataTaskBrowserConfigurationTimeout(BaseModel):
 
 
 class DataTaskBrowserConfiguration(BaseModel):
+    """Browser configuration for task execution"""
+
     initial_url: Optional[str] = None
     """The URL to navigate to when the browser session starts.
 
