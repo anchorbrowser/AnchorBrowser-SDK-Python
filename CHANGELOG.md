@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.13 (2025-12-09)
+
+Full Changelog: [v0.3.12...v0.3.13](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.12...v0.3.13)
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([cb35cbc](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/cb35cbcfddccb5fee912b1cafe3dfab5b237209f))
+
+
+### Chores
+
+* add missing docstrings ([6e46d9f](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/6e46d9f28d01af030ea754883f0086cd80705999))
+
 ## 0.3.12 (2025-12-03)
 
 Full Changelog: [v0.3.11...v0.3.12](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.11...v0.3.12)
