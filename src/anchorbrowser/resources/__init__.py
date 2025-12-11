@@ -48,13 +48,13 @@ from .extensions import (
     ExtensionsResourceWithStreamingResponse,
     AsyncExtensionsResourceWithStreamingResponse,
 )
-from .batch_sessions import (
-    BatchSessionsResource,
-    AsyncBatchSessionsResource,
-    BatchSessionsResourceWithRawResponse,
-    AsyncBatchSessionsResourceWithRawResponse,
-    BatchSessionsResourceWithStreamingResponse,
-    AsyncBatchSessionsResourceWithStreamingResponse,
+from .identities import (
+    IdentitiesResource,
+    AsyncIdentitiesResource,
+    IdentitiesResourceWithRawResponse,
+    AsyncIdentitiesResourceWithRawResponse,
+    IdentitiesResourceWithStreamingResponse,
+    AsyncIdentitiesResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -88,16 +88,16 @@ __all__ = [
     "AsyncEventsResourceWithRawResponse",
     "EventsResourceWithStreamingResponse",
     "AsyncEventsResourceWithStreamingResponse",
-    "BatchSessionsResource",
-    "AsyncBatchSessionsResource",
-    "BatchSessionsResourceWithRawResponse",
-    "AsyncBatchSessionsResourceWithRawResponse",
-    "BatchSessionsResourceWithStreamingResponse",
-    "AsyncBatchSessionsResourceWithStreamingResponse",
     "TaskResource",
     "AsyncTaskResource",
     "TaskResourceWithRawResponse",
     "AsyncTaskResourceWithRawResponse",
     "TaskResourceWithStreamingResponse",
     "AsyncTaskResourceWithStreamingResponse",
+    "IdentitiesResource",
+    "AsyncIdentitiesResource",
+    "IdentitiesResourceWithRawResponse",
+    "AsyncIdentitiesResourceWithRawResponse",
+    "IdentitiesResourceWithStreamingResponse",
+    "AsyncIdentitiesResourceWithStreamingResponse",
 ]
