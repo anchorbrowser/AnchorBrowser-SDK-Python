@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 (2025-12-11)
+
+Full Changelog: [v0.3.13...v0.4.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.13...v0.4.0)
+
+### Features
+
+* BRO-1383 Add get identity credentials endpoint to SDK ([0548f2f](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/0548f2fd39fb76b7e972154637aafe317a6ce17f))
+
 ## 0.3.13 (2025-12-09)
 
 Full Changelog: [v0.3.12...v0.3.13](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.12...v0.3.13)
