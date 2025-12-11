@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import tools, events, profiles, extensions, batch_sessions
+from .resources import tools, events, profiles, extensions, identities
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
@@ -50,8 +50,8 @@ class Anchorbrowser(SyncAPIClient):
     tools: tools.ToolsResource
     extensions: extensions.ExtensionsResource
     events: events.EventsResource
-    batch_sessions: batch_sessions.BatchSessionsResource
     task: task.TaskResource
+    identities: identities.IdentitiesResource
     with_raw_response: AnchorbrowserWithRawResponse
     with_streaming_response: AnchorbrowserWithStreamedResponse
 
@@ -114,8 +114,8 @@ class Anchorbrowser(SyncAPIClient):
         self.tools = tools.ToolsResource(self)
         self.extensions = extensions.ExtensionsResource(self)
         self.events = events.EventsResource(self)
-        self.batch_sessions = batch_sessions.BatchSessionsResource(self)
         self.task = task.TaskResource(self)
+        self.identities = identities.IdentitiesResource(self)
         self.with_raw_response = AnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AnchorbrowserWithStreamedResponse(self)
 
@@ -230,8 +230,8 @@ class AsyncAnchorbrowser(AsyncAPIClient):
     tools: tools.AsyncToolsResource
     extensions: extensions.AsyncExtensionsResource
     events: events.AsyncEventsResource
-    batch_sessions: batch_sessions.AsyncBatchSessionsResource
     task: task.AsyncTaskResource
+    identities: identities.AsyncIdentitiesResource
     with_raw_response: AsyncAnchorbrowserWithRawResponse
     with_streaming_response: AsyncAnchorbrowserWithStreamedResponse
 
@@ -294,8 +294,8 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         self.tools = tools.AsyncToolsResource(self)
         self.extensions = extensions.AsyncExtensionsResource(self)
         self.events = events.AsyncEventsResource(self)
-        self.batch_sessions = batch_sessions.AsyncBatchSessionsResource(self)
         self.task = task.AsyncTaskResource(self)
+        self.identities = identities.AsyncIdentitiesResource(self)
         self.with_raw_response = AsyncAnchorbrowserWithRawResponse(self)
         self.with_streaming_response = AsyncAnchorbrowserWithStreamedResponse(self)
 
@@ -411,8 +411,8 @@ class AnchorbrowserWithRawResponse:
         self.tools = tools.ToolsResourceWithRawResponse(client.tools)
         self.extensions = extensions.ExtensionsResourceWithRawResponse(client.extensions)
         self.events = events.EventsResourceWithRawResponse(client.events)
-        self.batch_sessions = batch_sessions.BatchSessionsResourceWithRawResponse(client.batch_sessions)
         self.task = task.TaskResourceWithRawResponse(client.task)
+        self.identities = identities.IdentitiesResourceWithRawResponse(client.identities)
 
 
 class AsyncAnchorbrowserWithRawResponse:
@@ -422,8 +422,8 @@ class AsyncAnchorbrowserWithRawResponse:
         self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
         self.extensions = extensions.AsyncExtensionsResourceWithRawResponse(client.extensions)
         self.events = events.AsyncEventsResourceWithRawResponse(client.events)
-        self.batch_sessions = batch_sessions.AsyncBatchSessionsResourceWithRawResponse(client.batch_sessions)
         self.task = task.AsyncTaskResourceWithRawResponse(client.task)
+        self.identities = identities.AsyncIdentitiesResourceWithRawResponse(client.identities)
 
 
 class AnchorbrowserWithStreamedResponse:
@@ -433,8 +433,8 @@ class AnchorbrowserWithStreamedResponse:
         self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
         self.extensions = extensions.ExtensionsResourceWithStreamingResponse(client.extensions)
         self.events = events.EventsResourceWithStreamingResponse(client.events)
-        self.batch_sessions = batch_sessions.BatchSessionsResourceWithStreamingResponse(client.batch_sessions)
         self.task = task.TaskResourceWithStreamingResponse(client.task)
+        self.identities = identities.IdentitiesResourceWithStreamingResponse(client.identities)
 
 
 class AsyncAnchorbrowserWithStreamedResponse:
@@ -444,8 +444,8 @@ class AsyncAnchorbrowserWithStreamedResponse:
         self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
         self.extensions = extensions.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
         self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
-        self.batch_sessions = batch_sessions.AsyncBatchSessionsResourceWithStreamingResponse(client.batch_sessions)
         self.task = task.AsyncTaskResourceWithStreamingResponse(client.task)
+        self.identities = identities.AsyncIdentitiesResourceWithStreamingResponse(client.identities)
 
 
 Client = Anchorbrowser
