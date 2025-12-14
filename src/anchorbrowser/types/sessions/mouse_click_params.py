@@ -22,7 +22,7 @@ class MouseClickParams(TypedDict, total=False):
     selector: str
     """A valid CSS selector for the requested element"""
 
-    api_timeout: Annotated[float, PropertyInfo(alias="timeout")]
+    selector_timeout_ms: Annotated[float, PropertyInfo(alias="timeout")]
     """
     If a selector was passed, timeout in ms for waiting for the DOM element to be
     selected. Defaults to 5000 (5 seconds).
