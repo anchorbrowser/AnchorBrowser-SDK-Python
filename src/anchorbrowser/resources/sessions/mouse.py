@@ -52,7 +52,7 @@ class MouseResource(SyncAPIResource):
         button: Literal["left", "middle", "right"] | Omit = omit,
         index: float | Omit = omit,
         selector: str | Omit = omit,
-        api_timeout: float | Omit = omit,
+        selector_timeout_ms: float | Omit = omit,
         x: float | Omit = omit,
         y: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -73,7 +73,7 @@ class MouseResource(SyncAPIResource):
 
           selector: A valid CSS selector for the requested element
 
-          api_timeout: If a selector was passed, timeout in ms for waiting for the DOM element to be
+          selector_timeout_ms: If a selector was passed, timeout in ms for waiting for the DOM element to be
               selected. Defaults to 5000 (5 seconds).
 
           x: X coordinate
@@ -97,7 +97,7 @@ class MouseResource(SyncAPIResource):
                     "button": button,
                     "index": index,
                     "selector": selector,
-                    "api_timeout": api_timeout,
+                    "selector_timeout_ms": selector_timeout_ms,
                     "x": x,
                     "y": y,
                 },
@@ -233,7 +233,7 @@ class AsyncMouseResource(AsyncAPIResource):
         button: Literal["left", "middle", "right"] | Omit = omit,
         index: float | Omit = omit,
         selector: str | Omit = omit,
-        api_timeout: float | Omit = omit,
+        selector_timeout_ms: float | Omit = omit,
         x: float | Omit = omit,
         y: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -254,7 +254,7 @@ class AsyncMouseResource(AsyncAPIResource):
 
           selector: A valid CSS selector for the requested element
 
-          api_timeout: If a selector was passed, timeout in ms for waiting for the DOM element to be
+          selector_timeout_ms: If a selector was passed, timeout in ms for waiting for the DOM element to be
               selected. Defaults to 5000 (5 seconds).
 
           x: X coordinate
@@ -278,7 +278,7 @@ class AsyncMouseResource(AsyncAPIResource):
                     "button": button,
                     "index": index,
                     "selector": selector,
-                    "api_timeout": api_timeout,
+                    "selector_timeout_ms": selector_timeout_ms,
                     "x": x,
                     "y": y,
                 },

@@ -37,7 +37,7 @@ class TestMouse:
             button="left",
             index=0,
             selector="selector",
-            api_timeout=0,
+            selector_timeout_ms=0,
             x=0,
             y=0,
         )
@@ -210,7 +210,7 @@ class TestAsyncMouse:
             button="left",
             index=0,
             selector="selector",
-            api_timeout=0,
+            selector_timeout_ms=0,
             x=0,
             y=0,
         )
