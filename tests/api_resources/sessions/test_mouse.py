@@ -26,8 +26,6 @@ class TestMouse:
     def test_method_click(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.click(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            x=0,
-            y=0,
         )
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
@@ -36,9 +34,12 @@ class TestMouse:
     def test_method_click_with_all_params(self, client: Anchorbrowser) -> None:
         mouse = client.sessions.mouse.click(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            button="left",
+            index=0,
+            selector="selector",
+            api_timeout=0,
             x=0,
             y=0,
-            button="left",
         )
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
@@ -47,8 +48,6 @@ class TestMouse:
     def test_raw_response_click(self, client: Anchorbrowser) -> None:
         response = client.sessions.mouse.with_raw_response.click(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            x=0,
-            y=0,
         )
 
         assert response.is_closed is True
@@ -61,8 +60,6 @@ class TestMouse:
     def test_streaming_response_click(self, client: Anchorbrowser) -> None:
         with client.sessions.mouse.with_streaming_response.click(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            x=0,
-            y=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -78,8 +75,6 @@ class TestMouse:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.sessions.mouse.with_raw_response.click(
                 session_id="",
-                x=0,
-                y=0,
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -204,8 +199,6 @@ class TestAsyncMouse:
     async def test_method_click(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.click(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            x=0,
-            y=0,
         )
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
@@ -214,9 +207,12 @@ class TestAsyncMouse:
     async def test_method_click_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         mouse = await async_client.sessions.mouse.click(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            button="left",
+            index=0,
+            selector="selector",
+            api_timeout=0,
             x=0,
             y=0,
-            button="left",
         )
         assert_matches_type(MouseClickResponse, mouse, path=["response"])
 
@@ -225,8 +221,6 @@ class TestAsyncMouse:
     async def test_raw_response_click(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.mouse.with_raw_response.click(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            x=0,
-            y=0,
         )
 
         assert response.is_closed is True
@@ -239,8 +233,6 @@ class TestAsyncMouse:
     async def test_streaming_response_click(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.mouse.with_streaming_response.click(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            x=0,
-            y=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -256,8 +248,6 @@ class TestAsyncMouse:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.sessions.mouse.with_raw_response.click(
                 session_id="",
-                x=0,
-                y=0,
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
