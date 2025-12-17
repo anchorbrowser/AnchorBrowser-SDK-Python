@@ -49,9 +49,12 @@ class MouseResource(SyncAPIResource):
         self,
         session_id: str,
         *,
-        x: int,
-        y: int,
         button: Literal["left", "middle", "right"] | Omit = omit,
+        index: float | Omit = omit,
+        selector: str | Omit = omit,
+        selector_timeout_ms: float | Omit = omit,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -63,11 +66,19 @@ class MouseResource(SyncAPIResource):
         Performs a mouse click at the specified coordinates
 
         Args:
+          button: Mouse button to use
+
+          index: If a selector was passed and multiple elements match the selector, the index of
+              the element in the list (0-based). Defaults to 0.
+
+          selector: A valid CSS selector for the requested element
+
+          selector_timeout_ms: If a selector was passed, timeout in ms for waiting for the DOM element to be
+              selected. Defaults to 5000 (5 seconds).
+
           x: X coordinate
 
           y: Y coordinate
-
-          button: Mouse button to use
 
           extra_headers: Send extra headers
 
@@ -83,9 +94,12 @@ class MouseResource(SyncAPIResource):
             f"/v1/sessions/{session_id}/mouse/click",
             body=maybe_transform(
                 {
+                    "button": button,
+                    "index": index,
+                    "selector": selector,
+                    "selector_timeout_ms": selector_timeout_ms,
                     "x": x,
                     "y": y,
-                    "button": button,
                 },
                 mouse_click_params.MouseClickParams,
             ),
@@ -216,9 +230,12 @@ class AsyncMouseResource(AsyncAPIResource):
         self,
         session_id: str,
         *,
-        x: int,
-        y: int,
         button: Literal["left", "middle", "right"] | Omit = omit,
+        index: float | Omit = omit,
+        selector: str | Omit = omit,
+        selector_timeout_ms: float | Omit = omit,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -230,11 +247,19 @@ class AsyncMouseResource(AsyncAPIResource):
         Performs a mouse click at the specified coordinates
 
         Args:
+          button: Mouse button to use
+
+          index: If a selector was passed and multiple elements match the selector, the index of
+              the element in the list (0-based). Defaults to 0.
+
+          selector: A valid CSS selector for the requested element
+
+          selector_timeout_ms: If a selector was passed, timeout in ms for waiting for the DOM element to be
+              selected. Defaults to 5000 (5 seconds).
+
           x: X coordinate
 
           y: Y coordinate
-
-          button: Mouse button to use
 
           extra_headers: Send extra headers
 
@@ -250,9 +275,12 @@ class AsyncMouseResource(AsyncAPIResource):
             f"/v1/sessions/{session_id}/mouse/click",
             body=await async_maybe_transform(
                 {
+                    "button": button,
+                    "index": index,
+                    "selector": selector,
+                    "selector_timeout_ms": selector_timeout_ms,
                     "x": x,
                     "y": y,
-                    "button": button,
                 },
                 mouse_click_params.MouseClickParams,
             ),

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.0 (2025-12-16)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* Bro 949 mouse click api to support dom selector click ([88947eb](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/88947eb7af3414d1ac76f6de3961623f2f3c173d))
+* Bro 949 mouse click api to support dom selector click ([2f21297](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/2f21297ca41d95d1f5c455fdff0990a7df07069f))
+
+
+### Chores
+
+* **internal:** add missing files argument to base client ([3eb10ca](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/3eb10ca9462a0dd082a1a89872a15da21abee703))
+
 ## 0.4.0 (2025-12-11)
 
 Full Changelog: [v0.3.13...v0.4.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.3.13...v0.4.0)
