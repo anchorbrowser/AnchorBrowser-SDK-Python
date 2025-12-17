@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import tools, events, profiles, extensions, identities
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
@@ -29,8 +29,16 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.task import task
-from .resources.sessions import sessions
+
+if TYPE_CHECKING:
+    from .resources import task, tools, events, profiles, sessions, extensions, identities
+    from .resources.tools import ToolsResource, AsyncToolsResource
+    from .resources.events import EventsResource, AsyncEventsResource
+    from .resources.profiles import ProfilesResource, AsyncProfilesResource
+    from .resources.task.task import TaskResource, AsyncTaskResource
+    from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
+    from .resources.identities import IdentitiesResource, AsyncIdentitiesResource
+    from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource
 
 __all__ = [
     "Timeout",
@@ -45,16 +53,6 @@ __all__ = [
 
 
 class Anchorbrowser(SyncAPIClient):
-    profiles: profiles.ProfilesResource
-    sessions: sessions.SessionsResource
-    tools: tools.ToolsResource
-    extensions: extensions.ExtensionsResource
-    events: events.EventsResource
-    task: task.TaskResource
-    identities: identities.IdentitiesResource
-    with_raw_response: AnchorbrowserWithRawResponse
-    with_streaming_response: AnchorbrowserWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -109,15 +107,55 @@ class Anchorbrowser(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.profiles = profiles.ProfilesResource(self)
-        self.sessions = sessions.SessionsResource(self)
-        self.tools = tools.ToolsResource(self)
-        self.extensions = extensions.ExtensionsResource(self)
-        self.events = events.EventsResource(self)
-        self.task = task.TaskResource(self)
-        self.identities = identities.IdentitiesResource(self)
-        self.with_raw_response = AnchorbrowserWithRawResponse(self)
-        self.with_streaming_response = AnchorbrowserWithStreamedResponse(self)
+    @cached_property
+    def profiles(self) -> ProfilesResource:
+        from .resources.profiles import ProfilesResource
+
+        return ProfilesResource(self)
+
+    @cached_property
+    def sessions(self) -> SessionsResource:
+        from .resources.sessions import SessionsResource
+
+        return SessionsResource(self)
+
+    @cached_property
+    def tools(self) -> ToolsResource:
+        from .resources.tools import ToolsResource
+
+        return ToolsResource(self)
+
+    @cached_property
+    def extensions(self) -> ExtensionsResource:
+        from .resources.extensions import ExtensionsResource
+
+        return ExtensionsResource(self)
+
+    @cached_property
+    def events(self) -> EventsResource:
+        from .resources.events import EventsResource
+
+        return EventsResource(self)
+
+    @cached_property
+    def task(self) -> TaskResource:
+        from .resources.task import TaskResource
+
+        return TaskResource(self)
+
+    @cached_property
+    def identities(self) -> IdentitiesResource:
+        from .resources.identities import IdentitiesResource
+
+        return IdentitiesResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AnchorbrowserWithRawResponse:
+        return AnchorbrowserWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AnchorbrowserWithStreamedResponse:
+        return AnchorbrowserWithStreamedResponse(self)
 
     @property
     @override
@@ -225,16 +263,6 @@ class Anchorbrowser(SyncAPIClient):
 
 
 class AsyncAnchorbrowser(AsyncAPIClient):
-    profiles: profiles.AsyncProfilesResource
-    sessions: sessions.AsyncSessionsResource
-    tools: tools.AsyncToolsResource
-    extensions: extensions.AsyncExtensionsResource
-    events: events.AsyncEventsResource
-    task: task.AsyncTaskResource
-    identities: identities.AsyncIdentitiesResource
-    with_raw_response: AsyncAnchorbrowserWithRawResponse
-    with_streaming_response: AsyncAnchorbrowserWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -289,15 +317,55 @@ class AsyncAnchorbrowser(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.profiles = profiles.AsyncProfilesResource(self)
-        self.sessions = sessions.AsyncSessionsResource(self)
-        self.tools = tools.AsyncToolsResource(self)
-        self.extensions = extensions.AsyncExtensionsResource(self)
-        self.events = events.AsyncEventsResource(self)
-        self.task = task.AsyncTaskResource(self)
-        self.identities = identities.AsyncIdentitiesResource(self)
-        self.with_raw_response = AsyncAnchorbrowserWithRawResponse(self)
-        self.with_streaming_response = AsyncAnchorbrowserWithStreamedResponse(self)
+    @cached_property
+    def profiles(self) -> AsyncProfilesResource:
+        from .resources.profiles import AsyncProfilesResource
+
+        return AsyncProfilesResource(self)
+
+    @cached_property
+    def sessions(self) -> AsyncSessionsResource:
+        from .resources.sessions import AsyncSessionsResource
+
+        return AsyncSessionsResource(self)
+
+    @cached_property
+    def tools(self) -> AsyncToolsResource:
+        from .resources.tools import AsyncToolsResource
+
+        return AsyncToolsResource(self)
+
+    @cached_property
+    def extensions(self) -> AsyncExtensionsResource:
+        from .resources.extensions import AsyncExtensionsResource
+
+        return AsyncExtensionsResource(self)
+
+    @cached_property
+    def events(self) -> AsyncEventsResource:
+        from .resources.events import AsyncEventsResource
+
+        return AsyncEventsResource(self)
+
+    @cached_property
+    def task(self) -> AsyncTaskResource:
+        from .resources.task import AsyncTaskResource
+
+        return AsyncTaskResource(self)
+
+    @cached_property
+    def identities(self) -> AsyncIdentitiesResource:
+        from .resources.identities import AsyncIdentitiesResource
+
+        return AsyncIdentitiesResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncAnchorbrowserWithRawResponse:
+        return AsyncAnchorbrowserWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncAnchorbrowserWithStreamedResponse:
+        return AsyncAnchorbrowserWithStreamedResponse(self)
 
     @property
     @override
@@ -405,47 +473,199 @@ class AsyncAnchorbrowser(AsyncAPIClient):
 
 
 class AnchorbrowserWithRawResponse:
+    _client: Anchorbrowser
+
     def __init__(self, client: Anchorbrowser) -> None:
-        self.profiles = profiles.ProfilesResourceWithRawResponse(client.profiles)
-        self.sessions = sessions.SessionsResourceWithRawResponse(client.sessions)
-        self.tools = tools.ToolsResourceWithRawResponse(client.tools)
-        self.extensions = extensions.ExtensionsResourceWithRawResponse(client.extensions)
-        self.events = events.EventsResourceWithRawResponse(client.events)
-        self.task = task.TaskResourceWithRawResponse(client.task)
-        self.identities = identities.IdentitiesResourceWithRawResponse(client.identities)
+        self._client = client
+
+    @cached_property
+    def profiles(self) -> profiles.ProfilesResourceWithRawResponse:
+        from .resources.profiles import ProfilesResourceWithRawResponse
+
+        return ProfilesResourceWithRawResponse(self._client.profiles)
+
+    @cached_property
+    def sessions(self) -> sessions.SessionsResourceWithRawResponse:
+        from .resources.sessions import SessionsResourceWithRawResponse
+
+        return SessionsResourceWithRawResponse(self._client.sessions)
+
+    @cached_property
+    def tools(self) -> tools.ToolsResourceWithRawResponse:
+        from .resources.tools import ToolsResourceWithRawResponse
+
+        return ToolsResourceWithRawResponse(self._client.tools)
+
+    @cached_property
+    def extensions(self) -> extensions.ExtensionsResourceWithRawResponse:
+        from .resources.extensions import ExtensionsResourceWithRawResponse
+
+        return ExtensionsResourceWithRawResponse(self._client.extensions)
+
+    @cached_property
+    def events(self) -> events.EventsResourceWithRawResponse:
+        from .resources.events import EventsResourceWithRawResponse
+
+        return EventsResourceWithRawResponse(self._client.events)
+
+    @cached_property
+    def task(self) -> task.TaskResourceWithRawResponse:
+        from .resources.task import TaskResourceWithRawResponse
+
+        return TaskResourceWithRawResponse(self._client.task)
+
+    @cached_property
+    def identities(self) -> identities.IdentitiesResourceWithRawResponse:
+        from .resources.identities import IdentitiesResourceWithRawResponse
+
+        return IdentitiesResourceWithRawResponse(self._client.identities)
 
 
 class AsyncAnchorbrowserWithRawResponse:
+    _client: AsyncAnchorbrowser
+
     def __init__(self, client: AsyncAnchorbrowser) -> None:
-        self.profiles = profiles.AsyncProfilesResourceWithRawResponse(client.profiles)
-        self.sessions = sessions.AsyncSessionsResourceWithRawResponse(client.sessions)
-        self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
-        self.extensions = extensions.AsyncExtensionsResourceWithRawResponse(client.extensions)
-        self.events = events.AsyncEventsResourceWithRawResponse(client.events)
-        self.task = task.AsyncTaskResourceWithRawResponse(client.task)
-        self.identities = identities.AsyncIdentitiesResourceWithRawResponse(client.identities)
+        self._client = client
+
+    @cached_property
+    def profiles(self) -> profiles.AsyncProfilesResourceWithRawResponse:
+        from .resources.profiles import AsyncProfilesResourceWithRawResponse
+
+        return AsyncProfilesResourceWithRawResponse(self._client.profiles)
+
+    @cached_property
+    def sessions(self) -> sessions.AsyncSessionsResourceWithRawResponse:
+        from .resources.sessions import AsyncSessionsResourceWithRawResponse
+
+        return AsyncSessionsResourceWithRawResponse(self._client.sessions)
+
+    @cached_property
+    def tools(self) -> tools.AsyncToolsResourceWithRawResponse:
+        from .resources.tools import AsyncToolsResourceWithRawResponse
+
+        return AsyncToolsResourceWithRawResponse(self._client.tools)
+
+    @cached_property
+    def extensions(self) -> extensions.AsyncExtensionsResourceWithRawResponse:
+        from .resources.extensions import AsyncExtensionsResourceWithRawResponse
+
+        return AsyncExtensionsResourceWithRawResponse(self._client.extensions)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithRawResponse:
+        from .resources.events import AsyncEventsResourceWithRawResponse
+
+        return AsyncEventsResourceWithRawResponse(self._client.events)
+
+    @cached_property
+    def task(self) -> task.AsyncTaskResourceWithRawResponse:
+        from .resources.task import AsyncTaskResourceWithRawResponse
+
+        return AsyncTaskResourceWithRawResponse(self._client.task)
+
+    @cached_property
+    def identities(self) -> identities.AsyncIdentitiesResourceWithRawResponse:
+        from .resources.identities import AsyncIdentitiesResourceWithRawResponse
+
+        return AsyncIdentitiesResourceWithRawResponse(self._client.identities)
 
 
 class AnchorbrowserWithStreamedResponse:
+    _client: Anchorbrowser
+
     def __init__(self, client: Anchorbrowser) -> None:
-        self.profiles = profiles.ProfilesResourceWithStreamingResponse(client.profiles)
-        self.sessions = sessions.SessionsResourceWithStreamingResponse(client.sessions)
-        self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
-        self.extensions = extensions.ExtensionsResourceWithStreamingResponse(client.extensions)
-        self.events = events.EventsResourceWithStreamingResponse(client.events)
-        self.task = task.TaskResourceWithStreamingResponse(client.task)
-        self.identities = identities.IdentitiesResourceWithStreamingResponse(client.identities)
+        self._client = client
+
+    @cached_property
+    def profiles(self) -> profiles.ProfilesResourceWithStreamingResponse:
+        from .resources.profiles import ProfilesResourceWithStreamingResponse
+
+        return ProfilesResourceWithStreamingResponse(self._client.profiles)
+
+    @cached_property
+    def sessions(self) -> sessions.SessionsResourceWithStreamingResponse:
+        from .resources.sessions import SessionsResourceWithStreamingResponse
+
+        return SessionsResourceWithStreamingResponse(self._client.sessions)
+
+    @cached_property
+    def tools(self) -> tools.ToolsResourceWithStreamingResponse:
+        from .resources.tools import ToolsResourceWithStreamingResponse
+
+        return ToolsResourceWithStreamingResponse(self._client.tools)
+
+    @cached_property
+    def extensions(self) -> extensions.ExtensionsResourceWithStreamingResponse:
+        from .resources.extensions import ExtensionsResourceWithStreamingResponse
+
+        return ExtensionsResourceWithStreamingResponse(self._client.extensions)
+
+    @cached_property
+    def events(self) -> events.EventsResourceWithStreamingResponse:
+        from .resources.events import EventsResourceWithStreamingResponse
+
+        return EventsResourceWithStreamingResponse(self._client.events)
+
+    @cached_property
+    def task(self) -> task.TaskResourceWithStreamingResponse:
+        from .resources.task import TaskResourceWithStreamingResponse
+
+        return TaskResourceWithStreamingResponse(self._client.task)
+
+    @cached_property
+    def identities(self) -> identities.IdentitiesResourceWithStreamingResponse:
+        from .resources.identities import IdentitiesResourceWithStreamingResponse
+
+        return IdentitiesResourceWithStreamingResponse(self._client.identities)
 
 
 class AsyncAnchorbrowserWithStreamedResponse:
+    _client: AsyncAnchorbrowser
+
     def __init__(self, client: AsyncAnchorbrowser) -> None:
-        self.profiles = profiles.AsyncProfilesResourceWithStreamingResponse(client.profiles)
-        self.sessions = sessions.AsyncSessionsResourceWithStreamingResponse(client.sessions)
-        self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
-        self.extensions = extensions.AsyncExtensionsResourceWithStreamingResponse(client.extensions)
-        self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
-        self.task = task.AsyncTaskResourceWithStreamingResponse(client.task)
-        self.identities = identities.AsyncIdentitiesResourceWithStreamingResponse(client.identities)
+        self._client = client
+
+    @cached_property
+    def profiles(self) -> profiles.AsyncProfilesResourceWithStreamingResponse:
+        from .resources.profiles import AsyncProfilesResourceWithStreamingResponse
+
+        return AsyncProfilesResourceWithStreamingResponse(self._client.profiles)
+
+    @cached_property
+    def sessions(self) -> sessions.AsyncSessionsResourceWithStreamingResponse:
+        from .resources.sessions import AsyncSessionsResourceWithStreamingResponse
+
+        return AsyncSessionsResourceWithStreamingResponse(self._client.sessions)
+
+    @cached_property
+    def tools(self) -> tools.AsyncToolsResourceWithStreamingResponse:
+        from .resources.tools import AsyncToolsResourceWithStreamingResponse
+
+        return AsyncToolsResourceWithStreamingResponse(self._client.tools)
+
+    @cached_property
+    def extensions(self) -> extensions.AsyncExtensionsResourceWithStreamingResponse:
+        from .resources.extensions import AsyncExtensionsResourceWithStreamingResponse
+
+        return AsyncExtensionsResourceWithStreamingResponse(self._client.extensions)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithStreamingResponse:
+        from .resources.events import AsyncEventsResourceWithStreamingResponse
+
+        return AsyncEventsResourceWithStreamingResponse(self._client.events)
+
+    @cached_property
+    def task(self) -> task.AsyncTaskResourceWithStreamingResponse:
+        from .resources.task import AsyncTaskResourceWithStreamingResponse
+
+        return AsyncTaskResourceWithStreamingResponse(self._client.task)
+
+    @cached_property
+    def identities(self) -> identities.AsyncIdentitiesResourceWithStreamingResponse:
+        from .resources.identities import AsyncIdentitiesResourceWithStreamingResponse
+
+        return AsyncIdentitiesResourceWithStreamingResponse(self._client.identities)
 
 
 Client = Anchorbrowser
