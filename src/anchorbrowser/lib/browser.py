@@ -187,6 +187,7 @@ class AgentTaskParams(TypedDict, total=False):
     human_intervention: Optional[bool]
     max_steps: Optional[int]
     secret_values: Optional[Dict[str, Any]]
+    directly_open_url: Optional[bool]
 
 
 class BrowserTaskResponse(TypedDict):

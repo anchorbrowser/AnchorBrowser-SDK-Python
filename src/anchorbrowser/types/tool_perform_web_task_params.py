@@ -69,3 +69,6 @@ class ToolPerformWebTaskParams(TypedDict, total=False):
 
     If not provided, the tool will use the current page in the session.
     """
+
+    directly_open_url: bool
+    """If true, the tool will directly open the URL in the browser."""
