@@ -138,6 +138,7 @@ class ToolsResource(SyncAPIResource):
         provider: Literal["openai", "gemini", "groq", "azure", "xai"] | Omit = omit,
         secret_values: Dict[str, str] | Omit = omit,
         url: str | Omit = omit,
+        directly_open_url: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -182,6 +183,8 @@ class ToolsResource(SyncAPIResource):
           url: The URL of the webpage. If not provided, the tool will use the current page in
               the session.
 
+          directly_open_url: If true, the tool will directly open the URL in the browser.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -205,6 +208,7 @@ class ToolsResource(SyncAPIResource):
                     "provider": provider,
                     "secret_values": secret_values,
                     "url": url,
+                    "directly_open_url": directly_open_url,
                 },
                 tool_perform_web_task_params.ToolPerformWebTaskParams,
             ),
@@ -411,6 +415,7 @@ class AsyncToolsResource(AsyncAPIResource):
         provider: Literal["openai", "gemini", "groq", "azure", "xai"] | Omit = omit,
         secret_values: Dict[str, str] | Omit = omit,
         url: str | Omit = omit,
+        directly_open_url: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -455,6 +460,8 @@ class AsyncToolsResource(AsyncAPIResource):
           url: The URL of the webpage. If not provided, the tool will use the current page in
               the session.
 
+          directly_open_url: If true, the tool will directly open the URL in the browser.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -478,6 +485,7 @@ class AsyncToolsResource(AsyncAPIResource):
                     "provider": provider,
                     "secret_values": secret_values,
                     "url": url,
+                    "directly_open_url": directly_open_url,
                 },
                 tool_perform_web_task_params.ToolPerformWebTaskParams,
             ),

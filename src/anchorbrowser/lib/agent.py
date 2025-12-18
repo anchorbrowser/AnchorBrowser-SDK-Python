@@ -20,6 +20,7 @@ class AgentTaskParams(TypedDict, total=False):
     human_intervention: Optional[bool]
     max_steps: Optional[int]
     secret_values: Optional[Dict[str, Any]]
+    directly_open_url: Optional[bool]
 
 
 def create_task_payload(
@@ -34,6 +35,7 @@ def create_task_payload(
     human_intervention: Optional[bool] = None,
     max_steps: Optional[int] = None,
     secret_values: Optional[Dict[str, Any]] = None,
+    directly_open_url: Optional[bool] = None,
 ) -> str:
     if not prompt or prompt.strip() == "":
         raise ValueError("Prompt cannot be empty")
@@ -61,7 +63,8 @@ def create_task_payload(
         payload["max_steps"] = max_steps
     if secret_values is not None:
         payload["secret_values"] = secret_values
-
+    if directly_open_url is not None:
+        payload["directly_open_url"] = directly_open_url
     return json.dumps(payload)
 
 

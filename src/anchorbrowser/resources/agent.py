@@ -90,6 +90,7 @@ class AgentResource(SyncAPIResource):
             human_intervention = None
             max_steps = None
             secret_values = None
+            directly_open_url = None
             if task_options:
                 output_schema = task_options.get("output_schema")
                 url = task_options.get("url")
@@ -102,7 +103,7 @@ class AgentResource(SyncAPIResource):
                 human_intervention = task_options.get("human_intervention")
                 max_steps = task_options.get("max_steps")
                 secret_values = task_options.get("secret_values")
-                
+                directly_open_url = task_options.get("directly_open_url")
                 if url:
                     browser_setup.page.goto(url)
                 on_agent_step = task_options.get("on_agent_step")
@@ -120,6 +121,7 @@ class AgentResource(SyncAPIResource):
                 human_intervention=human_intervention,
                 max_steps=max_steps,
                 secret_values=secret_values,
+                directly_open_url=directly_open_url,
             )
             task_result = str(browser_setup.ai.evaluate(task_payload))
             return task_result
@@ -171,6 +173,7 @@ class AgentResource(SyncAPIResource):
             human_intervention = None
             max_steps = None
             secret_values = None
+            directly_open_url = None
             if task_options:
                 output_schema = task_options.get("output_schema")
                 url = task_options.get("url")
@@ -183,7 +186,7 @@ class AgentResource(SyncAPIResource):
                 human_intervention = task_options.get("human_intervention")
                 max_steps = task_options.get("max_steps")
                 secret_values = task_options.get("secret_values")
-                
+                directly_open_url = task_options.get("directly_open_url")
                 if url:
                     browser_setup.page.goto(url)
                 on_agent_step = task_options.get("on_agent_step")
@@ -201,6 +204,7 @@ class AgentResource(SyncAPIResource):
                 human_intervention=human_intervention,
                 max_steps=max_steps,
                 secret_values=secret_values,
+                directly_open_url=directly_open_url,
             )
             task_result = str(browser_setup.ai.evaluate(task_payload))
             return BrowserTaskResponse(
@@ -281,6 +285,7 @@ class AsyncAgentResource(AsyncAPIResource):
             human_intervention = None
             max_steps = None
             secret_values = None
+            directly_open_url = None
             if task_options:
                 output_schema = task_options.get("output_schema")
                 url = task_options.get("url")
@@ -293,7 +298,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 human_intervention = task_options.get("human_intervention")
                 max_steps = task_options.get("max_steps")
                 secret_values = task_options.get("secret_values")
-                
+                directly_open_url = task_options.get("directly_open_url")
                 if url:
                     await (await browser_setup.async_page).goto(url)
                 on_agent_step = task_options.get("on_agent_step")
@@ -311,6 +316,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 human_intervention=human_intervention,
                 max_steps=max_steps,
                 secret_values=secret_values,
+                directly_open_url=directly_open_url,
             )
             task_result = await (await browser_setup.async_ai).evaluate(task_payload)
             return str(task_result)
@@ -362,6 +368,7 @@ class AsyncAgentResource(AsyncAPIResource):
             human_intervention = None
             max_steps = None
             secret_values = None
+            directly_open_url = None
             if task_options:
                 output_schema = task_options.get("output_schema")
                 url = task_options.get("url")
@@ -374,7 +381,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 human_intervention = task_options.get("human_intervention")
                 max_steps = task_options.get("max_steps")
                 secret_values = task_options.get("secret_values")
-                
+                directly_open_url = task_options.get("directly_open_url")
                 if url:
                     await (await browser_setup.async_page).goto(url)
                 on_agent_step = task_options.get("on_agent_step")
@@ -392,6 +399,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 human_intervention=human_intervention,
                 max_steps=max_steps,
                 secret_values=secret_values,
+                directly_open_url=directly_open_url,
             )
             task_result = await (await browser_setup.async_ai).evaluate(task_payload)
             return BrowserTaskResponse(
