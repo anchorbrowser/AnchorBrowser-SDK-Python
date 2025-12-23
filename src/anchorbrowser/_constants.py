@@ -6,9 +6,9 @@ RAW_RESPONSE_HEADER = "X-Stainless-Raw-Response"
 OVERRIDE_CAST_TO_HEADER = "____stainless_override_cast_to"
 
 # default timeout is 1 minute
-DEFAULT_TIMEOUT = httpx.Timeout(timeout=1200, connect=20.0)
+DEFAULT_TIMEOUT = httpx.Timeout(timeout=1000000, connect=20.0)
 DEFAULT_MAX_RETRIES = 0
-DEFAULT_CONNECTION_LIMITS = httpx.Limits(max_connections=100000, max_keepalive_connections=20)
+DEFAULT_CONNECTION_LIMITS = httpx.Limits(max_connections=100000, max_keepalive_connections=100)
 
 INITIAL_RETRY_DELAY = 0.5
 MAX_RETRY_DELAY = 8.0
