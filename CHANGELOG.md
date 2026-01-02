@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.4 (2026-01-02)
+
+Full Changelog: [v0.5.3...v0.5.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.5.3...v0.5.4)
+
+### Chores
+
+* speedup initial import ([3ed7ed3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/3ed7ed3ec79f8348c94c1a9373017108a28529c7))
+
 ## 0.5.3 (2025-12-23)
 
 Full Changelog: [v0.5.2...v0.5.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.5.2...v0.5.3)

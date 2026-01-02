@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,6 +20,7 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
 from .resources import task, agent, tools, events, browser, profiles, extensions, identities
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
@@ -412,6 +413,8 @@ class AsyncAnchorbrowser(AsyncAPIClient):
 
 
 class AnchorbrowserWithRawResponse:
+    _client: Anchorbrowser
+
     def __init__(self, client: Anchorbrowser) -> None:
         self.profiles = profiles.ProfilesResourceWithRawResponse(client.profiles)
         self.sessions = sessions.SessionsResourceWithRawResponse(client.sessions)
@@ -425,6 +428,8 @@ class AnchorbrowserWithRawResponse:
 
 
 class AsyncAnchorbrowserWithRawResponse:
+    _client: AsyncAnchorbrowser
+
     def __init__(self, client: AsyncAnchorbrowser) -> None:
         self.profiles = profiles.AsyncProfilesResourceWithRawResponse(client.profiles)
         self.sessions = sessions.AsyncSessionsResourceWithRawResponse(client.sessions)
@@ -438,6 +443,8 @@ class AsyncAnchorbrowserWithRawResponse:
 
 
 class AnchorbrowserWithStreamedResponse:
+    _client: Anchorbrowser
+
     def __init__(self, client: Anchorbrowser) -> None:
         self.profiles = profiles.ProfilesResourceWithStreamingResponse(client.profiles)
         self.sessions = sessions.SessionsResourceWithStreamingResponse(client.sessions)
@@ -451,6 +458,8 @@ class AnchorbrowserWithStreamedResponse:
 
 
 class AsyncAnchorbrowserWithStreamedResponse:
+    _client: AsyncAnchorbrowser
+
     def __init__(self, client: AsyncAnchorbrowser) -> None:
         self.profiles = profiles.AsyncProfilesResourceWithStreamingResponse(client.profiles)
         self.sessions = sessions.AsyncSessionsResourceWithStreamingResponse(client.sessions)
