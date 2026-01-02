@@ -20,6 +20,7 @@ __all__ = [
     "BrowserPopupBlocker",
     "BrowserProfile",
     "BrowserViewport",
+    "Identity",
     "Integration",
     "IntegrationConfiguration",
     "IntegrationConfigurationOnePasswordAllSecretsConfig",
@@ -37,6 +38,13 @@ __all__ = [
 class SessionCreateParams(TypedDict, total=False):
     browser: Browser
     """Browser-specific configurations."""
+
+    identities: Iterable[Identity]
+    """Activates an authenticated session.
+
+    **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
+    enable.
+    """
 
     integrations: Iterable[Integration]
     """Array of integrations to load in the browser session.
@@ -187,6 +195,13 @@ class Browser(TypedDict, total=False):
 
     viewport: BrowserViewport
     """Configuration for the browser's viewport size."""
+
+
+class Identity(TypedDict, total=False):
+    """Previously configured identity to be used for the authenticated session."""
+
+    id: str
+    """The identity ID to use for the browser session."""
 
 
 class IntegrationConfigurationOnePasswordAllSecretsConfig(TypedDict, total=False):

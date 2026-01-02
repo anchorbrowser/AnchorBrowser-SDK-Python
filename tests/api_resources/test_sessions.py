@@ -66,6 +66,7 @@ class TestSessions:
                     "width": 0,
                 },
             },
+            identities=[{"id": "123e4567-e89b-12d3-a456-426614174000"}],
             integrations=[
                 {
                     "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -692,6 +693,7 @@ class TestAsyncSessions:
                     "width": 0,
                 },
             },
+            identities=[{"id": "123e4567-e89b-12d3-a456-426614174000"}],
             integrations=[
                 {
                     "id": "550e8400-e29b-41d4-a716-446655440000",

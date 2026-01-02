@@ -145,6 +145,7 @@ class SessionsResource(SyncAPIResource):
         self,
         *,
         browser: session_create_params.Browser | Omit = omit,
+        identities: Iterable[session_create_params.Identity] | Omit = omit,
         integrations: Iterable[session_create_params.Integration] | Omit = omit,
         session: session_create_params.Session | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -160,6 +161,11 @@ class SessionsResource(SyncAPIResource):
 
         Args:
           browser: Browser-specific configurations.
+
+          identities: Activates an authenticated session.
+
+              **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
+              enable.
 
           integrations: Array of integrations to load in the browser session. Integrations must be
               previously created using the Integrations API.
@@ -179,6 +185,7 @@ class SessionsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "browser": browser,
+                    "identities": identities,
                     "integrations": integrations,
                     "session": session,
                 },
@@ -683,6 +690,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         self,
         *,
         browser: session_create_params.Browser | Omit = omit,
+        identities: Iterable[session_create_params.Identity] | Omit = omit,
         integrations: Iterable[session_create_params.Integration] | Omit = omit,
         session: session_create_params.Session | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -698,6 +706,11 @@ class AsyncSessionsResource(AsyncAPIResource):
 
         Args:
           browser: Browser-specific configurations.
+
+          identities: Activates an authenticated session.
+
+              **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
+              enable.
 
           integrations: Array of integrations to load in the browser session. Integrations must be
               previously created using the Integrations API.
@@ -717,6 +730,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "browser": browser,
+                    "identities": identities,
                     "integrations": integrations,
                     "session": session,
                 },

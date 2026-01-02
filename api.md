@@ -232,9 +232,19 @@ Methods:
 Types:
 
 ```python
-from anchorbrowser.types import IdentityRetrieveCredentialsResponse
+from anchorbrowser.types import (
+    IdentityCreateResponse,
+    IdentityRetrieveResponse,
+    IdentityUpdateResponse,
+    IdentityDeleteResponse,
+    IdentityRetrieveCredentialsResponse,
+)
 ```
 
 Methods:
 
+- <code title="post /v1/identities">client.identities.<a href="./src/anchorbrowser/resources/identities.py">create</a>(\*\*<a href="src/anchorbrowser/types/identity_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/identity_create_response.py">IdentityCreateResponse</a></code>
+- <code title="get /v1/identities/{identity_id}">client.identities.<a href="./src/anchorbrowser/resources/identities.py">retrieve</a>(identity_id) -> <a href="./src/anchorbrowser/types/identity_retrieve_response.py">IdentityRetrieveResponse</a></code>
+- <code title="put /v1/identities/{identity_id}">client.identities.<a href="./src/anchorbrowser/resources/identities.py">update</a>(identity_id, \*\*<a href="src/anchorbrowser/types/identity_update_params.py">params</a>) -> <a href="./src/anchorbrowser/types/identity_update_response.py">IdentityUpdateResponse</a></code>
+- <code title="delete /v1/identities/{identity_id}">client.identities.<a href="./src/anchorbrowser/resources/identities.py">delete</a>(identity_id) -> <a href="./src/anchorbrowser/types/identity_delete_response.py">IdentityDeleteResponse</a></code>
 - <code title="get /v1/identities/{identity_id}/credentials">client.identities.<a href="./src/anchorbrowser/resources/identities.py">retrieve_credentials</a>(identity_id) -> <a href="./src/anchorbrowser/types/identity_retrieve_credentials_response.py">IdentityRetrieveCredentialsResponse</a></code>
