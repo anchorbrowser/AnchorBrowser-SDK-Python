@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.6.0 (2026-01-05)
+
+Full Changelog: [v0.5.4...v0.6.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.5.4...v0.6.0)
+
+### Features
+
+* added applications endpoints as well ([ed63175](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/ed63175860a8ae9b9faa7273715cd2bdd29a4630))
+* added identity endpoints ([4c8b5e5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/4c8b5e56cf7b839b4ea10286d71a1284451bc5ac))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([ab770df](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/ab770df308f8eec33156bccbfea6fd0fd289ab1f))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([b4769fe](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/b4769fe1f15ed89ce57412661b6b717ff0438fa9))
+* **internal:** version bump ([3d54a22](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/3d54a22f2fed0955b3fcf36cc4ba82e36828eca8))
+
 ## 0.5.4 (2026-01-02)
 
 Full Changelog: [v0.5.3...v0.5.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.5.3...v0.5.4)
