@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING, Any, Mapping
+from typing import Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,7 +20,6 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
-from ._compat import cached_property
 from ._version import __version__
 from .resources import task, agent, tools, events, browser, profiles, extensions, identities
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
