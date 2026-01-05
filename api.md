@@ -248,3 +248,47 @@ Methods:
 - <code title="put /v1/identities/{identity_id}">client.identities.<a href="./src/anchorbrowser/resources/identities.py">update</a>(identity_id, \*\*<a href="src/anchorbrowser/types/identity_update_params.py">params</a>) -> <a href="./src/anchorbrowser/types/identity_update_response.py">IdentityUpdateResponse</a></code>
 - <code title="delete /v1/identities/{identity_id}">client.identities.<a href="./src/anchorbrowser/resources/identities.py">delete</a>(identity_id) -> <a href="./src/anchorbrowser/types/identity_delete_response.py">IdentityDeleteResponse</a></code>
 - <code title="get /v1/identities/{identity_id}/credentials">client.identities.<a href="./src/anchorbrowser/resources/identities.py">retrieve_credentials</a>(identity_id) -> <a href="./src/anchorbrowser/types/identity_retrieve_credentials_response.py">IdentityRetrieveCredentialsResponse</a></code>
+
+# Applications
+
+Types:
+
+```python
+from anchorbrowser.types import (
+    ApplicationCreateResponse,
+    ApplicationRetrieveResponse,
+    ApplicationListResponse,
+    ApplicationDeleteResponse,
+    ApplicationCreateIdentityTokenResponse,
+    ApplicationListIdentitiesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/applications">client.applications.<a href="./src/anchorbrowser/resources/applications/applications.py">create</a>(\*\*<a href="src/anchorbrowser/types/application_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/application_create_response.py">ApplicationCreateResponse</a></code>
+- <code title="get /v1/applications/{application_id}">client.applications.<a href="./src/anchorbrowser/resources/applications/applications.py">retrieve</a>(application_id) -> <a href="./src/anchorbrowser/types/application_retrieve_response.py">ApplicationRetrieveResponse</a></code>
+- <code title="get /v1/applications">client.applications.<a href="./src/anchorbrowser/resources/applications/applications.py">list</a>(\*\*<a href="src/anchorbrowser/types/application_list_params.py">params</a>) -> <a href="./src/anchorbrowser/types/application_list_response.py">ApplicationListResponse</a></code>
+- <code title="delete /v1/applications/{application_id}">client.applications.<a href="./src/anchorbrowser/resources/applications/applications.py">delete</a>(application_id) -> <a href="./src/anchorbrowser/types/application_delete_response.py">ApplicationDeleteResponse</a></code>
+- <code title="post /v1/applications/{application_id}/tokens">client.applications.<a href="./src/anchorbrowser/resources/applications/applications.py">create_identity_token</a>(application_id, \*\*<a href="src/anchorbrowser/types/application_create_identity_token_params.py">params</a>) -> <a href="./src/anchorbrowser/types/application_create_identity_token_response.py">ApplicationCreateIdentityTokenResponse</a></code>
+- <code title="get /v1/applications/{application_id}/identities">client.applications.<a href="./src/anchorbrowser/resources/applications/applications.py">list_identities</a>(application_id, \*\*<a href="src/anchorbrowser/types/application_list_identities_params.py">params</a>) -> <a href="./src/anchorbrowser/types/application_list_identities_response.py">ApplicationListIdentitiesResponse</a></code>
+
+## AuthFlows
+
+Types:
+
+```python
+from anchorbrowser.types.applications import (
+    AuthFlowCreateResponse,
+    AuthFlowUpdateResponse,
+    AuthFlowListResponse,
+    AuthFlowDeleteResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/applications/{application_id}/auth-flows">client.applications.auth_flows.<a href="./src/anchorbrowser/resources/applications/auth_flows.py">create</a>(application_id, \*\*<a href="src/anchorbrowser/types/applications/auth_flow_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/applications/auth_flow_create_response.py">AuthFlowCreateResponse</a></code>
+- <code title="patch /v1/applications/{application_id}/auth-flows/{auth_flow_id}">client.applications.auth_flows.<a href="./src/anchorbrowser/resources/applications/auth_flows.py">update</a>(auth_flow_id, \*, application_id, \*\*<a href="src/anchorbrowser/types/applications/auth_flow_update_params.py">params</a>) -> <a href="./src/anchorbrowser/types/applications/auth_flow_update_response.py">AuthFlowUpdateResponse</a></code>
+- <code title="get /v1/applications/{application_id}/auth-flows">client.applications.auth_flows.<a href="./src/anchorbrowser/resources/applications/auth_flows.py">list</a>(application_id) -> <a href="./src/anchorbrowser/types/applications/auth_flow_list_response.py">AuthFlowListResponse</a></code>
+- <code title="delete /v1/applications/{application_id}/auth-flows/{auth_flow_id}">client.applications.auth_flows.<a href="./src/anchorbrowser/resources/applications/auth_flows.py">delete</a>(auth_flow_id, \*, application_id) -> <a href="./src/anchorbrowser/types/applications/auth_flow_delete_response.py">AuthFlowDeleteResponse</a></code>
