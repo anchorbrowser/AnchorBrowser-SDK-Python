@@ -470,7 +470,6 @@ class AsyncAnchorbrowserWithStreamedResponse:
         self.task = task.AsyncTaskResourceWithStreamingResponse(client.task)
         self.identities = identities.AsyncIdentitiesResourceWithStreamingResponse(client.identities)
 
-
 Client = Anchorbrowser
 
 AsyncClient = AsyncAnchorbrowser
