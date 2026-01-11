@@ -31,6 +31,7 @@ class TestRun:
         run = client.task.run.execute(
             task_id="550e8400-e29b-41d4-a716-446655440000",
             async_=True,
+            cleanup_sessions=True,
             inputs={
                 "ANCHOR_TARGET_URL": "https://example.com",
                 "ANCHOR_MAX_PAGES": "10",
@@ -51,6 +52,7 @@ class TestRun:
                     "max_duration": 0,
                 },
             },
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             version="1",
         )
         assert_matches_type(RunExecuteResponse, run, path=["response"])
@@ -101,6 +103,7 @@ class TestAsyncRun:
         run = await async_client.task.run.execute(
             task_id="550e8400-e29b-41d4-a716-446655440000",
             async_=True,
+            cleanup_sessions=True,
             inputs={
                 "ANCHOR_TARGET_URL": "https://example.com",
                 "ANCHOR_MAX_PAGES": "10",
@@ -121,6 +124,7 @@ class TestAsyncRun:
                     "max_duration": 0,
                 },
             },
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             version="1",
         )
         assert_matches_type(RunExecuteResponse, run, path=["response"])

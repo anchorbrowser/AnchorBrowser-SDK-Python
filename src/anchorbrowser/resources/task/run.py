@@ -48,8 +48,10 @@ class RunResource(SyncAPIResource):
         *,
         task_id: str,
         async_: bool | Omit = omit,
+        cleanup_sessions: bool | Omit = omit,
         inputs: Dict[str, str] | Omit = omit,
         override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
+        session_id: str | Omit = omit,
         version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -69,9 +71,13 @@ class RunResource(SyncAPIResource):
 
           async_: Whether to run the task asynchronously.
 
+          cleanup_sessions: Whether to cleanup browser sessions after task execution. Defaults to true.
+
           inputs: Environment variables for task execution (keys must start with ANCHOR\\__)
 
           override_browser_configuration: Override browser configuration for this execution
+
+          session_id: Optional existing browser session ID to use for task execution
 
           version: Version to run (draft, latest, or version number)
 
@@ -89,8 +95,10 @@ class RunResource(SyncAPIResource):
                 {
                     "task_id": task_id,
                     "async_": async_,
+                    "cleanup_sessions": cleanup_sessions,
                     "inputs": inputs,
                     "override_browser_configuration": override_browser_configuration,
+                    "session_id": session_id,
                     "version": version,
                 },
                 run_execute_params.RunExecuteParams,
@@ -127,8 +135,10 @@ class AsyncRunResource(AsyncAPIResource):
         *,
         task_id: str,
         async_: bool | Omit = omit,
+        cleanup_sessions: bool | Omit = omit,
         inputs: Dict[str, str] | Omit = omit,
         override_browser_configuration: run_execute_params.OverrideBrowserConfiguration | Omit = omit,
+        session_id: str | Omit = omit,
         version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -148,9 +158,13 @@ class AsyncRunResource(AsyncAPIResource):
 
           async_: Whether to run the task asynchronously.
 
+          cleanup_sessions: Whether to cleanup browser sessions after task execution. Defaults to true.
+
           inputs: Environment variables for task execution (keys must start with ANCHOR\\__)
 
           override_browser_configuration: Override browser configuration for this execution
+
+          session_id: Optional existing browser session ID to use for task execution
 
           version: Version to run (draft, latest, or version number)
 
@@ -168,8 +182,10 @@ class AsyncRunResource(AsyncAPIResource):
                 {
                     "task_id": task_id,
                     "async_": async_,
+                    "cleanup_sessions": cleanup_sessions,
                     "inputs": inputs,
                     "override_browser_configuration": override_browser_configuration,
+                    "session_id": session_id,
                     "version": version,
                 },
                 run_execute_params.RunExecuteParams,

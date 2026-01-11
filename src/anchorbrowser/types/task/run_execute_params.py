@@ -26,6 +26,9 @@ class RunExecuteParams(TypedDict, total=False):
     async_: Annotated[bool, PropertyInfo(alias="async")]
     """Whether to run the task asynchronously."""
 
+    cleanup_sessions: Annotated[bool, PropertyInfo(alias="cleanupSessions")]
+    """Whether to cleanup browser sessions after task execution. Defaults to true."""
+
     inputs: Dict[str, str]
     """Environment variables for task execution (keys must start with ANCHOR\\__)"""
 
@@ -33,6 +36,9 @@ class RunExecuteParams(TypedDict, total=False):
         OverrideBrowserConfiguration, PropertyInfo(alias="overrideBrowserConfiguration")
     ]
     """Override browser configuration for this execution"""
+
+    session_id: Annotated[str, PropertyInfo(alias="sessionId")]
+    """Optional existing browser session ID to use for task execution"""
 
     version: str
     """Version to run (draft, latest, or version number)"""
