@@ -9,8 +9,11 @@ import pytest
 
 from tests.utils import assert_matches_type
 from anchorbrowser import Anchorbrowser, AsyncAnchorbrowser
-from anchorbrowser.types import TaskListResponse, TaskCreateResponse
-from anchorbrowser.types.task_run_response import RunExecuteResponse
+from anchorbrowser.types import (
+    TaskRunResponse,
+    TaskListResponse,
+    TaskCreateResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -122,16 +125,18 @@ class TestTask:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_run(self, client: Anchorbrowser) -> None:
-        run = client.task.run(
+        task = client.task.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(RunExecuteResponse, run, path=["response"])
+        assert_matches_type(TaskRunResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_run_with_all_params(self, client: Anchorbrowser) -> None:
-        run = client.task.run(
+        task = client.task.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
+            async_=True,
+            cleanup_sessions=True,
             inputs={
                 "ANCHOR_TARGET_URL": "https://example.com",
                 "ANCHOR_MAX_PAGES": "10",
@@ -152,9 +157,10 @@ class TestTask:
                     "max_duration": 0,
                 },
             },
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             version="1",
         )
-        assert_matches_type(RunExecuteResponse, run, path=["response"])
+        assert_matches_type(TaskRunResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -165,8 +171,8 @@ class TestTask:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        run = response.parse()
-        assert_matches_type(RunExecuteResponse, run, path=["response"])
+        task = response.parse()
+        assert_matches_type(TaskRunResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -196,9 +202,8 @@ class TestTask:
             },
             version="1",
         )
-        assert_matches_type(RunExecuteResponse, run, path=["response"])
-   
-   
+        assert_matches_type(TaskRunResponse, run, path=["response"])
+
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_run_async(self, client: Anchorbrowser) -> None:
@@ -210,7 +215,7 @@ class TestTask:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         run = response.parse()
-        assert_matches_type(RunExecuteResponse, run, path=["response"])
+        assert_matches_type(TaskRunResponse, run, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -221,8 +226,8 @@ class TestTask:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            run = response.parse()
-            assert_matches_type(RunExecuteResponse, run, path=["response"])
+            task = response.parse()
+            assert_matches_type(TaskRunResponse, task, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -336,16 +341,18 @@ class TestAsyncTask:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_run(self, async_client: AsyncAnchorbrowser) -> None:
-        run = await async_client.task.run(
+        task = await async_client.task.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(RunExecuteResponse, run, path=["response"])
+        assert_matches_type(TaskRunResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_run_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
-        run = await async_client.task.run(
+        task = await async_client.task.run(
             task_id="550e8400-e29b-41d4-a716-446655440000",
+            async_=True,
+            cleanup_sessions=True,
             inputs={
                 "ANCHOR_TARGET_URL": "https://example.com",
                 "ANCHOR_MAX_PAGES": "10",
@@ -366,9 +373,10 @@ class TestAsyncTask:
                     "max_duration": 0,
                 },
             },
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             version="1",
         )
-        assert_matches_type(RunExecuteResponse, run, path=["response"])
+        assert_matches_type(TaskRunResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -379,8 +387,8 @@ class TestAsyncTask:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        run = await response.parse()
-        assert_matches_type(RunExecuteResponse, run, path=["response"])
+        task = await response.parse()
+        assert_matches_type(TaskRunResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -391,7 +399,7 @@ class TestAsyncTask:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            run = await response.parse()
-            assert_matches_type(RunExecuteResponse, run, path=["response"])
+            task = await response.parse()
+            assert_matches_type(TaskRunResponse, task, path=["response"])
 
         assert cast(Any, response.is_closed) is True

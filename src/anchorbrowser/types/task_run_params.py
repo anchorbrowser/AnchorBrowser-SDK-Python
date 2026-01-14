@@ -8,7 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 from .._utils import PropertyInfo
 
 __all__ = [
-    "RunExecuteParams",
+    "TaskRunParams",
     "OverrideBrowserConfiguration",
     "OverrideBrowserConfigurationLiveView",
     "OverrideBrowserConfigurationProxy",
@@ -19,7 +19,7 @@ __all__ = [
 ]
 
 
-class RunExecuteParams(TypedDict, total=False):
+class TaskRunParams(TypedDict, total=False):
     task_id: Required[Annotated[str, PropertyInfo(alias="taskId")]]
     """Task identifier"""
 

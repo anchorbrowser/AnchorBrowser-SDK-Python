@@ -18,7 +18,6 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.sessions.agent import file_upload_params
-from ....types.sessions.agent.file_list_response import FileListResponse
 from ....types.sessions.agent.file_upload_response import FileUploadResponse
 
 __all__ = ["FilesResource", "AsyncFilesResource"]
@@ -43,41 +42,6 @@ class FilesResource(SyncAPIResource):
         For more information, see https://www.github.com/anchorbrowser/AnchorBrowser-SDK-Python#with_streaming_response
         """
         return FilesResourceWithStreamingResponse(self)
-
-    def list(
-        self,
-        session_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FileListResponse:
-        """
-        List all resources that have been uploaded to the browser session for agent use.
-        Returns resource metadata including name, size, type, and last modified
-        timestamp.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return self._get(
-            f"/v1/sessions/{session_id}/agent/files",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=FileListResponse,
-        )
 
     def upload(
         self,
@@ -148,41 +112,6 @@ class AsyncFilesResource(AsyncAPIResource):
         """
         return AsyncFilesResourceWithStreamingResponse(self)
 
-    async def list(
-        self,
-        session_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FileListResponse:
-        """
-        List all resources that have been uploaded to the browser session for agent use.
-        Returns resource metadata including name, size, type, and last modified
-        timestamp.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return await self._get(
-            f"/v1/sessions/{session_id}/agent/files",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=FileListResponse,
-        )
-
     async def upload(
         self,
         session_id: str,
@@ -236,9 +165,6 @@ class FilesResourceWithRawResponse:
     def __init__(self, files: FilesResource) -> None:
         self._files = files
 
-        self.list = to_raw_response_wrapper(
-            files.list,
-        )
         self.upload = to_raw_response_wrapper(
             files.upload,
         )
@@ -248,9 +174,6 @@ class AsyncFilesResourceWithRawResponse:
     def __init__(self, files: AsyncFilesResource) -> None:
         self._files = files
 
-        self.list = async_to_raw_response_wrapper(
-            files.list,
-        )
         self.upload = async_to_raw_response_wrapper(
             files.upload,
         )
@@ -260,9 +183,6 @@ class FilesResourceWithStreamingResponse:
     def __init__(self, files: FilesResource) -> None:
         self._files = files
 
-        self.list = to_streamed_response_wrapper(
-            files.list,
-        )
         self.upload = to_streamed_response_wrapper(
             files.upload,
         )
@@ -272,9 +192,6 @@ class AsyncFilesResourceWithStreamingResponse:
     def __init__(self, files: AsyncFilesResource) -> None:
         self._files = files
 
-        self.list = async_to_streamed_response_wrapper(
-            files.list,
-        )
         self.upload = async_to_streamed_response_wrapper(
             files.upload,
         )

@@ -16,7 +16,6 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.sessions import clipboard_set_params
-from ...types.sessions.clipboard_get_response import ClipboardGetResponse
 from ...types.sessions.clipboard_set_response import ClipboardSetResponse
 
 __all__ = ["ClipboardResource", "AsyncClipboardResource"]
@@ -41,39 +40,6 @@ class ClipboardResource(SyncAPIResource):
         For more information, see https://www.github.com/anchorbrowser/AnchorBrowser-SDK-Python#with_streaming_response
         """
         return ClipboardResourceWithStreamingResponse(self)
-
-    def get(
-        self,
-        session_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ClipboardGetResponse:
-        """
-        Retrieves the current content of the clipboard
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return self._get(
-            f"/v1/sessions/{session_id}/clipboard",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ClipboardGetResponse,
-        )
 
     def set(
         self,
@@ -133,39 +99,6 @@ class AsyncClipboardResource(AsyncAPIResource):
         """
         return AsyncClipboardResourceWithStreamingResponse(self)
 
-    async def get(
-        self,
-        session_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ClipboardGetResponse:
-        """
-        Retrieves the current content of the clipboard
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return await self._get(
-            f"/v1/sessions/{session_id}/clipboard",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ClipboardGetResponse,
-        )
-
     async def set(
         self,
         session_id: str,
@@ -208,9 +141,6 @@ class ClipboardResourceWithRawResponse:
     def __init__(self, clipboard: ClipboardResource) -> None:
         self._clipboard = clipboard
 
-        self.get = to_raw_response_wrapper(
-            clipboard.get,
-        )
         self.set = to_raw_response_wrapper(
             clipboard.set,
         )
@@ -220,9 +150,6 @@ class AsyncClipboardResourceWithRawResponse:
     def __init__(self, clipboard: AsyncClipboardResource) -> None:
         self._clipboard = clipboard
 
-        self.get = async_to_raw_response_wrapper(
-            clipboard.get,
-        )
         self.set = async_to_raw_response_wrapper(
             clipboard.set,
         )
@@ -232,9 +159,6 @@ class ClipboardResourceWithStreamingResponse:
     def __init__(self, clipboard: ClipboardResource) -> None:
         self._clipboard = clipboard
 
-        self.get = to_streamed_response_wrapper(
-            clipboard.get,
-        )
         self.set = to_streamed_response_wrapper(
             clipboard.set,
         )
@@ -244,9 +168,6 @@ class AsyncClipboardResourceWithStreamingResponse:
     def __init__(self, clipboard: AsyncClipboardResource) -> None:
         self._clipboard = clipboard
 
-        self.get = async_to_streamed_response_wrapper(
-            clipboard.get,
-        )
         self.set = async_to_streamed_response_wrapper(
             clipboard.set,
         )
