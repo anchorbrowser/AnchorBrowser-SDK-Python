@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.2 (2026-01-14)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.6.1...v0.6.2)
+
+### Features
+
+* added cleanup session ([028df9f](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/028df9f2a5c709db205c75a3bf525e599deda75f))
+* **client:** add support for binary request streaming ([d496f05](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/d496f05331dc564dfa14cf68e7ed3fefbb9d204e))
+
 ## 0.6.1 (2026-01-05)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.6.0...v0.6.1)
