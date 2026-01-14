@@ -25,7 +25,6 @@ from .mouse import (
 )
 from ...types import (
     session_goto_params,
-    session_paste_params,
     session_create_params,
     session_scroll_params,
     session_upload_file_params,
@@ -83,14 +82,11 @@ from .recordings.recordings import (
     RecordingsResourceWithStreamingResponse,
     AsyncRecordingsResourceWithStreamingResponse,
 )
-from ...types.session_copy_response import SessionCopyResponse
 from ...types.session_goto_response import SessionGotoResponse
-from ...types.session_paste_response import SessionPasteResponse
 from ...types.session_create_response import SessionCreateResponse
 from ...types.session_scroll_response import SessionScrollResponse
 from ...types.shared.success_response import SuccessResponse
 from ...types.session_retrieve_response import SessionRetrieveResponse
-from ...types.session_list_pages_response import SessionListPagesResponse
 from ...types.session_upload_file_response import SessionUploadFileResponse
 from ...types.session_drag_and_drop_response import SessionDragAndDropResponse
 from ...types.session_retrieve_downloads_response import SessionRetrieveDownloadsResponse
@@ -272,39 +268,6 @@ class SessionsResource(SyncAPIResource):
             cast_to=SuccessResponse,
         )
 
-    def copy(
-        self,
-        session_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionCopyResponse:
-        """
-        Copies the currently selected text to the clipboard
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return self._post(
-            f"/v1/sessions/{session_id}/copy",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SessionCopyResponse,
-        )
-
     def drag_and_drop(
         self,
         session_id: str,
@@ -398,76 +361,6 @@ class SessionsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SessionGotoResponse,
-        )
-
-    def list_pages(
-        self,
-        session_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionListPagesResponse:
-        """
-        Retrieves a list of pages associated with a specific browser session.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return self._get(
-            f"/v1/sessions/{session_id}/pages",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SessionListPagesResponse,
-        )
-
-    def paste(
-        self,
-        session_id: str,
-        *,
-        text: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionPasteResponse:
-        """
-        Pastes text at the current cursor position
-
-        Args:
-          text: Text to paste
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return self._post(
-            f"/v1/sessions/{session_id}/paste",
-            body=maybe_transform({"text": text}, session_paste_params.SessionPasteParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SessionPasteResponse,
         )
 
     def retrieve_downloads(
@@ -824,39 +717,6 @@ class AsyncSessionsResource(AsyncAPIResource):
             cast_to=SuccessResponse,
         )
 
-    async def copy(
-        self,
-        session_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionCopyResponse:
-        """
-        Copies the currently selected text to the clipboard
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return await self._post(
-            f"/v1/sessions/{session_id}/copy",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SessionCopyResponse,
-        )
-
     async def drag_and_drop(
         self,
         session_id: str,
@@ -950,76 +810,6 @@ class AsyncSessionsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SessionGotoResponse,
-        )
-
-    async def list_pages(
-        self,
-        session_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionListPagesResponse:
-        """
-        Retrieves a list of pages associated with a specific browser session.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return await self._get(
-            f"/v1/sessions/{session_id}/pages",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SessionListPagesResponse,
-        )
-
-    async def paste(
-        self,
-        session_id: str,
-        *,
-        text: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SessionPasteResponse:
-        """
-        Pastes text at the current cursor position
-
-        Args:
-          text: Text to paste
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return await self._post(
-            f"/v1/sessions/{session_id}/paste",
-            body=await async_maybe_transform({"text": text}, session_paste_params.SessionPasteParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SessionPasteResponse,
         )
 
     async def retrieve_downloads(
@@ -1215,20 +1005,11 @@ class SessionsResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             sessions.delete,
         )
-        self.copy = to_raw_response_wrapper(
-            sessions.copy,
-        )
         self.drag_and_drop = to_raw_response_wrapper(
             sessions.drag_and_drop,
         )
         self.goto = to_raw_response_wrapper(
             sessions.goto,
-        )
-        self.list_pages = to_raw_response_wrapper(
-            sessions.list_pages,
-        )
-        self.paste = to_raw_response_wrapper(
-            sessions.paste,
         )
         self.retrieve_downloads = to_raw_response_wrapper(
             sessions.retrieve_downloads,
@@ -1282,20 +1063,11 @@ class AsyncSessionsResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             sessions.delete,
         )
-        self.copy = async_to_raw_response_wrapper(
-            sessions.copy,
-        )
         self.drag_and_drop = async_to_raw_response_wrapper(
             sessions.drag_and_drop,
         )
         self.goto = async_to_raw_response_wrapper(
             sessions.goto,
-        )
-        self.list_pages = async_to_raw_response_wrapper(
-            sessions.list_pages,
-        )
-        self.paste = async_to_raw_response_wrapper(
-            sessions.paste,
         )
         self.retrieve_downloads = async_to_raw_response_wrapper(
             sessions.retrieve_downloads,
@@ -1348,20 +1120,11 @@ class SessionsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             sessions.delete,
         )
-        self.copy = to_streamed_response_wrapper(
-            sessions.copy,
-        )
         self.drag_and_drop = to_streamed_response_wrapper(
             sessions.drag_and_drop,
         )
         self.goto = to_streamed_response_wrapper(
             sessions.goto,
-        )
-        self.list_pages = to_streamed_response_wrapper(
-            sessions.list_pages,
-        )
-        self.paste = to_streamed_response_wrapper(
-            sessions.paste,
         )
         self.retrieve_downloads = to_streamed_response_wrapper(
             sessions.retrieve_downloads,
@@ -1414,20 +1177,11 @@ class AsyncSessionsResourceWithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             sessions.delete,
         )
-        self.copy = async_to_streamed_response_wrapper(
-            sessions.copy,
-        )
         self.drag_and_drop = async_to_streamed_response_wrapper(
             sessions.drag_and_drop,
         )
         self.goto = async_to_streamed_response_wrapper(
             sessions.goto,
-        )
-        self.list_pages = async_to_streamed_response_wrapper(
-            sessions.list_pages,
-        )
-        self.paste = async_to_streamed_response_wrapper(
-            sessions.paste,
         )
         self.retrieve_downloads = async_to_streamed_response_wrapper(
             sessions.retrieve_downloads,

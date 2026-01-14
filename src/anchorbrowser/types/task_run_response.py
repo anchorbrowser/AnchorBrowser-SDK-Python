@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["RunExecuteResponse", "Data"]
+__all__ = ["TaskRunResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -31,6 +31,6 @@ class Data(BaseModel):
     """Task execution output"""
 
 
-class RunExecuteResponse(BaseModel):
+class TaskRunResponse(BaseModel):
     data: Optional[Data] = None
 

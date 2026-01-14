@@ -12,13 +12,10 @@ from respx import MockRouter
 from tests.utils import assert_matches_type
 from anchorbrowser import Anchorbrowser, AsyncAnchorbrowser
 from anchorbrowser.types import (
-    SessionCopyResponse,
     SessionGotoResponse,
-    SessionPasteResponse,
     SessionCreateResponse,
     SessionScrollResponse,
     SessionRetrieveResponse,
-    SessionListPagesResponse,
     SessionUploadFileResponse,
     SessionDragAndDropResponse,
     SessionRetrieveDownloadsResponse,
@@ -201,48 +198,6 @@ class TestSessions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_copy(self, client: Anchorbrowser) -> None:
-        session = client.sessions.copy(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(SessionCopyResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_copy(self, client: Anchorbrowser) -> None:
-        response = client.sessions.with_raw_response.copy(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        session = response.parse()
-        assert_matches_type(SessionCopyResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_copy(self, client: Anchorbrowser) -> None:
-        with client.sessions.with_streaming_response.copy(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            session = response.parse()
-            assert_matches_type(SessionCopyResponse, session, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_path_params_copy(self, client: Anchorbrowser) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            client.sessions.with_raw_response.copy(
-                "",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
     def test_method_drag_and_drop(self, client: Anchorbrowser) -> None:
         session = client.sessions.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -356,94 +311,6 @@ class TestSessions:
             client.sessions.with_raw_response.goto(
                 session_id="",
                 url="url",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_list_pages(self, client: Anchorbrowser) -> None:
-        session = client.sessions.list_pages(
-            "session_id",
-        )
-        assert_matches_type(SessionListPagesResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_list_pages(self, client: Anchorbrowser) -> None:
-        response = client.sessions.with_raw_response.list_pages(
-            "session_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        session = response.parse()
-        assert_matches_type(SessionListPagesResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_list_pages(self, client: Anchorbrowser) -> None:
-        with client.sessions.with_streaming_response.list_pages(
-            "session_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            session = response.parse()
-            assert_matches_type(SessionListPagesResponse, session, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_path_params_list_pages(self, client: Anchorbrowser) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            client.sessions.with_raw_response.list_pages(
-                "",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_paste(self, client: Anchorbrowser) -> None:
-        session = client.sessions.paste(
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="text",
-        )
-        assert_matches_type(SessionPasteResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_paste(self, client: Anchorbrowser) -> None:
-        response = client.sessions.with_raw_response.paste(
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="text",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        session = response.parse()
-        assert_matches_type(SessionPasteResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_paste(self, client: Anchorbrowser) -> None:
-        with client.sessions.with_streaming_response.paste(
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="text",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            session = response.parse()
-            assert_matches_type(SessionPasteResponse, session, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_path_params_paste(self, client: Anchorbrowser) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            client.sessions.with_raw_response.paste(
-                session_id="",
-                text="text",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -828,48 +695,6 @@ class TestAsyncSessions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_copy(self, async_client: AsyncAnchorbrowser) -> None:
-        session = await async_client.sessions.copy(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(SessionCopyResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_copy(self, async_client: AsyncAnchorbrowser) -> None:
-        response = await async_client.sessions.with_raw_response.copy(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        session = await response.parse()
-        assert_matches_type(SessionCopyResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_copy(self, async_client: AsyncAnchorbrowser) -> None:
-        async with async_client.sessions.with_streaming_response.copy(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            session = await response.parse()
-            assert_matches_type(SessionCopyResponse, session, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_path_params_copy(self, async_client: AsyncAnchorbrowser) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            await async_client.sessions.with_raw_response.copy(
-                "",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
     async def test_method_drag_and_drop(self, async_client: AsyncAnchorbrowser) -> None:
         session = await async_client.sessions.drag_and_drop(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -983,94 +808,6 @@ class TestAsyncSessions:
             await async_client.sessions.with_raw_response.goto(
                 session_id="",
                 url="url",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_list_pages(self, async_client: AsyncAnchorbrowser) -> None:
-        session = await async_client.sessions.list_pages(
-            "session_id",
-        )
-        assert_matches_type(SessionListPagesResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_list_pages(self, async_client: AsyncAnchorbrowser) -> None:
-        response = await async_client.sessions.with_raw_response.list_pages(
-            "session_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        session = await response.parse()
-        assert_matches_type(SessionListPagesResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_list_pages(self, async_client: AsyncAnchorbrowser) -> None:
-        async with async_client.sessions.with_streaming_response.list_pages(
-            "session_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            session = await response.parse()
-            assert_matches_type(SessionListPagesResponse, session, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_path_params_list_pages(self, async_client: AsyncAnchorbrowser) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            await async_client.sessions.with_raw_response.list_pages(
-                "",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_paste(self, async_client: AsyncAnchorbrowser) -> None:
-        session = await async_client.sessions.paste(
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="text",
-        )
-        assert_matches_type(SessionPasteResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_paste(self, async_client: AsyncAnchorbrowser) -> None:
-        response = await async_client.sessions.with_raw_response.paste(
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="text",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        session = await response.parse()
-        assert_matches_type(SessionPasteResponse, session, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_paste(self, async_client: AsyncAnchorbrowser) -> None:
-        async with async_client.sessions.with_streaming_response.paste(
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            text="text",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            session = await response.parse()
-            assert_matches_type(SessionPasteResponse, session, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_path_params_paste(self, async_client: AsyncAnchorbrowser) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            await async_client.sessions.with_raw_response.paste(
-                session_id="",
-                text="text",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

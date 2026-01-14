@@ -9,13 +9,8 @@ from .mouse_move_response import MouseMoveResponse as MouseMoveResponse
 from .clipboard_set_params import ClipboardSetParams as ClipboardSetParams
 from .keyboard_type_params import KeyboardTypeParams as KeyboardTypeParams
 from .mouse_click_response import MouseClickResponse as MouseClickResponse
-from .clipboard_get_response import ClipboardGetResponse as ClipboardGetResponse
 from .clipboard_set_response import ClipboardSetResponse as ClipboardSetResponse
 from .keyboard_type_response import KeyboardTypeResponse as KeyboardTypeResponse
 from .recording_list_response import RecordingListResponse as RecordingListResponse
 from .keyboard_shortcut_params import KeyboardShortcutParams as KeyboardShortcutParams
-from .recording_pause_response import RecordingPauseResponse as RecordingPauseResponse
-from .mouse_double_click_params import MouseDoubleClickParams as MouseDoubleClickParams
-from .recording_resume_response import RecordingResumeResponse as RecordingResumeResponse
 from .keyboard_shortcut_response import KeyboardShortcutResponse as KeyboardShortcutResponse
-from .mouse_double_click_response import MouseDoubleClickResponse as MouseDoubleClickResponse
