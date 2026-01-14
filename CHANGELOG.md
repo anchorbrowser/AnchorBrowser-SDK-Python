@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0 (2026-01-14)
+
+Full Changelog: [v0.6.2...v0.7.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.6.2...v0.7.0)
+
+### Features
+
+* **api:** manual updates ([cc4db06](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/cc4db0601ddb4ca2bd37bc56415678d69b1e65df))
+
 ## 0.6.2 (2026-01-14)
 
 Full Changelog: [v0.6.1...v0.6.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.6.1...v0.6.2)
