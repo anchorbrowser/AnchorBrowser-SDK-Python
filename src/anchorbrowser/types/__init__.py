@@ -3,28 +3,26 @@
 from __future__ import annotations
 
 from .shared import SuccessResponse as SuccessResponse
+from .task_run_params import TaskRunParams as TaskRunParams
 from .task_list_params import TaskListParams as TaskListParams
+from .task_run_response import TaskRunResponse as TaskRunResponse
 from .extension_manifest import ExtensionManifest as ExtensionManifest
 from .task_create_params import TaskCreateParams as TaskCreateParams
 from .task_list_response import TaskListResponse as TaskListResponse
 from .event_signal_params import EventSignalParams as EventSignalParams
 from .session_goto_params import SessionGotoParams as SessionGotoParams
-from .session_paste_params import SessionPasteParams as SessionPasteParams
 from .task_create_response import TaskCreateResponse as TaskCreateResponse
 from .event_wait_for_params import EventWaitForParams as EventWaitForParams
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_list_response import ProfileListResponse as ProfileListResponse
-from .session_copy_response import SessionCopyResponse as SessionCopyResponse
 from .session_create_params import SessionCreateParams as SessionCreateParams
 from .session_goto_response import SessionGotoResponse as SessionGotoResponse
 from .session_scroll_params import SessionScrollParams as SessionScrollParams
 from .identity_create_params import IdentityCreateParams as IdentityCreateParams
 from .identity_update_params import IdentityUpdateParams as IdentityUpdateParams
-from .session_paste_response import SessionPasteResponse as SessionPasteResponse
 from .application_list_params import ApplicationListParams as ApplicationListParams
 from .event_wait_for_response import EventWaitForResponse as EventWaitForResponse
 from .extension_list_response import ExtensionListResponse as ExtensionListResponse
-from .extension_upload_params import ExtensionUploadParams as ExtensionUploadParams
 from .session_create_response import SessionCreateResponse as SessionCreateResponse
 from .session_scroll_response import SessionScrollResponse as SessionScrollResponse
 from .identity_create_response import IdentityCreateResponse as IdentityCreateResponse
@@ -32,8 +30,6 @@ from .identity_delete_response import IdentityDeleteResponse as IdentityDeleteRe
 from .identity_update_response import IdentityUpdateResponse as IdentityUpdateResponse
 from .application_create_params import ApplicationCreateParams as ApplicationCreateParams
 from .application_list_response import ApplicationListResponse as ApplicationListResponse
-from .extension_delete_response import ExtensionDeleteResponse as ExtensionDeleteResponse
-from .extension_upload_response import ExtensionUploadResponse as ExtensionUploadResponse
 from .profile_retrieve_response import ProfileRetrieveResponse as ProfileRetrieveResponse
 from .session_retrieve_response import SessionRetrieveResponse as SessionRetrieveResponse
 from .tool_fetch_webpage_params import ToolFetchWebpageParams as ToolFetchWebpageParams
@@ -41,8 +37,6 @@ from .identity_retrieve_response import IdentityRetrieveResponse as IdentityRetr
 from .session_upload_file_params import SessionUploadFileParams as SessionUploadFileParams
 from .application_create_response import ApplicationCreateResponse as ApplicationCreateResponse
 from .application_delete_response import ApplicationDeleteResponse as ApplicationDeleteResponse
-from .extension_retrieve_response import ExtensionRetrieveResponse as ExtensionRetrieveResponse
-from .session_list_pages_response import SessionListPagesResponse as SessionListPagesResponse
 from .tool_fetch_webpage_response import ToolFetchWebpageResponse as ToolFetchWebpageResponse
 from .session_drag_and_drop_params import SessionDragAndDropParams as SessionDragAndDropParams
 from .session_upload_file_response import SessionUploadFileResponse as SessionUploadFileResponse
