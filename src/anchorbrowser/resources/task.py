@@ -7,38 +7,26 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...types import task_run_params, task_list_params, task_create_params
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
-from ..._compat import cached_property
-from .executions import (
-    ExecutionsResource,
-    AsyncExecutionsResource,
-    ExecutionsResourceWithRawResponse,
-    AsyncExecutionsResourceWithRawResponse,
-    ExecutionsResourceWithStreamingResponse,
-    AsyncExecutionsResourceWithStreamingResponse,
-)
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ..types import task_run_params, task_list_params, task_create_params
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._utils import maybe_transform, async_maybe_transform
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
-from ...types.task_run_response import TaskRunResponse
-from ...types.task_list_response import TaskListResponse
-from ...types.task_create_response import TaskCreateResponse
+from .._base_client import make_request_options
+from ..types.task_run_response import TaskRunResponse
+from ..types.task_list_response import TaskListResponse
+from ..types.task_create_response import TaskCreateResponse
 
 __all__ = ["TaskResource", "AsyncTaskResource"]
 
 
 class TaskResource(SyncAPIResource):
-    @cached_property
-    def executions(self) -> ExecutionsResource:
-        return ExecutionsResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> TaskResourceWithRawResponse:
         """
@@ -164,6 +152,45 @@ class TaskResource(SyncAPIResource):
             cast_to=TaskListResponse,
         )
 
+    def retrieve_execution_result(
+        self,
+        execution_id: str,
+        *,
+        task_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """Retrieves a single execution result by its ID.
+
+        This endpoint is useful for
+        polling execution status in async mode or retrieving detailed execution
+        information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
+        if not execution_id:
+            raise ValueError(f"Expected a non-empty value for `execution_id` but received {execution_id!r}")
+        return self._get(
+            f"/v1/task/{task_id}/executions/{execution_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
     def run(
         self,
         *,
@@ -232,10 +259,6 @@ class TaskResource(SyncAPIResource):
 
 
 class AsyncTaskResource(AsyncAPIResource):
-    @cached_property
-    def executions(self) -> AsyncExecutionsResource:
-        return AsyncExecutionsResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> AsyncTaskResourceWithRawResponse:
         """
@@ -361,6 +384,45 @@ class AsyncTaskResource(AsyncAPIResource):
             cast_to=TaskListResponse,
         )
 
+    async def retrieve_execution_result(
+        self,
+        execution_id: str,
+        *,
+        task_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """Retrieves a single execution result by its ID.
+
+        This endpoint is useful for
+        polling execution status in async mode or retrieving detailed execution
+        information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
+        if not execution_id:
+            raise ValueError(f"Expected a non-empty value for `execution_id` but received {execution_id!r}")
+        return await self._get(
+            f"/v1/task/{task_id}/executions/{execution_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
     async def run(
         self,
         *,
@@ -438,13 +500,12 @@ class TaskResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             task.list,
         )
+        self.retrieve_execution_result = to_raw_response_wrapper(
+            task.retrieve_execution_result,
+        )
         self.run = to_raw_response_wrapper(
             task.run,
         )
-
-    @cached_property
-    def executions(self) -> ExecutionsResourceWithRawResponse:
-        return ExecutionsResourceWithRawResponse(self._task.executions)
 
 
 class AsyncTaskResourceWithRawResponse:
@@ -457,13 +518,12 @@ class AsyncTaskResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             task.list,
         )
+        self.retrieve_execution_result = async_to_raw_response_wrapper(
+            task.retrieve_execution_result,
+        )
         self.run = async_to_raw_response_wrapper(
             task.run,
         )
-
-    @cached_property
-    def executions(self) -> AsyncExecutionsResourceWithRawResponse:
-        return AsyncExecutionsResourceWithRawResponse(self._task.executions)
 
 
 class TaskResourceWithStreamingResponse:
@@ -476,13 +536,12 @@ class TaskResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             task.list,
         )
+        self.retrieve_execution_result = to_streamed_response_wrapper(
+            task.retrieve_execution_result,
+        )
         self.run = to_streamed_response_wrapper(
             task.run,
         )
-
-    @cached_property
-    def executions(self) -> ExecutionsResourceWithStreamingResponse:
-        return ExecutionsResourceWithStreamingResponse(self._task.executions)
 
 
 class AsyncTaskResourceWithStreamingResponse:
@@ -495,10 +554,9 @@ class AsyncTaskResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             task.list,
         )
+        self.retrieve_execution_result = async_to_streamed_response_wrapper(
+            task.retrieve_execution_result,
+        )
         self.run = async_to_streamed_response_wrapper(
             task.run,
         )
-
-    @cached_property
-    def executions(self) -> AsyncExecutionsResourceWithStreamingResponse:
-        return AsyncExecutionsResourceWithStreamingResponse(self._task.executions)
