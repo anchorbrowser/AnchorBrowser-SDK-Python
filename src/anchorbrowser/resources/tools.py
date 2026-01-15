@@ -139,6 +139,7 @@ class ToolsResource(SyncAPIResource):
         secret_values: Dict[str, str] | Omit = omit,
         url: str | Omit = omit,
         directly_open_url: bool | Omit = omit,
+        async_: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -185,6 +186,8 @@ class ToolsResource(SyncAPIResource):
 
           directly_open_url: If true, the tool will directly open the URL in the browser.
 
+          async_: Whether to execute the task asynchronously.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -209,6 +212,7 @@ class ToolsResource(SyncAPIResource):
                     "secret_values": secret_values,
                     "url": url,
                     "directly_open_url": directly_open_url,
+                    "async": async_,
                 },
                 tool_perform_web_task_params.ToolPerformWebTaskParams,
             ),
@@ -416,6 +420,7 @@ class AsyncToolsResource(AsyncAPIResource):
         secret_values: Dict[str, str] | Omit = omit,
         url: str | Omit = omit,
         directly_open_url: bool | Omit = omit,
+        async_: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -462,6 +467,8 @@ class AsyncToolsResource(AsyncAPIResource):
 
           directly_open_url: If true, the tool will directly open the URL in the browser.
 
+          async_: Whether to execute the task asynchronously.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -486,6 +493,7 @@ class AsyncToolsResource(AsyncAPIResource):
                     "secret_values": secret_values,
                     "url": url,
                     "directly_open_url": directly_open_url,
+                    "async": async_,
                 },
                 tool_perform_web_task_params.ToolPerformWebTaskParams,
             ),
