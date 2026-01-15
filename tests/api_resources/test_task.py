@@ -13,6 +13,7 @@ from anchorbrowser.types import (
     TaskRunResponse,
     TaskListResponse,
     TaskCreateResponse,
+    TaskRetrieveExecutionResultResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -129,7 +130,7 @@ class TestTask:
             execution_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             task_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(object, task, path=["response"])
+        assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -142,7 +143,7 @@ class TestTask:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         task = response.parse()
-        assert_matches_type(object, task, path=["response"])
+        assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -155,7 +156,7 @@ class TestTask:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             task = response.parse()
-            assert_matches_type(object, task, path=["response"])
+            assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -397,7 +398,7 @@ class TestAsyncTask:
             execution_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             task_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(object, task, path=["response"])
+        assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -410,7 +411,7 @@ class TestAsyncTask:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         task = await response.parse()
-        assert_matches_type(object, task, path=["response"])
+        assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -423,7 +424,7 @@ class TestAsyncTask:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             task = await response.parse()
-            assert_matches_type(object, task, path=["response"])
+            assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

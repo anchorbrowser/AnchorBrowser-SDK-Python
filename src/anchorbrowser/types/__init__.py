@@ -51,8 +51,14 @@ from .application_list_identities_response import ApplicationListIdentitiesRespo
 from .identity_retrieve_credentials_response import (
     IdentityRetrieveCredentialsResponse as IdentityRetrieveCredentialsResponse,
 )
+from .task_retrieve_execution_result_response import (
+    TaskRetrieveExecutionResultResponse as TaskRetrieveExecutionResultResponse,
+)
 from .application_create_identity_token_params import (
     ApplicationCreateIdentityTokenParams as ApplicationCreateIdentityTokenParams,
+)
+from .tool_get_perform_web_task_status_response import (
+    ToolGetPerformWebTaskStatusResponse as ToolGetPerformWebTaskStatusResponse,
 )
 from .application_create_identity_token_response import (
     ApplicationCreateIdentityTokenResponse as ApplicationCreateIdentityTokenResponse,

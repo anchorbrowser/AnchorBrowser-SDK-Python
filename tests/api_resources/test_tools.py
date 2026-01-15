@@ -13,6 +13,7 @@ from tests.utils import assert_matches_type
 from anchorbrowser import Anchorbrowser, AsyncAnchorbrowser
 from anchorbrowser.types import (
     ToolPerformWebTaskResponse,
+    ToolGetPerformWebTaskStatusResponse,
 )
 from anchorbrowser._response import (
     BinaryAPIResponse,
@@ -75,7 +76,7 @@ class TestTools:
         tool = client.tools.get_perform_web_task_status(
             "workflowId",
         )
-        assert_matches_type(object, tool, path=["response"])
+        assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -87,7 +88,7 @@ class TestTools:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tool = response.parse()
-        assert_matches_type(object, tool, path=["response"])
+        assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -99,7 +100,7 @@ class TestTools:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tool = response.parse()
-            assert_matches_type(object, tool, path=["response"])
+            assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -274,7 +275,7 @@ class TestAsyncTools:
         tool = await async_client.tools.get_perform_web_task_status(
             "workflowId",
         )
-        assert_matches_type(object, tool, path=["response"])
+        assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -286,7 +287,7 @@ class TestAsyncTools:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tool = await response.parse()
-        assert_matches_type(object, tool, path=["response"])
+        assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -298,7 +299,7 @@ class TestAsyncTools:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tool = await response.parse()
-            assert_matches_type(object, tool, path=["response"])
+            assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

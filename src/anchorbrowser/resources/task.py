@@ -22,6 +22,7 @@ from .._base_client import make_request_options
 from ..types.task_run_response import TaskRunResponse
 from ..types.task_list_response import TaskListResponse
 from ..types.task_create_response import TaskCreateResponse
+from ..types.task_retrieve_execution_result_response import TaskRetrieveExecutionResultResponse
 
 __all__ = ["TaskResource", "AsyncTaskResource"]
 
@@ -163,7 +164,7 @@ class TaskResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> TaskRetrieveExecutionResultResponse:
         """Retrieves a single execution result by its ID.
 
         This endpoint is useful for
@@ -188,7 +189,7 @@ class TaskResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=TaskRetrieveExecutionResultResponse,
         )
 
     def run(
@@ -395,7 +396,7 @@ class AsyncTaskResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> TaskRetrieveExecutionResultResponse:
         """Retrieves a single execution result by its ID.
 
         This endpoint is useful for
@@ -420,7 +421,7 @@ class AsyncTaskResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=TaskRetrieveExecutionResultResponse,
         )
 
     async def run(
