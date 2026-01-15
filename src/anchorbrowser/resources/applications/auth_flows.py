@@ -18,11 +18,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.applications import auth_flow_create_params, auth_flow_update_params
+from ...types.applications import auth_flow_create_params
 from ...types.applications.auth_flow_list_response import AuthFlowListResponse
 from ...types.applications.auth_flow_create_response import AuthFlowCreateResponse
 from ...types.applications.auth_flow_delete_response import AuthFlowDeleteResponse
-from ...types.applications.auth_flow_update_response import AuthFlowUpdateResponse
 
 __all__ = ["AuthFlowsResource", "AsyncAuthFlowsResource"]
 
@@ -107,71 +106,6 @@ class AuthFlowsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthFlowCreateResponse,
-        )
-
-    def update(
-        self,
-        auth_flow_id: str,
-        *,
-        application_id: str,
-        custom_fields: Iterable[auth_flow_update_params.CustomField] | Omit = omit,
-        description: str | Omit = omit,
-        is_recommended: bool | Omit = omit,
-        methods: List[Literal["username_password", "authenticator", "custom"]] | Omit = omit,
-        name: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AuthFlowUpdateResponse:
-        """Updates an existing authentication flow.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
-
-        Args:
-          custom_fields: Custom fields for this authentication flow
-
-          description: Description of the authentication flow
-
-          is_recommended: Whether this is the recommended authentication flow
-
-          methods: Authentication methods in this flow
-
-          name: Name of the authentication flow
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not application_id:
-            raise ValueError(f"Expected a non-empty value for `application_id` but received {application_id!r}")
-        if not auth_flow_id:
-            raise ValueError(f"Expected a non-empty value for `auth_flow_id` but received {auth_flow_id!r}")
-        return self._patch(
-            f"/v1/applications/{application_id}/auth-flows/{auth_flow_id}",
-            body=maybe_transform(
-                {
-                    "custom_fields": custom_fields,
-                    "description": description,
-                    "is_recommended": is_recommended,
-                    "methods": methods,
-                    "name": name,
-                },
-                auth_flow_update_params.AuthFlowUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AuthFlowUpdateResponse,
         )
 
     def list(
@@ -333,71 +267,6 @@ class AsyncAuthFlowsResource(AsyncAPIResource):
             cast_to=AuthFlowCreateResponse,
         )
 
-    async def update(
-        self,
-        auth_flow_id: str,
-        *,
-        application_id: str,
-        custom_fields: Iterable[auth_flow_update_params.CustomField] | Omit = omit,
-        description: str | Omit = omit,
-        is_recommended: bool | Omit = omit,
-        methods: List[Literal["username_password", "authenticator", "custom"]] | Omit = omit,
-        name: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AuthFlowUpdateResponse:
-        """Updates an existing authentication flow.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
-
-        Args:
-          custom_fields: Custom fields for this authentication flow
-
-          description: Description of the authentication flow
-
-          is_recommended: Whether this is the recommended authentication flow
-
-          methods: Authentication methods in this flow
-
-          name: Name of the authentication flow
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not application_id:
-            raise ValueError(f"Expected a non-empty value for `application_id` but received {application_id!r}")
-        if not auth_flow_id:
-            raise ValueError(f"Expected a non-empty value for `auth_flow_id` but received {auth_flow_id!r}")
-        return await self._patch(
-            f"/v1/applications/{application_id}/auth-flows/{auth_flow_id}",
-            body=await async_maybe_transform(
-                {
-                    "custom_fields": custom_fields,
-                    "description": description,
-                    "is_recommended": is_recommended,
-                    "methods": methods,
-                    "name": name,
-                },
-                auth_flow_update_params.AuthFlowUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AuthFlowUpdateResponse,
-        )
-
     async def list(
         self,
         application_id: str,
@@ -482,9 +351,6 @@ class AuthFlowsResourceWithRawResponse:
         self.create = to_raw_response_wrapper(
             auth_flows.create,
         )
-        self.update = to_raw_response_wrapper(
-            auth_flows.update,
-        )
         self.list = to_raw_response_wrapper(
             auth_flows.list,
         )
@@ -499,9 +365,6 @@ class AsyncAuthFlowsResourceWithRawResponse:
 
         self.create = async_to_raw_response_wrapper(
             auth_flows.create,
-        )
-        self.update = async_to_raw_response_wrapper(
-            auth_flows.update,
         )
         self.list = async_to_raw_response_wrapper(
             auth_flows.list,
@@ -518,9 +381,6 @@ class AuthFlowsResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             auth_flows.create,
         )
-        self.update = to_streamed_response_wrapper(
-            auth_flows.update,
-        )
         self.list = to_streamed_response_wrapper(
             auth_flows.list,
         )
@@ -535,9 +395,6 @@ class AsyncAuthFlowsResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             auth_flows.create,
-        )
-        self.update = async_to_streamed_response_wrapper(
-            auth_flows.update,
         )
         self.list = async_to_streamed_response_wrapper(
             auth_flows.list,

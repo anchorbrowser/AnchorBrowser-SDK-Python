@@ -13,7 +13,6 @@ from anchorbrowser.types.applications import (
     AuthFlowListResponse,
     AuthFlowCreateResponse,
     AuthFlowDeleteResponse,
-    AuthFlowUpdateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -83,72 +82,6 @@ class TestAuthFlows:
                 application_id="",
                 methods=["username_password"],
                 name="Standard Login",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_update(self, client: Anchorbrowser) -> None:
-        auth_flow = client.applications.auth_flows.update(
-            auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(AuthFlowUpdateResponse, auth_flow, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_update_with_all_params(self, client: Anchorbrowser) -> None:
-        auth_flow = client.applications.auth_flows.update(
-            auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            custom_fields=[{"name": "name"}],
-            description="description",
-            is_recommended=True,
-            methods=["username_password", "authenticator"],
-            name="Updated Login Flow",
-        )
-        assert_matches_type(AuthFlowUpdateResponse, auth_flow, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_update(self, client: Anchorbrowser) -> None:
-        response = client.applications.auth_flows.with_raw_response.update(
-            auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        auth_flow = response.parse()
-        assert_matches_type(AuthFlowUpdateResponse, auth_flow, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_update(self, client: Anchorbrowser) -> None:
-        with client.applications.auth_flows.with_streaming_response.update(
-            auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            auth_flow = response.parse()
-            assert_matches_type(AuthFlowUpdateResponse, auth_flow, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_path_params_update(self, client: Anchorbrowser) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `application_id` but received ''"):
-            client.applications.auth_flows.with_raw_response.update(
-                auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                application_id="",
-            )
-
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_flow_id` but received ''"):
-            client.applications.auth_flows.with_raw_response.update(
-                auth_flow_id="",
-                application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -312,72 +245,6 @@ class TestAsyncAuthFlows:
                 application_id="",
                 methods=["username_password"],
                 name="Standard Login",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_update(self, async_client: AsyncAnchorbrowser) -> None:
-        auth_flow = await async_client.applications.auth_flows.update(
-            auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(AuthFlowUpdateResponse, auth_flow, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
-        auth_flow = await async_client.applications.auth_flows.update(
-            auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            custom_fields=[{"name": "name"}],
-            description="description",
-            is_recommended=True,
-            methods=["username_password", "authenticator"],
-            name="Updated Login Flow",
-        )
-        assert_matches_type(AuthFlowUpdateResponse, auth_flow, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_update(self, async_client: AsyncAnchorbrowser) -> None:
-        response = await async_client.applications.auth_flows.with_raw_response.update(
-            auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        auth_flow = await response.parse()
-        assert_matches_type(AuthFlowUpdateResponse, auth_flow, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncAnchorbrowser) -> None:
-        async with async_client.applications.auth_flows.with_streaming_response.update(
-            auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            auth_flow = await response.parse()
-            assert_matches_type(AuthFlowUpdateResponse, auth_flow, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_path_params_update(self, async_client: AsyncAnchorbrowser) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `application_id` but received ''"):
-            await async_client.applications.auth_flows.with_raw_response.update(
-                auth_flow_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                application_id="",
-            )
-
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_flow_id` but received ''"):
-            await async_client.applications.auth_flows.with_raw_response.update(
-                auth_flow_id="",
-                application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

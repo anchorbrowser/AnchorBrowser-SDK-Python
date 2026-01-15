@@ -241,7 +241,6 @@ Types:
 ```python
 from anchorbrowser.types.applications import (
     AuthFlowCreateResponse,
-    AuthFlowUpdateResponse,
     AuthFlowListResponse,
     AuthFlowDeleteResponse,
 )
@@ -250,6 +249,5 @@ from anchorbrowser.types.applications import (
 Methods:
 
 - <code title="post /v1/applications/{application_id}/auth-flows">client.applications.auth_flows.<a href="./src/anchorbrowser/resources/applications/auth_flows.py">create</a>(application_id, \*\*<a href="src/anchorbrowser/types/applications/auth_flow_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/applications/auth_flow_create_response.py">AuthFlowCreateResponse</a></code>
-- <code title="patch /v1/applications/{application_id}/auth-flows/{auth_flow_id}">client.applications.auth_flows.<a href="./src/anchorbrowser/resources/applications/auth_flows.py">update</a>(auth_flow_id, \*, application_id, \*\*<a href="src/anchorbrowser/types/applications/auth_flow_update_params.py">params</a>) -> <a href="./src/anchorbrowser/types/applications/auth_flow_update_response.py">AuthFlowUpdateResponse</a></code>
 - <code title="get /v1/applications/{application_id}/auth-flows">client.applications.auth_flows.<a href="./src/anchorbrowser/resources/applications/auth_flows.py">list</a>(application_id) -> <a href="./src/anchorbrowser/types/applications/auth_flow_list_response.py">AuthFlowListResponse</a></code>
 - <code title="delete /v1/applications/{application_id}/auth-flows/{auth_flow_id}">client.applications.auth_flows.<a href="./src/anchorbrowser/resources/applications/auth_flows.py">delete</a>(auth_flow_id, \*, application_id) -> <a href="./src/anchorbrowser/types/applications/auth_flow_delete_response.py">AuthFlowDeleteResponse</a></code>
