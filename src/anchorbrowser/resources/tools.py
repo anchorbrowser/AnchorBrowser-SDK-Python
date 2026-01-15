@@ -28,6 +28,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.tool_perform_web_task_response import ToolPerformWebTaskResponse
+from ..types.tool_get_perform_web_task_status_response import ToolGetPerformWebTaskStatusResponse
 
 __all__ = ["ToolsResource", "AsyncToolsResource"]
 
@@ -133,7 +134,7 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> ToolGetPerformWebTaskStatusResponse:
         """
         Get the status of an asynchronous perform-web-task execution by workflow ID.
 
@@ -153,7 +154,7 @@ class ToolsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=ToolGetPerformWebTaskStatusResponse,
         )
 
     def perform_web_task(
@@ -439,7 +440,7 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> ToolGetPerformWebTaskStatusResponse:
         """
         Get the status of an asynchronous perform-web-task execution by workflow ID.
 
@@ -459,7 +460,7 @@ class AsyncToolsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=ToolGetPerformWebTaskStatusResponse,
         )
 
     async def perform_web_task(
