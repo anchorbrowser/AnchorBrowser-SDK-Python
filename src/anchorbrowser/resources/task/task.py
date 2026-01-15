@@ -7,26 +7,38 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import task_run_params, task_list_params, task_create_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ...types import task_run_params, task_list_params, task_create_params
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
+from ..._compat import cached_property
+from .executions import (
+    ExecutionsResource,
+    AsyncExecutionsResource,
+    ExecutionsResourceWithRawResponse,
+    AsyncExecutionsResourceWithRawResponse,
+    ExecutionsResourceWithStreamingResponse,
+    AsyncExecutionsResourceWithStreamingResponse,
+)
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
-from ..types.task_run_response import TaskRunResponse
-from ..types.task_list_response import TaskListResponse
-from ..types.task_create_response import TaskCreateResponse
+from ..._base_client import make_request_options
+from ...types.task_run_response import TaskRunResponse
+from ...types.task_list_response import TaskListResponse
+from ...types.task_create_response import TaskCreateResponse
 
 __all__ = ["TaskResource", "AsyncTaskResource"]
 
 
 class TaskResource(SyncAPIResource):
+    @cached_property
+    def executions(self) -> ExecutionsResource:
+        return ExecutionsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> TaskResourceWithRawResponse:
         """
@@ -220,6 +232,10 @@ class TaskResource(SyncAPIResource):
 
 
 class AsyncTaskResource(AsyncAPIResource):
+    @cached_property
+    def executions(self) -> AsyncExecutionsResource:
+        return AsyncExecutionsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncTaskResourceWithRawResponse:
         """
@@ -426,6 +442,10 @@ class TaskResourceWithRawResponse:
             task.run,
         )
 
+    @cached_property
+    def executions(self) -> ExecutionsResourceWithRawResponse:
+        return ExecutionsResourceWithRawResponse(self._task.executions)
+
 
 class AsyncTaskResourceWithRawResponse:
     def __init__(self, task: AsyncTaskResource) -> None:
@@ -440,6 +460,10 @@ class AsyncTaskResourceWithRawResponse:
         self.run = async_to_raw_response_wrapper(
             task.run,
         )
+
+    @cached_property
+    def executions(self) -> AsyncExecutionsResourceWithRawResponse:
+        return AsyncExecutionsResourceWithRawResponse(self._task.executions)
 
 
 class TaskResourceWithStreamingResponse:
@@ -456,6 +480,10 @@ class TaskResourceWithStreamingResponse:
             task.run,
         )
 
+    @cached_property
+    def executions(self) -> ExecutionsResourceWithStreamingResponse:
+        return ExecutionsResourceWithStreamingResponse(self._task.executions)
+
 
 class AsyncTaskResourceWithStreamingResponse:
     def __init__(self, task: AsyncTaskResource) -> None:
@@ -470,3 +498,7 @@ class AsyncTaskResourceWithStreamingResponse:
         self.run = async_to_streamed_response_wrapper(
             task.run,
         )
+
+    @cached_property
+    def executions(self) -> AsyncExecutionsResourceWithStreamingResponse:
+        return AsyncExecutionsResourceWithStreamingResponse(self._task.executions)
