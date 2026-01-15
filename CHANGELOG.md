@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.3 (2026-01-15)
+
+Full Changelog: [v0.7.2...v0.7.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.7.2...v0.7.3)
+
+### Features
+
+* Added missing PerformWebTaskStatusSuccessResponseData ([fe0cb0e](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/fe0cb0ebf2baaa70a43eb2bf0b0ba232b64e80b8))
+* **api:** manual updates ([7138387](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/713838776e60085512d036062d636f7f5f54d619))
+* BRO-1808 added polling results routes to sdk ([8c0a312](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/8c0a312af463e106d19e433fe3604ea9874a7c0f))
+
 ## 0.7.2 (2026-01-15)
 
 Full Changelog: [v0.7.1...v0.7.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.7.1...v0.7.2)

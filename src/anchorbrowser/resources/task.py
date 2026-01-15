@@ -16,12 +16,13 @@ from .._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
+    async_to_streamed_response_wrapper
 )
 from .._base_client import make_request_options
 from ..types.task_run_response import TaskRunResponse
 from ..types.task_list_response import TaskListResponse
 from ..types.task_create_response import TaskCreateResponse
+from ..types.task_retrieve_execution_result_response import TaskRetrieveExecutionResultResponse
 
 __all__ = ["TaskResource", "AsyncTaskResource"]
 
@@ -150,6 +151,45 @@ class TaskResource(SyncAPIResource):
                 ),
             ),
             cast_to=TaskListResponse,
+        )
+
+    def retrieve_execution_result(
+        self,
+        execution_id: str,
+        *,
+        task_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TaskRetrieveExecutionResultResponse:
+        """Retrieves a single execution result by its ID.
+
+        This endpoint is useful for
+        polling execution status in async mode or retrieving detailed execution
+        information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
+        if not execution_id:
+            raise ValueError(f"Expected a non-empty value for `execution_id` but received {execution_id!r}")
+        return self._get(
+            f"/v1/task/{task_id}/executions/{execution_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TaskRetrieveExecutionResultResponse,
         )
 
     def run(
@@ -345,6 +385,45 @@ class AsyncTaskResource(AsyncAPIResource):
             cast_to=TaskListResponse,
         )
 
+    async def retrieve_execution_result(
+        self,
+        execution_id: str,
+        *,
+        task_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TaskRetrieveExecutionResultResponse:
+        """Retrieves a single execution result by its ID.
+
+        This endpoint is useful for
+        polling execution status in async mode or retrieving detailed execution
+        information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
+        if not execution_id:
+            raise ValueError(f"Expected a non-empty value for `execution_id` but received {execution_id!r}")
+        return await self._get(
+            f"/v1/task/{task_id}/executions/{execution_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TaskRetrieveExecutionResultResponse,
+        )
+
     async def run(
         self,
         *,
@@ -422,6 +501,9 @@ class TaskResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             task.list,
         )
+        self.retrieve_execution_result = to_raw_response_wrapper(
+            task.retrieve_execution_result,
+        )
         self.run = to_raw_response_wrapper(
             task.run,
         )
@@ -436,6 +518,9 @@ class AsyncTaskResourceWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             task.list,
+        )
+        self.retrieve_execution_result = async_to_raw_response_wrapper(
+            task.retrieve_execution_result,
         )
         self.run = async_to_raw_response_wrapper(
             task.run,
@@ -452,6 +537,9 @@ class TaskResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             task.list,
         )
+        self.retrieve_execution_result = to_streamed_response_wrapper(
+            task.retrieve_execution_result,
+        )
         self.run = to_streamed_response_wrapper(
             task.run,
         )
@@ -466,6 +554,9 @@ class AsyncTaskResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             task.list,
+        )
+        self.retrieve_execution_result = async_to_streamed_response_wrapper(
+            task.retrieve_execution_result,
         )
         self.run = async_to_streamed_response_wrapper(
             task.run,

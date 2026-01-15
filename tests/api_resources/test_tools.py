@@ -13,6 +13,7 @@ from tests.utils import assert_matches_type
 from anchorbrowser import Anchorbrowser, AsyncAnchorbrowser
 from anchorbrowser.types import (
     ToolPerformWebTaskResponse,
+    ToolGetPerformWebTaskStatusResponse,
 )
 from anchorbrowser._response import (
     BinaryAPIResponse,
@@ -68,6 +69,48 @@ class TestTools:
             assert_matches_type(str, tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_get_perform_web_task_status(self, client: Anchorbrowser) -> None:
+        tool = client.tools.get_perform_web_task_status(
+            "workflowId",
+        )
+        assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_get_perform_web_task_status(self, client: Anchorbrowser) -> None:
+        response = client.tools.with_raw_response.get_perform_web_task_status(
+            "workflowId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = response.parse()
+        assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_get_perform_web_task_status(self, client: Anchorbrowser) -> None:
+        with client.tools.with_streaming_response.get_perform_web_task_status(
+            "workflowId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = response.parse()
+            assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_get_perform_web_task_status(self, client: Anchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            client.tools.with_raw_response.get_perform_web_task_status(
+                "",
+            )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -225,6 +268,48 @@ class TestAsyncTools:
             assert_matches_type(str, tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_get_perform_web_task_status(self, async_client: AsyncAnchorbrowser) -> None:
+        tool = await async_client.tools.get_perform_web_task_status(
+            "workflowId",
+        )
+        assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_get_perform_web_task_status(self, async_client: AsyncAnchorbrowser) -> None:
+        response = await async_client.tools.with_raw_response.get_perform_web_task_status(
+            "workflowId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = await response.parse()
+        assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_perform_web_task_status(self, async_client: AsyncAnchorbrowser) -> None:
+        async with async_client.tools.with_streaming_response.get_perform_web_task_status(
+            "workflowId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = await response.parse()
+            assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_get_perform_web_task_status(self, async_client: AsyncAnchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            await async_client.tools.with_raw_response.get_perform_web_task_status(
+                "",
+            )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
