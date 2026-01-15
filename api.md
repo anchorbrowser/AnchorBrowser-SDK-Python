@@ -146,6 +146,7 @@ from anchorbrowser.types import ToolFetchWebpageResponse, ToolPerformWebTaskResp
 Methods:
 
 - <code title="post /v1/tools/fetch-webpage">client.tools.<a href="./src/anchorbrowser/resources/tools.py">fetch_webpage</a>(\*\*<a href="src/anchorbrowser/types/tool_fetch_webpage_params.py">params</a>) -> str</code>
+- <code title="get /v1/tools/perform-web-task/{workflowId}/status">client.tools.<a href="./src/anchorbrowser/resources/tools.py">get_perform_web_task_status</a>(workflow_id) -> object</code>
 - <code title="post /v1/tools/perform-web-task">client.tools.<a href="./src/anchorbrowser/resources/tools.py">perform_web_task</a>(\*\*<a href="src/anchorbrowser/types/tool_perform_web_task_params.py">params</a>) -> <a href="./src/anchorbrowser/types/tool_perform_web_task_response.py">ToolPerformWebTaskResponse</a></code>
 - <code title="post /v1/tools/screenshot">client.tools.<a href="./src/anchorbrowser/resources/tools.py">screenshot_webpage</a>(\*\*<a href="src/anchorbrowser/types/tool_screenshot_webpage_params.py">params</a>) -> BinaryAPIResponse</code>
 
@@ -184,9 +185,15 @@ from anchorbrowser.types import TaskCreateResponse, TaskListResponse, TaskRunRes
 
 Methods:
 
-- <code title="post /v1/task">client.task.<a href="./src/anchorbrowser/resources/task.py">create</a>(\*\*<a href="src/anchorbrowser/types/task_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_create_response.py">TaskCreateResponse</a></code>
-- <code title="get /v1/task">client.task.<a href="./src/anchorbrowser/resources/task.py">list</a>(\*\*<a href="src/anchorbrowser/types/task_list_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_list_response.py">TaskListResponse</a></code>
-- <code title="post /v1/task/run">client.task.<a href="./src/anchorbrowser/resources/task.py">run</a>(\*\*<a href="src/anchorbrowser/types/task_run_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_run_response.py">TaskRunResponse</a></code>
+- <code title="post /v1/task">client.task.<a href="./src/anchorbrowser/resources/task/task.py">create</a>(\*\*<a href="src/anchorbrowser/types/task_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_create_response.py">TaskCreateResponse</a></code>
+- <code title="get /v1/task">client.task.<a href="./src/anchorbrowser/resources/task/task.py">list</a>(\*\*<a href="src/anchorbrowser/types/task_list_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_list_response.py">TaskListResponse</a></code>
+- <code title="post /v1/task/run">client.task.<a href="./src/anchorbrowser/resources/task/task.py">run</a>(\*\*<a href="src/anchorbrowser/types/task_run_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_run_response.py">TaskRunResponse</a></code>
+
+## Executions
+
+Methods:
+
+- <code title="get /v1/task/{taskId}/executions/{executionId}">client.task.executions.<a href="./src/anchorbrowser/resources/task/executions.py">retrieve</a>(execution_id, \*, task_id) -> object</code>
 
 # Identities
 
