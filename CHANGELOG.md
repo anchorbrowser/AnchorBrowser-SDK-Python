@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.4 (2026-01-17)
+
+Full Changelog: [v0.7.3...v0.7.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.7.3...v0.7.4)
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([8e618cd](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/8e618cdbc5ac6406a4d089b7d3c06a533806ec7c))
+
 ## 0.7.3 (2026-01-15)
 
 Full Changelog: [v0.7.2...v0.7.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.7.2...v0.7.3)
