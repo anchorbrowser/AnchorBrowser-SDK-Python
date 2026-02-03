@@ -63,6 +63,8 @@ class AgentResource(SyncAPIResource):
         Returns:
             str: The result of the AI agent task execution.
         """
+        if session_id and session_options:
+            raise ValueError("session_id and session_options cannot be provided together")
         if session_id:
             retrieved_session = self._client.sessions.retrieve(session_id)
             if not retrieved_session or not retrieved_session or not retrieved_session.session_id:
