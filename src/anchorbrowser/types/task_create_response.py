@@ -184,60 +184,9 @@ class DataBrowserConfigurationProxyAnchorProxy(BaseModel):
             "uz",
             "ve",
             "ye",
-            "bd",
-            "bw",
-            "bn",
-            "bi",
-            "kh",
-            "cn",
-            "dj",
-            "gq",
-            "sz",
-            "fj",
-            "hk",
-            "id",
-            "ke",
-            "la",
-            "ls",
-            "lr",
-            "mg",
-            "mw",
-            "my",
-            "mv",
-            "mn",
-            "mz",
-            "mm",
-            "na",
-            "np",
-            "nc",
-            "ne",
-            "om",
-            "pg",
-            "ru",
-            "rw",
-            "ws",
-            "sg",
-            "ss",
-            "lk",
-            "sd",
-            "tz",
-            "th",
-            "tl",
-            "tm",
-            "ug",
-            "gb",
-            "vu",
-            "vn",
-            "zm",
-            "zw",
-            "bt",
-            "mu",
         ]
     ] = None
-    """Supported country codes ISO 2 lowercase
-
-    **On change make sure to update the Proxy type.**
-    """
+    """Supported country codes ISO 2 lowercase"""
 
     region: Optional[str] = None
     """
@@ -245,8 +194,11 @@ class DataBrowserConfigurationProxyAnchorProxy(BaseModel):
     be used when region is also provided.
     """
 
-    type: Optional[Literal["anchor_proxy", "anchor_residential", "anchor_mobile", "anchor_gov"]] = None
-    """**On change make sure to update the country_code.**"""
+    type: Optional[Literal["anchor_proxy"]] = None
+    """
+    Create a session with a proxy to access websites as if you're browsing from a
+    computer in that country.
+    """
 
 
 class DataBrowserConfigurationProxyCustomProxy(BaseModel):
