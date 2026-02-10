@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.9.0 (2026-02-10)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* BRO-1833 Docs: Old proxy config cleanup ([cbd1293](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/cbd1293a1a7cee73ddca599365539fbd9367a51f))
+
+
+### Chores
+
+* **internal:** bump dependencies ([a0e5458](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/a0e545884a7073bdac211e7048a04a799839d850))
+
 ## 0.8.0 (2026-02-03)
 
 Full Changelog: [v0.7.5...v0.8.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.7.5...v0.8.0)
