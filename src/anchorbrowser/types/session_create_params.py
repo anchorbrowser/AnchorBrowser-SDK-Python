@@ -394,59 +394,8 @@ class SessionProxyAnchorProxy(TypedDict, total=False):
         "uz",
         "ve",
         "ye",
-        "bd",
-        "bw",
-        "bn",
-        "bi",
-        "kh",
-        "cn",
-        "dj",
-        "gq",
-        "sz",
-        "fj",
-        "hk",
-        "id",
-        "ke",
-        "la",
-        "ls",
-        "lr",
-        "mg",
-        "mw",
-        "my",
-        "mv",
-        "mn",
-        "mz",
-        "mm",
-        "na",
-        "np",
-        "nc",
-        "ne",
-        "om",
-        "pg",
-        "ru",
-        "rw",
-        "ws",
-        "sg",
-        "ss",
-        "lk",
-        "sd",
-        "tz",
-        "th",
-        "tl",
-        "tm",
-        "ug",
-        "gb",
-        "vu",
-        "vn",
-        "zm",
-        "zw",
-        "bt",
-        "mu",
     ]
-    """Supported country codes ISO 2 lowercase
-
-    **On change make sure to update the Proxy type.**
-    """
+    """Supported country codes ISO 2 lowercase"""
 
     region: str
     """
@@ -454,8 +403,11 @@ class SessionProxyAnchorProxy(TypedDict, total=False):
     be used when region is also provided.
     """
 
-    type: Literal["anchor_proxy", "anchor_residential", "anchor_mobile", "anchor_gov"]
-    """**On change make sure to update the country_code.**"""
+    type: Literal["anchor_proxy"]
+    """
+    Create a session with a proxy to access websites as if you're browsing from a
+    computer in that country.
+    """
 
 
 class SessionProxyCustomProxy(TypedDict, total=False):
