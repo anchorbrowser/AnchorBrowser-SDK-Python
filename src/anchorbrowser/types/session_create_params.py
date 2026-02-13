@@ -470,5 +470,8 @@ class Session(TypedDict, total=False):
     recording: SessionRecording
     """Configuration for session recording."""
 
+    tags: SequenceNotStr[str]
+    """Tags for the browser session."""
+
     timeout: SessionTimeout
     """Timeout configurations for the browser session."""
