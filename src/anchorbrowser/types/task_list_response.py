@@ -209,7 +209,10 @@ class DataTaskBrowserConfigurationProxyCustomProxy(BaseModel):
     """Proxy password"""
 
     server: str
-    """Proxy server address"""
+    """
+    Proxy address in **PROTOCOL://HOST:PORT** format (e.g.,
+    https://proxy.example.com:443). See [proxy page](/advanced/proxy#custom-proxy).
+    """
 
     type: Literal["custom"]
 
