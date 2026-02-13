@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.1 (2026-02-13)
+
+Full Changelog: [v0.9.0...v0.9.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.9.0...v0.9.1)
+
+### Chores
+
+* format all `api.md` files ([27bbca7](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/27bbca74e9fa19555199319f24952bf35ebb2445))
+* **internal:** fix lint error on Python 3.14 ([22b1f28](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/22b1f282c4c8acfc65c68fffd9fb948a3bf395f3))
+
 ## 0.9.0 (2026-02-10)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.8.0...v0.9.0)
