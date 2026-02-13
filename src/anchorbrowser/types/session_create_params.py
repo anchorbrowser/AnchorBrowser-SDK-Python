@@ -92,6 +92,11 @@ class BrowserExtraStealth(TypedDict, total=False):
     active: bool
     """Enable or disable extra stealth mode."""
 
+class BrowserForcePopupsAsTabs(TypedDict, total=False):
+    """Configuration for force popup as tabs."""
+
+    active: bool
+    """Enable or disable force popup as tabs. Defaults to `false`."""
 
 class BrowserFullscreen(TypedDict, total=False):
     """Configuration for fullscreen mode."""
@@ -177,6 +182,8 @@ class Browser(TypedDict, total=False):
     Configuration for extra stealth mode to enhance browser fingerprinting
     protection.
     """
+    force_popups_as_tabs: BrowserForcePopupsAsTabs
+    """Configuration for force popup as tabs."""
 
     fullscreen: BrowserFullscreen
     """Configuration for fullscreen mode."""
