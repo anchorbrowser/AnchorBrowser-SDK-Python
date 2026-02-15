@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.0 (2026-02-15)
+
+Full Changelog: [v0.9.3...v0.10.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.9.3...v0.10.0)
+
+### Features
+
+* Bro 2142 docs clarify server prefix in custom proxy docs ([8b4d8b6](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/8b4d8b6c7065aa9b2402f8ab1257fb976151eb5c))
+* BRO-2193: Remove Early Availability labels (now GA) ([987d609](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/987d60922b4f08ec8a1c74bb61e42f076c1bbbb4))
+
 ## 0.9.3 (2026-02-13)
 
 Full Changelog: [v0.9.2...v0.9.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.9.2...v0.9.3)
