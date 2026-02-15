@@ -160,9 +160,6 @@ class SessionsResource(SyncAPIResource):
 
           identities: Activates an authenticated session.
 
-              **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
-              enable.
-
           integrations: Array of integrations to load in the browser session. Integrations must be
               previously created using the Integrations API.
 
@@ -608,9 +605,6 @@ class AsyncSessionsResource(AsyncAPIResource):
           browser: Browser-specific configurations.
 
           identities: Activates an authenticated session.
-
-              **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
-              enable.
 
           integrations: Array of integrations to load in the browser session. Integrations must be
               previously created using the Integrations API.
