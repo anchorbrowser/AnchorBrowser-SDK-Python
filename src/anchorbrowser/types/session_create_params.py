@@ -40,11 +40,7 @@ class SessionCreateParams(TypedDict, total=False):
     """Browser-specific configurations."""
 
     identities: Iterable[Identity]
-    """Activates an authenticated session.
-
-    **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
-    enable.
-    """
+    """Activates an authenticated session."""
 
     integrations: Iterable[Integration]
     """Array of integrations to load in the browser session.
