@@ -62,12 +62,8 @@ class AuthFlowsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthFlowCreateResponse:
-        """Creates a new authentication flow for an application.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Creates a new authentication flow for an application.
 
         Args:
           methods: Authentication methods in this flow
@@ -122,9 +118,6 @@ class AuthFlowsResource(SyncAPIResource):
         """
         Retrieves all authentication flows for a specific application.
 
-        **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
-
         Args:
           extra_headers: Send extra headers
 
@@ -156,12 +149,8 @@ class AuthFlowsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthFlowDeleteResponse:
-        """Deletes an existing authentication flow.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Deletes an existing authentication flow.
 
         Args:
           extra_headers: Send extra headers
@@ -221,12 +210,8 @@ class AsyncAuthFlowsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthFlowCreateResponse:
-        """Creates a new authentication flow for an application.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Creates a new authentication flow for an application.
 
         Args:
           methods: Authentication methods in this flow
@@ -281,9 +266,6 @@ class AsyncAuthFlowsResource(AsyncAPIResource):
         """
         Retrieves all authentication flows for a specific application.
 
-        **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
-
         Args:
           extra_headers: Send extra headers
 
@@ -315,12 +297,8 @@ class AsyncAuthFlowsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthFlowDeleteResponse:
-        """Deletes an existing authentication flow.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Deletes an existing authentication flow.
 
         Args:
           extra_headers: Send extra headers

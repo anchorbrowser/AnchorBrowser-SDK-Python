@@ -76,12 +76,8 @@ class ApplicationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ApplicationCreateResponse:
-        """Creates a new application for identity management.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Creates a new application for identity management.
 
         Args:
           source: The source URL of the application
@@ -125,12 +121,8 @@ class ApplicationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ApplicationRetrieveResponse:
-        """Retrieves details of a specific application by its ID.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Retrieves details of a specific application by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -162,12 +154,8 @@ class ApplicationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ApplicationListResponse:
-        """Retrieves all applications for the authenticated team.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Retrieves all applications for the authenticated team.
 
         Args:
           search: Search query to filter applications by name
@@ -203,12 +191,8 @@ class ApplicationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ApplicationDeleteResponse:
-        """Deletes an existing application.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Deletes an existing application.
 
         Args:
           extra_headers: Send extra headers
@@ -290,9 +274,6 @@ class ApplicationsResource(SyncAPIResource):
         """
         Retrieves all identities associated with a specific application.
 
-        **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
-
         Args:
           search: Search query to filter identities by name
 
@@ -358,12 +339,8 @@ class AsyncApplicationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ApplicationCreateResponse:
-        """Creates a new application for identity management.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Creates a new application for identity management.
 
         Args:
           source: The source URL of the application
@@ -407,12 +384,8 @@ class AsyncApplicationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ApplicationRetrieveResponse:
-        """Retrieves details of a specific application by its ID.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Retrieves details of a specific application by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -444,12 +417,8 @@ class AsyncApplicationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ApplicationListResponse:
-        """Retrieves all applications for the authenticated team.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Retrieves all applications for the authenticated team.
 
         Args:
           search: Search query to filter applications by name
@@ -485,12 +454,8 @@ class AsyncApplicationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ApplicationDeleteResponse:
-        """Deletes an existing application.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Deletes an existing application.
 
         Args:
           extra_headers: Send extra headers
@@ -571,9 +536,6 @@ class AsyncApplicationsResource(AsyncAPIResource):
     ) -> ApplicationListIdentitiesResponse:
         """
         Retrieves all identities associated with a specific application.
-
-        **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
 
         Args:
           search: Search query to filter identities by name

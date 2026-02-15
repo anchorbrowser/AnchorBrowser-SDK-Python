@@ -64,12 +64,8 @@ class IdentitiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityCreateResponse:
-        """Creates a new identity with credentials for authentication.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Creates a new identity with credentials for authentication.
 
         Args:
           credentials: Array of credentials for authentication
@@ -128,12 +124,8 @@ class IdentitiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityRetrieveResponse:
-        """Retrieves details of a specific identity by its ID.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Retrieves details of a specific identity by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -170,9 +162,6 @@ class IdentitiesResource(SyncAPIResource):
     ) -> IdentityUpdateResponse:
         """
         Updates an existing identity's name, metadata, or credentials.
-
-        **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
 
         Args:
           credentials: Array of credentials for authentication
@@ -218,12 +207,8 @@ class IdentitiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityDeleteResponse:
-        """Deletes an existing identity.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Deletes an existing identity.
 
         Args:
           extra_headers: Send extra headers
@@ -315,12 +300,8 @@ class AsyncIdentitiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityCreateResponse:
-        """Creates a new identity with credentials for authentication.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Creates a new identity with credentials for authentication.
 
         Args:
           credentials: Array of credentials for authentication
@@ -381,12 +362,8 @@ class AsyncIdentitiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityRetrieveResponse:
-        """Retrieves details of a specific identity by its ID.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Retrieves details of a specific identity by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -423,9 +400,6 @@ class AsyncIdentitiesResource(AsyncAPIResource):
     ) -> IdentityUpdateResponse:
         """
         Updates an existing identity's name, metadata, or credentials.
-
-        **Beta** Capability. [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
 
         Args:
           credentials: Array of credentials for authentication
@@ -471,12 +445,8 @@ class AsyncIdentitiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityDeleteResponse:
-        """Deletes an existing identity.
-
-        **Beta** Capability.
-
-        [Contact support](mailto:support@anchorbrowser.io) to
-        enable.
+        """
+        Deletes an existing identity.
 
         Args:
           extra_headers: Send extra headers
