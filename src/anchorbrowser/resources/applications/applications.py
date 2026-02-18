@@ -263,6 +263,7 @@ class ApplicationsResource(SyncAPIResource):
         self,
         application_id: str,
         *,
+        metadata: str | Omit = omit,
         search: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -275,6 +276,9 @@ class ApplicationsResource(SyncAPIResource):
         Retrieves all identities associated with a specific application.
 
         Args:
+          metadata: Filter identities by metadata. Pass a **JSON object** to filter identities whose
+              metadata contains the specified key-value pairs.
+
           search: Search query to filter identities by name
 
           extra_headers: Send extra headers
@@ -295,7 +299,11 @@ class ApplicationsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"search": search}, application_list_identities_params.ApplicationListIdentitiesParams
+                    {
+                        "metadata": metadata,
+                        "search": search,
+                    },
+                    application_list_identities_params.ApplicationListIdentitiesParams,
                 ),
             ),
             cast_to=ApplicationListIdentitiesResponse,
@@ -526,6 +534,7 @@ class AsyncApplicationsResource(AsyncAPIResource):
         self,
         application_id: str,
         *,
+        metadata: str | Omit = omit,
         search: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -538,6 +547,9 @@ class AsyncApplicationsResource(AsyncAPIResource):
         Retrieves all identities associated with a specific application.
 
         Args:
+          metadata: Filter identities by metadata. Pass a **JSON object** to filter identities whose
+              metadata contains the specified key-value pairs.
+
           search: Search query to filter identities by name
 
           extra_headers: Send extra headers
@@ -558,7 +570,11 @@ class AsyncApplicationsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"search": search}, application_list_identities_params.ApplicationListIdentitiesParams
+                    {
+                        "metadata": metadata,
+                        "search": search,
+                    },
+                    application_list_identities_params.ApplicationListIdentitiesParams,
                 ),
             ),
             cast_to=ApplicationListIdentitiesResponse,
