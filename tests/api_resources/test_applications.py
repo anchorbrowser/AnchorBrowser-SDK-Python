@@ -247,6 +247,7 @@ class TestApplications:
     def test_method_list_identities_with_all_params(self, client: Anchorbrowser) -> None:
         application = client.applications.list_identities(
             application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            metadata="metadata",
             search="search",
         )
         assert_matches_type(ApplicationListIdentitiesResponse, application, path=["response"])
@@ -514,6 +515,7 @@ class TestAsyncApplications:
     async def test_method_list_identities_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         application = await async_client.applications.list_identities(
             application_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            metadata="metadata",
             search="search",
         )
         assert_matches_type(ApplicationListIdentitiesResponse, application, path=["response"])

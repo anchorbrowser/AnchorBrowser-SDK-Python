@@ -179,7 +179,11 @@ class TestTask:
     @parametrize
     def test_method_run(self, client: Anchorbrowser) -> None:
         task = client.task.run(
-            task_id="550e8400-e29b-41d4-a716-446655440000",
+            task_id="taskId",
+            input_params={
+                "File Name": "invoice-2026-02.pdf",
+                "Operation": "extract_text",
+            },
         )
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
@@ -187,31 +191,14 @@ class TestTask:
     @parametrize
     def test_method_run_with_all_params(self, client: Anchorbrowser) -> None:
         task = client.task.run(
-            task_id="550e8400-e29b-41d4-a716-446655440000",
-            async_=True,
+            task_id="taskId",
+            input_params={
+                "File Name": "invoice-2026-02.pdf",
+                "Operation": "extract_text",
+            },
             cleanup_sessions=True,
-            inputs={
-                "ANCHOR_TARGET_URL": "https://example.com",
-                "ANCHOR_MAX_PAGES": "10",
-            },
-            override_browser_configuration={
-                "initial_url": "https://example.com",
-                "live_view": {"read_only": True},
-                "proxy": {
-                    "active": True,
-                    "city": "city",
-                    "country_code": "af",
-                    "region": "region",
-                    "type": "anchor_proxy",
-                },
-                "recording": {"active": True},
-                "timeout": {
-                    "idle_timeout": 0,
-                    "max_duration": 0,
-                },
-            },
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            version="1",
+            identity_id="identity_id",
+            session_id="session_id",
         )
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
@@ -219,7 +206,11 @@ class TestTask:
     @parametrize
     def test_raw_response_run(self, client: Anchorbrowser) -> None:
         response = client.task.with_raw_response.run(
-            task_id="550e8400-e29b-41d4-a716-446655440000",
+            task_id="taskId",
+            input_params={
+                "File Name": "invoice-2026-02.pdf",
+                "Operation": "extract_text",
+            },
         )
 
         assert response.is_closed is True
@@ -231,7 +222,11 @@ class TestTask:
     @parametrize
     def test_streaming_response_run(self, client: Anchorbrowser) -> None:
         with client.task.with_streaming_response.run(
-            task_id="550e8400-e29b-41d4-a716-446655440000",
+            task_id="taskId",
+            input_params={
+                "File Name": "invoice-2026-02.pdf",
+                "Operation": "extract_text",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -240,6 +235,18 @@ class TestTask:
             assert_matches_type(TaskRunResponse, task, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_run(self, client: Anchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `task_id` but received ''"):
+            client.task.with_raw_response.run(
+                task_id="",
+                input_params={
+                    "File Name": "invoice-2026-02.pdf",
+                    "Operation": "extract_text",
+                },
+            )
 
 
 class TestAsyncTask:
@@ -404,7 +411,11 @@ class TestAsyncTask:
     @parametrize
     async def test_method_run(self, async_client: AsyncAnchorbrowser) -> None:
         task = await async_client.task.run(
-            task_id="550e8400-e29b-41d4-a716-446655440000",
+            task_id="taskId",
+            input_params={
+                "File Name": "invoice-2026-02.pdf",
+                "Operation": "extract_text",
+            },
         )
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
@@ -412,31 +423,14 @@ class TestAsyncTask:
     @parametrize
     async def test_method_run_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         task = await async_client.task.run(
-            task_id="550e8400-e29b-41d4-a716-446655440000",
-            async_=True,
+            task_id="taskId",
+            input_params={
+                "File Name": "invoice-2026-02.pdf",
+                "Operation": "extract_text",
+            },
             cleanup_sessions=True,
-            inputs={
-                "ANCHOR_TARGET_URL": "https://example.com",
-                "ANCHOR_MAX_PAGES": "10",
-            },
-            override_browser_configuration={
-                "initial_url": "https://example.com",
-                "live_view": {"read_only": True},
-                "proxy": {
-                    "active": True,
-                    "city": "city",
-                    "country_code": "af",
-                    "region": "region",
-                    "type": "anchor_proxy",
-                },
-                "recording": {"active": True},
-                "timeout": {
-                    "idle_timeout": 0,
-                    "max_duration": 0,
-                },
-            },
-            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            version="1",
+            identity_id="identity_id",
+            session_id="session_id",
         )
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
@@ -444,7 +438,11 @@ class TestAsyncTask:
     @parametrize
     async def test_raw_response_run(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.task.with_raw_response.run(
-            task_id="550e8400-e29b-41d4-a716-446655440000",
+            task_id="taskId",
+            input_params={
+                "File Name": "invoice-2026-02.pdf",
+                "Operation": "extract_text",
+            },
         )
 
         assert response.is_closed is True
@@ -456,7 +454,11 @@ class TestAsyncTask:
     @parametrize
     async def test_streaming_response_run(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.task.with_streaming_response.run(
-            task_id="550e8400-e29b-41d4-a716-446655440000",
+            task_id="taskId",
+            input_params={
+                "File Name": "invoice-2026-02.pdf",
+                "Operation": "extract_text",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -465,3 +467,15 @@ class TestAsyncTask:
             assert_matches_type(TaskRunResponse, task, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_run(self, async_client: AsyncAnchorbrowser) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `task_id` but received ''"):
+            await async_client.task.with_raw_response.run(
+                task_id="",
+                input_params={
+                    "File Name": "invoice-2026-02.pdf",
+                    "Operation": "extract_text",
+                },
+            )

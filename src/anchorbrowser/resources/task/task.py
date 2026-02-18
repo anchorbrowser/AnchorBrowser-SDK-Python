@@ -7,27 +7,39 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import task_run_params, task_list_params, task_create_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from .runs import (
+    RunsResource,
+    AsyncRunsResource,
+    RunsResourceWithRawResponse,
+    AsyncRunsResourceWithRawResponse,
+    RunsResourceWithStreamingResponse,
+    AsyncRunsResourceWithStreamingResponse,
+)
+from ...types import task_run_params, task_list_params, task_create_params
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
-from ..types.task_run_response import TaskRunResponse
-from ..types.task_list_response import TaskListResponse
-from ..types.task_create_response import TaskCreateResponse
-from ..types.task_retrieve_execution_result_response import TaskRetrieveExecutionResultResponse
+from ..._base_client import make_request_options
+from ...types.task_run_response import TaskRunResponse
+from ...types.task_list_response import TaskListResponse
+from ...types.task_create_response import TaskCreateResponse
+from ...types.task_retrieve_execution_result_response import TaskRetrieveExecutionResultResponse
 
 __all__ = ["TaskResource", "AsyncTaskResource"]
 
 
 class TaskResource(SyncAPIResource):
+    @cached_property
+    def runs(self) -> RunsResource:
+        return RunsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> TaskResourceWithRawResponse:
         """
@@ -67,6 +79,9 @@ class TaskResource(SyncAPIResource):
         Tasks are
         reusable code snippets that can be executed in browser sessions. Tasks support
         versioning with draft and published versions.
+
+        If you are using the new Task Builder, see the Tasks V2 endpoints in this API
+        reference.
 
         Args:
           language: Programming language for the task
@@ -121,6 +136,9 @@ class TaskResource(SyncAPIResource):
 
         Tasks are
         returned with their latest version information and metadata.
+
+        If you are using the new Task Builder, see the Tasks V2 endpoints in this API
+        reference.
 
         Args:
           limit: Number of tasks per page
@@ -194,14 +212,12 @@ class TaskResource(SyncAPIResource):
 
     def run(
         self,
-        *,
         task_id: str,
-        async_: bool | Omit = omit,
+        *,
+        input_params: Dict[str, str],
         cleanup_sessions: bool | Omit = omit,
-        inputs: Dict[str, str] | Omit = omit,
-        override_browser_configuration: task_run_params.OverrideBrowserConfiguration | Omit = omit,
+        identity_id: str | Omit = omit,
         session_id: str | Omit = omit,
-        version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -209,26 +225,17 @@ class TaskResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskRunResponse:
-        """Executes a task in a browser session.
-
-        The task can be run with a specific
-        version or the latest version. Optionally, you can provide an existing session
-        ID or let the system create a new one.
+        """
+        Triggers execution of a task by ID using the V2 tasks API.
 
         Args:
-          task_id: Task identifier
+          input_params: Key-value pairs of input parameters for the task
 
-          async_: Whether to run the task asynchronously.
+          cleanup_sessions: Whether to clean up sessions after execution
 
-          cleanup_sessions: Whether to cleanup browser sessions after task execution. Defaults to true.
+          identity_id: Optional identity ID to use for the task
 
-          inputs: Environment variables for task execution (keys must start with ANCHOR\\__)
-
-          override_browser_configuration: Override browser configuration for this execution
-
-          session_id: Optional existing browser session ID to use for task execution
-
-          version: Version to run (draft, latest, or version number)
+          session_id: Optional session ID to run the task in
 
           extra_headers: Send extra headers
 
@@ -238,17 +245,16 @@ class TaskResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return self._post(
-            "/v1/task/run",
+            f"/v2/tasks/{task_id}/run",
             body=maybe_transform(
                 {
-                    "task_id": task_id,
-                    "async_": async_,
+                    "input_params": input_params,
                     "cleanup_sessions": cleanup_sessions,
-                    "inputs": inputs,
-                    "override_browser_configuration": override_browser_configuration,
+                    "identity_id": identity_id,
                     "session_id": session_id,
-                    "version": version,
                 },
                 task_run_params.TaskRunParams,
             ),
@@ -260,6 +266,10 @@ class TaskResource(SyncAPIResource):
 
 
 class AsyncTaskResource(AsyncAPIResource):
+    @cached_property
+    def runs(self) -> AsyncRunsResource:
+        return AsyncRunsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncTaskResourceWithRawResponse:
         """
@@ -299,6 +309,9 @@ class AsyncTaskResource(AsyncAPIResource):
         Tasks are
         reusable code snippets that can be executed in browser sessions. Tasks support
         versioning with draft and published versions.
+
+        If you are using the new Task Builder, see the Tasks V2 endpoints in this API
+        reference.
 
         Args:
           language: Programming language for the task
@@ -353,6 +366,9 @@ class AsyncTaskResource(AsyncAPIResource):
 
         Tasks are
         returned with their latest version information and metadata.
+
+        If you are using the new Task Builder, see the Tasks V2 endpoints in this API
+        reference.
 
         Args:
           limit: Number of tasks per page
@@ -426,14 +442,12 @@ class AsyncTaskResource(AsyncAPIResource):
 
     async def run(
         self,
-        *,
         task_id: str,
-        async_: bool | Omit = omit,
+        *,
+        input_params: Dict[str, str],
         cleanup_sessions: bool | Omit = omit,
-        inputs: Dict[str, str] | Omit = omit,
-        override_browser_configuration: task_run_params.OverrideBrowserConfiguration | Omit = omit,
+        identity_id: str | Omit = omit,
         session_id: str | Omit = omit,
-        version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -441,26 +455,17 @@ class AsyncTaskResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskRunResponse:
-        """Executes a task in a browser session.
-
-        The task can be run with a specific
-        version or the latest version. Optionally, you can provide an existing session
-        ID or let the system create a new one.
+        """
+        Triggers execution of a task by ID using the V2 tasks API.
 
         Args:
-          task_id: Task identifier
+          input_params: Key-value pairs of input parameters for the task
 
-          async_: Whether to run the task asynchronously.
+          cleanup_sessions: Whether to clean up sessions after execution
 
-          cleanup_sessions: Whether to cleanup browser sessions after task execution. Defaults to true.
+          identity_id: Optional identity ID to use for the task
 
-          inputs: Environment variables for task execution (keys must start with ANCHOR\\__)
-
-          override_browser_configuration: Override browser configuration for this execution
-
-          session_id: Optional existing browser session ID to use for task execution
-
-          version: Version to run (draft, latest, or version number)
+          session_id: Optional session ID to run the task in
 
           extra_headers: Send extra headers
 
@@ -470,17 +475,16 @@ class AsyncTaskResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return await self._post(
-            "/v1/task/run",
+            f"/v2/tasks/{task_id}/run",
             body=await async_maybe_transform(
                 {
-                    "task_id": task_id,
-                    "async_": async_,
+                    "input_params": input_params,
                     "cleanup_sessions": cleanup_sessions,
-                    "inputs": inputs,
-                    "override_browser_configuration": override_browser_configuration,
+                    "identity_id": identity_id,
                     "session_id": session_id,
-                    "version": version,
                 },
                 task_run_params.TaskRunParams,
             ),
@@ -508,6 +512,10 @@ class TaskResourceWithRawResponse:
             task.run,
         )
 
+    @cached_property
+    def runs(self) -> RunsResourceWithRawResponse:
+        return RunsResourceWithRawResponse(self._task.runs)
+
 
 class AsyncTaskResourceWithRawResponse:
     def __init__(self, task: AsyncTaskResource) -> None:
@@ -525,6 +533,10 @@ class AsyncTaskResourceWithRawResponse:
         self.run = async_to_raw_response_wrapper(
             task.run,
         )
+
+    @cached_property
+    def runs(self) -> AsyncRunsResourceWithRawResponse:
+        return AsyncRunsResourceWithRawResponse(self._task.runs)
 
 
 class TaskResourceWithStreamingResponse:
@@ -544,6 +556,10 @@ class TaskResourceWithStreamingResponse:
             task.run,
         )
 
+    @cached_property
+    def runs(self) -> RunsResourceWithStreamingResponse:
+        return RunsResourceWithStreamingResponse(self._task.runs)
+
 
 class AsyncTaskResourceWithStreamingResponse:
     def __init__(self, task: AsyncTaskResource) -> None:
@@ -561,3 +577,7 @@ class AsyncTaskResourceWithStreamingResponse:
         self.run = async_to_streamed_response_wrapper(
             task.run,
         )
+
+    @cached_property
+    def runs(self) -> AsyncRunsResourceWithStreamingResponse:
+        return AsyncRunsResourceWithStreamingResponse(self._task.runs)

@@ -3,12 +3,12 @@
 from typing import Dict, Optional
 from typing_extensions import Literal
 
-from .._models import BaseModel
+from ..._models import BaseModel
 
-__all__ = ["TaskRunResponse"]
+__all__ = ["RunRetrieveStatusResponse"]
 
 
-class TaskRunResponse(BaseModel):
+class RunRetrieveStatusResponse(BaseModel):
     run_id: str
     """The ID of the task run"""
 
