@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.1 (2026-02-18)
+
+Full Changelog: [v0.10.0...v0.10.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.10.0...v0.10.1)
+
+### Features
+
+* Bro 2133 docs add identity metadata filtering ([55b7ceb](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/55b7cebc0931977dfdd7a33c9b90f61812e0221e))
+
 ## 0.10.0 (2026-02-15)
 
 Full Changelog: [v0.9.3...v0.10.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.9.3...v0.10.0)
