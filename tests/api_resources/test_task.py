@@ -22,7 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestTask:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Anchorbrowser) -> None:
         task = client.task.create(
@@ -31,7 +31,7 @@ class TestTask:
         )
         assert_matches_type(TaskCreateResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Anchorbrowser) -> None:
         task = client.task.create(
@@ -58,7 +58,7 @@ class TestTask:
         )
         assert_matches_type(TaskCreateResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Anchorbrowser) -> None:
         response = client.task.with_raw_response.create(
@@ -71,7 +71,7 @@ class TestTask:
         task = response.parse()
         assert_matches_type(TaskCreateResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Anchorbrowser) -> None:
         with client.task.with_streaming_response.create(
@@ -86,13 +86,13 @@ class TestTask:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Anchorbrowser) -> None:
         task = client.task.list()
         assert_matches_type(TaskListResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Anchorbrowser) -> None:
         task = client.task.list(
@@ -101,7 +101,7 @@ class TestTask:
         )
         assert_matches_type(TaskListResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Anchorbrowser) -> None:
         response = client.task.with_raw_response.list()
@@ -111,7 +111,7 @@ class TestTask:
         task = response.parse()
         assert_matches_type(TaskListResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Anchorbrowser) -> None:
         with client.task.with_streaming_response.list() as response:
@@ -123,7 +123,7 @@ class TestTask:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_execution_result(self, client: Anchorbrowser) -> None:
         task = client.task.retrieve_execution_result(
@@ -132,7 +132,7 @@ class TestTask:
         )
         assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_execution_result(self, client: Anchorbrowser) -> None:
         response = client.task.with_raw_response.retrieve_execution_result(
@@ -145,7 +145,7 @@ class TestTask:
         task = response.parse()
         assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_execution_result(self, client: Anchorbrowser) -> None:
         with client.task.with_streaming_response.retrieve_execution_result(
@@ -160,7 +160,7 @@ class TestTask:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve_execution_result(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `task_id` but received ''"):
@@ -175,7 +175,7 @@ class TestTask:
                 task_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run(self, client: Anchorbrowser) -> None:
         task = client.task.run(
@@ -187,7 +187,7 @@ class TestTask:
         )
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params(self, client: Anchorbrowser) -> None:
         task = client.task.run(
@@ -202,7 +202,7 @@ class TestTask:
         )
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run(self, client: Anchorbrowser) -> None:
         response = client.task.with_raw_response.run(
@@ -218,7 +218,7 @@ class TestTask:
         task = response.parse()
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run(self, client: Anchorbrowser) -> None:
         with client.task.with_streaming_response.run(
@@ -236,7 +236,7 @@ class TestTask:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_run(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `task_id` but received ''"):
@@ -254,7 +254,7 @@ class TestAsyncTask:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncAnchorbrowser) -> None:
         task = await async_client.task.create(
@@ -263,7 +263,7 @@ class TestAsyncTask:
         )
         assert_matches_type(TaskCreateResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         task = await async_client.task.create(
@@ -290,7 +290,7 @@ class TestAsyncTask:
         )
         assert_matches_type(TaskCreateResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.task.with_raw_response.create(
@@ -303,7 +303,7 @@ class TestAsyncTask:
         task = await response.parse()
         assert_matches_type(TaskCreateResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.task.with_streaming_response.create(
@@ -318,13 +318,13 @@ class TestAsyncTask:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncAnchorbrowser) -> None:
         task = await async_client.task.list()
         assert_matches_type(TaskListResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         task = await async_client.task.list(
@@ -333,7 +333,7 @@ class TestAsyncTask:
         )
         assert_matches_type(TaskListResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.task.with_raw_response.list()
@@ -343,7 +343,7 @@ class TestAsyncTask:
         task = await response.parse()
         assert_matches_type(TaskListResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.task.with_streaming_response.list() as response:
@@ -355,7 +355,7 @@ class TestAsyncTask:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_execution_result(self, async_client: AsyncAnchorbrowser) -> None:
         task = await async_client.task.retrieve_execution_result(
@@ -364,7 +364,7 @@ class TestAsyncTask:
         )
         assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_execution_result(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.task.with_raw_response.retrieve_execution_result(
@@ -377,7 +377,7 @@ class TestAsyncTask:
         task = await response.parse()
         assert_matches_type(TaskRetrieveExecutionResultResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_execution_result(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.task.with_streaming_response.retrieve_execution_result(
@@ -392,7 +392,7 @@ class TestAsyncTask:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve_execution_result(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `task_id` but received ''"):
@@ -407,7 +407,7 @@ class TestAsyncTask:
                 task_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run(self, async_client: AsyncAnchorbrowser) -> None:
         task = await async_client.task.run(
@@ -419,7 +419,7 @@ class TestAsyncTask:
         )
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
         task = await async_client.task.run(
@@ -434,7 +434,7 @@ class TestAsyncTask:
         )
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.task.with_raw_response.run(
@@ -450,7 +450,7 @@ class TestAsyncTask:
         task = await response.parse()
         assert_matches_type(TaskRunResponse, task, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.task.with_streaming_response.run(
@@ -468,7 +468,7 @@ class TestAsyncTask:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_run(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `task_id` but received ''"):
