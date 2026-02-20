@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.2 (2026-02-20)
+
+Full Changelog: [v0.10.1...v0.10.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.10.1...v0.10.2)
+
+### Chores
+
+* **internal:** remove mock server code ([c6965d1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/c6965d158269db15903c120cac225575a335ba78))
+
 ## 0.10.1 (2026-02-18)
 
 Full Changelog: [v0.10.0...v0.10.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.10.0...v0.10.1)
