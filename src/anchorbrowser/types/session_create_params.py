@@ -12,6 +12,7 @@ __all__ = [
     "Browser",
     "BrowserAdblock",
     "BrowserCaptchaSolver",
+    "BrowserCrossOriginSupport",
     "BrowserDisableWebSecurity",
     "BrowserExtraStealth",
     "BrowserFullscreen",
@@ -66,6 +67,17 @@ class BrowserCaptchaSolver(TypedDict, total=False):
     """Enable or disable captcha-solving.
 
     Requires proxy to be active. Defaults to `false`.
+    """
+
+
+class BrowserCrossOriginSupport(TypedDict, total=False):
+    """Configuration for cross-origin support."""
+
+    active: bool
+    """Whether to enable cross-origin support.
+
+    Allows accessing iframes and resources from different origins. Defaults to
+    `false`.
     """
 
 
@@ -158,6 +170,9 @@ class Browser(TypedDict, total=False):
 
     captcha_solver: BrowserCaptchaSolver
     """Configuration for captcha-solving."""
+
+    cross_origin_support: BrowserCrossOriginSupport
+    """Configuration for cross-origin support."""
 
     disable_web_security: BrowserDisableWebSecurity
     """Configuration for disabling web security features."""
