@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.10.2 (2026-03-05)
+
+Full Changelog: [v0.10.1...v0.10.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.10.1...v0.10.2)
+
+### Features
+
+* cross_origin_support ([128bac5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/128bac58432dc2ef3b307cd1f2c70e965829ff19))
+
+
+### Chores
+
+* **internal:** add request options to SSE classes ([d646346](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/d646346303857152b79aaff547e713508e5c6442))
+* **internal:** make `test_proxy_environment_variables` more resilient ([8355ee5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/8355ee56a837f0b1d7113e39bd8f2c385adb501b))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([f06224a](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/f06224aef8bc02d8f3ecc6db6b0796fbdb70b68b))
+* **internal:** remove mock server code ([c6965d1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/c6965d158269db15903c120cac225575a335ba78))
+* update mock server docs ([f4f1c89](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/f4f1c892c06e0af5b5e8207e3426ac8b3d6cda91))
+
 ## 0.10.0 (2026-02-15)
 
 Full Changelog: [v0.9.3...v0.10.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.9.3...v0.10.0)
