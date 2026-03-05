@@ -238,13 +238,15 @@ class TaskResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return self._post(
-            "/v1/task/run",
+            f"/v1/task/run",
             body=maybe_transform(
                 {
                     "task_id": task_id,
                     "async": async_,
-                    "cleanup_sessions": cleanup_sessions,
+                    "cleanup_sessions": cleanup_sessions, 
                     "inputs": inputs,
                     "override_browser_configuration": override_browser_configuration,
                     "session_id": session_id,
@@ -470,8 +472,10 @@ class AsyncTaskResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return await self._post(
-            "/v1/task/run",
+            f"/v1/task/run",
             body=await async_maybe_transform(
                 {
                     "task_id": task_id,
@@ -508,7 +512,6 @@ class TaskResourceWithRawResponse:
             task.run,
         )
 
-
 class AsyncTaskResourceWithRawResponse:
     def __init__(self, task: AsyncTaskResource) -> None:
         self._task = task
@@ -526,7 +529,6 @@ class AsyncTaskResourceWithRawResponse:
             task.run,
         )
 
-
 class TaskResourceWithStreamingResponse:
     def __init__(self, task: TaskResource) -> None:
         self._task = task
@@ -543,7 +545,6 @@ class TaskResourceWithStreamingResponse:
         self.run = to_streamed_response_wrapper(
             task.run,
         )
-
 
 class AsyncTaskResourceWithStreamingResponse:
     def __init__(self, task: AsyncTaskResource) -> None:
