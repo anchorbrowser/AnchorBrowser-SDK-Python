@@ -33,4 +33,3 @@ class Data(BaseModel):
 
 class TaskRunResponse(BaseModel):
     data: Optional[Data] = None
-

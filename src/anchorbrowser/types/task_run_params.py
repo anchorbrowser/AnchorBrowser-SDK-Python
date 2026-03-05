@@ -288,4 +288,3 @@ class OverrideBrowserConfiguration(TypedDict, total=False):
 
     timeout: OverrideBrowserConfigurationTimeout
     """Timeout configurations for the browser session."""
-

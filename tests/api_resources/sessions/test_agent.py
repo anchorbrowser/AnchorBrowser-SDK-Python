@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAgent:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_pause(self, client: Anchorbrowser) -> None:
         agent = client.sessions.agent.pause(
@@ -25,7 +25,7 @@ class TestAgent:
         )
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_pause(self, client: Anchorbrowser) -> None:
         response = client.sessions.agent.with_raw_response.pause(
@@ -37,7 +37,7 @@ class TestAgent:
         agent = response.parse()
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_pause(self, client: Anchorbrowser) -> None:
         with client.sessions.agent.with_streaming_response.pause(
@@ -51,7 +51,7 @@ class TestAgent:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_pause(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -59,7 +59,7 @@ class TestAgent:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_resume(self, client: Anchorbrowser) -> None:
         agent = client.sessions.agent.resume(
@@ -67,7 +67,7 @@ class TestAgent:
         )
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_resume(self, client: Anchorbrowser) -> None:
         response = client.sessions.agent.with_raw_response.resume(
@@ -79,7 +79,7 @@ class TestAgent:
         agent = response.parse()
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_resume(self, client: Anchorbrowser) -> None:
         with client.sessions.agent.with_streaming_response.resume(
@@ -93,7 +93,7 @@ class TestAgent:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_resume(self, client: Anchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -107,7 +107,7 @@ class TestAsyncAgent:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_pause(self, async_client: AsyncAnchorbrowser) -> None:
         agent = await async_client.sessions.agent.pause(
@@ -115,7 +115,7 @@ class TestAsyncAgent:
         )
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_pause(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.agent.with_raw_response.pause(
@@ -127,7 +127,7 @@ class TestAsyncAgent:
         agent = await response.parse()
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_pause(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.agent.with_streaming_response.pause(
@@ -141,7 +141,7 @@ class TestAsyncAgent:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_pause(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -149,7 +149,7 @@ class TestAsyncAgent:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_resume(self, async_client: AsyncAnchorbrowser) -> None:
         agent = await async_client.sessions.agent.resume(
@@ -157,7 +157,7 @@ class TestAsyncAgent:
         )
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_resume(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.agent.with_raw_response.resume(
@@ -169,7 +169,7 @@ class TestAsyncAgent:
         agent = await response.parse()
         assert_matches_type(SuccessResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_resume(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.agent.with_streaming_response.resume(
@@ -183,7 +183,7 @@ class TestAsyncAgent:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_resume(self, async_client: AsyncAnchorbrowser) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
