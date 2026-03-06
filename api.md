@@ -83,12 +83,17 @@ Methods:
 Types:
 
 ```python
-from anchorbrowser.types.sessions import MouseClickResponse, MouseMoveResponse
+from anchorbrowser.types.sessions import (
+    MouseClickResponse,
+    MouseDoubleClickResponse,
+    MouseMoveResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /v1/sessions/{sessionId}/mouse/click">client.sessions.mouse.<a href="./src/anchorbrowser/resources/sessions/mouse.py">click</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/mouse_click_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/mouse_click_response.py">MouseClickResponse</a></code>
+- <code title="post /v1/sessions/{sessionId}/mouse/doubleClick">client.sessions.mouse.<a href="./src/anchorbrowser/resources/sessions/mouse.py">double_click</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/mouse_double_click_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/mouse_double_click_response.py">MouseDoubleClickResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/mouse/move">client.sessions.mouse.<a href="./src/anchorbrowser/resources/sessions/mouse.py">move</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/mouse_move_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/mouse_move_response.py">MouseMoveResponse</a></code>
 
 ## Keyboard
@@ -109,19 +114,15 @@ Methods:
 Types:
 
 ```python
-from anchorbrowser.types.sessions import ClipboardSetResponse
+from anchorbrowser.types.sessions import ClipboardGetResponse, ClipboardSetResponse
 ```
 
 Methods:
 
+- <code title="get /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">get</a>(session_id) -> <a href="./src/anchorbrowser/types/sessions/clipboard_get_response.py">ClipboardGetResponse</a></code>
 - <code title="post /v1/sessions/{sessionId}/clipboard">client.sessions.clipboard.<a href="./src/anchorbrowser/resources/sessions/clipboard.py">set</a>(session_id, \*\*<a href="src/anchorbrowser/types/sessions/clipboard_set_params.py">params</a>) -> <a href="./src/anchorbrowser/types/sessions/clipboard_set_response.py">ClipboardSetResponse</a></code>
 
 ## Agent
-
-Methods:
-
-- <code title="post /v1/sessions/{session_id}/agent/pause">client.sessions.agent.<a href="./src/anchorbrowser/resources/sessions/agent/agent.py">pause</a>(session_id) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
-- <code title="post /v1/sessions/{session_id}/agent/resume">client.sessions.agent.<a href="./src/anchorbrowser/resources/sessions/agent/agent.py">resume</a>(session_id) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 
 ### Files
 
@@ -188,28 +189,14 @@ from anchorbrowser.types import (
     TaskCreateResponse,
     TaskListResponse,
     TaskRetrieveExecutionResultResponse,
-    TaskRunResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /v1/task">client.task.<a href="./src/anchorbrowser/resources/task/task.py">create</a>(\*\*<a href="src/anchorbrowser/types/task_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_create_response.py">TaskCreateResponse</a></code>
-- <code title="get /v1/task">client.task.<a href="./src/anchorbrowser/resources/task/task.py">list</a>(\*\*<a href="src/anchorbrowser/types/task_list_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_list_response.py">TaskListResponse</a></code>
-- <code title="get /v1/task/{taskId}/executions/{executionId}">client.task.<a href="./src/anchorbrowser/resources/task/task.py">retrieve_execution_result</a>(execution_id, \*, task_id) -> <a href="./src/anchorbrowser/types/task_retrieve_execution_result_response.py">TaskRetrieveExecutionResultResponse</a></code>
-- <code title="post /v2/tasks/{taskId}/run">client.task.<a href="./src/anchorbrowser/resources/task/task.py">run</a>(task_id, \*\*<a href="src/anchorbrowser/types/task_run_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_run_response.py">TaskRunResponse</a></code>
-
-## Runs
-
-Types:
-
-```python
-from anchorbrowser.types.task import RunRetrieveStatusResponse
-```
-
-Methods:
-
-- <code title="get /v2/tasks/runs/{runId}/status">client.task.runs.<a href="./src/anchorbrowser/resources/task/runs.py">retrieve_status</a>(run_id) -> <a href="./src/anchorbrowser/types/task/run_retrieve_status_response.py">RunRetrieveStatusResponse</a></code>
+- <code title="post /v1/task">client.task.<a href="./src/anchorbrowser/resources/task.py">create</a>(\*\*<a href="src/anchorbrowser/types/task_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_create_response.py">TaskCreateResponse</a></code>
+- <code title="get /v1/task">client.task.<a href="./src/anchorbrowser/resources/task.py">list</a>(\*\*<a href="src/anchorbrowser/types/task_list_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_list_response.py">TaskListResponse</a></code>
+- <code title="get /v1/task/{taskId}/executions/{executionId}">client.task.<a href="./src/anchorbrowser/resources/task.py">retrieve_execution_result</a>(execution_id, \*, task_id) -> <a href="./src/anchorbrowser/types/task_retrieve_execution_result_response.py">TaskRetrieveExecutionResultResponse</a></code>
 
 # Identities
 

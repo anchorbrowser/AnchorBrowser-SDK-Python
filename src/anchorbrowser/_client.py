@@ -32,10 +32,10 @@ from ._base_client import (
 
 if TYPE_CHECKING:
     from .resources import task, tools, events, profiles, sessions, extensions, identities, applications
+    from .resources.task import TaskResource, AsyncTaskResource
     from .resources.tools import ToolsResource, AsyncToolsResource
     from .resources.events import EventsResource, AsyncEventsResource
     from .resources.profiles import ProfilesResource, AsyncProfilesResource
-    from .resources.task.task import TaskResource, AsyncTaskResource
     from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
     from .resources.identities import IdentitiesResource, AsyncIdentitiesResource
     from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource

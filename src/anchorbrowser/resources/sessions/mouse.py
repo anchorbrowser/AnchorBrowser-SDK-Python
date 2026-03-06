@@ -17,9 +17,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.sessions import mouse_move_params, mouse_click_params
+from ...types.sessions import mouse_move_params, mouse_click_params, mouse_double_click_params
 from ...types.sessions.mouse_move_response import MouseMoveResponse
 from ...types.sessions.mouse_click_response import MouseClickResponse
+from ...types.sessions.mouse_double_click_response import MouseDoubleClickResponse
 
 __all__ = ["MouseResource", "AsyncMouseResource"]
 
@@ -106,6 +107,56 @@ class MouseResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MouseClickResponse,
+        )
+
+    def double_click(
+        self,
+        session_id: str,
+        *,
+        x: int,
+        y: int,
+        button: Literal["left", "middle", "right"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MouseDoubleClickResponse:
+        """
+        Performs a double click at the specified coordinates
+
+        Args:
+          x: X coordinate
+
+          y: Y coordinate
+
+          button: Mouse button to use
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._post(
+            f"/v1/sessions/{session_id}/mouse/doubleClick",
+            body=maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "button": button,
+                },
+                mouse_double_click_params.MouseDoubleClickParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MouseDoubleClickResponse,
         )
 
     def move(
@@ -239,6 +290,56 @@ class AsyncMouseResource(AsyncAPIResource):
             cast_to=MouseClickResponse,
         )
 
+    async def double_click(
+        self,
+        session_id: str,
+        *,
+        x: int,
+        y: int,
+        button: Literal["left", "middle", "right"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MouseDoubleClickResponse:
+        """
+        Performs a double click at the specified coordinates
+
+        Args:
+          x: X coordinate
+
+          y: Y coordinate
+
+          button: Mouse button to use
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._post(
+            f"/v1/sessions/{session_id}/mouse/doubleClick",
+            body=await async_maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "button": button,
+                },
+                mouse_double_click_params.MouseDoubleClickParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MouseDoubleClickResponse,
+        )
+
     async def move(
         self,
         session_id: str,
@@ -293,6 +394,9 @@ class MouseResourceWithRawResponse:
         self.click = to_raw_response_wrapper(
             mouse.click,
         )
+        self.double_click = to_raw_response_wrapper(
+            mouse.double_click,
+        )
         self.move = to_raw_response_wrapper(
             mouse.move,
         )
@@ -304,6 +408,9 @@ class AsyncMouseResourceWithRawResponse:
 
         self.click = async_to_raw_response_wrapper(
             mouse.click,
+        )
+        self.double_click = async_to_raw_response_wrapper(
+            mouse.double_click,
         )
         self.move = async_to_raw_response_wrapper(
             mouse.move,
@@ -317,6 +424,9 @@ class MouseResourceWithStreamingResponse:
         self.click = to_streamed_response_wrapper(
             mouse.click,
         )
+        self.double_click = to_streamed_response_wrapper(
+            mouse.double_click,
+        )
         self.move = to_streamed_response_wrapper(
             mouse.move,
         )
@@ -328,6 +438,9 @@ class AsyncMouseResourceWithStreamingResponse:
 
         self.click = async_to_streamed_response_wrapper(
             mouse.click,
+        )
+        self.double_click = async_to_streamed_response_wrapper(
+            mouse.double_click,
         )
         self.move = async_to_streamed_response_wrapper(
             mouse.move,
