@@ -10,6 +10,7 @@ import pytest
 from tests.utils import assert_matches_type
 from anchorbrowser import Anchorbrowser, AsyncAnchorbrowser
 from anchorbrowser.types import (
+    TaskRunResponse,
     TaskListResponse,
     TaskCreateResponse,
     TaskRetrieveExecutionResultResponse,
@@ -174,6 +175,72 @@ class TestTask:
                 task_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_run(self, client: Anchorbrowser) -> None:
+        task = client.task.run(
+            task_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+        assert_matches_type(TaskRunResponse, task, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_run_with_all_params(self, client: Anchorbrowser) -> None:
+        task = client.task.run(
+            task_id="550e8400-e29b-41d4-a716-446655440000",
+            async_=True,
+            cleanup_sessions=True,
+            inputs={
+                "ANCHOR_TARGET_URL": "https://example.com",
+                "ANCHOR_MAX_PAGES": "10",
+            },
+            override_browser_configuration={
+                "initial_url": "https://example.com",
+                "live_view": {"read_only": True},
+                "proxy": {
+                    "active": True,
+                    "city": "city",
+                    "country_code": "af",
+                    "region": "region",
+                    "type": "anchor_proxy",
+                },
+                "recording": {"active": True},
+                "timeout": {
+                    "idle_timeout": 0,
+                    "max_duration": 0,
+                },
+            },
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            version="1",
+        )
+        assert_matches_type(TaskRunResponse, task, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_run(self, client: Anchorbrowser) -> None:
+        response = client.task.with_raw_response.run(
+            task_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        task = response.parse()
+        assert_matches_type(TaskRunResponse, task, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_run(self, client: Anchorbrowser) -> None:
+        with client.task.with_streaming_response.run(
+            task_id="550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            task = response.parse()
+            assert_matches_type(TaskRunResponse, task, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncTask:
     parametrize = pytest.mark.parametrize(
@@ -332,3 +399,69 @@ class TestAsyncTask:
                 execution_id="",
                 task_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run(self, async_client: AsyncAnchorbrowser) -> None:
+        task = await async_client.task.run(
+            task_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+        assert_matches_type(TaskRunResponse, task, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run_with_all_params(self, async_client: AsyncAnchorbrowser) -> None:
+        task = await async_client.task.run(
+            task_id="550e8400-e29b-41d4-a716-446655440000",
+            async_=True,
+            cleanup_sessions=True,
+            inputs={
+                "ANCHOR_TARGET_URL": "https://example.com",
+                "ANCHOR_MAX_PAGES": "10",
+            },
+            override_browser_configuration={
+                "initial_url": "https://example.com",
+                "live_view": {"read_only": True},
+                "proxy": {
+                    "active": True,
+                    "city": "city",
+                    "country_code": "af",
+                    "region": "region",
+                    "type": "anchor_proxy",
+                },
+                "recording": {"active": True},
+                "timeout": {
+                    "idle_timeout": 0,
+                    "max_duration": 0,
+                },
+            },
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            version="1",
+        )
+        assert_matches_type(TaskRunResponse, task, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_run(self, async_client: AsyncAnchorbrowser) -> None:
+        response = await async_client.task.with_raw_response.run(
+            task_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        task = await response.parse()
+        assert_matches_type(TaskRunResponse, task, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_run(self, async_client: AsyncAnchorbrowser) -> None:
+        async with async_client.task.with_streaming_response.run(
+            task_id="550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            task = await response.parse()
+            assert_matches_type(TaskRunResponse, task, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

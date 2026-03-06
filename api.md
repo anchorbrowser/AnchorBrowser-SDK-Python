@@ -189,6 +189,7 @@ from anchorbrowser.types import (
     TaskCreateResponse,
     TaskListResponse,
     TaskRetrieveExecutionResultResponse,
+    TaskRunResponse,
 )
 ```
 
@@ -197,6 +198,7 @@ Methods:
 - <code title="post /v1/task">client.task.<a href="./src/anchorbrowser/resources/task.py">create</a>(\*\*<a href="src/anchorbrowser/types/task_create_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_create_response.py">TaskCreateResponse</a></code>
 - <code title="get /v1/task">client.task.<a href="./src/anchorbrowser/resources/task.py">list</a>(\*\*<a href="src/anchorbrowser/types/task_list_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_list_response.py">TaskListResponse</a></code>
 - <code title="get /v1/task/{taskId}/executions/{executionId}">client.task.<a href="./src/anchorbrowser/resources/task.py">retrieve_execution_result</a>(execution_id, \*, task_id) -> <a href="./src/anchorbrowser/types/task_retrieve_execution_result_response.py">TaskRetrieveExecutionResultResponse</a></code>
+- <code title="post /v1/task/run">client.task.<a href="./src/anchorbrowser/resources/task.py">run</a>(\*\*<a href="src/anchorbrowser/types/task_run_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_run_response.py">TaskRunResponse</a></code>
 
 # Identities
 
