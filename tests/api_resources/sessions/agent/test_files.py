@@ -22,7 +22,7 @@ class TestFiles:
     def test_method_upload(self, client: Anchorbrowser) -> None:
         file = client.sessions.agent.files.upload(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(FileUploadResponse, file, path=["response"])
 
@@ -31,7 +31,7 @@ class TestFiles:
     def test_raw_response_upload(self, client: Anchorbrowser) -> None:
         response = client.sessions.agent.files.with_raw_response.upload(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -44,7 +44,7 @@ class TestFiles:
     def test_streaming_response_upload(self, client: Anchorbrowser) -> None:
         with client.sessions.agent.files.with_streaming_response.upload(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -60,7 +60,7 @@ class TestFiles:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.sessions.agent.files.with_raw_response.upload(
                 session_id="",
-                file=b"raw file contents",
+                file=b"Example data",
             )
 
 
@@ -74,7 +74,7 @@ class TestAsyncFiles:
     async def test_method_upload(self, async_client: AsyncAnchorbrowser) -> None:
         file = await async_client.sessions.agent.files.upload(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(FileUploadResponse, file, path=["response"])
 
@@ -83,7 +83,7 @@ class TestAsyncFiles:
     async def test_raw_response_upload(self, async_client: AsyncAnchorbrowser) -> None:
         response = await async_client.sessions.agent.files.with_raw_response.upload(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -96,7 +96,7 @@ class TestAsyncFiles:
     async def test_streaming_response_upload(self, async_client: AsyncAnchorbrowser) -> None:
         async with async_client.sessions.agent.files.with_streaming_response.upload(
             session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -112,5 +112,5 @@ class TestAsyncFiles:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.sessions.agent.files.with_raw_response.upload(
                 session_id="",
-                file=b"raw file contents",
+                file=b"Example data",
             )

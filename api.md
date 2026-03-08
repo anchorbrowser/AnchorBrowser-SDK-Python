@@ -189,6 +189,7 @@ from anchorbrowser.types import (
     TaskCreateResponse,
     TaskListResponse,
     TaskRetrieveExecutionResultResponse,
+    TaskRunResponse,
 )
 ```
 

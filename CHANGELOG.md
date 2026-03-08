@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.11.1 (2026-03-08)
+
+Full Changelog: [v0.11.0...v0.11.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.11.0...v0.11.1)
+
+### Features
+
+* **api:** manual updates ([0d78c9a](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/0d78c9a3620a3f3240065f1836cb8fd74f88d313))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([1091e17](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/1091e17ce21b3cf47e0510a7571d0267f703f793))
+* update placeholder string ([a9fb3f0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/a9fb3f06e28e413714fb2a5c4d39fe77b334b4cd))
+
 ## 0.11.0 (2026-03-06)
 
 Full Changelog: [v0.10.2...v0.11.0](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.10.2...v0.11.0)
