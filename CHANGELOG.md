@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.11.2 (2026-03-17)
+
+Full Changelog: [v0.11.1...v0.11.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.11.1...v0.11.2)
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([d2675be](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/d2675be59807b21dcd82039f3a6357bad40584c7))
+* **pydantic:** do not pass `by_alias` unless set ([9573992](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/95739921ce63b11910a4c895a6bac3f0556a21df))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([296e29d](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/296e29de1d9fadf90bcc9066f7c5a2ddcf45e763))
+
 ## 0.11.1 (2026-03-08)
 
 Full Changelog: [v0.11.0...v0.11.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.11.0...v0.11.1)
