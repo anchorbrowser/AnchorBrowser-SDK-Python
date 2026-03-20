@@ -180,6 +180,43 @@ Methods:
 - <code title="post /v1/events/{event_name}">client.events.<a href="./src/anchorbrowser/resources/events.py">signal</a>(event_name, \*\*<a href="src/anchorbrowser/types/event_signal_params.py">params</a>) -> <a href="./src/anchorbrowser/types/shared/success_response.py">SuccessResponse</a></code>
 - <code title="post /v1/events/{event_name}/wait">client.events.<a href="./src/anchorbrowser/resources/events.py">wait_for</a>(event_name, \*\*<a href="src/anchorbrowser/types/event_wait_for_params.py">params</a>) -> <a href="./src/anchorbrowser/types/event_wait_for_response.py">EventWaitForResponse</a></code>
 
+# Tasks
+
+Types:
+
+```python
+from anchorbrowser.types import TaskGenerateResponse, TaskRunResponse
+```
+
+Methods:
+
+- <code title="post /v2/tasks/generate">client.tasks.<a href="./src/anchorbrowser/resources/tasks/tasks.py">generate</a>(\*\*<a href="src/anchorbrowser/types/task_generate_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_generate_response.py">TaskGenerateResponse</a></code>
+- <code title="post /v2/tasks/{taskId}/run">client.tasks.<a href="./src/anchorbrowser/resources/tasks/tasks.py">run</a>(task_id, \*\*<a href="src/anchorbrowser/types/task_run_params.py">params</a>) -> <a href="./src/anchorbrowser/types/task_run_response.py">TaskRunResponse</a></code>
+
+## Runs
+
+Types:
+
+```python
+from anchorbrowser.types.tasks import RunGetStatusResponse
+```
+
+Methods:
+
+- <code title="get /v2/tasks/runs/{runId}/status">client.tasks.runs.<a href="./src/anchorbrowser/resources/tasks/runs.py">get_status</a>(run_id) -> <a href="./src/anchorbrowser/types/tasks/run_get_status_response.py">RunGetStatusResponse</a></code>
+
+## Generations
+
+Types:
+
+```python
+from anchorbrowser.types.tasks import GenerationGetStatusResponse
+```
+
+Methods:
+
+- <code title="get /v2/tasks/{taskId}/generation-status">client.tasks.generations.<a href="./src/anchorbrowser/resources/tasks/generations.py">get_status</a>(task_id) -> <a href="./src/anchorbrowser/types/tasks/generation_get_status_response.py">GenerationGetStatusResponse</a></code>
+
 # Identities
 
 Types:

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
 
 import pytest
 
@@ -66,7 +65,7 @@ class TestApplications:
             application = response.parse()
             assert_matches_type(ApplicationCreateResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -100,7 +99,7 @@ class TestApplications:
             application = response.parse()
             assert_matches_type(ApplicationRetrieveResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -144,7 +143,7 @@ class TestApplications:
             application = response.parse()
             assert_matches_type(ApplicationListResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -178,7 +177,7 @@ class TestApplications:
             application = response.parse()
             assert_matches_type(ApplicationDeleteResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -223,7 +222,7 @@ class TestApplications:
             application = response.parse()
             assert_matches_type(ApplicationCreateIdentityTokenResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -276,7 +275,7 @@ class TestApplications:
             application = response.parse()
             assert_matches_type(ApplicationListIdentitiesResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -334,7 +333,7 @@ class TestAsyncApplications:
             application = await response.parse()
             assert_matches_type(ApplicationCreateResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -368,7 +367,7 @@ class TestAsyncApplications:
             application = await response.parse()
             assert_matches_type(ApplicationRetrieveResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -412,7 +411,7 @@ class TestAsyncApplications:
             application = await response.parse()
             assert_matches_type(ApplicationListResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -446,7 +445,7 @@ class TestAsyncApplications:
             application = await response.parse()
             assert_matches_type(ApplicationDeleteResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -491,7 +490,7 @@ class TestAsyncApplications:
             application = await response.parse()
             assert_matches_type(ApplicationCreateIdentityTokenResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -544,7 +543,7 @@ class TestAsyncApplications:
             application = await response.parse()
             assert_matches_type(ApplicationListIdentitiesResponse, application, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize

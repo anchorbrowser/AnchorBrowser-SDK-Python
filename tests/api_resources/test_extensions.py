@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
 
 import pytest
 
@@ -43,7 +42,7 @@ class TestExtensions:
             extension = response.parse()
             assert_matches_type(ExtensionListResponse, extension, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
 
 class TestAsyncExtensions:
@@ -77,4 +76,4 @@ class TestAsyncExtensions:
             extension = await response.parse()
             assert_matches_type(ExtensionListResponse, extension, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True

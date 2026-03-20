@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
 
 import httpx
 import pytest
@@ -122,7 +121,7 @@ class TestSessions:
             session = response.parse()
             assert_matches_type(SessionCreateResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -156,7 +155,7 @@ class TestSessions:
             session = response.parse()
             assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -198,7 +197,7 @@ class TestSessions:
             session = response.parse()
             assert_matches_type(SuccessResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -265,7 +264,7 @@ class TestSessions:
             session = response.parse()
             assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -314,7 +313,7 @@ class TestSessions:
             session = response.parse()
             assert_matches_type(SessionGotoResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -357,7 +356,7 @@ class TestSessions:
             session = response.parse()
             assert_matches_type(SessionRetrieveDownloadsResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -378,7 +377,7 @@ class TestSessions:
         )
         assert session.is_closed
         assert session.json() == {"foo": "bar"}
-        assert cast(Any, session.is_closed) is True
+        assert session.is_closed is True
         assert isinstance(session, BinaryAPIResponse)
 
     @parametrize
@@ -410,10 +409,10 @@ class TestSessions:
             assert session.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assert session.json() == {"foo": "bar"}
-            assert cast(Any, session.is_closed) is True
+            assert session.is_closed is True
             assert isinstance(session, StreamedBinaryAPIResponse)
 
-        assert cast(Any, session.is_closed) is True
+        assert session.is_closed is True
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
@@ -478,7 +477,7 @@ class TestSessions:
             session = response.parse()
             assert_matches_type(SessionScrollResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -526,7 +525,7 @@ class TestSessions:
             session = response.parse()
             assert_matches_type(SessionUploadFileResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -631,7 +630,7 @@ class TestAsyncSessions:
             session = await response.parse()
             assert_matches_type(SessionCreateResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -665,7 +664,7 @@ class TestAsyncSessions:
             session = await response.parse()
             assert_matches_type(SessionRetrieveResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -707,7 +706,7 @@ class TestAsyncSessions:
             session = await response.parse()
             assert_matches_type(SuccessResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -774,7 +773,7 @@ class TestAsyncSessions:
             session = await response.parse()
             assert_matches_type(SessionDragAndDropResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -823,7 +822,7 @@ class TestAsyncSessions:
             session = await response.parse()
             assert_matches_type(SessionGotoResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -866,7 +865,7 @@ class TestAsyncSessions:
             session = await response.parse()
             assert_matches_type(SessionRetrieveDownloadsResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -887,7 +886,7 @@ class TestAsyncSessions:
         )
         assert session.is_closed
         assert await session.json() == {"foo": "bar"}
-        assert cast(Any, session.is_closed) is True
+        assert session.is_closed is True
         assert isinstance(session, AsyncBinaryAPIResponse)
 
     @parametrize
@@ -923,10 +922,10 @@ class TestAsyncSessions:
             assert session.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assert await session.json() == {"foo": "bar"}
-            assert cast(Any, session.is_closed) is True
+            assert session.is_closed is True
             assert isinstance(session, AsyncStreamedBinaryAPIResponse)
 
-        assert cast(Any, session.is_closed) is True
+        assert session.is_closed is True
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
@@ -991,7 +990,7 @@ class TestAsyncSessions:
             session = await response.parse()
             assert_matches_type(SessionScrollResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1039,7 +1038,7 @@ class TestAsyncSessions:
             session = await response.parse()
             assert_matches_type(SessionUploadFileResponse, session, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
 
 import pytest
 
@@ -65,7 +64,7 @@ class TestEvents:
             event = response.parse()
             assert_matches_type(SuccessResponse, event, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -121,7 +120,7 @@ class TestEvents:
             event = response.parse()
             assert_matches_type(EventWaitForResponse, event, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -184,7 +183,7 @@ class TestAsyncEvents:
             event = await response.parse()
             assert_matches_type(SuccessResponse, event, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -240,7 +239,7 @@ class TestAsyncEvents:
             event = await response.parse()
             assert_matches_type(EventWaitForResponse, event, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize

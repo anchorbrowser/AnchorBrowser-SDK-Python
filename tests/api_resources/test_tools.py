@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
 
 import httpx
 import pytest
@@ -68,7 +67,7 @@ class TestTools:
             tool = response.parse()
             assert_matches_type(str, tool, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -102,7 +101,7 @@ class TestTools:
             tool = response.parse()
             assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -163,7 +162,7 @@ class TestTools:
             tool = response.parse()
             assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
@@ -172,7 +171,7 @@ class TestTools:
         tool = client.tools.screenshot_webpage()
         assert tool.is_closed
         assert tool.json() == {"foo": "bar"}
-        assert cast(Any, tool.is_closed) is True
+        assert tool.is_closed is True
         assert isinstance(tool, BinaryAPIResponse)
 
     @parametrize
@@ -192,7 +191,7 @@ class TestTools:
         )
         assert tool.is_closed
         assert tool.json() == {"foo": "bar"}
-        assert cast(Any, tool.is_closed) is True
+        assert tool.is_closed is True
         assert isinstance(tool, BinaryAPIResponse)
 
     @parametrize
@@ -216,10 +215,10 @@ class TestTools:
             assert tool.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assert tool.json() == {"foo": "bar"}
-            assert cast(Any, tool.is_closed) is True
+            assert tool.is_closed is True
             assert isinstance(tool, StreamedBinaryAPIResponse)
 
-        assert cast(Any, tool.is_closed) is True
+        assert tool.is_closed is True
 
 
 class TestAsyncTools:
@@ -267,7 +266,7 @@ class TestAsyncTools:
             tool = await response.parse()
             assert_matches_type(str, tool, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -301,7 +300,7 @@ class TestAsyncTools:
             tool = await response.parse()
             assert_matches_type(ToolGetPerformWebTaskStatusResponse, tool, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -362,7 +361,7 @@ class TestAsyncTools:
             tool = await response.parse()
             assert_matches_type(ToolPerformWebTaskResponse, tool, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
@@ -371,7 +370,7 @@ class TestAsyncTools:
         tool = await async_client.tools.screenshot_webpage()
         assert tool.is_closed
         assert await tool.json() == {"foo": "bar"}
-        assert cast(Any, tool.is_closed) is True
+        assert tool.is_closed is True
         assert isinstance(tool, AsyncBinaryAPIResponse)
 
     @parametrize
@@ -393,7 +392,7 @@ class TestAsyncTools:
         )
         assert tool.is_closed
         assert await tool.json() == {"foo": "bar"}
-        assert cast(Any, tool.is_closed) is True
+        assert tool.is_closed is True
         assert isinstance(tool, AsyncBinaryAPIResponse)
 
     @parametrize
@@ -421,7 +420,7 @@ class TestAsyncTools:
             assert tool.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assert await tool.json() == {"foo": "bar"}
-            assert cast(Any, tool.is_closed) is True
+            assert tool.is_closed is True
             assert isinstance(tool, AsyncStreamedBinaryAPIResponse)
 
-        assert cast(Any, tool.is_closed) is True
+        assert tool.is_closed is True

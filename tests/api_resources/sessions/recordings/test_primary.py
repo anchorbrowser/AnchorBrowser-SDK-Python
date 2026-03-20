@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
 
 import httpx
 import pytest
@@ -34,7 +33,7 @@ class TestPrimary:
         )
         assert primary.is_closed
         assert primary.json() == {"foo": "bar"}
-        assert cast(Any, primary.is_closed) is True
+        assert primary.is_closed is True
         assert isinstance(primary, BinaryAPIResponse)
 
     @parametrize
@@ -66,10 +65,10 @@ class TestPrimary:
             assert primary.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assert primary.json() == {"foo": "bar"}
-            assert cast(Any, primary.is_closed) is True
+            assert primary.is_closed is True
             assert isinstance(primary, StreamedBinaryAPIResponse)
 
-        assert cast(Any, primary.is_closed) is True
+        assert primary.is_closed is True
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
@@ -96,7 +95,7 @@ class TestAsyncPrimary:
         )
         assert primary.is_closed
         assert await primary.json() == {"foo": "bar"}
-        assert cast(Any, primary.is_closed) is True
+        assert primary.is_closed is True
         assert isinstance(primary, AsyncBinaryAPIResponse)
 
     @parametrize
@@ -128,10 +127,10 @@ class TestAsyncPrimary:
             assert primary.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assert await primary.json() == {"foo": "bar"}
-            assert cast(Any, primary.is_closed) is True
+            assert primary.is_closed is True
             assert isinstance(primary, AsyncStreamedBinaryAPIResponse)
 
-        assert cast(Any, primary.is_closed) is True
+        assert primary.is_closed is True
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)

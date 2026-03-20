@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
 
 import pytest
 
@@ -78,7 +77,7 @@ class TestIdentities:
             identity = response.parse()
             assert_matches_type(IdentityCreateResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -112,7 +111,7 @@ class TestIdentities:
             identity = response.parse()
             assert_matches_type(IdentityRetrieveResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -171,7 +170,7 @@ class TestIdentities:
             identity = response.parse()
             assert_matches_type(IdentityUpdateResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -213,7 +212,7 @@ class TestIdentities:
             identity = response.parse()
             assert_matches_type(IdentityDeleteResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -255,7 +254,7 @@ class TestIdentities:
             identity = response.parse()
             assert_matches_type(IdentityRetrieveCredentialsResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -326,7 +325,7 @@ class TestAsyncIdentities:
             identity = await response.parse()
             assert_matches_type(IdentityCreateResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -360,7 +359,7 @@ class TestAsyncIdentities:
             identity = await response.parse()
             assert_matches_type(IdentityRetrieveResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -419,7 +418,7 @@ class TestAsyncIdentities:
             identity = await response.parse()
             assert_matches_type(IdentityUpdateResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -461,7 +460,7 @@ class TestAsyncIdentities:
             identity = await response.parse()
             assert_matches_type(IdentityDeleteResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -503,7 +502,7 @@ class TestAsyncIdentities:
             identity = await response.parse()
             assert_matches_type(IdentityRetrieveCredentialsResponse, identity, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
