@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.3 (2026-03-20)
+
+Full Changelog: [v0.11.2...v0.11.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.11.2...v0.11.3)
+
+### Bug Fixes
+
+* sanitize endpoint path params ([3ebc805](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/3ebc80543fc7b29c9ac9479455bfb108023370a8))
+
 ## 0.11.2 (2026-03-17)
 
 Full Changelog: [v0.11.1...v0.11.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v0.11.1...v0.11.2)
