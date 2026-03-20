@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 from .shared import SuccessResponse as SuccessResponse
+from .task_run_params import TaskRunParams as TaskRunParams
+from .task_run_response import TaskRunResponse as TaskRunResponse
 from .extension_manifest import ExtensionManifest as ExtensionManifest
 from .event_signal_params import EventSignalParams as EventSignalParams
 from .session_goto_params import SessionGotoParams as SessionGotoParams
+from .task_generate_params import TaskGenerateParams as TaskGenerateParams
 from .event_wait_for_params import EventWaitForParams as EventWaitForParams
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_list_response import ProfileListResponse as ProfileListResponse
@@ -14,6 +17,7 @@ from .session_goto_response import SessionGotoResponse as SessionGotoResponse
 from .session_scroll_params import SessionScrollParams as SessionScrollParams
 from .identity_create_params import IdentityCreateParams as IdentityCreateParams
 from .identity_update_params import IdentityUpdateParams as IdentityUpdateParams
+from .task_generate_response import TaskGenerateResponse as TaskGenerateResponse
 from .application_list_params import ApplicationListParams as ApplicationListParams
 from .event_wait_for_response import EventWaitForResponse as EventWaitForResponse
 from .extension_list_response import ExtensionListResponse as ExtensionListResponse

@@ -31,12 +31,13 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import tools, events, profiles, sessions, extensions, identities, applications
+    from .resources import tasks, tools, events, profiles, sessions, extensions, identities, applications
     from .resources.tools import ToolsResource, AsyncToolsResource
     from .resources.events import EventsResource, AsyncEventsResource
     from .resources.profiles import ProfilesResource, AsyncProfilesResource
     from .resources.extensions import ExtensionsResource, AsyncExtensionsResource
     from .resources.identities import IdentitiesResource, AsyncIdentitiesResource
+    from .resources.tasks.tasks import TasksResource, AsyncTasksResource
     from .resources.sessions.sessions import SessionsResource, AsyncSessionsResource
     from .resources.applications.applications import ApplicationsResource, AsyncApplicationsResource
 
@@ -136,6 +137,12 @@ class Anchorbrowser(SyncAPIClient):
         from .resources.events import EventsResource
 
         return EventsResource(self)
+
+    @cached_property
+    def tasks(self) -> TasksResource:
+        from .resources.tasks import TasksResource
+
+        return TasksResource(self)
 
     @cached_property
     def identities(self) -> IdentitiesResource:
@@ -348,6 +355,12 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         return AsyncEventsResource(self)
 
     @cached_property
+    def tasks(self) -> AsyncTasksResource:
+        from .resources.tasks import AsyncTasksResource
+
+        return AsyncTasksResource(self)
+
+    @cached_property
     def identities(self) -> AsyncIdentitiesResource:
         from .resources.identities import AsyncIdentitiesResource
 
@@ -509,6 +522,12 @@ class AnchorbrowserWithRawResponse:
         return EventsResourceWithRawResponse(self._client.events)
 
     @cached_property
+    def tasks(self) -> tasks.TasksResourceWithRawResponse:
+        from .resources.tasks import TasksResourceWithRawResponse
+
+        return TasksResourceWithRawResponse(self._client.tasks)
+
+    @cached_property
     def identities(self) -> identities.IdentitiesResourceWithRawResponse:
         from .resources.identities import IdentitiesResourceWithRawResponse
 
@@ -556,6 +575,12 @@ class AsyncAnchorbrowserWithRawResponse:
         from .resources.events import AsyncEventsResourceWithRawResponse
 
         return AsyncEventsResourceWithRawResponse(self._client.events)
+
+    @cached_property
+    def tasks(self) -> tasks.AsyncTasksResourceWithRawResponse:
+        from .resources.tasks import AsyncTasksResourceWithRawResponse
+
+        return AsyncTasksResourceWithRawResponse(self._client.tasks)
 
     @cached_property
     def identities(self) -> identities.AsyncIdentitiesResourceWithRawResponse:
@@ -607,6 +632,12 @@ class AnchorbrowserWithStreamedResponse:
         return EventsResourceWithStreamingResponse(self._client.events)
 
     @cached_property
+    def tasks(self) -> tasks.TasksResourceWithStreamingResponse:
+        from .resources.tasks import TasksResourceWithStreamingResponse
+
+        return TasksResourceWithStreamingResponse(self._client.tasks)
+
+    @cached_property
     def identities(self) -> identities.IdentitiesResourceWithStreamingResponse:
         from .resources.identities import IdentitiesResourceWithStreamingResponse
 
@@ -654,6 +685,12 @@ class AsyncAnchorbrowserWithStreamedResponse:
         from .resources.events import AsyncEventsResourceWithStreamingResponse
 
         return AsyncEventsResourceWithStreamingResponse(self._client.events)
+
+    @cached_property
+    def tasks(self) -> tasks.AsyncTasksResourceWithStreamingResponse:
+        from .resources.tasks import AsyncTasksResourceWithStreamingResponse
+
+        return AsyncTasksResourceWithStreamingResponse(self._client.tasks)
 
     @cached_property
     def identities(self) -> identities.AsyncIdentitiesResourceWithStreamingResponse:
