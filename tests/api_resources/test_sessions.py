@@ -59,6 +59,17 @@ class TestSessions:
                     "name": "name",
                     "persist": True,
                 },
+                "sensitive_data_mask": {
+                    "active": True,
+                    "custom_patterns": [
+                        {
+                            "mask": "mask",
+                            "regex": "regex",
+                        }
+                    ],
+                    "custom_selectors": ["string"],
+                    "site_selectors": {"foo": ["string"]},
+                },
                 "viewport": {
                     "height": 0,
                     "width": 0,
@@ -556,6 +567,17 @@ class TestAsyncSessions:
                 "profile": {
                     "name": "name",
                     "persist": True,
+                },
+                "sensitive_data_mask": {
+                    "active": True,
+                    "custom_patterns": [
+                        {
+                            "mask": "mask",
+                            "regex": "regex",
+                        }
+                    ],
+                    "custom_selectors": ["string"],
+                    "site_selectors": {"foo": ["string"]},
                 },
                 "viewport": {
                     "height": 0,
