@@ -8,7 +8,7 @@ import httpx
 
 from ..types import event_signal_params, event_wait_for_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -75,7 +75,7 @@ class EventsResource(SyncAPIResource):
         if not event_name:
             raise ValueError(f"Expected a non-empty value for `event_name` but received {event_name!r}")
         return self._post(
-            f"/v1/events/{event_name}",
+            path_template("/v1/events/{event_name}", event_name=event_name),
             body=maybe_transform({"data": data}, event_signal_params.EventSignalParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -114,7 +114,7 @@ class EventsResource(SyncAPIResource):
         if not event_name:
             raise ValueError(f"Expected a non-empty value for `event_name` but received {event_name!r}")
         return self._post(
-            f"/v1/events/{event_name}/wait",
+            path_template("/v1/events/{event_name}/wait", event_name=event_name),
             body=maybe_transform({"timeout_ms": timeout_ms}, event_wait_for_params.EventWaitForParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -174,7 +174,7 @@ class AsyncEventsResource(AsyncAPIResource):
         if not event_name:
             raise ValueError(f"Expected a non-empty value for `event_name` but received {event_name!r}")
         return await self._post(
-            f"/v1/events/{event_name}",
+            path_template("/v1/events/{event_name}", event_name=event_name),
             body=await async_maybe_transform({"data": data}, event_signal_params.EventSignalParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -213,7 +213,7 @@ class AsyncEventsResource(AsyncAPIResource):
         if not event_name:
             raise ValueError(f"Expected a non-empty value for `event_name` but received {event_name!r}")
         return await self._post(
-            f"/v1/events/{event_name}/wait",
+            path_template("/v1/events/{event_name}/wait", event_name=event_name),
             body=await async_maybe_transform({"timeout_ms": timeout_ms}, event_wait_for_params.EventWaitForParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

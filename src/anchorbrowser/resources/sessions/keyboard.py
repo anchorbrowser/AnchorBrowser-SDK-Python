@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -74,7 +74,7 @@ class KeyboardResource(SyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._post(
-            f"/v1/sessions/{session_id}/keyboard/shortcut",
+            path_template("/v1/sessions/{session_id}/keyboard/shortcut", session_id=session_id),
             body=maybe_transform(
                 {
                     "keys": keys,
@@ -120,7 +120,7 @@ class KeyboardResource(SyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._post(
-            f"/v1/sessions/{session_id}/keyboard/type",
+            path_template("/v1/sessions/{session_id}/keyboard/type", session_id=session_id),
             body=maybe_transform(
                 {
                     "text": text,
@@ -187,7 +187,7 @@ class AsyncKeyboardResource(AsyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._post(
-            f"/v1/sessions/{session_id}/keyboard/shortcut",
+            path_template("/v1/sessions/{session_id}/keyboard/shortcut", session_id=session_id),
             body=await async_maybe_transform(
                 {
                     "keys": keys,
@@ -233,7 +233,7 @@ class AsyncKeyboardResource(AsyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._post(
-            f"/v1/sessions/{session_id}/keyboard/type",
+            path_template("/v1/sessions/{session_id}/keyboard/type", session_id=session_id),
             body=await async_maybe_transform(
                 {
                     "text": text,
