@@ -41,6 +41,7 @@ from .keyboard import (
     AsyncKeyboardResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from ..._models import construct_type
 from .clipboard import (
     ClipboardResource,
     AsyncClipboardResource,
@@ -214,14 +215,17 @@ class SessionsResource(SyncAPIResource):
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return self._get(
+        raw_response = self._get(
             path_template("/v1/sessions/{session_id}", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionRetrieveResponse,  # Get as raw object (dict) to unwrap
+            cast_to=object,  # Get as raw object (dict) to unwrap
         )
-        
+        payload = cast(Mapping[str, object], raw_response)
+        data: object = payload.get("data", raw_response)
+        # return SessionRetrieveResponse(data=payload.get("data", {}))
+        return cast(SessionRetrieveResponse, construct_type(type_=SessionRetrieveResponse, value=data))
     def delete(
         self,
         session_id: str,
@@ -652,13 +656,16 @@ class AsyncSessionsResource(AsyncAPIResource):
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return await self._get(
+        raw_response = await self._get(
             path_template("/v1/sessions/{session_id}", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SessionRetrieveResponse,  # Get as raw object (dict) to unwrap
+            cast_to=object,  # Get as raw object (dict) to unwrap
         )
+        payload = cast(Mapping[str, object], raw_response)
+        data: object = payload.get("data", raw_response)
+        return cast(SessionRetrieveResponse, construct_type(type_=SessionRetrieveResponse, value=data))
 
     async def delete(
         self,
