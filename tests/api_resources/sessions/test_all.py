@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
 
 import pytest
 
@@ -44,7 +43,7 @@ class TestAll:
             all = response.parse()
             assert_matches_type(SuccessResponse, all, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -72,7 +71,7 @@ class TestAll:
             all = response.parse()
             assert_matches_type(AllStatusResponse, all, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
 
 class TestAsyncAll:
@@ -106,7 +105,7 @@ class TestAsyncAll:
             all = await response.parse()
             assert_matches_type(SuccessResponse, all, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -134,4 +133,4 @@ class TestAsyncAll:
             all = await response.parse()
             assert_matches_type(AllStatusResponse, all, path=["response"])
 
-        assert cast(Any, response.is_closed) is True
+        assert response.is_closed is True
