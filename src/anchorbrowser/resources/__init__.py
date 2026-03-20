@@ -1,12 +1,4 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
-from .task import (
-    TaskResource,
-    AsyncTaskResource,
-    TaskResourceWithRawResponse,
-    AsyncTaskResourceWithRawResponse,
-    TaskResourceWithStreamingResponse,
-    AsyncTaskResourceWithStreamingResponse,
-)
 from .tools import (
     ToolsResource,
     AsyncToolsResource,
@@ -95,12 +87,6 @@ __all__ = [
     "AsyncEventsResourceWithRawResponse",
     "EventsResourceWithStreamingResponse",
     "AsyncEventsResourceWithStreamingResponse",
-    "TaskResource",
-    "AsyncTaskResource",
-    "TaskResourceWithRawResponse",
-    "AsyncTaskResourceWithRawResponse",
-    "TaskResourceWithStreamingResponse",
-    "AsyncTaskResourceWithStreamingResponse",
     "IdentitiesResource",
     "AsyncIdentitiesResource",
     "IdentitiesResourceWithRawResponse",

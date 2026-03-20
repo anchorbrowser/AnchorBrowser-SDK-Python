@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import task, agent, tools, events, browser, profiles, sessions, extensions, identities, applications
+from .resources import agent, tools, events, browser, profiles, sessions, extensions, identities, applications
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, AnchorbrowserError
 from ._base_client import (
@@ -50,7 +50,6 @@ class Anchorbrowser(SyncAPIClient):
     browser: browser.BrowserResource
     agent: agent.AgentResource
     events: events.EventsResource
-    task: task.TaskResource
     identities: identities.IdentitiesResource
     applications: applications.ApplicationsResource
     with_raw_response: AnchorbrowserWithRawResponse
@@ -117,7 +116,6 @@ class Anchorbrowser(SyncAPIClient):
         self.browser = browser.BrowserResource(self)
         self.agent = agent.AgentResource(self)
         self.events = events.EventsResource(self)
-        self.task = task.TaskResource(self)
         self.identities = identities.IdentitiesResource(self)
         self.applications = applications.ApplicationsResource(self)
         self.with_raw_response = AnchorbrowserWithRawResponse(self)
@@ -236,7 +234,6 @@ class AsyncAnchorbrowser(AsyncAPIClient):
     browser: browser.AsyncBrowserResource
     agent: agent.AsyncAgentResource
     events: events.AsyncEventsResource
-    task: task.AsyncTaskResource
     identities: identities.AsyncIdentitiesResource
     applications: applications.AsyncApplicationsResource
     with_raw_response: AsyncAnchorbrowserWithRawResponse
@@ -303,7 +300,6 @@ class AsyncAnchorbrowser(AsyncAPIClient):
         self.browser = browser.AsyncBrowserResource(self)
         self.agent = agent.AsyncAgentResource(self)
         self.events = events.AsyncEventsResource(self)
-        self.task = task.AsyncTaskResource(self)
         self.identities = identities.AsyncIdentitiesResource(self)
         self.applications = applications.AsyncApplicationsResource(self)
         self.with_raw_response = AsyncAnchorbrowserWithRawResponse(self)
@@ -425,7 +421,6 @@ class AnchorbrowserWithRawResponse:
         self.browser = browser.BrowserResourceWithRawResponse(client.browser)
         self.agent = agent.AgentResourceWithRawResponse(client.agent)
         self.events = events.EventsResourceWithRawResponse(client.events)
-        self.task = task.TaskResourceWithRawResponse(client.task)
         self.identities = identities.IdentitiesResourceWithRawResponse(client.identities)
         self.applications = applications.ApplicationsResourceWithRawResponse(client.applications)
 
@@ -441,7 +436,6 @@ class AsyncAnchorbrowserWithRawResponse:
         self.browser = browser.AsyncBrowserResourceWithRawResponse(client.browser)
         self.agent = agent.AsyncAgentResourceWithRawResponse(client.agent)
         self.events = events.AsyncEventsResourceWithRawResponse(client.events)
-        self.task = task.AsyncTaskResourceWithRawResponse(client.task)
         self.identities = identities.AsyncIdentitiesResourceWithRawResponse(client.identities)
         self.applications = applications.AsyncApplicationsResourceWithRawResponse(client.applications)
 
@@ -457,7 +451,6 @@ class AnchorbrowserWithStreamedResponse:
         self.browser = browser.BrowserResourceWithStreamingResponse(client.browser)
         self.agent = agent.AgentResourceWithStreamingResponse(client.agent)
         self.events = events.EventsResourceWithStreamingResponse(client.events)
-        self.task = task.TaskResourceWithStreamingResponse(client.task)
         self.identities = identities.IdentitiesResourceWithStreamingResponse(client.identities)
         self.applications = applications.ApplicationsResourceWithStreamingResponse(client.applications)
 
@@ -473,7 +466,6 @@ class AsyncAnchorbrowserWithStreamedResponse:
         self.browser = browser.AsyncBrowserResourceWithStreamingResponse(client.browser)
         self.agent = agent.AsyncAgentResourceWithStreamingResponse(client.agent)
         self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
-        self.task = task.AsyncTaskResourceWithStreamingResponse(client.task)
         self.identities = identities.AsyncIdentitiesResourceWithStreamingResponse(client.identities)
         self.applications = applications.AsyncApplicationsResourceWithStreamingResponse(client.applications)
 
