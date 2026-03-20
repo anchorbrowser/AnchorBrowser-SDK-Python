@@ -31,7 +31,7 @@ from ...types import (
     session_drag_and_drop_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
-from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ..._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .keyboard import (
     KeyboardResource,
     AsyncKeyboardResource,
@@ -41,7 +41,6 @@ from .keyboard import (
     AsyncKeyboardResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
-from ..._models import construct_type
 from .clipboard import (
     ClipboardResource,
     AsyncClipboardResource,
@@ -215,22 +214,14 @@ class SessionsResource(SyncAPIResource):
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        
-        # Get raw response to unwrap the data field
-        raw_response = cast(dict[str, object], self._get(
-            f"/v1/sessions/{session_id}",
+        return self._get(
+            path_template("/v1/sessions/{session_id}", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,  # Get as raw object (dict) to unwrap
-        ))
+            cast_to=SessionRetrieveResponse,  # Get as raw object (dict) to unwrap
+        )
         
-        # Unwrap data field if API returns { data: {...} }
-        data: object = raw_response.get("data", raw_response)
-        
-        # Construct the response type from the unwrapped data
-        return cast(SessionRetrieveResponse, construct_type(type_=SessionRetrieveResponse, value=data))
-
     def delete(
         self,
         session_id: str,
@@ -258,7 +249,7 @@ class SessionsResource(SyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._delete(
-            f"/v1/sessions/{session_id}",
+            path_template("/v1/sessions/{session_id}", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -306,7 +297,7 @@ class SessionsResource(SyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._post(
-            f"/v1/sessions/{session_id}/drag-and-drop",
+            path_template("/v1/sessions/{session_id}/drag-and-drop", session_id=session_id),
             body=maybe_transform(
                 {
                     "end_x": end_x,
@@ -352,7 +343,7 @@ class SessionsResource(SyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._post(
-            f"/v1/sessions/{session_id}/goto",
+            path_template("/v1/sessions/{session_id}/goto", session_id=session_id),
             body=maybe_transform({"url": url}, session_goto_params.SessionGotoParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -388,7 +379,7 @@ class SessionsResource(SyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._get(
-            f"/v1/sessions/{session_id}/downloads",
+            path_template("/v1/sessions/{session_id}/downloads", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -422,7 +413,7 @@ class SessionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         extra_headers = {"Accept": "image/png", **(extra_headers or {})}
         return self._get(
-            f"/v1/sessions/{session_id}/screenshot",
+            path_template("/v1/sessions/{session_id}/screenshot", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -473,7 +464,7 @@ class SessionsResource(SyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._post(
-            f"/v1/sessions/{session_id}/scroll",
+            path_template("/v1/sessions/{session_id}/scroll", session_id=session_id),
             body=maybe_transform(
                 {
                     "delta_y": delta_y,
@@ -530,7 +521,7 @@ class SessionsResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            f"/v1/sessions/{session_id}/uploads",
+            path_template("/v1/sessions/{session_id}/uploads", session_id=session_id),
             body=maybe_transform(body, session_upload_file_params.SessionUploadFileParams),
             files=files,
             options=make_request_options(
@@ -661,21 +652,13 @@ class AsyncSessionsResource(AsyncAPIResource):
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        
-        # Get raw response to unwrap the data field
-        raw_response = cast(dict[str, object], await self._get(
-            f"/v1/sessions/{session_id}",
+        return await self._get(
+            path_template("/v1/sessions/{session_id}", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,  # Get as raw object (dict) to unwrap
-        ))
-        
-        # Unwrap data field if API returns { data: {...} }
-        data: object = raw_response.get("data", raw_response)
-        
-        # Construct the response type from the unwrapped data
-        return cast(SessionRetrieveResponse, construct_type(type_=SessionRetrieveResponse, value=data))
+            cast_to=SessionRetrieveResponse,  # Get as raw object (dict) to unwrap
+        )
 
     async def delete(
         self,
@@ -704,7 +687,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._delete(
-            f"/v1/sessions/{session_id}",
+            path_template("/v1/sessions/{session_id}", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -752,7 +735,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._post(
-            f"/v1/sessions/{session_id}/drag-and-drop",
+            path_template("/v1/sessions/{session_id}/drag-and-drop", session_id=session_id),
             body=await async_maybe_transform(
                 {
                     "end_x": end_x,
@@ -798,7 +781,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._post(
-            f"/v1/sessions/{session_id}/goto",
+            path_template("/v1/sessions/{session_id}/goto", session_id=session_id),
             body=await async_maybe_transform({"url": url}, session_goto_params.SessionGotoParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -834,7 +817,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._get(
-            f"/v1/sessions/{session_id}/downloads",
+            path_template("/v1/sessions/{session_id}/downloads", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -868,7 +851,7 @@ class AsyncSessionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         extra_headers = {"Accept": "image/png", **(extra_headers or {})}
         return await self._get(
-            f"/v1/sessions/{session_id}/screenshot",
+            path_template("/v1/sessions/{session_id}/screenshot", session_id=session_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -919,7 +902,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._post(
-            f"/v1/sessions/{session_id}/scroll",
+            path_template("/v1/sessions/{session_id}/scroll", session_id=session_id),
             body=await async_maybe_transform(
                 {
                     "delta_y": delta_y,
@@ -976,7 +959,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            f"/v1/sessions/{session_id}/uploads",
+            path_template("/v1/sessions/{session_id}/uploads", session_id=session_id),
             body=await async_maybe_transform(body, session_upload_file_params.SessionUploadFileParams),
             files=files,
             options=make_request_options(
