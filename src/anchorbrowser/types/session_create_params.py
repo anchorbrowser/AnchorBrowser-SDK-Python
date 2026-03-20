@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Dict, Union, Iterable
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
@@ -20,6 +20,8 @@ __all__ = [
     "BrowserP2pDownload",
     "BrowserPopupBlocker",
     "BrowserProfile",
+    "BrowserSensitiveDataMask",
+    "BrowserSensitiveDataMaskCustomPattern",
     "BrowserViewport",
     "Identity",
     "Integration",
@@ -152,6 +154,39 @@ class BrowserProfile(TypedDict, total=False):
     """
 
 
+class BrowserSensitiveDataMaskCustomPattern(TypedDict, total=False):
+    mask: str
+    """Replacement string for matched text. Defaults to `****`."""
+
+    regex: str
+    """Regular expression pattern to match sensitive data."""
+
+
+class BrowserSensitiveDataMask(TypedDict, total=False):
+    """
+    Automatically detects and masks sensitive data (passwords, emails, phone numbers, credit card fields, tokens) in web pages. Supports custom CSS selectors globally or per site, and custom regex patterns.
+    """
+
+    active: bool
+    """Enable or disable sensitive data masking. Defaults to `false`."""
+
+    custom_patterns: Iterable[BrowserSensitiveDataMaskCustomPattern]
+    """Custom regex patterns to detect and mask additional sensitive data types."""
+
+    custom_selectors: SequenceNotStr[str]
+    """Additional CSS selectors to mask globally across all sites.
+
+    Matched elements will be blurred.
+    """
+
+    site_selectors: Dict[str, SequenceNotStr[str]]
+    """Per-site CSS selectors.
+
+    Keys are hostnames (supports wildcard prefix like `*.bank.com`), values are
+    arrays of CSS selectors. Matched elements will be blurred.
+    """
+
+
 class BrowserViewport(TypedDict, total=False):
     """Configuration for the browser's viewport size."""
 
@@ -203,6 +238,13 @@ class Browser(TypedDict, total=False):
 
     profile: BrowserProfile
     """Options for managing and persisting browser session profiles."""
+
+    sensitive_data_mask: BrowserSensitiveDataMask
+    """
+    Automatically detects and masks sensitive data (passwords, emails, phone
+    numbers, credit card fields, tokens) in web pages. Supports custom CSS selectors
+    globally or per site, and custom regex patterns.
+    """
 
     viewport: BrowserViewport
     """Configuration for the browser's viewport size."""
