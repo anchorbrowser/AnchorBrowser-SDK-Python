@@ -21,7 +21,7 @@ class ToolPerformWebTaskParams(TypedDict, total=False):
     session.
     """
 
-    agent: Literal["browser-use", "openai-cua"]
+    agent: Literal["browser-use", "openai-cua", "yutori"]
     """The AI agent to use for task completion. Defaults to browser-use."""
 
     detect_elements: bool
