@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0-dev.2 (2026-03-22)
+
+Full Changelog: [v1.0.0-dev.1...v1.0.0-dev.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.1...v1.0.0-dev.2)
+
+### Features
+
+* sync: 648d9964e6be653fefb4a30fa97f643270cbef48 ([9ce0579](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/9ce0579ad4bbddff28aa140e57fdf54d4c6e85d0))
+
 ## 1.0.0-dev.1 (2026-03-20)
 
 Full Changelog: [v1.0.0-dev.0...v1.0.0-dev.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.0...v1.0.0-dev.1)
