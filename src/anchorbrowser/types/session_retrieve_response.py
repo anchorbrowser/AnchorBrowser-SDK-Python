@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 
 from .._models import BaseModel
@@ -33,8 +33,8 @@ class SessionRetrieveResponse(BaseModel):
     status: Optional[str] = None
     """The current status of the session."""
 
-    steps: Optional[List[object]] = None
-    """Array of steps executed in the session."""
+    steps: Optional[int] = None
+    """Number of AI agent steps executed in the session."""
 
     tags: Optional[object] = None
     """Tags associated with the session."""
