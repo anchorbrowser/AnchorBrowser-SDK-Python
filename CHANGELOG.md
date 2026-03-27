@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.0.0-dev.2 (2026-03-27)
+
+Full Changelog: [v1.0.0-dev.1...v1.0.0-dev.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.1...v1.0.0-dev.2)
+
+### Features
+
+* **internal:** implement indices array format for query and form serialization ([6194236](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/619423614a7fc8d69b6e899f4621f472786600b2))
+* sync: 648d9964e6be653fefb4a30fa97f643270cbef48 ([9ce0579](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/9ce0579ad4bbddff28aa140e57fdf54d4c6e85d0))
+* sync: dcc9987533645b7dccb0a400f6fcc3b120770ee0 ([0b7e169](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/0b7e169898906aa95c157d1af94910a43e11a4bd))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([b89d042](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/b89d04229543fe4b2df6cbd5f3931a1015465018))
+* **internal:** update gitignore ([a7769a5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/a7769a5d9896b7ce44a4f53fce4dc1d7b1f0f1eb))
+
 ## 1.0.0-dev.1 (2026-03-20)
 
 Full Changelog: [v1.0.0-dev.0...v1.0.0-dev.1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.0...v1.0.0-dev.1)
