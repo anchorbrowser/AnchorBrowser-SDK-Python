@@ -12,9 +12,6 @@ class ApplicationRetrieveResponse(BaseModel):
     id: Optional[str] = None
     """Unique identifier for the application"""
 
-    allowed_domains: Optional[List[str]] = None
-    """List of allowed domains for this application"""
-
     auth_methods: Optional[List[str]] = None
     """Authentication methods available for this application"""
 
