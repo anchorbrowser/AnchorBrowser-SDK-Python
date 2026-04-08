@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0-dev.3 (2026-04-08)
+
+Full Changelog: [v1.0.0-dev.2...v1.0.0-dev.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.2...v1.0.0-dev.3)
+
+### Features
+
+* sync: 21018baad5584d902c3f1a95e9c66a508784f9f3 ([314ea0f](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/314ea0fdaf7b115c35b8f297beac3ea9ccf5d243))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([27f4775](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/27f4775114e32bea330a78c53e15c99b76771342))
+
 ## 1.0.0-dev.2 (2026-03-27)
 
 Full Changelog: [v1.0.0-dev.1...v1.0.0-dev.2](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.1...v1.0.0-dev.2)
