@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0-dev.4 (2026-04-11)
+
+Full Changelog: [v1.0.0-dev.3...v1.0.0-dev.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.3...v1.0.0-dev.4)
+
+### Bug Fixes
+
+* ensure file data are only sent as 1 parameter ([7f3bda5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/7f3bda5951d4a09201533a1f7a2abbd4b99fab29))
+
 ## 1.0.0-dev.3 (2026-04-08)
 
 Full Changelog: [v1.0.0-dev.2...v1.0.0-dev.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.2...v1.0.0-dev.3)
