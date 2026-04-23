@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.0.0-dev.4 (2026-04-23)
+
+Full Changelog: [v1.0.0-dev.3...v1.0.0-dev.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.3...v1.0.0-dev.4)
+
+### Features
+
+* sync: d02def6b953ce36e95f51a56df9153053fb4ef71 ([7301c2b](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/7301c2b4978917e96e269d55016ab3c6474b511f))
+
+
+### Bug Fixes
+
+* ensure file data are only sent as 1 parameter ([7f3bda5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/7f3bda5951d4a09201533a1f7a2abbd4b99fab29))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([12fce4c](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/12fce4c3b6bb9e860f8c71f53294ecbf6b973a6d))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([e5bd8cd](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/e5bd8cd2a29b85cbd215d71fdc41f6d9723973a7))
+
 ## 1.0.0-dev.3 (2026-04-08)
 
 Full Changelog: [v1.0.0-dev.2...v1.0.0-dev.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.2...v1.0.0-dev.3)
