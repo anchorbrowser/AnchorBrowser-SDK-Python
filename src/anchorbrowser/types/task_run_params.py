@@ -13,7 +13,7 @@ class TaskRunParams(TypedDict, total=False):
     """Key-value pairs of input parameters for the task"""
 
     cleanup_sessions: bool
-    """Whether to clean up sessions after execution"""
+    """Whether to clean up sessions after execution (default: true)"""
 
     identity_id: str
     """Optional identity ID to use for the task"""

@@ -154,7 +154,7 @@ class TasksResource(SyncAPIResource):
         Args:
           input_params: Key-value pairs of input parameters for the task
 
-          cleanup_sessions: Whether to clean up sessions after execution
+          cleanup_sessions: Whether to clean up sessions after execution (default: true)
 
           identity_id: Optional identity ID to use for the task
 
@@ -302,7 +302,7 @@ class AsyncTasksResource(AsyncAPIResource):
         Args:
           input_params: Key-value pairs of input parameters for the task
 
-          cleanup_sessions: Whether to clean up sessions after execution
+          cleanup_sessions: Whether to clean up sessions after execution (default: true)
 
           identity_id: Optional identity ID to use for the task
 
