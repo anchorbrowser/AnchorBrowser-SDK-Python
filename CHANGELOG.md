@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.0.0-dev.4 (2026-05-01)
+
+Full Changelog: [v1.0.0-dev.3...v1.0.0-dev.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.3...v1.0.0-dev.4)
+
+### Features
+
+* support setting headers via env ([caa1c9f](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/caa1c9f1526040294b8837c707acfe1537133ffa))
+* sync: d02def6b953ce36e95f51a56df9153053fb4ef71 ([7301c2b](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/7301c2b4978917e96e269d55016ab3c6474b511f))
+
+
+### Bug Fixes
+
+* ensure file data are only sent as 1 parameter ([7f3bda5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/7f3bda5951d4a09201533a1f7a2abbd4b99fab29))
+* use correct field name format for multipart file arrays ([60d05a1](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/60d05a119099dfb8d8f0420488c09668cbbe1a20))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([12fce4c](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/12fce4c3b6bb9e860f8c71f53294ecbf6b973a6d))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([e5bd8cd](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/e5bd8cd2a29b85cbd215d71fdc41f6d9723973a7))
+* **internal:** reformat pyproject.toml ([9a967e9](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/9a967e9889380d86a337148de73e8177c1690a17))
+
 ## 1.0.0-dev.3 (2026-04-08)
 
 Full Changelog: [v1.0.0-dev.2...v1.0.0-dev.3](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.2...v1.0.0-dev.3)
