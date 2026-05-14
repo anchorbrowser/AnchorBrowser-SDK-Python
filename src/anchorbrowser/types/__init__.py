@@ -46,9 +46,6 @@ from .tool_screenshot_webpage_params import ToolScreenshotWebpageParams as ToolS
 from .application_list_identities_params import ApplicationListIdentitiesParams as ApplicationListIdentitiesParams
 from .session_retrieve_downloads_response import SessionRetrieveDownloadsResponse as SessionRetrieveDownloadsResponse
 from .application_list_identities_response import ApplicationListIdentitiesResponse as ApplicationListIdentitiesResponse
-from .identity_retrieve_credentials_response import (
-    IdentityRetrieveCredentialsResponse as IdentityRetrieveCredentialsResponse,
-)
 from .application_create_identity_token_params import (
     ApplicationCreateIdentityTokenParams as ApplicationCreateIdentityTokenParams,
 )
