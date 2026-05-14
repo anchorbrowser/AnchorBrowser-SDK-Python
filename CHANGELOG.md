@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0-dev.5 (2026-05-14)
+
+Full Changelog: [v1.0.0-dev.4...v1.0.0-dev.5](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.4...v1.0.0-dev.5)
+
+### Features
+
+* **internal/types:** support eagerly validating pydantic iterators ([0ae4db6](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/0ae4db694967277395c4423d5d3d6326bd503365))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([5145623](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/commit/5145623c0ae3939dbfa0cd9e3ea2ff3600bca41d))
+
 ## 1.0.0-dev.4 (2026-05-01)
 
 Full Changelog: [v1.0.0-dev.3...v1.0.0-dev.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.3...v1.0.0-dev.4)
