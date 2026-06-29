@@ -5,10 +5,10 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["SessionRetrieveDownloadsResponse", "Data"]
+__all__ = ["SessionRetrieveDownloadsResponse", "Data", "DataItem"]
 
 
-class Data(BaseModel):
+class DataItem(BaseModel):
     id: Optional[str] = None
     """The unique ID of the download record."""
 
@@ -40,5 +40,12 @@ class Data(BaseModel):
     """The suggested file name for saving the file."""
 
 
+class Data(BaseModel):
+    count: Optional[int] = None
+    """Number of downloads in the session."""
+
+    items: Optional[List[DataItem]] = None
+
+
 class SessionRetrieveDownloadsResponse(BaseModel):
-    data: Optional[List[Data]] = None
+    data: Optional[Data] = None
