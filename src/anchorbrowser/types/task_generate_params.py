@@ -327,3 +327,9 @@ class TaskBrowserDefaultConfiguration(TypedDict, total=False):
 
     timeout: TaskBrowserDefaultConfigurationTimeout
     """Timeout configurations for the browser session."""
+
+    x402: bool
+    """
+    Allow this browser session to automatically pay x402-protected resources using
+    Amazon Bedrock AgentCore Payments.
+    """

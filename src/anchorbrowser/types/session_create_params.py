@@ -528,3 +528,9 @@ class Session(TypedDict, total=False):
 
     timeout: SessionTimeout
     """Timeout configurations for the browser session."""
+
+    x402: bool
+    """
+    Allow this browser session to automatically pay x402-protected resources using
+    Amazon Bedrock AgentCore Payments.
+    """

@@ -98,6 +98,7 @@ class TestSessions:
                     "idle_timeout": 0,
                     "max_duration": 0,
                 },
+                "x402": True,
             },
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
@@ -607,6 +608,7 @@ class TestAsyncSessions:
                     "idle_timeout": 0,
                     "max_duration": 0,
                 },
+                "x402": True,
             },
         )
         assert_matches_type(SessionCreateResponse, session, path=["response"])
