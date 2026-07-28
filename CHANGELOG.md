@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0 (2026-07-28)
+
+* refactor: devendor stainless, align all actions and docs (c3ea2ff)
+
+
 ## 1.0.0-dev.4 (2026-05-01)
 
 Full Changelog: [v1.0.0-dev.3...v1.0.0-dev.4](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/compare/v1.0.0-dev.3...v1.0.0-dev.4)
