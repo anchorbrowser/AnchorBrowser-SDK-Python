@@ -131,6 +131,20 @@ class Op:
                 ctype = "application/json" if "application/json" in content else next(iter(content), None)
                 if ctype:
                     schema = resolve(content[ctype].get("schema"))
+                    if "allOf" in schema:
+                        # flatten allOf like the resource generator does
+                        merged_props: dict[str, Any] = {}
+                        merged_required: list[str] = []
+                        for part in schema["allOf"]:
+                            resolved_part = resolve(part)
+                            merged_props.update(resolved_part.get("properties") or {})
+                            merged_required.extend(resolved_part.get("required") or [])
+                        merged: dict[str, Any] = {
+                            "type": "object",
+                            "properties": merged_props,
+                            "required": merged_required,
+                        }
+                        schema = merged
                     required = set(schema.get("required") or [])
                     for prop, prop_schema in (schema.get("properties") or {}).items():
                         if prop in required:

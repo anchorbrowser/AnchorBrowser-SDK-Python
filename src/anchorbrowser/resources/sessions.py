@@ -570,6 +570,9 @@ class SessionsResource(SyncAPIResource):
         self,
         session_id: str,
         *,
+        x: int,
+        y: int,
+        button: Literal["left", "middle", "right"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -582,11 +585,15 @@ class SessionsResource(SyncAPIResource):
 
         Args:
           session_id: The ID of the browser session
+          x: X coordinate
+          y: Y coordinate
+          button: Mouse button to use
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._post(
             path_template("/v1/sessions/{sessionId}/mouse/doubleClick", sessionId=session_id),
+            body=strip_not_given({"x": x, "y": y, "button": button}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -597,6 +604,9 @@ class SessionsResource(SyncAPIResource):
         self,
         session_id: str,
         *,
+        x: int,
+        y: int,
+        button: Literal["left", "middle", "right"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -609,11 +619,15 @@ class SessionsResource(SyncAPIResource):
 
         Args:
           session_id: The ID of the browser session
+          x: X coordinate
+          y: Y coordinate
+          button: Mouse button to use
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._post(
             path_template("/v1/sessions/{sessionId}/mouse/down", sessionId=session_id),
+            body=strip_not_given({"x": x, "y": y, "button": button}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -624,6 +638,9 @@ class SessionsResource(SyncAPIResource):
         self,
         session_id: str,
         *,
+        x: int,
+        y: int,
+        button: Literal["left", "middle", "right"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -636,11 +653,15 @@ class SessionsResource(SyncAPIResource):
 
         Args:
           session_id: The ID of the browser session
+          x: X coordinate
+          y: Y coordinate
+          button: Mouse button to use
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._post(
             path_template("/v1/sessions/{sessionId}/mouse/up", sessionId=session_id),
+            body=strip_not_given({"x": x, "y": y, "button": button}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -723,6 +744,12 @@ class SessionsResource(SyncAPIResource):
         self,
         session_id: str,
         *,
+        x: int,
+        y: int,
+        delta_y: int,
+        delta_x: int | NotGiven = not_given,
+        steps: int | NotGiven = not_given,
+        use_os: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -735,11 +762,20 @@ class SessionsResource(SyncAPIResource):
 
         Args:
           session_id: The ID of the browser session
+          x: X coordinate
+          y: Y coordinate
+          delta_x: Horizontal scroll amount (positive is right, negative is left)
+          delta_y: Vertical scroll amount (positive is down, negative is up)
+          steps: Number of steps to break the scroll into for smoother scrolling
+          use_os: Whether to use the OS scroll or the Playwright scroll
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return self._post(
             path_template("/v1/sessions/{sessionId}/scroll", sessionId=session_id),
+            body=strip_not_given(
+                {"x": x, "y": y, "deltaX": delta_x, "deltaY": delta_y, "steps": steps, "useOs": use_os}
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1509,6 +1545,9 @@ class AsyncSessionsResource(AsyncAPIResource):
         self,
         session_id: str,
         *,
+        x: int,
+        y: int,
+        button: Literal["left", "middle", "right"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -1521,11 +1560,15 @@ class AsyncSessionsResource(AsyncAPIResource):
 
         Args:
           session_id: The ID of the browser session
+          x: X coordinate
+          y: Y coordinate
+          button: Mouse button to use
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._post(
             path_template("/v1/sessions/{sessionId}/mouse/doubleClick", sessionId=session_id),
+            body=strip_not_given({"x": x, "y": y, "button": button}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1536,6 +1579,9 @@ class AsyncSessionsResource(AsyncAPIResource):
         self,
         session_id: str,
         *,
+        x: int,
+        y: int,
+        button: Literal["left", "middle", "right"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -1548,11 +1594,15 @@ class AsyncSessionsResource(AsyncAPIResource):
 
         Args:
           session_id: The ID of the browser session
+          x: X coordinate
+          y: Y coordinate
+          button: Mouse button to use
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._post(
             path_template("/v1/sessions/{sessionId}/mouse/down", sessionId=session_id),
+            body=strip_not_given({"x": x, "y": y, "button": button}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1563,6 +1613,9 @@ class AsyncSessionsResource(AsyncAPIResource):
         self,
         session_id: str,
         *,
+        x: int,
+        y: int,
+        button: Literal["left", "middle", "right"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -1575,11 +1628,15 @@ class AsyncSessionsResource(AsyncAPIResource):
 
         Args:
           session_id: The ID of the browser session
+          x: X coordinate
+          y: Y coordinate
+          button: Mouse button to use
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._post(
             path_template("/v1/sessions/{sessionId}/mouse/up", sessionId=session_id),
+            body=strip_not_given({"x": x, "y": y, "button": button}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1662,6 +1719,12 @@ class AsyncSessionsResource(AsyncAPIResource):
         self,
         session_id: str,
         *,
+        x: int,
+        y: int,
+        delta_y: int,
+        delta_x: int | NotGiven = not_given,
+        steps: int | NotGiven = not_given,
+        use_os: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -1674,11 +1737,20 @@ class AsyncSessionsResource(AsyncAPIResource):
 
         Args:
           session_id: The ID of the browser session
+          x: X coordinate
+          y: Y coordinate
+          delta_x: Horizontal scroll amount (positive is right, negative is left)
+          delta_y: Vertical scroll amount (positive is down, negative is up)
+          steps: Number of steps to break the scroll into for smoother scrolling
+          use_os: Whether to use the OS scroll or the Playwright scroll
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
         return await self._post(
             path_template("/v1/sessions/{sessionId}/scroll", sessionId=session_id),
+            body=strip_not_given(
+                {"x": x, "y": y, "deltaX": delta_x, "deltaY": delta_y, "steps": steps, "useOs": use_os}
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

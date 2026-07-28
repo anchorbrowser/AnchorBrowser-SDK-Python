@@ -197,6 +197,17 @@ class Operation:
                 self.is_multipart = True
             if media is not None:
                 schema = ctx.resolve(media.get("schema"))
+                if "allOf" in schema:
+                    # flatten allOf compositions (e.g. CoordinatesRequestSchema + extras)
+                    # so every part's properties become method kwargs
+                    merged_props: dict[str, Any] = {}
+                    merged_required: list[str] = []
+                    for part in schema["allOf"]:
+                        resolved_part = ctx.resolve(part)
+                        merged_props.update(resolved_part.get("properties") or {})
+                        merged_required.extend(resolved_part.get("required") or [])
+                    merged: dict[str, Any] = {"type": "object", "properties": merged_props, "required": merged_required}
+                    schema = merged
                 required = set(schema.get("required", []))
                 for prop, prop_schema in (schema.get("properties") or {}).items():
                     resolved_prop = ctx.resolve(prop_schema)
