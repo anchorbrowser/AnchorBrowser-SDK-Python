@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Build the package exactly as it would be published and leave the artifacts
+# in dist/: anchorbrowser-<version>-py3-none-any.whl (+ sdist).
+#
+# Install the wheel in any project to test the SDK before a release:
+#   pip install /path/to/dist/anchorbrowser-<version>-py3-none-any.whl
+
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+rye build --clean
+
+WHEEL="$(ls dist/*.whl | tail -1)"
+
+echo
+echo "==> Local wheel ready: $(pwd)/$WHEEL"
+echo "    pip install $(pwd)/$WHEEL"

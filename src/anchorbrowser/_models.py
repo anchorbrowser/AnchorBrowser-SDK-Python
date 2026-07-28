@@ -649,7 +649,11 @@ class DiscriminatorDetails:
 
 
 def _build_discriminated_union_meta(*, union: type, meta_annotations: tuple[Any, ...]) -> DiscriminatorDetails | None:
-    cached = DISCRIMINATOR_CACHE.get(union)
+    try:
+        cached = DISCRIMINATOR_CACHE.get(union)
+    except TypeError:
+        # PEP 604 unions (`X | Y`) are not weak-referenceable before Python 3.12
+        cached = None
     if cached is not None:
         return cached
 
@@ -704,7 +708,11 @@ def _build_discriminated_union_meta(*, union: type, meta_annotations: tuple[Any,
         discriminator_field=discriminator_field_name,
         discriminator_alias=discriminator_alias,
     )
-    DISCRIMINATOR_CACHE.setdefault(union, details)
+    try:
+        DISCRIMINATOR_CACHE.setdefault(union, details)
+    except TypeError:
+        # PEP 604 unions (`X | Y`) are not weak-referenceable before Python 3.12
+        pass
     return details
 
 
