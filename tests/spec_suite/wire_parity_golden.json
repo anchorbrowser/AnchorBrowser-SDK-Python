@@ -1215,7 +1215,10 @@
     "query": {}
   },
   "Sessions.mouseDoubleClick": {
-    "body": null,
+    "body": {
+      "x": 1,
+      "y": 1
+    },
     "header_names": [
       "accept",
       "anchor-api-key",
@@ -1233,7 +1236,10 @@
     "query": {}
   },
   "Sessions.mouseDown": {
-    "body": null,
+    "body": {
+      "x": 1,
+      "y": 1
+    },
     "header_names": [
       "accept",
       "anchor-api-key",
@@ -1272,7 +1278,10 @@
     "query": {}
   },
   "Sessions.mouseUp": {
-    "body": null,
+    "body": {
+      "x": 1,
+      "y": 1
+    },
     "header_names": [
       "accept",
       "anchor-api-key",
@@ -1310,7 +1319,11 @@
     "query": {}
   },
   "Sessions.scroll": {
-    "body": null,
+    "body": {
+      "deltaY": 1,
+      "x": 1,
+      "y": 1
+    },
     "header_names": [
       "accept",
       "anchor-api-key",
