@@ -1,6 +1,11 @@
-# This workflow is triggered when a GitHub release is created.
-# It can also be run manually to re-publish to PyPI in case it failed for some reason.
-# You can run this workflow by navigating to https://www.github.com/anchorbrowser/AnchorBrowser-SDK-Python/actions/workflows/publish-pypi.yml
+# Publishes the package to PyPI via OIDC trusted publishing (no API token).
+#
+# Normally dispatched by the Release workflow after it pushes the release
+# commit and tag. It can also be run manually to re-publish if it failed.
+#
+# One-time setup on PyPI (project 'anchorbrowser' -> Manage -> Publishing):
+# add a "Trusted Publisher" for this GitHub repository with workflow name
+# `publish-pypi.yml` (no environment).
 name: Publish PyPI
 on:
   workflow_dispatch:
@@ -8,10 +13,16 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: read
+
 jobs:
   publish:
     name: publish
     runs-on: ubuntu-latest
+    permissions:
+      # required for PyPI OIDC trusted publishing
+      id-token: write
 
     steps:
       - uses: actions/checkout@v6
@@ -24,8 +35,10 @@ jobs:
           RYE_VERSION: '0.44.0'
           RYE_INSTALL_OPTION: '--yes'
 
-      - name: Publish to PyPI
-        run: |
-          bash ./bin/publish-pypi
-        env:
-          PYPI_TOKEN: ${{ secrets.ANCHORBROWSER_PYPI_TOKEN || secrets.PYPI_TOKEN }}
+      - name: Build sdist and wheel
+        run: rye build --clean
+
+      - name: Publish to PyPI (trusted publishing)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist

@@ -1,0 +1,117 @@
+# Cut a new release of the anchorbrowser PyPI package.
+#
+# Run manually from the Actions tab with the new version as input.
+# The workflow verifies the full quality gate (lint, generated-code sync,
+# build, tests incl. wire-parity), bumps the version, updates the changelog,
+# tags, creates a GitHub release, and publishes to PyPI via OIDC trusted
+# publishing (dispatched to publish-pypi.yml).
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'New version (PEP 440, e.g. 1.0.0 or 1.0.0rc1). Pre-releases (a/b/rc/dev) are marked as GitHub pre-releases and are not installed by default by pip.'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  release:
+    name: release ${{ inputs.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Validate version
+        run: |
+          VERSION="${{ inputs.version }}"
+          if ! echo "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+((a|b|rc)[0-9]+)?(\.post[0-9]+)?(\.dev[0-9]+)?$'; then
+            echo "::error::'$VERSION' is not a valid (canonical PEP 440) version"
+            exit 1
+          fi
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+            echo "::error::tag v$VERSION already exists"
+            exit 1
+          fi
+
+      - name: Install Rye
+        run: |
+          curl -sSf https://rye.astral.sh/get | bash
+          echo "$HOME/.rye/shims" >> $GITHUB_PATH
+        env:
+          RYE_VERSION: '0.44.0'
+          RYE_INSTALL_OPTION: '--yes'
+
+      - name: Install dependencies
+        run: rye sync --all-features
+
+      - name: Quality gate — lint (ruff, pyright, mypy)
+        run: ./scripts/lint
+
+      - name: Quality gate — generated code in sync with spec
+        run: ./scripts/generate --check
+
+      - name: Quality gate — build
+        run: rye build --clean
+
+      - name: Quality gate — tests (incl. wire-parity and spec coverage)
+        run: ./scripts/test
+
+      - name: Bump version
+        run: |
+          VERSION="${{ inputs.version }}"
+          sed -i -E 's/^version = "[^"]*"/version = "'"$VERSION"'"/' pyproject.toml
+          sed -i -E 's/^__version__ = "[^"]*"/__version__ = "'"$VERSION"'"/' src/anchorbrowser/_version.py
+          grep -q "version = \"$VERSION\"" pyproject.toml
+          grep -q "__version__ = \"$VERSION\"" src/anchorbrowser/_version.py
+
+      - name: Update changelog
+        run: |
+          VERSION="${{ inputs.version }}"
+          DATE="$(date -u +%Y-%m-%d)"
+          LAST_TAG="$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || true)"
+          RANGE="${LAST_TAG:+$LAST_TAG..}HEAD"
+          {
+            echo "# Changelog"
+            echo
+            echo "## $VERSION ($DATE)"
+            echo
+            git log --no-merges --pretty='format:* %s (%h)' $RANGE
+            echo
+            echo
+            tail -n +2 CHANGELOG.md 2>/dev/null || true
+          } > CHANGELOG.new.md
+          mv CHANGELOG.new.md CHANGELOG.md
+
+      - name: Commit, tag and push
+        run: |
+          VERSION="${{ inputs.version }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pyproject.toml src/anchorbrowser/_version.py CHANGELOG.md
+          git commit -m "release: $VERSION"
+          git tag "v$VERSION"
+          git push origin HEAD "v$VERSION"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ inputs.version }}"
+          PRERELEASE_FLAG=""
+          if echo "$VERSION" | grep -Eq '(a|b|rc|\.dev)[0-9]+'; then PRERELEASE_FLAG="--prerelease"; fi
+          gh release create "v$VERSION" --title "v$VERSION" --generate-notes $PRERELEASE_FLAG
+
+      # PyPI OIDC trusted publishing is bound to publish-pypi.yml, so publishing
+      # happens there. Releases created with GITHUB_TOKEN do not trigger other
+      # workflows, so dispatch it explicitly. It builds from the release commit
+      # just pushed to main.
+      - name: Publish to PyPI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run publish-pypi.yml --ref main

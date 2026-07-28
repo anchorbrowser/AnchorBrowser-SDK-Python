@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Regenerate tests/spec_suite/wire_parity_golden.json — the committed record of
+# exactly what every SDK method puts on the wire. Run after an intentional
+# wire-behavior change and review the diff.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+PY="${PYTHON:-.venv/bin/python}"
+if [ ! -x "$PY" ]; then PY="$(command -v python3)"; fi
+"$PY" - <<'PYEOF'
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, "tests")
+sys.path.insert(0, "src")
+
+from spec_suite._synth import all_operations
+from spec_suite._capture import CaptureServer, normalize, invoke
+
+from anchorbrowser import Anchorbrowser
+
+server = CaptureServer()
+client = Anchorbrowser(api_key="test-api-key", base_url=server.base_url, max_retries=0)
+
+golden = {"__operation_count__": len(all_operations())}
+for op in all_operations():
+    before = len(server.captured)
+    invoke(client, op)
+    assert len(server.captured) == before + 1, op.name
+    golden[op.name] = normalize(server.captured[-1])
+
+server.stop()
+out = Path("tests/spec_suite/wire_parity_golden.json")
+out.write_text(json.dumps(golden, indent=2, sort_keys=True) + "\n")
+print(f"wrote {out} ({len(all_operations())} operations)")
+PYEOF

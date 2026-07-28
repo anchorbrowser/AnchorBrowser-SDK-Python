@@ -1,0 +1,2000 @@
+{
+  "Agent.getRequestedHumanIntervention": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/agent/requested-human-intervention",
+    "query": {}
+  },
+  "Agent.listAgentFiles": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/agent/files",
+    "query": {}
+  },
+  "Agent.listPendingInterventions": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/pending-interventions",
+    "query": {}
+  },
+  "Agent.pauseAgent": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/agent/pause",
+    "query": {}
+  },
+  "Agent.respondToHumanIntervention": {
+    "body": {
+      "response": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/agent/respond-to-human-intervention",
+    "query": {}
+  },
+  "Agent.resumeAgent": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/agent/resume",
+    "query": {}
+  },
+  "Agent.uploadAgentFiles": {
+    "body": "--<boundary>\nContent-Disposition: form-data; name=\"file\"; filename=\"example.txt\"\nContent-Type: text/plain\n\nExample data\n--<boundary>--",
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "multipart/form-data; boundary=<boundary>"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/agent/files",
+    "query": {}
+  },
+  "Applications.createApplication": {
+    "body": {
+      "source": "https://example.com"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/applications",
+    "query": {}
+  },
+  "Applications.createAuthFlow": {
+    "body": {
+      "methods": [
+        "username_password"
+      ],
+      "name": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/applications/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/auth-flows",
+    "query": {}
+  },
+  "Applications.createIdentityToken": {
+    "body": {
+      "callbackUrl": "https://example.com/callback"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/applications/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/tokens",
+    "query": {}
+  },
+  "Applications.deleteApplication": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/applications/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Applications.deleteAuthFlow": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/applications/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/auth-flows/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Applications.getApplication": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/applications/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Applications.listApplicationIdentities": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/applications/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/identities",
+    "query": {}
+  },
+  "Applications.listApplications": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/applications",
+    "query": {}
+  },
+  "Applications.listAuthFlows": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/applications/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/auth-flows",
+    "query": {}
+  },
+  "Applications.updateAuthFlow": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "PATCH",
+    "path": "/v1/applications/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/auth-flows/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "BatchSessions.createBatchSession": {
+    "body": {
+      "count": 1
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/batch-sessions",
+    "query": {}
+  },
+  "BatchSessions.deleteBatchSession": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/batch-sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "BatchSessions.getBatchSession": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/batch-sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "BatchSessions.listBatchSessions": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/batch-sessions",
+    "query": {}
+  },
+  "BatchSessions.retryBatchSession": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/batch-sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/retry",
+    "query": {}
+  },
+  "BatchSessions.updateBatchSession": {
+    "body": {
+      "status": "cancelled"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "PATCH",
+    "path": "/v1/batch-sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Billing.getBilling": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/billing",
+    "query": {}
+  },
+  "Certificates.createCertificate": {
+    "body": "--<boundary>\nContent-Disposition: form-data; name=\"name\"\n\nstring\n--<boundary>\nContent-Disposition: form-data; name=\"file\"; filename=\"example.txt\"\nContent-Type: text/plain\n\nExample data\n--<boundary>--",
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "multipart/form-data; boundary=<boundary>"
+    },
+    "method": "POST",
+    "path": "/v1/certificates",
+    "query": {}
+  },
+  "Certificates.deleteCertificate": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/certificates/your-name",
+    "query": {}
+  },
+  "Certificates.listCertificates": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/certificates",
+    "query": {}
+  },
+  "Events.signalEvent": {
+    "body": {
+      "data": {
+        "message": "Task completed",
+        "result": "success",
+        "timestamp": "2024-01-01T12:00:00Z"
+      }
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/events/your-event-name",
+    "query": {}
+  },
+  "Events.waitForEvent": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/events/your-event-name/wait",
+    "query": {}
+  },
+  "Extensions.deleteExtension": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/extensions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Extensions.getExtension": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/extensions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Extensions.listExtensions": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/extensions",
+    "query": {}
+  },
+  "Extensions.uploadExtension": {
+    "body": "--<boundary>\nContent-Disposition: form-data; name=\"name\"\n\nstring\n--<boundary>\nContent-Disposition: form-data; name=\"file\"; filename=\"example.txt\"\nContent-Type: text/plain\n\nExample data\n--<boundary>--",
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "multipart/form-data; boundary=<boundary>"
+    },
+    "method": "POST",
+    "path": "/v1/extensions",
+    "query": {}
+  },
+  "Identities.createIdentity": {
+    "body": {
+      "source": "https://example.com"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/identities",
+    "query": {}
+  },
+  "Identities.deleteIdentity": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/identities/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Identities.getIdentity": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/identities/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Identities.updateIdentity": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "PUT",
+    "path": "/v1/identities/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Integrations.createIntegration": {
+    "body": {
+      "credentials": {
+        "data": {
+          "serviceAccount": "ops_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        "type": "serviceAccount"
+      },
+      "name": "My 1Password Integration",
+      "type": "1PASSWORD"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/integrations",
+    "query": {}
+  },
+  "Integrations.deleteIntegration": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/integrations/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Integrations.listIntegrations": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/integrations",
+    "query": {}
+  },
+  "Profiles.createProfile": {
+    "body": {
+      "name": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/profiles",
+    "query": {}
+  },
+  "Profiles.deleteProfile": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/profiles/your-name",
+    "query": {}
+  },
+  "Profiles.getProfile": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/profiles/your-name",
+    "query": {}
+  },
+  "Profiles.listProfiles": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/profiles",
+    "query": {}
+  },
+  "Recordings.deleteRecording": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/recordings/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Recordings.fetchPrimaryRecording": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "video/mp4",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/recordings/primary/fetch",
+    "query": {}
+  },
+  "Recordings.listRecordings": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/recordings",
+    "query": {}
+  },
+  "Recordings.pauseRecording": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/recordings/pause",
+    "query": {}
+  },
+  "Recordings.resumeRecording": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/recordings/resume",
+    "query": {}
+  },
+  "Sessions.copy": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/copy",
+    "query": {}
+  },
+  "Sessions.createSession": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions",
+    "query": {}
+  },
+  "Sessions.createSessionAsync": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/async",
+    "query": {}
+  },
+  "Sessions.deleteAllSessions": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/sessions/all",
+    "query": {}
+  },
+  "Sessions.deleteSession": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Sessions.dragAndDrop": {
+    "body": {
+      "endX": 1,
+      "endY": 1,
+      "startX": 1,
+      "startY": 1
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/drag-and-drop",
+    "query": {}
+  },
+  "Sessions.getAllSessionsStatus": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/all/status",
+    "query": {}
+  },
+  "Sessions.getAsyncSessionStatus": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/async/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/status",
+    "query": {}
+  },
+  "Sessions.getClipboard": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/clipboard",
+    "query": {}
+  },
+  "Sessions.getSession": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Sessions.getSessionDownloads": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/downloads",
+    "query": {}
+  },
+  "Sessions.getSessionPages": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/pages",
+    "query": {}
+  },
+  "Sessions.getSessionScreenshot": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "image/png",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/screenshot",
+    "query": {}
+  },
+  "Sessions.getSessionsHistory": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions/history",
+    "query": {}
+  },
+  "Sessions.goto": {
+    "body": {
+      "url": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/goto",
+    "query": {}
+  },
+  "Sessions.keyboardShortcut": {
+    "body": {
+      "keys": [
+        "string"
+      ]
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/keyboard/shortcut",
+    "query": {}
+  },
+  "Sessions.keyboardType": {
+    "body": {
+      "text": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/keyboard/type",
+    "query": {}
+  },
+  "Sessions.listSessions": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/sessions",
+    "query": {}
+  },
+  "Sessions.mouseClick": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/mouse/click",
+    "query": {}
+  },
+  "Sessions.mouseDoubleClick": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/mouse/doubleClick",
+    "query": {}
+  },
+  "Sessions.mouseDown": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/mouse/down",
+    "query": {}
+  },
+  "Sessions.mouseMove": {
+    "body": {
+      "x": 1,
+      "y": 1
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/mouse/move",
+    "query": {}
+  },
+  "Sessions.mouseUp": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/mouse/up",
+    "query": {}
+  },
+  "Sessions.paste": {
+    "body": {
+      "text": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/paste",
+    "query": {}
+  },
+  "Sessions.scroll": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/scroll",
+    "query": {}
+  },
+  "Sessions.setClipboard": {
+    "body": {
+      "text": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/clipboard",
+    "query": {}
+  },
+  "Sessions.uploadFile": {
+    "body": "--<boundary>\nContent-Disposition: form-data; name=\"file\"; filename=\"example.txt\"\nContent-Type: text/plain\n\nExample data\n--<boundary>--",
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "multipart/form-data; boundary=<boundary>"
+    },
+    "method": "POST",
+    "path": "/v1/sessions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/uploads",
+    "query": {}
+  },
+  "Tasks.generateTask": {
+    "body": {
+      "taskName": "string",
+      "taskPrompt": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v2/tasks/generate",
+    "query": {}
+  },
+  "Tasks.getTaskGenerationStatus": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v2/tasks/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/generation-status",
+    "query": {}
+  },
+  "Tasks.getTaskRunStatus": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v2/tasks/runs/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/status",
+    "query": {}
+  },
+  "Tasks.runTask": {
+    "body": {
+      "input_params": {}
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v2/tasks/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/run",
+    "query": {}
+  },
+  "TasksLegacy.createTask": {
+    "body": {
+      "language": "typescript",
+      "name": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/task",
+    "query": {}
+  },
+  "TasksLegacy.deleteTask": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "TasksLegacy.deleteTaskVersion": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/your-task-version",
+    "query": {}
+  },
+  "TasksLegacy.deployTask": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/deploy",
+    "query": {}
+  },
+  "TasksLegacy.getLatestTaskVersion": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/latest",
+    "query": {}
+  },
+  "TasksLegacy.getTask": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "TasksLegacy.getTaskDraft": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/draft",
+    "query": {}
+  },
+  "TasksLegacy.getTaskExecution": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/executions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "TasksLegacy.getTaskVersion": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/your-task-version",
+    "query": {}
+  },
+  "TasksLegacy.listTaskExecutions": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/executions",
+    "query": {}
+  },
+  "TasksLegacy.listTaskVersions": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/versions",
+    "query": {}
+  },
+  "TasksLegacy.listTasks": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/task",
+    "query": {}
+  },
+  "TasksLegacy.publishTaskVersion": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/your-task-version",
+    "query": {}
+  },
+  "TasksLegacy.runAdhocTask": {
+    "body": {
+      "taskId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/task/run",
+    "query": {}
+  },
+  "TasksLegacy.runTaskByName": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/task/run/your-task-name",
+    "query": {}
+  },
+  "TasksLegacy.saveTaskDraft": {
+    "body": {
+      "code": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/draft",
+    "query": {}
+  },
+  "TasksLegacy.updateTask": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "PUT",
+    "path": "/v1/task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Tools.createPagePdf": {
+    "body": {
+      "url": "https://example.com"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/pdf",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/tools/page-pdf",
+    "query": {}
+  },
+  "Tools.executeCode": {
+    "body": {
+      "code": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/tools/execute-code",
+    "query": {
+      "sessionId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"
+    }
+  },
+  "Tools.fetchWebpage": {
+    "body": {
+      "url": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "text/html",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/tools/fetch/webpage",
+    "query": {}
+  },
+  "Tools.getPerformWebTaskStatus": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/tools/perform-web-task/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/status",
+    "query": {}
+  },
+  "Tools.performWebTask": {
+    "body": {
+      "prompt": "string"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/tools/perform-web-task",
+    "query": {}
+  },
+  "Tools.screenshotWebpage": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "image/png",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/tools/screenshot",
+    "query": {}
+  },
+  "Webhooks.createWebhook": {
+    "body": {
+      "subscribed_events": [
+        "task.completed"
+      ],
+      "url": "https://your-app.example.com/anchor/webhooks"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/webhooks",
+    "query": {}
+  },
+  "Webhooks.deleteWebhook": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "DELETE",
+    "path": "/v1/webhooks/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Webhooks.getWebhook": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/webhooks/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "Webhooks.listWebhookEvents": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/webhooks/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/events",
+    "query": {}
+  },
+  "Webhooks.listWebhooks": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key"
+    },
+    "method": "GET",
+    "path": "/v1/webhooks",
+    "query": {}
+  },
+  "Webhooks.rotateWebhookSecret": {
+    "body": null,
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/webhooks/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/rotate-secret",
+    "query": {}
+  },
+  "Webhooks.sendWebhookTestEvent": {
+    "body": {
+      "event_type": "task.completed"
+    },
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "POST",
+    "path": "/v1/webhooks/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/test",
+    "query": {}
+  },
+  "Webhooks.updateWebhook": {
+    "body": {},
+    "header_names": [
+      "accept",
+      "anchor-api-key",
+      "content-type",
+      "user-agent",
+      "x-anchor-sdk"
+    ],
+    "headers": {
+      "accept": "application/json",
+      "anchor-api-key": "test-api-key",
+      "content-type": "application/json"
+    },
+    "method": "PATCH",
+    "path": "/v1/webhooks/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    "query": {}
+  },
+  "__operation_count__": 111
+}

@@ -11,7 +11,7 @@ from playwright.async_api import (
 )
 
 if TYPE_CHECKING:
-    from collections import Generator, AsyncGenerator
+    from collections.abc import Generator, AsyncGenerator
 
 
 @contextmanager
@@ -49,11 +49,18 @@ async def get_async_playwright_chromium_from_cdp_url(
 
 
 def get_cdp_url(api_base_url: str, session_id: str, api_key: str) -> str:
-    return f"{api_base_url.replace('https://', 'wss://').replace('api.', 'connect.')}?apiKey={api_key}&sessionId={session_id}"
+    base = (
+        api_base_url.rstrip("/")
+        .replace("https://", "wss://")
+        .replace("http://", "ws://")
+        .replace("api.", "connect.")
+    )
+    return f"{base}?apiKey={api_key}&sessionId={session_id}"
 
 
 def get_agent_ws_url(api_base_url: str, session_id: str) -> str:
-    return f"{api_base_url.replace('https://', 'wss://')}/ws?sessionId={session_id}"
+    base = api_base_url.rstrip("/").replace("https://", "wss://").replace("http://", "ws://")
+    return f"{base}/ws?sessionId={session_id}"
 
 
 def get_ai_service_worker(browser_context: "BrowserContext") -> Optional["Worker"]:

@@ -3,26 +3,27 @@
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/anchorbrowser.svg?label=pypi%20(stable))](https://pypi.org/project/anchorbrowser/)
 
-The Anchorbrowser Python library provides convenient access to the Anchorbrowser REST API from any Python 3.9+
+The Anchorbrowser Python library provides convenient access to the Anchorbrowser REST API from any Python 3.10+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated with [Stainless](https://www.stainless.com/).
+The SDK is generated directly from the public OpenAPI specification — every documented endpoint is available as a typed method.
+
+> **Upgrading from v0.X.X ?** See [MIGRATION.md](MIGRATION.md) for every breaking change and its v1 equivalent.
 
 ## Documentation
 
-The REST API documentation can be found on [docs.anchorbrowser.io](https://docs.anchorbrowser.io). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.anchorbrowser.io](https://docs.anchorbrowser.io), including a full
+[SDK reference](https://docs.anchorbrowser.io/sdk-reference/overview) with a Python example for every operation.
 
 ## Installation
 
 ```sh
 # install from PyPI
-pip install --pre anchorbrowser
+pip install anchorbrowser
 ```
 
 ## Usage
-
-The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
@@ -32,7 +33,7 @@ client = Anchorbrowser(
     api_key=os.environ.get("ANCHORBROWSER_API_KEY"),  # This is the default and can be omitted
 )
 
-session = client.sessions.create(
+session = client.sessions.create_session(
     session={"recording": {"active": False}},
 )
 print(session.data)
@@ -42,6 +43,47 @@ While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
 to add `ANCHORBROWSER_API_KEY="Your API Key"` to your `.env` file
 so that your API Key is not stored in source control.
+
+Every resource is an attribute on the client with one method per API operation:
+
+| Resource                                                                       | Operations                                                                                                          |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| `client.sessions`                                                              | create/list/get/delete sessions, screenshots, uploads, OS-level control (mouse, keyboard, clipboard, goto, scroll)  |
+| `client.tools`                                                                 | `perform_web_task`, `fetch_webpage`, `screenshot_webpage`, `execute_code`, `create_page_pdf`                        |
+| `client.profiles`, `client.identities`, `client.applications`                  | profile & identity management                                                                                        |
+| `client.webhooks`                                                              | webhook CRUD, secret rotation, test events                                                                           |
+| `client.batch_sessions`, `client.certificates`, `client.integrations`, `client.extensions` | platform resources                                                                                        |
+| `client.tasks`, `client.tasks_legacy`                                          | task execution (v2) and the legacy v1 task API                                                                       |
+| `client.recordings`, `client.agent`, `client.events`, `client.billing`         | recordings, agent files & interventions, event signaling, billing info                                               |
+
+### Run an AI agent task
+
+`client.agent.task(...)` creates a session (or reuses one via `session_id=...`), runs a
+natural-language task in it server-side (through the perform-web-task API, like the
+TypeScript SDK's `agentTask`), and waits for the result — with no HTTP timeout and no
+retries, since agent tasks can run for many minutes:
+
+```python
+result = client.agent.task("go to example.com and return the page title")
+print(result.data.result)
+```
+
+`client.agent.browser_task(...)` starts the task but returns immediately with the session id,
+a `concurrent.futures.Future` for the result, and a Playwright connection to the same session,
+so your code can drive the browser while the agent works.
+
+### Drive the browser with Playwright
+
+`client.browser` connects Playwright to an Anchor cloud browser session over CDP:
+
+```python
+with client.browser.create() as browser:
+    page = browser.contexts[0].pages[0]
+    page.goto("https://example.com")
+    print(page.title())
+```
+
+Use `client.browser.connect(session_id)` to attach to an existing session instead.
 
 ## Async usage
 
@@ -58,7 +100,7 @@ client = AsyncAnchorbrowser(
 
 
 async def main() -> None:
-    session = await client.sessions.create(
+    session = await client.sessions.create_session(
         session={"recording": {"active": False}},
     )
     print(session.data)
@@ -77,7 +119,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre anchorbrowser[aiohttp]
+pip install anchorbrowser[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -94,7 +136,7 @@ async def main() -> None:
         api_key=os.environ.get("ANCHORBROWSER_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        session = await client.sessions.create(
+        session = await client.sessions.create_session(
             session={"recording": {"active": False}},
         )
         print(session.data)
@@ -105,7 +147,9 @@ asyncio.run(main())
 
 ## Using types
 
-Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
+Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict)
+(importable from `anchorbrowser.types.params`). Responses are [Pydantic models](https://docs.pydantic.dev)
+(importable from `anchorbrowser.types.models`) which also provide helper methods for things like:
 
 - Serializing back into JSON, `model.to_json()`
 - Converting to a dictionary, `model.to_dict()`
@@ -121,10 +165,12 @@ from anchorbrowser import Anchorbrowser
 
 client = Anchorbrowser()
 
-session = client.sessions.create(
-    browser={},
+session = client.sessions.create_session(
+    session={
+        "proxy": {"active": True, "type": "anchor_residential", "country_code": "us"},
+    },
 )
-print(session.browser)
+print(session.data)
 ```
 
 ## File uploads
@@ -161,7 +207,7 @@ from anchorbrowser import Anchorbrowser
 client = Anchorbrowser()
 
 try:
-    client.sessions.create(
+    client.sessions.create_session(
         session={"recording": {"active": False}},
     )
 except anchorbrowser.APIConnectionError as e:
@@ -206,7 +252,7 @@ client = Anchorbrowser(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).sessions.create(
+client.with_options(max_retries=5).sessions.create_session(
     session={"recording": {"active": False}},
 )
 ```
@@ -231,7 +277,7 @@ client = Anchorbrowser(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).sessions.create(
+client.with_options(timeout=5.0).sessions.create_session(
     session={"recording": {"active": False}},
 )
 ```
@@ -266,49 +312,6 @@ if response.my_field is None:
     print('Got json like {"my_field": null}.')
 ```
 
-### Accessing raw response data (e.g. headers)
-
-The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
-
-```py
-from anchorbrowser import Anchorbrowser
-
-client = Anchorbrowser()
-response = client.sessions.with_raw_response.create(
-    session={
-        "recording": {
-            "active": False
-        }
-    },
-)
-print(response.headers.get('X-My-Header'))
-
-session = response.parse()  # get the object that `sessions.create()` would have returned
-print(session.data)
-```
-
-These methods return an [`APIResponse`](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/tree/main/src/anchorbrowser/_response.py) object.
-
-The async client returns an [`AsyncAPIResponse`](https://github.com/anchorbrowser/AnchorBrowser-SDK-Python/tree/main/src/anchorbrowser/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
-
-#### `.with_streaming_response`
-
-The above interface eagerly reads the full response body when you make the request, which may not always be what you want.
-
-To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
-
-```python
-with client.sessions.with_streaming_response.create(
-    session={"recording": {"active": False}},
-) as response:
-    print(response.headers.get("X-My-Header"))
-
-    for line in response.iter_lines():
-        print(line)
-```
-
-The context manager is required so that the response will reliably be closed.
-
 ### Making custom/undocumented requests
 
 This library is typed for convenient access to the documented API.
@@ -318,7 +321,8 @@ If you need to access undocumented endpoints, params, or response properties, th
 #### Undocumented endpoints
 
 To make requests to undocumented endpoints, you can make requests using `client.get`, `client.post`, and other
-http verbs. Options on the client will be respected (such as retries) when making this request.
+http verbs. Options on the client will be respected (such as retries) when making this request. This is also the
+way to access raw response data (e.g. headers) for a documented endpoint:
 
 ```py
 import httpx
@@ -410,7 +414,7 @@ print(anchorbrowser.__version__)
 
 ## Requirements
 
-Python 3.9 or higher.
+Python 3.10 or higher.
 
 ## Contributing
 
