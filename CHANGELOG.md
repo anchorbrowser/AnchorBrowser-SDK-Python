@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 (2026-07-28)
+
+* release: 1.0.1 (510cd54)
+
+
 ## 1.0.0 (2026-07-28)
 
 * refactor: devendor stainless, align all actions and docs (c3ea2ff)
