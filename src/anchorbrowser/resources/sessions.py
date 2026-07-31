@@ -105,6 +105,8 @@ class SessionsResource(SyncAPIResource):
         browser: params.BrowserConfig | NotGiven = not_given,
         integrations: Iterable[params.Integration] | NotGiven = not_given,
         identities: Iterable[Dict[str, object]] | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        identity_async_auth: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -122,11 +124,24 @@ class SessionsResource(SyncAPIResource):
           integrations: Array of integrations to load in the browser session. Integrations must be
           previously created using the Integrations API.
           identities: Activates an authenticated session.
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          identity_async_auth: Run identity authentication in the background and return the session
+          immediately.
         """
         return self._post(
             "/v1/sessions",
             body=strip_not_given(
-                {"session": session, "browser": browser, "integrations": integrations, "identities": identities}
+                {
+                    "session": session,
+                    "browser": browser,
+                    "integrations": integrations,
+                    "identities": identities,
+                    "identity_skip_validation": identity_skip_validation,
+                    "identity_async_auth": identity_async_auth,
+                }
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -141,6 +156,8 @@ class SessionsResource(SyncAPIResource):
         browser: params.BrowserConfig | NotGiven = not_given,
         integrations: Iterable[params.Integration] | NotGiven = not_given,
         identities: Iterable[Dict[str, object]] | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        identity_async_auth: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -161,11 +178,24 @@ class SessionsResource(SyncAPIResource):
           integrations: Array of integrations to load in the browser session. Integrations must be
           previously created using the Integrations API.
           identities: Activates an authenticated session.
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          identity_async_auth: Run identity authentication in the background and return the session
+          immediately.
         """
         return self._post(
             "/v1/sessions/async",
             body=strip_not_given(
-                {"session": session, "browser": browser, "integrations": integrations, "identities": identities}
+                {
+                    "session": session,
+                    "browser": browser,
+                    "integrations": integrations,
+                    "identities": identities,
+                    "identity_skip_validation": identity_skip_validation,
+                    "identity_async_auth": identity_async_auth,
+                }
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1080,6 +1110,8 @@ class AsyncSessionsResource(AsyncAPIResource):
         browser: params.BrowserConfig | NotGiven = not_given,
         integrations: Iterable[params.Integration] | NotGiven = not_given,
         identities: Iterable[Dict[str, object]] | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        identity_async_auth: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -1097,11 +1129,24 @@ class AsyncSessionsResource(AsyncAPIResource):
           integrations: Array of integrations to load in the browser session. Integrations must be
           previously created using the Integrations API.
           identities: Activates an authenticated session.
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          identity_async_auth: Run identity authentication in the background and return the session
+          immediately.
         """
         return await self._post(
             "/v1/sessions",
             body=strip_not_given(
-                {"session": session, "browser": browser, "integrations": integrations, "identities": identities}
+                {
+                    "session": session,
+                    "browser": browser,
+                    "integrations": integrations,
+                    "identities": identities,
+                    "identity_skip_validation": identity_skip_validation,
+                    "identity_async_auth": identity_async_auth,
+                }
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1116,6 +1161,8 @@ class AsyncSessionsResource(AsyncAPIResource):
         browser: params.BrowserConfig | NotGiven = not_given,
         integrations: Iterable[params.Integration] | NotGiven = not_given,
         identities: Iterable[Dict[str, object]] | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        identity_async_auth: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -1136,11 +1183,24 @@ class AsyncSessionsResource(AsyncAPIResource):
           integrations: Array of integrations to load in the browser session. Integrations must be
           previously created using the Integrations API.
           identities: Activates an authenticated session.
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          identity_async_auth: Run identity authentication in the background and return the session
+          immediately.
         """
         return await self._post(
             "/v1/sessions/async",
             body=strip_not_given(
-                {"session": session, "browser": browser, "integrations": integrations, "identities": identities}
+                {
+                    "session": session,
+                    "browser": browser,
+                    "integrations": integrations,
+                    "identities": identities,
+                    "identity_skip_validation": identity_skip_validation,
+                    "identity_async_auth": identity_async_auth,
+                }
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

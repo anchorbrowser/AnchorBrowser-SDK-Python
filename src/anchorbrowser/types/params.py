@@ -945,6 +945,21 @@ class RunTaskV2Request(TypedDict):
     identity_id: NotRequired[str]
     session_id: NotRequired[str]
     cleanup_sessions: NotRequired[bool]
+    identity_skip_validation: NotRequired[bool]
+    sync: NotRequired[bool]
+
+
+class ReauthenticateIdentityRequest(TypedDict):
+    sync: NotRequired[bool]
+
+
+ReauthenticateIdentityResponse = TypedDict(
+    "ReauthenticateIdentityResponse",
+    {
+        "identityId": str,
+        "async": bool,
+    },
+)
 
 
 class TaskRunStatusV2Response(TypedDict):
@@ -1567,6 +1582,8 @@ class SessionCreateRequestSchema(TypedDict):
     browser: NotRequired[BrowserConfig]
     integrations: NotRequired[list[Integration]]
     identities: NotRequired[list[Identity]]
+    identity_skip_validation: NotRequired[bool]
+    identity_async_auth: NotRequired[bool]
 
 
 class BatchSessionRequestSchema(TypedDict):

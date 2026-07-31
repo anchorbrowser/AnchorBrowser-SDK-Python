@@ -158,6 +158,41 @@ class IdentitiesResource(SyncAPIResource):
             cast_to=models.DeleteIdentityResponse,
         )
 
+    def reauthenticate_identity(
+        self,
+        identity_id: str,
+        *,
+        sync: bool | NotGiven = not_given,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.ReauthenticateIdentityResponse:
+        """
+        Reauthenticate Identity
+
+        Re-authenticates an identity on demand: validates the saved browser profile and runs login
+        if
+        it is no longer signed in, then persists the refreshed profile and tears the temporary
+        session
+        down. Equivalent to a session with `identity_skip_validation: false` that ends after auth.
+
+        Args:
+          identity_id: The ID of the identity to reauthenticate
+          sync: When `true` (default), wait for authentication to finish and persist the refreshed
+          profile before returning. When `false`, start authentication asynchronously.
+        """
+        if not identity_id:
+            raise ValueError(f"Expected a non-empty value for `identity_id` but received {identity_id!r}")
+        return self._post(
+            path_template("/v1/identities/{identityId}/reauthenticate", identityId=identity_id),
+            body=strip_not_given({"sync": sync}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.ReauthenticateIdentityResponse,
+        )
+
 
 class AsyncIdentitiesResource(AsyncAPIResource):
     async def create_identity(
@@ -300,4 +335,39 @@ class AsyncIdentitiesResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=models.DeleteIdentityResponse,
+        )
+
+    async def reauthenticate_identity(
+        self,
+        identity_id: str,
+        *,
+        sync: bool | NotGiven = not_given,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.ReauthenticateIdentityResponse:
+        """
+        Reauthenticate Identity
+
+        Re-authenticates an identity on demand: validates the saved browser profile and runs login
+        if
+        it is no longer signed in, then persists the refreshed profile and tears the temporary
+        session
+        down. Equivalent to a session with `identity_skip_validation: false` that ends after auth.
+
+        Args:
+          identity_id: The ID of the identity to reauthenticate
+          sync: When `true` (default), wait for authentication to finish and persist the refreshed
+          profile before returning. When `false`, start authentication asynchronously.
+        """
+        if not identity_id:
+            raise ValueError(f"Expected a non-empty value for `identity_id` but received {identity_id!r}")
+        return await self._post(
+            path_template("/v1/identities/{identityId}/reauthenticate", identityId=identity_id),
+            body=strip_not_given({"sync": sync}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.ReauthenticateIdentityResponse,
         )

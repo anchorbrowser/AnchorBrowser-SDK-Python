@@ -1356,6 +1356,23 @@ class RunTaskV2Request(BaseModel):
     cleanup_sessions: bool | None = Field(
         True, description="Whether to clean up sessions after execution (default: true)"
     )
+    identity_skip_validation: bool | None = Field(
+        True,
+        description="When `true` (default), skip profile validation for active identities and reuse the saved\nbrowser profile. Set to `false` to validate the profile and re-authenticate if it is no\nlonger signed in. Pending identities still authenticate on first use.\n",
+    )
+    sync: bool | None = Field(False, description="Wait for the task to complete before returning. Defaults to `false`.")
+
+
+class ReauthenticateIdentityRequest(BaseModel):
+    sync: bool | None = Field(
+        True,
+        description="When `true` (default), wait for authentication to finish and persist the refreshed\nprofile before returning. When `false`, start authentication asynchronously.\n",
+    )
+
+
+class ReauthenticateIdentityResponse(BaseModel):
+    identity_id: str = Field(..., alias="identityId", description="The identity that was reauthenticated")
+    async_: bool = Field(..., alias="async", description="Whether authentication is still running in the background")
 
 
 class TaskRunStatusV2Response(BaseModel):
@@ -2146,6 +2163,13 @@ class SessionCreateRequestSchema(BaseModel):
         None,
         description="Activates an authenticated session.\n",
         examples=[[{"id": "123e4567-e89b-12d3-a456-426614174000"}]],
+    )
+    identity_skip_validation: bool | None = Field(
+        True,
+        description="When `true` (default), skip profile validation for active identities and reuse the saved\nbrowser profile. Set to `false` to validate the profile and re-authenticate if it is no\nlonger signed in. Pending identities still authenticate on first use.\n",
+    )
+    identity_async_auth: bool | None = Field(
+        False, description="Run identity authentication in the background and return the session immediately."
     )
 
 
