@@ -224,6 +224,19 @@ class LiveView(TypedDict):
     one_time_url: NotRequired[bool]
 
 
+class PutSessionTags(TypedDict):
+    tags: list[str]
+
+
+class SessionTagsResponse(TypedDict):
+    tags: list[str]
+
+
+class SessionTagsMutationResponse(TypedDict):
+    success: bool
+    message: NotRequired[str]
+
+
 class Profile(TypedDict):
     name: NotRequired[str]
     persist: NotRequired[bool]
@@ -444,8 +457,22 @@ class Data7(TypedDict):
     cost_limit: NotRequired[float]
 
 
+class Datum(TypedDict):
+    date: str
+    credits_used: float
+
+
+class Usage(TypedDict):
+    from_date: str
+    to_date: str
+    granularity: Literal["hour", "day", "week", "month"]
+    total_credits_used: float
+    data: list[Datum]
+
+
 class BillingInfoResponse(TypedDict):
     data: NotRequired[Data7]
+    usage: NotRequired[Usage]
 
 
 class RecordingItem(TypedDict):
@@ -524,6 +551,7 @@ PerformWebTaskRequestSchema = TypedDict(
         "detect_elements": NotRequired[bool],
         "human_intervention": NotRequired[bool],
         "max_steps": NotRequired[int],
+        "llm_timeout": NotRequired[int],
         "secret_values": NotRequired[dict[str, str]],
         "highlight_elements": NotRequired[bool],
         "output_schema": NotRequired[dict[str, Any]],
@@ -548,15 +576,18 @@ class PerformWebTaskResponseSchema(TypedDict):
 class PerformWebTaskStatusSuccessResponseData(TypedDict):
     status: Literal["COMPLETED"]
     result: dict[str, Any]
+    sessionId: NotRequired[str]
 
 
 class PerformWebTaskStatusRunningResponseData(TypedDict):
     status: Literal["RUNNING"]
+    sessionId: NotRequired[str]
 
 
 class PerformWebTaskStatusFailedResponseData(TypedDict):
     status: Literal["FAILED"]
     error: str
+    sessionId: NotRequired[str]
 
 
 class PerformWebTaskStatusResponseSchema(TypedDict):
@@ -945,6 +976,166 @@ class RunTaskV2Request(TypedDict):
     identity_id: NotRequired[str]
     session_id: NotRequired[str]
     cleanup_sessions: NotRequired[bool]
+    identity_skip_validation: NotRequired[bool]
+    sync: NotRequired[bool]
+
+
+class ReauthenticateIdentityRequest(TypedDict):
+    sync: NotRequired[bool]
+
+
+ReauthenticateIdentityResponse = TypedDict(
+    "ReauthenticateIdentityResponse",
+    {
+        "identityId": str,
+        "async": bool,
+    },
+)
+
+
+class AuthFlowV2StartRequest(TypedDict):
+    url: str
+    host: str
+
+
+class AuthFlowV2DecisionResolve(TypedDict):
+    choice: str
+
+
+class AuthFlowV2FormResolve(TypedDict):
+    option_index: int
+    values: dict[str, str]
+
+
+AuthFlowV2ResolveRequest: TypeAlias = AuthFlowV2FormResolve | AuthFlowV2DecisionResolve
+
+
+class AuthFlowV2FinalizeRequest(TypedDict):
+    identity_name: NotRequired[str]
+    profile_name: NotRequired[str]
+
+
+class AuthFlowV2DecisionOption(TypedDict):
+    step_id: str
+    label: str
+    automatable: bool
+
+
+class Input(TypedDict):
+    name: str
+    type: str
+    label: NotRequired[str]
+    placeholder: NotRequired[str]
+    value: NotRequired[str]
+
+
+class ExtraData(TypedDict):
+    create_integration_url: NotRequired[str]
+    number: NotRequired[str]
+
+
+class AuthFlowV2FormOption(TypedDict):
+    type: Literal[
+        "credentials",
+        "mfa_totp",
+        "mfa_sms",
+        "mfa_email",
+        "sso",
+        "captcha",
+        "consent",
+        "magic_link",
+        "passkey",
+        "generic",
+        "totp_secret",
+        "gmail_one_click_integration",
+    ]
+    automatable: bool
+    inputs: NotRequired[list[Input]]
+    extra_data: NotRequired[ExtraData]
+    message: NotRequired[str]
+    provider: NotRequired[str]
+    phoneHint: NotRequired[str]
+
+
+class AuthFlowV2ViewBase(TypedDict):
+    session_id: str
+    host: str
+    current_step_label: str
+    step_id: str
+    cdp_url: str
+    live_view_url: str
+    discovery_error: NotRequired[str]
+
+
+class AuthFlowV2DecisionView(AuthFlowV2ViewBase):
+    type: Literal["decision"]
+    options: list[AuthFlowV2DecisionOption]
+
+
+class AuthFlowV2FormView(AuthFlowV2ViewBase):
+    type: Literal["form"]
+    options: list[AuthFlowV2FormOption]
+    credentials_rejected: NotRequired[bool]
+    credentials_passed: NotRequired[bool]
+
+
+class AuthFlowV2DetectionFailedView(AuthFlowV2ViewBase):
+    type: Literal["detection_failed"]
+    node_status: Literal["detected", "failed", "explored"]
+    last_error: NotRequired[str]
+    retryable: bool
+    message: str
+
+
+class AuthFlowV2AuthenticatedView(AuthFlowV2ViewBase):
+    type: Literal["authenticated"]
+    message: NotRequired[str]
+
+
+class AuthFlowV2FailedView(AuthFlowV2ViewBase):
+    type: Literal["failed"]
+    error: str
+    retryable: bool
+
+
+AuthFlowV2View: TypeAlias = (
+    AuthFlowV2DecisionView
+    | AuthFlowV2FormView
+    | AuthFlowV2DetectionFailedView
+    | AuthFlowV2AuthenticatedView
+    | AuthFlowV2FailedView
+)
+
+
+class Target(TypedDict):
+    step_id: NotRequired[str]
+    label: NotRequired[str]
+
+
+class Nav(TypedDict):
+    status: Literal["pending", "succeeded", "failed", "none"]
+    error: NotRequired[str]
+    credentials_rejected: NotRequired[bool]
+
+
+class AuthFlowV2State(TypedDict):
+    session_id: str
+    graph_id: int
+    current_step_id: str
+    discovery_status: Literal["in_progress", "complete", "failed"]
+    discovery_error: NotRequired[str]
+    phase: Literal["navigating", "settled"]
+    updated_at: float
+    target: NotRequired[Target]
+    nav: Nav
+    view: NotRequired[AuthFlowV2View]
+
+
+class AuthFlowV2FinalizeResult(TypedDict):
+    identityId: str
+    profileName: str
+    automatable: bool
+    nonAutomatableReasons: list[str]
 
 
 class TaskRunStatusV2Response(TypedDict):
@@ -1284,6 +1475,7 @@ WebhookEventType: TypeAlias = Literal[
     "task.failed",
     "task.cancelled",
     "task.healed",
+    "session.ready",
     "session.completed",
     "session.failed",
     "session.recording.ready",
@@ -1341,12 +1533,13 @@ class WebhookEventDeliveryRow(TypedDict):
     id: str
     external_event_id: str
     event_type: WebhookEventType
-    status: Literal["pending", "in_flight", "succeeded", "failed", "dead"]
+    status: Literal["pending", "succeeded", "failed", "dead"]
     attempt: int
     response_status: NotRequired[int]
     error_message: NotRequired[str]
     scheduled_at: NotRequired[str]
     completed_at: NotRequired[str]
+    payload: NotRequired[dict[str, Any]]
 
 
 class Pagination2(TypedDict):
@@ -1364,6 +1557,114 @@ class WebhookDeleteResponse(TypedDict):
     ok: bool
 
 
+class AgentAccessNextStep(TypedDict):
+    method: Literal["GET", "POST"]
+    path: str
+    description: str
+
+
+class AgentAccessInstructions(TypedDict):
+    submit: str
+    appendix: str
+    api_key_header: str
+    optional_identity: str
+    anonymous_credits: float
+    identity_credits: float
+
+
+class AgentAccessError(TypedDict):
+    error: str
+    next: AgentAccessNextStep
+    docs: str
+
+
+class Credits(TypedDict):
+    anonymous: float
+    with_identity: float
+
+
+class Limits(TypedDict):
+    session_max_duration_minutes: float
+
+
+class FlowItem(TypedDict):
+    step: float
+    method: Literal["GET", "POST"]
+    path: str
+    why: str
+
+
+class OidcItem(TypedDict):
+    provider: str
+    issuer: str
+    how: str
+
+
+class Identity1(TypedDict):
+    optional: bool
+    extra_credits: float
+    submit: str
+    oidc: list[OidcItem]
+
+
+class AgentAccessGetAgentAccessGuideResponse(TypedDict):
+    purpose: str
+    docs: str
+    credits: Credits
+    ttl_seconds: float
+    limits: Limits
+    flow: list[FlowItem]
+    next: AgentAccessNextStep
+    identity: Identity1
+
+
+class Auth(TypedDict):
+    api_key_header: str
+    identity_token_header: NotRequired[str]
+    identity_token_required: bool
+
+
+class Upgrade(TypedDict):
+    message: str
+
+
+class AgentAccessCreateAgentAccessProjectResponse(TypedDict):
+    api_key: str
+    project_id: str
+    credits_granted: float
+    agent_identity_token: NotRequired[str]
+    auth: Auth
+    upgrade: NotRequired[Upgrade]
+    next: AgentAccessNextStep
+    docs: str
+    limits: Limits
+
+
+class Challenge(TypedDict):
+    id: str
+    type: str
+    icon: str
+    title: str
+    description: str
+    prompt: str
+    timeLimit: float
+
+
+class AgentAccessGetAgentAccessChallengeResponse(TypedDict):
+    challenge: Challenge
+    token: str
+    appendix_ref: NotRequired[str]
+    appendix_url: NotRequired[str]
+    instructions: AgentAccessInstructions
+    next: NotRequired[AgentAccessNextStep]
+
+
+class AgentAccessGetAgentAccessAppendixResponse(TypedDict):
+    appendix_ref: str
+    inventory: str
+    next: NotRequired[AgentAccessNextStep]
+
+
 class Data22(TypedDict):
     session_id: NotRequired[str]
     team_id: NotRequired[str]
@@ -1371,11 +1672,10 @@ class Data22(TypedDict):
     status: NotRequired[str]
     credits_used: NotRequired[float]
     configuration: NotRequired[dict[str, Any]]
-    playground: NotRequired[bool]
     proxy_bytes: NotRequired[int]
     tokens: NotRequired[dict[str, Any]]
     steps: NotRequired[int]
-    tags: NotRequired[dict[str, Any]]
+    tags: NotRequired[list[str]]
     created_at: NotRequired[str]
 
 
@@ -1567,6 +1867,8 @@ class SessionCreateRequestSchema(TypedDict):
     browser: NotRequired[BrowserConfig]
     integrations: NotRequired[list[Integration]]
     identities: NotRequired[list[Identity]]
+    identity_skip_validation: NotRequired[bool]
+    identity_async_auth: NotRequired[bool]
 
 
 class BatchSessionRequestSchema(TypedDict):

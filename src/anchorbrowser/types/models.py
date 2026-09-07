@@ -406,6 +406,23 @@ class LiveView(BaseModel):
     )
 
 
+class PutSessionTags(BaseModel):
+    tags: list[str] = Field(
+        ...,
+        description="Tags to set on the session. Replaces any existing tags.",
+        examples=[["production", "scraping", "customer-123"]],
+    )
+
+
+class SessionTagsResponse(BaseModel):
+    tags: list[str] = Field(..., description="Tags currently associated with the session, or null if none are set.")
+
+
+class SessionTagsMutationResponse(BaseModel):
+    success: bool = Field(..., description="Whether the tags operation succeeded.")
+    message: str | None = Field(None, description="Human-readable result message.")
+
+
 class Profile(BaseModel):
     name: str | None = Field(None, description="The name of the profile to be used during the browser session.")
     persist: bool | None = Field(
@@ -705,8 +722,25 @@ class Data7(BaseModel):
     cost_limit: float | None = Field(None, description="Optional configured credit spend limit for the project.")
 
 
+class Datum(BaseModel):
+    date: AwareDatetime = Field(..., description="Start of the bucket (ISO 8601, UTC).")
+    credits_used: float = Field(..., description="Credits used in this bucket.")
+
+
+class Usage(BaseModel):
+    from_date: AwareDatetime = Field(..., description="Resolved start of the aggregation window.")
+    to_date: AwareDatetime = Field(..., description="Resolved end of the aggregation window.")
+    granularity: Literal["hour", "day", "week", "month"] = Field(..., description="Bucket size used for aggregation.")
+    total_credits_used: float = Field(..., description="Sum of credits used across the window.")
+    data: list[Datum] = Field(..., description="Buckets ordered newest first. Periods with no sessions are omitted.")
+
+
 class BillingInfoResponse(BaseModel):
     data: Data7 | None = None
+    usage: Usage | None = Field(
+        None,
+        description="Credits-usage time series. Present only when at least one of the `from_date`, `to_date`, or `granularity` query parameters is provided. Sums per-session credits bucketed by session creation time (UTC); recent buckets can still grow while sessions settle. Unlocker credits are tracked per calendar month and are not included in this series, so the bucket total can be lower than `credits_used`. The series matches `GET /v1/sessions/history?metrics=credits_used`.",
+    )
 
 
 class RecordingItem(BaseModel):
@@ -814,6 +848,12 @@ class PerformWebTaskRequestSchema(BaseModel):
     max_steps: int | None = Field(
         None, description="Maximum number of steps the agent can take to complete the task. Defaults to 200."
     )
+    llm_timeout: int | None = Field(
+        None,
+        description="Timeout in seconds for each LLM call made by the agent (browser-use agent only). Raise it when tasks with deep context (long histories, large pages) hit LLM call timeouts. When omitted, the agent uses its model-based defaults.",
+        ge=10,
+        le=600,
+    )
     secret_values: dict[str, str] | None = Field(
         None,
         description="Secret values to pass to the agent for secure credential handling. Keys and values are passed as environment variables to the agent.",
@@ -847,15 +887,26 @@ class PerformWebTaskResponseSchema(BaseModel):
 class PerformWebTaskStatusSuccessResponseData(BaseModel):
     status: Literal["COMPLETED"] = Field(..., description="The workflow has completed successfully.")
     result: dict[str, Any] = Field(..., description="The outcome or answer produced by the autonomous task.")
+    session_id: str | None = Field(
+        None, alias="sessionId", description="Browser session the task ran on. Omitted when the job has no session."
+    )
 
 
 class PerformWebTaskStatusRunningResponseData(BaseModel):
     status: Literal["RUNNING"] = Field(..., description="The workflow is currently running.")
+    session_id: str | None = Field(
+        None,
+        alias="sessionId",
+        description="Browser session the task ran on. Present as soon as the job exists when a session was created or reused. Omitted when the job has no session.",
+    )
 
 
 class PerformWebTaskStatusFailedResponseData(BaseModel):
     status: Literal["FAILED"] = Field(..., description="The workflow has failed.")
     error: str = Field(..., description="Error message describing why the workflow failed.")
+    session_id: str | None = Field(
+        None, alias="sessionId", description="Browser session the task ran on. Omitted when the job has no session."
+    )
 
 
 class PerformWebTaskStatusResponseSchema(BaseModel):
@@ -1356,6 +1407,247 @@ class RunTaskV2Request(BaseModel):
     cleanup_sessions: bool | None = Field(
         True, description="Whether to clean up sessions after execution (default: true)"
     )
+    identity_skip_validation: bool | None = Field(
+        True,
+        description="When `true` (default), skip profile validation for active identities and reuse the saved\nbrowser profile. Set to `false` to validate the profile and re-authenticate if it is no\nlonger signed in. Pending identities still authenticate on first use.\n",
+    )
+    sync: bool | None = Field(False, description="Wait for the task to complete before returning. Defaults to `false`.")
+
+
+class ReauthenticateIdentityRequest(BaseModel):
+    sync: bool | None = Field(
+        True,
+        description="When `true` (default), wait for authentication to finish and persist the refreshed\nprofile before returning. When `false`, start authentication asynchronously.\n",
+    )
+
+
+class ReauthenticateIdentityResponse(BaseModel):
+    identity_id: str = Field(..., alias="identityId", description="The identity that was reauthenticated")
+    async_: bool = Field(..., alias="async", description="Whether authentication is still running in the background")
+
+
+class AuthFlowV2StartRequest(BaseModel):
+    url: AnyUrl = Field(
+        ..., description="Landing URL to open in the session (login page).", examples=["https://example.com/login"]
+    )
+    host: str = Field(
+        ..., description="Hostname of `url`. Must match the URL hostname after normalization.", examples=["example.com"]
+    )
+
+
+class AuthFlowV2DecisionResolve(BaseModel):
+    choice: str = Field(
+        ..., description="One of `options[].step_id` from the decision view.", examples=["root/login/google"]
+    )
+
+
+class AuthFlowV2FormResolve(BaseModel):
+    option_index: int = Field(..., description="Index into that form's `options` list.", examples=[0], ge=0)
+    values: dict[str, str] = Field(
+        ...,
+        description="Map of input name → value for the selected option (`options[option_index].inputs` lists the names).",
+        examples=[{"username": "user@example.com", "password": "secret"}],
+    )
+
+
+class AuthFlowV2ResolveRequest(RootModel[AuthFlowV2FormResolve | AuthFlowV2DecisionResolve]):
+    root: AuthFlowV2FormResolve | AuthFlowV2DecisionResolve = Field(
+        ...,
+        description="Body depends on the last `view.type`. Use the `decision` shape or the `form`\nshape — not both.\n",
+    )
+
+
+class AuthFlowV2FinalizeRequest(BaseModel):
+    identity_name: str | None = Field(None, description="Optional name for the created identity.")
+    profile_name: str | None = Field(
+        None, description="Optional browser profile name. Defaults to `profile-<session_id>`."
+    )
+
+
+class AuthFlowV2DecisionOption(BaseModel):
+    step_id: str = Field(..., description="Opaque identifier for this option; pass it back as `choice`.")
+    label: str = Field(..., description='Human-readable name of the login path (e.g. "Continue with Google").')
+    automatable: bool = Field(
+        ..., description="True if this path is known to be replayable unattended, without a human."
+    )
+
+
+class Input(BaseModel):
+    name: str
+    type: str
+    label: str | None = None
+    placeholder: str | None = None
+    value: str | None = None
+
+
+class ExtraData(BaseModel):
+    model_config = ConfigDict(
+        extra="allow",
+    )
+    create_integration_url: AnyUrl | None = Field(
+        None,
+        description="On `gmail_one_click_integration`. Browser URL to connect Gmail; see the option description for the token it returns.",
+    )
+    number: str | None = Field(
+        None, description="On `consent`. Device confirmation number from the live page, when shown."
+    )
+
+
+class AuthFlowV2FormOption(BaseModel):
+    type: Literal[
+        "credentials",
+        "mfa_totp",
+        "mfa_sms",
+        "mfa_email",
+        "sso",
+        "captcha",
+        "consent",
+        "magic_link",
+        "passkey",
+        "generic",
+        "totp_secret",
+        "gmail_one_click_integration",
+    ]
+    automatable: bool = Field(..., description="True if this option can be replayed unattended without a human.")
+    inputs: list[Input] | None = None
+    extra_data: ExtraData | None = Field(
+        None, description="Type-specific extras. Present only when the option has any."
+    )
+    message: str | None = None
+    provider: str | None = None
+    phone_hint: str | None = Field(None, alias="phoneHint")
+
+
+class AuthFlowV2ViewBase(BaseModel):
+    session_id: str
+    host: str = Field(..., description="Hostname the flow was started for.")
+    current_step_label: str = Field(..., description="Human-readable label of the current login step.")
+    step_id: str = Field(..., description="Identifier of the current login step.")
+    cdp_url: str = Field(..., description="CDP websocket URL of the session driving the login.")
+    live_view_url: str = Field(..., description="URL to watch or take over the session in a browser.")
+    discovery_error: str | None = Field(
+        None, description="Set when automatic step detection hit an error. A partial flow may still be presented."
+    )
+
+
+class AuthFlowV2DecisionView(AuthFlowV2ViewBase):
+    type: Literal["decision"]
+    options: list[AuthFlowV2DecisionOption] = Field(
+        ...,
+        description='Each item is `{ step_id, label, automatable }`.\nPOST `/resolve` with `{ "choice": "<step_id>" }`.\n',
+    )
+
+
+class AuthFlowV2FormView(AuthFlowV2ViewBase):
+    type: Literal["form"]
+    options: list[AuthFlowV2FormOption] = Field(
+        ...,
+        description='Each item includes `type` and `automatable`.\nPOST `/resolve` with `{ "option_index": n, "values": { ... } }`.\n',
+    )
+    credentials_rejected: bool | None = Field(
+        None, description="The last submission was rejected (e.g. wrong password) and the same form is re-presented."
+    )
+    credentials_passed: bool | None = Field(None, description="The previous step just cleared. Transient.")
+
+
+class AuthFlowV2DetectionFailedView(AuthFlowV2ViewBase):
+    type: Literal["detection_failed"]
+    node_status: Literal["detected", "failed", "explored"] = Field(
+        ..., description="How far the current step has been analyzed."
+    )
+    last_error: str | None = Field(None, description="The most recent navigation error, if any.")
+    retryable: bool = Field(
+        ..., description="True means keep polling `/state`; false means stop and use `live_view_url`."
+    )
+    message: str = Field(
+        ...,
+        description="Why detection stopped. Open `live_view_url` to finish signing in in the browser.\nDo not resolve. If `retryable` is true, you may also poll GET `/state`.\n",
+    )
+
+
+class AuthFlowV2AuthenticatedView(AuthFlowV2ViewBase):
+    type: Literal["authenticated"]
+    message: str | None = Field(None, description="Human-readable status. POST `/finalize` to persist the identity.")
+
+
+class AuthFlowV2FailedView(AuthFlowV2ViewBase):
+    type: Literal["failed"]
+    error: str = Field(..., description="What went wrong.")
+    retryable: bool = Field(..., description="True means keep polling `/state`; false means stop.")
+
+
+class AuthFlowV2View(
+    RootModel[
+        AuthFlowV2DecisionView
+        | AuthFlowV2FormView
+        | AuthFlowV2DetectionFailedView
+        | AuthFlowV2AuthenticatedView
+        | AuthFlowV2FailedView
+    ]
+):
+    root: (
+        AuthFlowV2DecisionView
+        | AuthFlowV2FormView
+        | AuthFlowV2DetectionFailedView
+        | AuthFlowV2AuthenticatedView
+        | AuthFlowV2FailedView
+    ) = Field(
+        ...,
+        description="Presentation returned by start/resolve. GET `/state` nests the same object as\n`view` when there is something to show. Discriminated on `type`. Call `/resolve`\nonly for `decision` or `form`.\n",
+        discriminator="type",
+    )
+
+
+class Target(BaseModel):
+    step_id: str | None = None
+    label: str | None = None
+
+
+class Nav(BaseModel):
+    status: Literal["pending", "succeeded", "failed", "none"]
+    error: str | None = None
+    credentials_rejected: bool | None = None
+
+
+class AuthFlowV2State(BaseModel):
+    session_id: str
+    graph_id: int = Field(..., description="Internal identifier for this auth flow.")
+    current_step_id: str = Field(
+        ...,
+        description="Identifier of the step the flow last committed. While `phase` is `navigating`,\n`view` may already describe a later step.\n",
+    )
+    discovery_status: Literal["in_progress", "complete", "failed"] = Field(
+        ..., description="Whether automatic detection of the login steps is still running."
+    )
+    discovery_error: str | None = None
+    phase: Literal["navigating", "settled"] = Field(
+        ...,
+        description="`navigating` — a browser transition is in flight; `view` may already be the next step.\n`settled` — idle at a step; `view` is that step.\n",
+    )
+    updated_at: float = Field(..., description="Unix epoch milliseconds of the last state change.")
+    target: Target | None = Field(
+        None,
+        description='Step the browser is moving toward. Present only while `phase` is `navigating`.\nUse for progress copy (for example "Preparing {label}…"). Not a second\npresentation — `view` is what to show.\n',
+    )
+    nav: Nav = Field(..., description="Outcome of the latest navigation operation.")
+    view: AuthFlowV2View | None = Field(
+        None,
+        description="What to render or answer. Same shape as start/resolve, derived read-only.\n\n- `phase: settled` — the current step.\n- `phase: navigating` — the upcoming step, when known; omitted until then.\n",
+    )
+
+
+class AuthFlowV2FinalizeResult(BaseModel):
+    identity_id: str = Field(..., alias="identityId")
+    profile_name: str = Field(..., alias="profileName")
+    automatable: bool = Field(
+        ...,
+        description="Identity-level replay flag. False if any passed form option was not automatable.\nDistinct from `options[].automatable` on `decision`/`form` views, which is per choice.\n",
+    )
+    non_automatable_reasons: list[str] = Field(
+        ...,
+        alias="nonAutomatableReasons",
+        description="Why the login cannot be replayed unattended. Empty when `automatable` is true.",
+    )
 
 
 class TaskRunStatusV2Response(BaseModel):
@@ -1756,6 +2048,7 @@ class WebhookEventType(
             "task.failed",
             "task.cancelled",
             "task.healed",
+            "session.ready",
             "session.completed",
             "session.failed",
             "session.recording.ready",
@@ -1773,6 +2066,7 @@ class WebhookEventType(
         "task.failed",
         "task.cancelled",
         "task.healed",
+        "session.ready",
         "session.completed",
         "session.failed",
         "session.recording.ready",
@@ -1873,17 +2167,23 @@ class WebhookEventDeliveryRow(BaseModel):
         examples=["evt_56a4c6e7f11e4b44eafce28a"],
     )
     event_type: WebhookEventType
-    status: Literal["pending", "in_flight", "succeeded", "failed", "dead"] = Field(
+    status: Literal["pending", "succeeded", "failed", "dead"] = Field(
         ...,
-        description="* `pending` — accepted, no attempt yet.\n* `in_flight` — currently being POSTed.\n* `succeeded` — receiver returned 2xx.\n* `failed` — receiver returned non-retryable 4xx.\n* `dead` — exhausted all retry attempts.\n",
+        description="* `pending` — accepted; delivery in progress or awaiting retry.\n* `succeeded` — receiver returned 2xx.\n* `failed` — receiver returned non-retryable 4xx.\n* `dead` — exhausted all retry attempts.\n",
     )
     attempt: int = Field(
-        ..., description="Attempt number for the most recent try (1 = first attempt, ≤ 6 with default policy).", ge=0
+        ...,
+        description="Attempt number for the most recent completed try (0 = no attempt finished yet, 1 = first attempt, ≤ 6 with default policy).",
+        ge=0,
     )
     response_status: int | None = Field(None, description="HTTP status code from the most recent attempt, if any.")
     error_message: str | None = None
     scheduled_at: AwareDatetime | None = None
     completed_at: AwareDatetime | None = None
+    payload: dict[str, Any] | None = Field(
+        None,
+        description="The sanitized event `data` exactly as delivered to your endpoint. Only present when the request sets `include_payload=true`.\n",
+    )
 
 
 class Pagination2(BaseModel):
@@ -1901,6 +2201,159 @@ class WebhookDeleteResponse(BaseModel):
     ok: bool = Field(..., examples=[True])
 
 
+class AgentAccessNextStep(BaseModel):
+    method: Literal["GET", "POST"] = Field(
+        ..., description="HTTP method for the next call in the Agent Access onboarding flow."
+    )
+    path: str = Field(
+        ..., description="Path on https://api.anchorbrowser.io for the next call. Prepend the method to execute it."
+    )
+    description: str = Field(
+        ..., description="Plain-language instruction for what to do on the next call and what you receive afterward."
+    )
+
+
+class AgentAccessInstructions(BaseModel):
+    submit: str = Field(
+        ...,
+        description="After solving the puzzle, call this endpoint with { token, answer }. token is from this response; answer is the final integer as a string.",
+    )
+    appendix: str = Field(..., description="Optional path hint from the challenge response.")
+    api_key_header: str = Field(
+        ...,
+        description="After POST succeeds, send the returned api_key using this request header on authenticated API calls.",
+    )
+    optional_identity: str = Field(
+        ...,
+        description="Optional identity_token on the same POST for more credits and an agent_identity_token for later calls.",
+    )
+    anonymous_credits: float = Field(
+        ..., description="Credits granted when POST omits identity_token or the token has no verified email."
+    )
+    identity_credits: float = Field(
+        ..., description="Credits granted when POST includes identity_token with a verified email."
+    )
+
+
+class AgentAccessError(BaseModel):
+    error: str = Field(..., description="Why the request failed.")
+    next: AgentAccessNextStep
+    docs: str = Field(
+        ...,
+        description="Human-readable guide URL for Agent Access.",
+        examples=["https://docs.anchorbrowser.io/quickstart/agent-access"],
+    )
+
+
+class Credits(BaseModel):
+    anonymous: float = Field(..., description="Credits when onboarding without verified-email identity.")
+    with_identity: float = Field(..., description="Credits when POST includes identity_token with verified email.")
+
+
+class Limits(BaseModel):
+    session_max_duration_minutes: float = Field(
+        ..., description="Maximum session duration in minutes for keys issued through Agent Access."
+    )
+
+
+class FlowItem(BaseModel):
+    step: float = Field(..., description="Order in the onboarding sequence.")
+    method: Literal["GET", "POST"] = Field(..., description="HTTP method for this step.")
+    path: str = Field(..., description="Path for this step.")
+    why: str = Field(..., description="Why this step exists.")
+
+
+class OidcItem(BaseModel):
+    provider: str = Field(..., description="Provider alias (google, github, vercel).")
+    issuer: str = Field(..., description="Expected JWT iss claim.")
+    how: str = Field(..., description="How to obtain a token from this provider.")
+
+
+class Identity1(BaseModel):
+    optional: bool = Field(..., description="Whether identity_token is optional on POST.")
+    extra_credits: float = Field(..., description="Credits granted with verified-email identity_token.")
+    submit: str = Field(..., description="How to pass identity_token on POST.")
+    oidc: list[OidcItem] = Field(..., description="Supported OIDC identity providers.")
+
+
+class AgentAccessGetAgentAccessGuideResponse(BaseModel):
+    purpose: str = Field(..., description="What Agent Access is for.")
+    docs: str = Field(..., description="Human-readable guide URL.")
+    credits: Credits
+    ttl_seconds: float = Field(..., description="Challenge token TTL in seconds.")
+    limits: Limits
+    flow: list[FlowItem] = Field(
+        ..., description="All onboarding steps in order. For the immediate action, prefer next."
+    )
+    next: AgentAccessNextStep
+    identity: Identity1
+
+
+class Auth(BaseModel):
+    api_key_header: str = Field(..., description="Header name for api_key (anchor-api-key).")
+    identity_token_header: str | None = Field(
+        None, description="Header name for agent_identity_token when identity_token_required is true."
+    )
+    identity_token_required: bool = Field(
+        ...,
+        description="When true, authenticated API calls must include anchor-identity-token in addition to anchor-api-key.",
+    )
+
+
+class Upgrade(BaseModel):
+    message: str = Field(..., description="How to repeat onboarding with identity_token to receive more credits.")
+
+
+class AgentAccessCreateAgentAccessProjectResponse(BaseModel):
+    api_key: str = Field(..., description="API key for authenticated requests. Send as header anchor-api-key.")
+    project_id: str = Field(..., description="Anchor project id created or reused for this onboarding.")
+    credits_granted: float = Field(
+        ..., description="Credits added by this POST. 0 when the Agent Access project already existed for this owner."
+    )
+    agent_identity_token: str | None = Field(
+        None,
+        description="When present, send as header anchor-identity-token on later API calls when auth.identity_token_required is true.",
+    )
+    auth: Auth
+    upgrade: Upgrade | None = None
+    next: AgentAccessNextStep
+    docs: str = Field(..., description="Human-readable guide URL for Agent Access.")
+    limits: Limits
+
+
+class Challenge(BaseModel):
+    id: str = Field(..., description="Challenge instance id.")
+    type: str = Field(..., description="Challenge type (semantic_logic).")
+    icon: str = Field(..., description="Display icon for UIs.")
+    title: str = Field(..., description="Short challenge title.")
+    description: str = Field(..., description="Short challenge summary.")
+    prompt: str = Field(
+        ..., description="Multi-step puzzle text. Follow the instructions to compute the final integer answer."
+    )
+    time_limit: float = Field(..., alias="timeLimit", description="Suggested solve time in seconds.")
+
+
+class AgentAccessGetAgentAccessChallengeResponse(BaseModel):
+    challenge: Challenge
+    token: str = Field(
+        ...,
+        description="Opaque challenge token. Pass to POST /v1/agent-access as token. This is not the puzzle answer.",
+    )
+    appendix_ref: str | None = None
+    appendix_url: str | None = None
+    instructions: AgentAccessInstructions
+    next: AgentAccessNextStep | None = None
+
+
+class AgentAccessGetAgentAccessAppendixResponse(BaseModel):
+    appendix_ref: str
+    inventory: str = Field(
+        ...,
+        description="Text payload for the active challenge. Parse with challenge.prompt to compute the final integer answer.",
+    )
+    next: AgentAccessNextStep | None = None
+
+
 class Data22(BaseModel):
     session_id: str | None = Field(None, description="The unique identifier of the session.")
     team_id: str | None = Field(None, description="The team ID associated with the session.")
@@ -1908,11 +2361,10 @@ class Data22(BaseModel):
     status: str | None = Field(None, description="The current status of the session.")
     credits_used: float | None = Field(None, description="The number of credits consumed by the session.")
     configuration: dict[str, Any] | None = Field(None, description="The configuration settings for the session.")
-    playground: bool | None = Field(None, description="Whether this is a playground session.")
     proxy_bytes: int | None = Field(None, description="The number of bytes transferred through the proxy.")
     tokens: dict[str, Any] | None = Field(None, description="Token usage information.")
     steps: int | None = Field(None, description="Number of AI agent steps executed in the session.")
-    tags: dict[str, Any] | None = Field(None, description="Tags associated with the session.")
+    tags: list[str] | None = Field(None, description="Tags associated with the session.")
     created_at: AwareDatetime | None = Field(None, description="The timestamp when the session was created.")
 
 
@@ -2146,6 +2598,13 @@ class SessionCreateRequestSchema(BaseModel):
         None,
         description="Activates an authenticated session.\n",
         examples=[[{"id": "123e4567-e89b-12d3-a456-426614174000"}]],
+    )
+    identity_skip_validation: bool | None = Field(
+        True,
+        description="When `true` (default), skip profile validation for active identities and reuse the saved\nbrowser profile. Set to `false` to validate the profile and re-authenticate if it is no\nlonger signed in. Pending identities still authenticate on first use.\n",
+    )
+    identity_async_auth: bool | None = Field(
+        False, description="Run identity authentication in the background and return the session immediately."
     )
 
 

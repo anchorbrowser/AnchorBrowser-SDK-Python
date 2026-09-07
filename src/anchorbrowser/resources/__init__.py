@@ -12,6 +12,10 @@ from .webhooks import WebhooksResource as WebhooksResource, AsyncWebhooksResourc
 from .extensions import ExtensionsResource as ExtensionsResource, AsyncExtensionsResource as AsyncExtensionsResource
 from .identities import IdentitiesResource as IdentitiesResource, AsyncIdentitiesResource as AsyncIdentitiesResource
 from .recordings import RecordingsResource as RecordingsResource, AsyncRecordingsResource as AsyncRecordingsResource
+from .agent_access import (
+    AgentAccessResource as AgentAccessResource,
+    AsyncAgentAccessResource as AsyncAgentAccessResource,
+)
 from .applications import (
     ApplicationsResource as ApplicationsResource,
     AsyncApplicationsResource as AsyncApplicationsResource,

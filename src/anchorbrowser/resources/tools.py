@@ -29,6 +29,7 @@ class ToolsResource(SyncAPIResource):
         detect_elements: bool | NotGiven = not_given,
         human_intervention: bool | NotGiven = not_given,
         max_steps: int | NotGiven = not_given,
+        llm_timeout: int | NotGiven = not_given,
         secret_values: Dict[str, object] | NotGiven = not_given,
         highlight_elements: bool | NotGiven = not_given,
         output_schema: Dict[str, object] | NotGiven = not_given,
@@ -59,6 +60,9 @@ class ToolsResource(SyncAPIResource):
           agent can request human input for ambiguous situations.
           max_steps: Maximum number of steps the agent can take to complete the task. Defaults to
           200.
+          llm_timeout: Timeout in seconds for each LLM call made by the agent (browser-use agent
+          only). Raise it when tasks with deep context (long histories, large pages) hit LLM call
+          timeouts. When omitted, the agent uses its model-based defaults.
           secret_values: Secret values to pass to the agent for secure credential handling. Keys
           and values are passed as environment variables to the agent.
           highlight_elements: Whether to highlight elements during task execution for better
@@ -81,6 +85,7 @@ class ToolsResource(SyncAPIResource):
                     "detect_elements": detect_elements,
                     "human_intervention": human_intervention,
                     "max_steps": max_steps,
+                    "llm_timeout": llm_timeout,
                     "secret_values": secret_values,
                     "highlight_elements": highlight_elements,
                     "output_schema": output_schema,
@@ -349,6 +354,7 @@ class AsyncToolsResource(AsyncAPIResource):
         detect_elements: bool | NotGiven = not_given,
         human_intervention: bool | NotGiven = not_given,
         max_steps: int | NotGiven = not_given,
+        llm_timeout: int | NotGiven = not_given,
         secret_values: Dict[str, object] | NotGiven = not_given,
         highlight_elements: bool | NotGiven = not_given,
         output_schema: Dict[str, object] | NotGiven = not_given,
@@ -379,6 +385,9 @@ class AsyncToolsResource(AsyncAPIResource):
           agent can request human input for ambiguous situations.
           max_steps: Maximum number of steps the agent can take to complete the task. Defaults to
           200.
+          llm_timeout: Timeout in seconds for each LLM call made by the agent (browser-use agent
+          only). Raise it when tasks with deep context (long histories, large pages) hit LLM call
+          timeouts. When omitted, the agent uses its model-based defaults.
           secret_values: Secret values to pass to the agent for secure credential handling. Keys
           and values are passed as environment variables to the agent.
           highlight_elements: Whether to highlight elements during task execution for better
@@ -401,6 +410,7 @@ class AsyncToolsResource(AsyncAPIResource):
                     "detect_elements": detect_elements,
                     "human_intervention": human_intervention,
                     "max_steps": max_steps,
+                    "llm_timeout": llm_timeout,
                     "secret_values": secret_values,
                     "highlight_elements": highlight_elements,
                     "output_schema": output_schema,
