@@ -14,6 +14,7 @@ from .webhooks import WebhooksResource, AsyncWebhooksResource
 from .extensions import ExtensionsResource, AsyncExtensionsResource
 from .identities import IdentitiesResource, AsyncIdentitiesResource
 from .recordings import RecordingsResource, AsyncRecordingsResource
+from .agent_access import AgentAccessResource, AsyncAgentAccessResource
 from .applications import ApplicationsResource, AsyncApplicationsResource
 from .certificates import CertificatesResource, AsyncCertificatesResource
 from .integrations import IntegrationsResource, AsyncIntegrationsResource
@@ -25,6 +26,10 @@ class SyncResourcesMixin:
     @cached_property
     def agent(self) -> AgentResource:
         return AgentResource(self)  # type: ignore[arg-type]
+
+    @cached_property
+    def agent_access(self) -> AgentAccessResource:
+        return AgentAccessResource(self)  # type: ignore[arg-type]
 
     @cached_property
     def applications(self) -> ApplicationsResource:
@@ -91,6 +96,10 @@ class AsyncResourcesMixin:
     @cached_property
     def agent(self) -> AsyncAgentResource:
         return AsyncAgentResource(self)  # type: ignore[arg-type]
+
+    @cached_property
+    def agent_access(self) -> AsyncAgentAccessResource:
+        return AsyncAgentAccessResource(self)  # type: ignore[arg-type]
 
     @cached_property
     def applications(self) -> AsyncApplicationsResource:
