@@ -158,6 +158,200 @@ class IdentitiesResource(SyncAPIResource):
             cast_to=models.DeleteIdentityResponse,
         )
 
+    def reauthenticate_identity(
+        self,
+        identity_id: str,
+        *,
+        sync: bool | NotGiven = not_given,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.ReauthenticateIdentityResponse:
+        """
+        Reauthenticate Identity
+
+        Re-authenticates an identity on demand: validates the saved browser profile and runs login
+        if
+        it is no longer signed in, then persists the refreshed profile and tears the temporary
+        session
+        down. Equivalent to a session with `identity_skip_validation: false` that ends after auth.
+
+        Args:
+          identity_id: The ID of the identity to reauthenticate
+          sync: When `true` (default), wait for authentication to finish and persist the refreshed
+          profile before returning. When `false`, start authentication asynchronously.
+        """
+        if not identity_id:
+            raise ValueError(f"Expected a non-empty value for `identity_id` but received {identity_id!r}")
+        return self._post(
+            path_template("/v1/identities/{identityId}/reauthenticate", identityId=identity_id),
+            body=strip_not_given({"sync": sync}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.ReauthenticateIdentityResponse,
+        )
+
+    def start_dynamic_auth_flow(
+        self,
+        session_id: str,
+        *,
+        url: str,
+        host: str,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.AuthFlowV2View:
+        """
+        Start Dynamic Auth Flow
+
+        Starts (or restarts) a dynamic auth flow in an existing browser session.
+        `session_id` is required in the path. Advances until the next presentation
+        (`decision`, `form`, `detection_failed`, `authenticated`, or `failed`).
+
+        If the response is `detection_failed` with `retryable: true`, or the request
+        times out, keep polling `GET /v1/identities/dynamic/state/{session_id}` —
+        some login steps take longer than a single start/resolve call. If
+        `detection_failed` and `retryable` is false, open `live_view_url` to finish
+        signing in. Do not treat a timeout as a hard stop until `view.type` is
+        `failed` or `detection_failed` and `retryable` is false.
+
+        Args:
+          session_id: Active browser session that will drive the login.
+          url: Landing URL to open in the session (login page).
+          host: Hostname of `url`. Must match the URL hostname after normalization.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._post(
+            path_template("/v1/identities/dynamic/start/{session_id}", session_id=session_id),
+            body=strip_not_given({"url": url, "host": host}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.AuthFlowV2View,
+        )
+
+    def get_dynamic_auth_flow_state(
+        self,
+        session_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.AuthFlowV2State:
+        """
+        Get Dynamic Auth Flow State
+
+        Read-only snapshot of an in-progress dynamic auth flow. Does not acquire the
+        flow lock or mutate state.
+
+        Poll this endpoint when:
+        - start/resolve returned `type: detection_failed` with `retryable: true`
+          (the next login step is still being determined and may take longer than
+          the request timeout)
+        - start/resolve timed out or returned 409 while a transition is in flight
+        - you need the current presentation without submitting an answer
+
+        `view` is that presentation — the same object start/resolve return. Treat it
+        as the live step when `phase` is `settled`. While `phase` is `navigating`,
+        `view` may already describe the next step; `target` is only a progress
+        label for the in-flight transition.
+
+        Keep polling until `view.type` is `decision`, `form`, `authenticated`, a
+        non-retryable `detection_failed`, or a non-retryable `failed`. Then call
+        `/resolve` only for `decision`/`form`, `/finalize` for `authenticated`, or
+        open `live_view_url` for `detection_failed`.
+
+        Args:
+          session_id: Session whose auth flow state to read.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._get(
+            path_template("/v1/identities/dynamic/state/{session_id}", session_id=session_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.AuthFlowV2State,
+        )
+
+    def resolve_dynamic_auth_flow(
+        self,
+        session_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.AuthFlowV2View:
+        """
+        Resolve Dynamic Auth Flow Step
+
+        Advances the flow by answering the current step. The body depends on the
+        last presentation's `type` — do not mix the two shapes:
+
+        - **`decision`**: send only `choice` (a `step_id` from `options`).
+          Do not send `option_index` or `values`.
+        - **`form`**: send `option_index` (index into `options`) and `values`
+          (field name → string). Do not send `choice`.
+
+        Do not call `/resolve` for `detection_failed`, `authenticated`, or `failed`.
+        For retryable `detection_failed`, a timeout, or a 409 (another transition
+        still in flight), poll `GET .../state/{session_id}` until a
+        `decision`/`form`/`authenticated` view appears, then continue. If
+        `detection_failed` is not retryable, open `live_view_url` to finish signing in.
+
+        Args:
+          session_id: Session whose auth flow to advance.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._post(
+            path_template("/v1/identities/dynamic/resolve/{session_id}", session_id=session_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.AuthFlowV2View,
+        )
+
+    def finalize_dynamic_auth_flow(
+        self,
+        session_id: str,
+        *,
+        identity_name: str | NotGiven = not_given,
+        profile_name: str | NotGiven = not_given,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.AuthFlowV2FinalizeResult:
+        """
+        Finalize Dynamic Auth Flow
+
+        Persists the identity, browser profile, and captured credentials after the
+        flow reaches `authenticated`. The response reports whether the saved login
+        can be replayed unattended (`automatable`).
+
+        Args:
+          session_id: Session whose authenticated flow to persist.
+          identity_name: Optional name for the created identity.
+          profile_name: Optional browser profile name. Defaults to `profile-<session_id>`.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._post(
+            path_template("/v1/identities/dynamic/finalize/{session_id}", session_id=session_id),
+            body=strip_not_given({"identity_name": identity_name, "profile_name": profile_name}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.AuthFlowV2FinalizeResult,
+        )
+
 
 class AsyncIdentitiesResource(AsyncAPIResource):
     async def create_identity(
@@ -300,4 +494,198 @@ class AsyncIdentitiesResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=models.DeleteIdentityResponse,
+        )
+
+    async def reauthenticate_identity(
+        self,
+        identity_id: str,
+        *,
+        sync: bool | NotGiven = not_given,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.ReauthenticateIdentityResponse:
+        """
+        Reauthenticate Identity
+
+        Re-authenticates an identity on demand: validates the saved browser profile and runs login
+        if
+        it is no longer signed in, then persists the refreshed profile and tears the temporary
+        session
+        down. Equivalent to a session with `identity_skip_validation: false` that ends after auth.
+
+        Args:
+          identity_id: The ID of the identity to reauthenticate
+          sync: When `true` (default), wait for authentication to finish and persist the refreshed
+          profile before returning. When `false`, start authentication asynchronously.
+        """
+        if not identity_id:
+            raise ValueError(f"Expected a non-empty value for `identity_id` but received {identity_id!r}")
+        return await self._post(
+            path_template("/v1/identities/{identityId}/reauthenticate", identityId=identity_id),
+            body=strip_not_given({"sync": sync}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.ReauthenticateIdentityResponse,
+        )
+
+    async def start_dynamic_auth_flow(
+        self,
+        session_id: str,
+        *,
+        url: str,
+        host: str,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.AuthFlowV2View:
+        """
+        Start Dynamic Auth Flow
+
+        Starts (or restarts) a dynamic auth flow in an existing browser session.
+        `session_id` is required in the path. Advances until the next presentation
+        (`decision`, `form`, `detection_failed`, `authenticated`, or `failed`).
+
+        If the response is `detection_failed` with `retryable: true`, or the request
+        times out, keep polling `GET /v1/identities/dynamic/state/{session_id}` —
+        some login steps take longer than a single start/resolve call. If
+        `detection_failed` and `retryable` is false, open `live_view_url` to finish
+        signing in. Do not treat a timeout as a hard stop until `view.type` is
+        `failed` or `detection_failed` and `retryable` is false.
+
+        Args:
+          session_id: Active browser session that will drive the login.
+          url: Landing URL to open in the session (login page).
+          host: Hostname of `url`. Must match the URL hostname after normalization.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._post(
+            path_template("/v1/identities/dynamic/start/{session_id}", session_id=session_id),
+            body=strip_not_given({"url": url, "host": host}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.AuthFlowV2View,
+        )
+
+    async def get_dynamic_auth_flow_state(
+        self,
+        session_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.AuthFlowV2State:
+        """
+        Get Dynamic Auth Flow State
+
+        Read-only snapshot of an in-progress dynamic auth flow. Does not acquire the
+        flow lock or mutate state.
+
+        Poll this endpoint when:
+        - start/resolve returned `type: detection_failed` with `retryable: true`
+          (the next login step is still being determined and may take longer than
+          the request timeout)
+        - start/resolve timed out or returned 409 while a transition is in flight
+        - you need the current presentation without submitting an answer
+
+        `view` is that presentation — the same object start/resolve return. Treat it
+        as the live step when `phase` is `settled`. While `phase` is `navigating`,
+        `view` may already describe the next step; `target` is only a progress
+        label for the in-flight transition.
+
+        Keep polling until `view.type` is `decision`, `form`, `authenticated`, a
+        non-retryable `detection_failed`, or a non-retryable `failed`. Then call
+        `/resolve` only for `decision`/`form`, `/finalize` for `authenticated`, or
+        open `live_view_url` for `detection_failed`.
+
+        Args:
+          session_id: Session whose auth flow state to read.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._get(
+            path_template("/v1/identities/dynamic/state/{session_id}", session_id=session_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.AuthFlowV2State,
+        )
+
+    async def resolve_dynamic_auth_flow(
+        self,
+        session_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.AuthFlowV2View:
+        """
+        Resolve Dynamic Auth Flow Step
+
+        Advances the flow by answering the current step. The body depends on the
+        last presentation's `type` — do not mix the two shapes:
+
+        - **`decision`**: send only `choice` (a `step_id` from `options`).
+          Do not send `option_index` or `values`.
+        - **`form`**: send `option_index` (index into `options`) and `values`
+          (field name → string). Do not send `choice`.
+
+        Do not call `/resolve` for `detection_failed`, `authenticated`, or `failed`.
+        For retryable `detection_failed`, a timeout, or a 409 (another transition
+        still in flight), poll `GET .../state/{session_id}` until a
+        `decision`/`form`/`authenticated` view appears, then continue. If
+        `detection_failed` is not retryable, open `live_view_url` to finish signing in.
+
+        Args:
+          session_id: Session whose auth flow to advance.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._post(
+            path_template("/v1/identities/dynamic/resolve/{session_id}", session_id=session_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.AuthFlowV2View,
+        )
+
+    async def finalize_dynamic_auth_flow(
+        self,
+        session_id: str,
+        *,
+        identity_name: str | NotGiven = not_given,
+        profile_name: str | NotGiven = not_given,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.AuthFlowV2FinalizeResult:
+        """
+        Finalize Dynamic Auth Flow
+
+        Persists the identity, browser profile, and captured credentials after the
+        flow reaches `authenticated`. The response reports whether the saved login
+        can be replayed unattended (`automatable`).
+
+        Args:
+          session_id: Session whose authenticated flow to persist.
+          identity_name: Optional name for the created identity.
+          profile_name: Optional browser profile name. Defaults to `profile-<session_id>`.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._post(
+            path_template("/v1/identities/dynamic/finalize/{session_id}", session_id=session_id),
+            body=strip_not_given({"identity_name": identity_name, "profile_name": profile_name}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.AuthFlowV2FinalizeResult,
         )
