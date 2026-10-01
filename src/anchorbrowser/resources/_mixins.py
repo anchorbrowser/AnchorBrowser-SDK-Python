@@ -7,6 +7,7 @@ from .tasks import TasksResource, AsyncTasksResource
 from .tools import ToolsResource, AsyncToolsResource
 from .events import EventsResource, AsyncEventsResource
 from .billing import BillingResource, AsyncBillingResource
+from .volumes import VolumesResource, AsyncVolumesResource
 from .._compat import cached_property
 from .profiles import ProfilesResource, AsyncProfilesResource
 from .sessions import SessionsResource, AsyncSessionsResource
@@ -14,6 +15,7 @@ from .webhooks import WebhooksResource, AsyncWebhooksResource
 from .extensions import ExtensionsResource, AsyncExtensionsResource
 from .identities import IdentitiesResource, AsyncIdentitiesResource
 from .recordings import RecordingsResource, AsyncRecordingsResource
+from .agent_access import AgentAccessResource, AsyncAgentAccessResource
 from .applications import ApplicationsResource, AsyncApplicationsResource
 from .certificates import CertificatesResource, AsyncCertificatesResource
 from .integrations import IntegrationsResource, AsyncIntegrationsResource
@@ -25,6 +27,10 @@ class SyncResourcesMixin:
     @cached_property
     def agent(self) -> AgentResource:
         return AgentResource(self)  # type: ignore[arg-type]
+
+    @cached_property
+    def agent_access(self) -> AgentAccessResource:
+        return AgentAccessResource(self)  # type: ignore[arg-type]
 
     @cached_property
     def applications(self) -> ApplicationsResource:
@@ -83,6 +89,10 @@ class SyncResourcesMixin:
         return ToolsResource(self)  # type: ignore[arg-type]
 
     @cached_property
+    def volumes(self) -> VolumesResource:
+        return VolumesResource(self)  # type: ignore[arg-type]
+
+    @cached_property
     def webhooks(self) -> WebhooksResource:
         return WebhooksResource(self)  # type: ignore[arg-type]
 
@@ -91,6 +101,10 @@ class AsyncResourcesMixin:
     @cached_property
     def agent(self) -> AsyncAgentResource:
         return AsyncAgentResource(self)  # type: ignore[arg-type]
+
+    @cached_property
+    def agent_access(self) -> AsyncAgentAccessResource:
+        return AsyncAgentAccessResource(self)  # type: ignore[arg-type]
 
     @cached_property
     def applications(self) -> AsyncApplicationsResource:
@@ -147,6 +161,10 @@ class AsyncResourcesMixin:
     @cached_property
     def tools(self) -> AsyncToolsResource:
         return AsyncToolsResource(self)  # type: ignore[arg-type]
+
+    @cached_property
+    def volumes(self) -> AsyncVolumesResource:
+        return AsyncVolumesResource(self)  # type: ignore[arg-type]
 
     @cached_property
     def webhooks(self) -> AsyncWebhooksResource:

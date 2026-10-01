@@ -22,13 +22,14 @@ class ToolsResource(SyncAPIResource):
         *,
         prompt: str,
         url: str | NotGiven = not_given,
-        agent: Literal["browser-use", "openai-cua", "gemini-computer-use", "anthropic-cua", "yutori"]
+        agent: Literal["browser-use", "openai-cua", "gemini-computer-use", "anthropic-cua", "yutori", "jev"]
         | NotGiven = not_given,
         provider: Literal["openai", "gemini", "groq", "azure", "xai"] | NotGiven = not_given,
         model: str | NotGiven = not_given,
         detect_elements: bool | NotGiven = not_given,
         human_intervention: bool | NotGiven = not_given,
         max_steps: int | NotGiven = not_given,
+        llm_timeout: int | NotGiven = not_given,
         secret_values: Dict[str, object] | NotGiven = not_given,
         highlight_elements: bool | NotGiven = not_given,
         output_schema: Dict[str, object] | NotGiven = not_given,
@@ -59,6 +60,9 @@ class ToolsResource(SyncAPIResource):
           agent can request human input for ambiguous situations.
           max_steps: Maximum number of steps the agent can take to complete the task. Defaults to
           200.
+          llm_timeout: Timeout in seconds for each LLM call made by the agent (browser-use agent
+          only). Raise it when tasks with deep context (long histories, large pages) hit LLM call
+          timeouts. When omitted, the agent uses its model-based defaults.
           secret_values: Secret values to pass to the agent for secure credential handling. Keys
           and values are passed as environment variables to the agent.
           highlight_elements: Whether to highlight elements during task execution for better
@@ -81,6 +85,7 @@ class ToolsResource(SyncAPIResource):
                     "detect_elements": detect_elements,
                     "human_intervention": human_intervention,
                     "max_steps": max_steps,
+                    "llm_timeout": llm_timeout,
                     "secret_values": secret_values,
                     "highlight_elements": highlight_elements,
                     "output_schema": output_schema,
@@ -163,32 +168,53 @@ class ToolsResource(SyncAPIResource):
         self,
         *,
         url: str,
+        options: Dict[str, object] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
+    ) -> object:
         """
         Web Unlocker
 
-        Fetch fully-rendered page content from any URL — including bot-protected sites — without
-        managing a browser session.
-        Requests are routed through stealth browsers with residential proxies, captcha solving, and
-        fingerprint randomization.
-        No session is required. See the [Web Unlocker guide](/advanced/web-unlocker) for more
-        details.
+        Fetch the fully rendered HTML of any URL — including CAPTCHA- and bot-protected sites —
+        with a single sessionless request.
+
+        Each request runs in a stealth browser behind a residential proxy. JavaScript is fully
+        rendered, cookie-consent dialogs are dismissed,
+        and CAPTCHA or bot-detection challenges (Cloudflare, reCAPTCHA, FunCaptcha, DataDome,
+        Kasada, Akamai) are solved automatically —
+        you receive the page behind the challenge, never the interstitial. No browser session is
+        created and the request does not count
+        against your concurrent-browser limit.
+
+        **Response:** the page body is returned directly (not wrapped in JSON). HTML pages return
+        `text/html`; PDFs and file downloads are
+        passed through as binary with their original content type and a `Content-Disposition:
+        attachment` header.
+
+        **Limits:** 2,000 requests per minute per API key by default. Requests can take up to about
+        two minutes when a challenge must be
+        solved, so configure client timeouts of at least 120 seconds.
+
+        **Billing:** 0.005 credits per `200` response, regardless of page content. `4xx` and `5xx`
+        responses are not billed.
+
+        See the [Web Unlocker guide](/advanced/web-unlocker) for examples, retry guidance, and a
+        comparison with browser sessions.
 
         Args:
-          url: The fully-qualified URL to fetch (e.g. `https://www.linkedin.com/company/openai`).
+          url: The fully-qualified URL to fetch, including the scheme (e.g.
+          `https://www.linkedin.com/company/openai`).
+          options: Optional retrieval settings.
         """
-        extra_headers = {"Accept": "text/html", **(extra_headers or {})}
         return self._post(
             "/v1/tools/fetch/webpage",
-            body=strip_not_given({"url": url}),
+            body=strip_not_given({"url": url, "options": options}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=object,
         )
 
     def screenshot_webpage(
@@ -342,13 +368,14 @@ class AsyncToolsResource(AsyncAPIResource):
         *,
         prompt: str,
         url: str | NotGiven = not_given,
-        agent: Literal["browser-use", "openai-cua", "gemini-computer-use", "anthropic-cua", "yutori"]
+        agent: Literal["browser-use", "openai-cua", "gemini-computer-use", "anthropic-cua", "yutori", "jev"]
         | NotGiven = not_given,
         provider: Literal["openai", "gemini", "groq", "azure", "xai"] | NotGiven = not_given,
         model: str | NotGiven = not_given,
         detect_elements: bool | NotGiven = not_given,
         human_intervention: bool | NotGiven = not_given,
         max_steps: int | NotGiven = not_given,
+        llm_timeout: int | NotGiven = not_given,
         secret_values: Dict[str, object] | NotGiven = not_given,
         highlight_elements: bool | NotGiven = not_given,
         output_schema: Dict[str, object] | NotGiven = not_given,
@@ -379,6 +406,9 @@ class AsyncToolsResource(AsyncAPIResource):
           agent can request human input for ambiguous situations.
           max_steps: Maximum number of steps the agent can take to complete the task. Defaults to
           200.
+          llm_timeout: Timeout in seconds for each LLM call made by the agent (browser-use agent
+          only). Raise it when tasks with deep context (long histories, large pages) hit LLM call
+          timeouts. When omitted, the agent uses its model-based defaults.
           secret_values: Secret values to pass to the agent for secure credential handling. Keys
           and values are passed as environment variables to the agent.
           highlight_elements: Whether to highlight elements during task execution for better
@@ -401,6 +431,7 @@ class AsyncToolsResource(AsyncAPIResource):
                     "detect_elements": detect_elements,
                     "human_intervention": human_intervention,
                     "max_steps": max_steps,
+                    "llm_timeout": llm_timeout,
                     "secret_values": secret_values,
                     "highlight_elements": highlight_elements,
                     "output_schema": output_schema,
@@ -483,32 +514,53 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        options: Dict[str, object] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
+    ) -> object:
         """
         Web Unlocker
 
-        Fetch fully-rendered page content from any URL — including bot-protected sites — without
-        managing a browser session.
-        Requests are routed through stealth browsers with residential proxies, captcha solving, and
-        fingerprint randomization.
-        No session is required. See the [Web Unlocker guide](/advanced/web-unlocker) for more
-        details.
+        Fetch the fully rendered HTML of any URL — including CAPTCHA- and bot-protected sites —
+        with a single sessionless request.
+
+        Each request runs in a stealth browser behind a residential proxy. JavaScript is fully
+        rendered, cookie-consent dialogs are dismissed,
+        and CAPTCHA or bot-detection challenges (Cloudflare, reCAPTCHA, FunCaptcha, DataDome,
+        Kasada, Akamai) are solved automatically —
+        you receive the page behind the challenge, never the interstitial. No browser session is
+        created and the request does not count
+        against your concurrent-browser limit.
+
+        **Response:** the page body is returned directly (not wrapped in JSON). HTML pages return
+        `text/html`; PDFs and file downloads are
+        passed through as binary with their original content type and a `Content-Disposition:
+        attachment` header.
+
+        **Limits:** 2,000 requests per minute per API key by default. Requests can take up to about
+        two minutes when a challenge must be
+        solved, so configure client timeouts of at least 120 seconds.
+
+        **Billing:** 0.005 credits per `200` response, regardless of page content. `4xx` and `5xx`
+        responses are not billed.
+
+        See the [Web Unlocker guide](/advanced/web-unlocker) for examples, retry guidance, and a
+        comparison with browser sessions.
 
         Args:
-          url: The fully-qualified URL to fetch (e.g. `https://www.linkedin.com/company/openai`).
+          url: The fully-qualified URL to fetch, including the scheme (e.g.
+          `https://www.linkedin.com/company/openai`).
+          options: Optional retrieval settings.
         """
-        extra_headers = {"Accept": "text/html", **(extra_headers or {})}
         return await self._post(
             "/v1/tools/fetch/webpage",
-            body=strip_not_given({"url": url}),
+            body=strip_not_given({"url": url, "options": options}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=object,
         )
 
     async def screenshot_webpage(
