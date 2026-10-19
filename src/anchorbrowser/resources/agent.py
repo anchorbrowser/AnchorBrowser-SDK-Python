@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Mapping, cast
+from typing import Dict, Union, Literal, Mapping, cast
 
 import httpx
 
@@ -21,6 +21,7 @@ class AgentResource(SyncAPIResource):
         session_id: str,
         *,
         file: FileTypes,
+        extract: Literal["true", "false"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -31,13 +32,18 @@ class AgentResource(SyncAPIResource):
 
         Upload files as agent resources to a browser session using multipart/form-data.
         If you upload a ZIP file, it will be automatically extracted and the files will be made
-        available as agent resources.
+        available as agent resources
+        (pass `extract=false` to keep the archive itself instead).
         If you upload a single file, it will be saved directly as an agent resource.
         Resources are then accessible to AI agents for task completion and automation.
 
         Args:
           session_id: The browser session ID
-          file: File to upload as agent resource (ZIP files will be extracted automatically)
+          file: File to upload as agent resource (ZIP files are extracted unless extract=false)
+          extract: Whether a `.zip` upload is unpacked into the uploads directory. Defaults to
+          `true`.
+          Set to `false` to keep the archive itself. Any other value is treated as `true`.
+          Has no effect on non-zip files.
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
@@ -49,7 +55,11 @@ class AgentResource(SyncAPIResource):
             body=body,
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=strip_not_given({"extract": extract}),
             ),
             cast_to=models.AgentUploadAgentFilesResponse,
         )
@@ -232,6 +242,7 @@ class AsyncAgentResource(AsyncAPIResource):
         session_id: str,
         *,
         file: FileTypes,
+        extract: Literal["true", "false"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -242,13 +253,18 @@ class AsyncAgentResource(AsyncAPIResource):
 
         Upload files as agent resources to a browser session using multipart/form-data.
         If you upload a ZIP file, it will be automatically extracted and the files will be made
-        available as agent resources.
+        available as agent resources
+        (pass `extract=false` to keep the archive itself instead).
         If you upload a single file, it will be saved directly as an agent resource.
         Resources are then accessible to AI agents for task completion and automation.
 
         Args:
           session_id: The browser session ID
-          file: File to upload as agent resource (ZIP files will be extracted automatically)
+          file: File to upload as agent resource (ZIP files are extracted unless extract=false)
+          extract: Whether a `.zip` upload is unpacked into the uploads directory. Defaults to
+          `true`.
+          Set to `false` to keep the archive itself. Any other value is treated as `true`.
+          Has no effect on non-zip files.
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
@@ -260,7 +276,11 @@ class AsyncAgentResource(AsyncAPIResource):
             body=body,
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=strip_not_given({"extract": extract}),
             ),
             cast_to=models.AgentUploadAgentFilesResponse,
         )

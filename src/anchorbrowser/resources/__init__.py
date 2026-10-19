@@ -6,12 +6,17 @@ from .tools import ToolsResource as ToolsResource, AsyncToolsResource as AsyncTo
 from .events import EventsResource as EventsResource, AsyncEventsResource as AsyncEventsResource
 from .billing import BillingResource as BillingResource, AsyncBillingResource as AsyncBillingResource
 from .browser import BrowserResource as BrowserResource, AsyncBrowserResource as AsyncBrowserResource
+from .volumes import VolumesResource as VolumesResource, AsyncVolumesResource as AsyncVolumesResource
 from .profiles import ProfilesResource as ProfilesResource, AsyncProfilesResource as AsyncProfilesResource
 from .sessions import SessionsResource as SessionsResource, AsyncSessionsResource as AsyncSessionsResource
 from .webhooks import WebhooksResource as WebhooksResource, AsyncWebhooksResource as AsyncWebhooksResource
 from .extensions import ExtensionsResource as ExtensionsResource, AsyncExtensionsResource as AsyncExtensionsResource
 from .identities import IdentitiesResource as IdentitiesResource, AsyncIdentitiesResource as AsyncIdentitiesResource
 from .recordings import RecordingsResource as RecordingsResource, AsyncRecordingsResource as AsyncRecordingsResource
+from .agent_access import (
+    AgentAccessResource as AgentAccessResource,
+    AsyncAgentAccessResource as AsyncAgentAccessResource,
+)
 from .applications import (
     ApplicationsResource as ApplicationsResource,
     AsyncApplicationsResource as AsyncApplicationsResource,
