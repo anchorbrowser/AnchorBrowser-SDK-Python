@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 import httpx
 
 from ..types import models
 from .._types import Body, Query, Headers, NotGiven, not_given
+from .._utils import strip_not_given
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
 
@@ -16,6 +19,9 @@ class BillingResource(SyncAPIResource):
     def get_billing(
         self,
         *,
+        from_date: str | NotGiven = not_given,
+        to_date: str | NotGiven = not_given,
+        granularity: Literal["hour", "day", "week", "month"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -25,12 +31,24 @@ class BillingResource(SyncAPIResource):
         Get Billing Info
 
         Retrieves credit balance, current-period credit usage, tier, and billing limits for the
-        authenticated project.
+        authenticated project. Pass `from_date`, `to_date`, or `granularity` to additionally
+        receive a `usage` time series of credits used per period, matching `GET
+        /v1/sessions/history?metrics=credits_used`.
+
+        Args:
+          from_date: Start of the usage window (ISO 8601 format, UTC). Passing any of `from_date`,
+          `to_date`, or `granularity` adds a `usage` block to the response. Defaults to 30 days ago.
+          to_date: End of the usage window (ISO 8601 format, UTC). Defaults to now.
+          granularity: Time granularity for the usage time series.
         """
         return self._get(
             "/v1/billing",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=strip_not_given({"from_date": from_date, "to_date": to_date, "granularity": granularity}),
             ),
             cast_to=models.BillingInfoResponse,
         )
@@ -40,6 +58,9 @@ class AsyncBillingResource(AsyncAPIResource):
     async def get_billing(
         self,
         *,
+        from_date: str | NotGiven = not_given,
+        to_date: str | NotGiven = not_given,
+        granularity: Literal["hour", "day", "week", "month"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -49,12 +70,24 @@ class AsyncBillingResource(AsyncAPIResource):
         Get Billing Info
 
         Retrieves credit balance, current-period credit usage, tier, and billing limits for the
-        authenticated project.
+        authenticated project. Pass `from_date`, `to_date`, or `granularity` to additionally
+        receive a `usage` time series of credits used per period, matching `GET
+        /v1/sessions/history?metrics=credits_used`.
+
+        Args:
+          from_date: Start of the usage window (ISO 8601 format, UTC). Passing any of `from_date`,
+          `to_date`, or `granularity` adds a `usage` block to the response. Defaults to 30 days ago.
+          to_date: End of the usage window (ISO 8601 format, UTC). Defaults to now.
+          granularity: Time granularity for the usage time series.
         """
         return await self._get(
             "/v1/billing",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=strip_not_given({"from_date": from_date, "to_date": to_date, "granularity": granularity}),
             ),
             cast_to=models.BillingInfoResponse,
         )
