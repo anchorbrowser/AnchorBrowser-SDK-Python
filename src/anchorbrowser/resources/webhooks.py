@@ -26,6 +26,7 @@ class WebhooksResource(SyncAPIResource):
                 "task.failed",
                 "task.cancelled",
                 "task.healed",
+                "session.ready",
                 "session.completed",
                 "session.failed",
                 "session.recording.ready",
@@ -127,6 +128,7 @@ class WebhooksResource(SyncAPIResource):
                 "task.failed",
                 "task.cancelled",
                 "task.healed",
+                "session.ready",
                 "session.completed",
                 "session.failed",
                 "session.recording.ready",
@@ -237,6 +239,7 @@ class WebhooksResource(SyncAPIResource):
             "task.failed",
             "task.cancelled",
             "task.healed",
+            "session.ready",
             "session.completed",
             "session.failed",
             "session.recording.ready",
@@ -285,12 +288,13 @@ class WebhooksResource(SyncAPIResource):
         *,
         limit: int | NotGiven = not_given,
         offset: int | NotGiven = not_given,
-        status: Literal["pending", "in_flight", "succeeded", "failed", "dead"] | NotGiven = not_given,
+        status: Literal["pending", "succeeded", "failed", "dead"] | NotGiven = not_given,
         event_type: Literal[
             "task.completed",
             "task.failed",
             "task.cancelled",
             "task.healed",
+            "session.ready",
             "session.completed",
             "session.failed",
             "session.recording.ready",
@@ -304,6 +308,7 @@ class WebhooksResource(SyncAPIResource):
         | NotGiven = not_given,
         since: str | NotGiven = not_given,
         until: str | NotGiven = not_given,
+        include_payload: Literal["true", "false"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -324,6 +329,8 @@ class WebhooksResource(SyncAPIResource):
           event_type: Filter by event type.
           since: Only include deliveries scheduled at or after this ISO 8601 timestamp.
           until: Only include deliveries scheduled at or before this ISO 8601 timestamp.
+          include_payload: Set to `true` to include each delivery's sanitized event `data` (as
+          delivered to your endpoint) in the `payload` field of every row.
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
@@ -342,6 +349,7 @@ class WebhooksResource(SyncAPIResource):
                         "event_type": event_type,
                         "since": since,
                         "until": until,
+                        "include_payload": include_payload,
                     }
                 ),
             ),
@@ -360,6 +368,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 "task.failed",
                 "task.cancelled",
                 "task.healed",
+                "session.ready",
                 "session.completed",
                 "session.failed",
                 "session.recording.ready",
@@ -461,6 +470,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 "task.failed",
                 "task.cancelled",
                 "task.healed",
+                "session.ready",
                 "session.completed",
                 "session.failed",
                 "session.recording.ready",
@@ -571,6 +581,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
             "task.failed",
             "task.cancelled",
             "task.healed",
+            "session.ready",
             "session.completed",
             "session.failed",
             "session.recording.ready",
@@ -619,12 +630,13 @@ class AsyncWebhooksResource(AsyncAPIResource):
         *,
         limit: int | NotGiven = not_given,
         offset: int | NotGiven = not_given,
-        status: Literal["pending", "in_flight", "succeeded", "failed", "dead"] | NotGiven = not_given,
+        status: Literal["pending", "succeeded", "failed", "dead"] | NotGiven = not_given,
         event_type: Literal[
             "task.completed",
             "task.failed",
             "task.cancelled",
             "task.healed",
+            "session.ready",
             "session.completed",
             "session.failed",
             "session.recording.ready",
@@ -638,6 +650,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         | NotGiven = not_given,
         since: str | NotGiven = not_given,
         until: str | NotGiven = not_given,
+        include_payload: Literal["true", "false"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -658,6 +671,8 @@ class AsyncWebhooksResource(AsyncAPIResource):
           event_type: Filter by event type.
           since: Only include deliveries scheduled at or after this ISO 8601 timestamp.
           until: Only include deliveries scheduled at or before this ISO 8601 timestamp.
+          include_payload: Set to `true` to include each delivery's sanitized event `data` (as
+          delivered to your endpoint) in the `payload` field of every row.
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
@@ -676,6 +691,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
                         "event_type": event_type,
                         "since": since,
                         "until": until,
+                        "include_payload": include_payload,
                     }
                 ),
             ),
