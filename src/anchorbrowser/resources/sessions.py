@@ -32,7 +32,6 @@ class SessionsResource(SyncAPIResource):
         created_to: str | NotGiven = not_given,
         batch_id: str | NotGiven = not_given,
         task_initiated: bool | NotGiven = not_given,
-        playground: bool | NotGiven = not_given,
         proxy: bool | NotGiven = not_given,
         extra_stealth: bool | NotGiven = not_given,
         profile_name: str | NotGiven = not_given,
@@ -62,7 +61,6 @@ class SessionsResource(SyncAPIResource):
           created_to: Include sessions created at or before this timestamp (ISO 8601).
           batch_id: Filter by batch identifier.
           task_initiated: Filter by whether the session was task-initiated.
-          playground: Filter by whether the session is a playground session.
           proxy: Filter by whether proxy was active for the session.
           extra_stealth: Filter by whether extra stealth mode was active.
           profile_name: Case-insensitive partial match on browser profile name.
@@ -88,7 +86,6 @@ class SessionsResource(SyncAPIResource):
                         "created_to": created_to,
                         "batch_id": batch_id,
                         "task_initiated": task_initiated,
-                        "playground": playground,
                         "proxy": proxy,
                         "extra_stealth": extra_stealth,
                         "profile_name": profile_name,
@@ -105,6 +102,8 @@ class SessionsResource(SyncAPIResource):
         browser: params.BrowserConfig | NotGiven = not_given,
         integrations: Iterable[params.Integration] | NotGiven = not_given,
         identities: Iterable[Dict[str, object]] | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        identity_async_auth: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -122,11 +121,24 @@ class SessionsResource(SyncAPIResource):
           integrations: Array of integrations to load in the browser session. Integrations must be
           previously created using the Integrations API.
           identities: Activates an authenticated session.
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          identity_async_auth: Run identity authentication in the background and return the session
+          immediately.
         """
         return self._post(
             "/v1/sessions",
             body=strip_not_given(
-                {"session": session, "browser": browser, "integrations": integrations, "identities": identities}
+                {
+                    "session": session,
+                    "browser": browser,
+                    "integrations": integrations,
+                    "identities": identities,
+                    "identity_skip_validation": identity_skip_validation,
+                    "identity_async_auth": identity_async_auth,
+                }
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -141,6 +153,8 @@ class SessionsResource(SyncAPIResource):
         browser: params.BrowserConfig | NotGiven = not_given,
         integrations: Iterable[params.Integration] | NotGiven = not_given,
         identities: Iterable[Dict[str, object]] | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        identity_async_auth: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -161,11 +175,24 @@ class SessionsResource(SyncAPIResource):
           integrations: Array of integrations to load in the browser session. Integrations must be
           previously created using the Integrations API.
           identities: Activates an authenticated session.
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          identity_async_auth: Run identity authentication in the background and return the session
+          immediately.
         """
         return self._post(
             "/v1/sessions/async",
             body=strip_not_given(
-                {"session": session, "browser": browser, "integrations": integrations, "identities": identities}
+                {
+                    "session": session,
+                    "browser": browser,
+                    "integrations": integrations,
+                    "identities": identities,
+                    "identity_skip_validation": identity_skip_validation,
+                    "identity_async_auth": identity_async_auth,
+                }
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -233,7 +260,6 @@ class SessionsResource(SyncAPIResource):
         created_to: str | NotGiven = not_given,
         batch_id: str | NotGiven = not_given,
         task_initiated: bool | NotGiven = not_given,
-        playground: bool | NotGiven = not_given,
         proxy: bool | NotGiven = not_given,
         extra_stealth: bool | NotGiven = not_given,
         profile_name: str | NotGiven = not_given,
@@ -256,7 +282,6 @@ class SessionsResource(SyncAPIResource):
           created_to: Include sessions created at or before this timestamp (ISO 8601).
           batch_id: Filter sessions by batch identifier.
           task_initiated: Filter by whether the session was initiated by a task.
-          playground: Filter by whether the session is a playground session.
           proxy: Filter by whether proxy was active for the session.
           extra_stealth: Filter by whether extra stealth mode was active for the session.
           profile_name: Filter sessions by browser profile name (case-insensitive partial match).
@@ -276,7 +301,6 @@ class SessionsResource(SyncAPIResource):
                         "created_to": created_to,
                         "batch_id": batch_id,
                         "task_initiated": task_initiated,
-                        "playground": playground,
                         "proxy": proxy,
                         "extra_stealth": extra_stealth,
                         "profile_name": profile_name,
@@ -403,6 +427,91 @@ class SessionsResource(SyncAPIResource):
             cast_to=models.SuccessResponse,
         )
 
+    def get_session_tags(
+        self,
+        session_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.SessionTagsResponse:
+        """
+        Get Session Tags
+
+        Retrieves the tags associated with a specific browser session.
+
+        Args:
+          session_id: The ID of the session to retrieve tags for.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._get(
+            path_template("/v1/sessions/{session_id}/tags", session_id=session_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.SessionTagsResponse,
+        )
+
+    def put_session_tags(
+        self,
+        session_id: str,
+        *,
+        tags: Iterable[str],
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.SessionTagsMutationResponse:
+        """
+        Put Session Tags
+
+        Create or replace tags on a browser session. This overwrites any existing tags
+        with the provided list. See [Session Tags](/advanced/session-tags).
+
+        Args:
+          session_id: The ID of the session to update tags for.
+          tags: Tags to set on the session. Replaces any existing tags.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._put(
+            path_template("/v1/sessions/{session_id}/tags", session_id=session_id),
+            body=strip_not_given({"tags": tags}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.SessionTagsMutationResponse,
+        )
+
+    def delete_session_tags(
+        self,
+        session_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.SessionTagsMutationResponse:
+        """
+        Delete Session Tags
+
+        Clears all tags from a browser session.
+
+        Args:
+          session_id: The ID of the session to clear tags for.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._delete(
+            path_template("/v1/sessions/{session_id}/tags", session_id=session_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.SessionTagsMutationResponse,
+        )
+
     def get_session_pages(
         self,
         session_id: str,
@@ -435,6 +544,7 @@ class SessionsResource(SyncAPIResource):
         session_id: str,
         *,
         file: FileTypes,
+        extract: Literal["true", "false"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -445,11 +555,20 @@ class SessionsResource(SyncAPIResource):
 
         Upload files directly to a browser session for use with web forms and file inputs.
 
-        Files are saved to the session's uploads directory and can be referenced in CDP commands.
+        Files are saved to the session's uploads directory and can be referenced in CDP commands
+        (for example `DOM.setFileInputFiles`). The saved paths are returned in `file_paths`.
+
+        A `.zip` upload is unpacked into the uploads directory by default and the archive itself is
+        not kept. Pass `extract=false` to store the archive as-is, for example to attach the zip
+        itself to a file input.
 
         Args:
           session_id: The browser session ID
           file: File to upload to the browser session
+          extract: Whether a `.zip` upload is unpacked into the uploads directory. Defaults to
+          `true`.
+          Set to `false` to keep the archive itself so it can be attached to a file input as-is.
+          Any other value is treated as `true`. Has no effect on non-zip files.
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
@@ -461,7 +580,11 @@ class SessionsResource(SyncAPIResource):
             body=body,
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=strip_not_given({"extract": extract}),
             ),
             cast_to=models.SessionsUploadFileResponse,
         )
@@ -1007,7 +1130,6 @@ class AsyncSessionsResource(AsyncAPIResource):
         created_to: str | NotGiven = not_given,
         batch_id: str | NotGiven = not_given,
         task_initiated: bool | NotGiven = not_given,
-        playground: bool | NotGiven = not_given,
         proxy: bool | NotGiven = not_given,
         extra_stealth: bool | NotGiven = not_given,
         profile_name: str | NotGiven = not_given,
@@ -1037,7 +1159,6 @@ class AsyncSessionsResource(AsyncAPIResource):
           created_to: Include sessions created at or before this timestamp (ISO 8601).
           batch_id: Filter by batch identifier.
           task_initiated: Filter by whether the session was task-initiated.
-          playground: Filter by whether the session is a playground session.
           proxy: Filter by whether proxy was active for the session.
           extra_stealth: Filter by whether extra stealth mode was active.
           profile_name: Case-insensitive partial match on browser profile name.
@@ -1063,7 +1184,6 @@ class AsyncSessionsResource(AsyncAPIResource):
                         "created_to": created_to,
                         "batch_id": batch_id,
                         "task_initiated": task_initiated,
-                        "playground": playground,
                         "proxy": proxy,
                         "extra_stealth": extra_stealth,
                         "profile_name": profile_name,
@@ -1080,6 +1200,8 @@ class AsyncSessionsResource(AsyncAPIResource):
         browser: params.BrowserConfig | NotGiven = not_given,
         integrations: Iterable[params.Integration] | NotGiven = not_given,
         identities: Iterable[Dict[str, object]] | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        identity_async_auth: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -1097,11 +1219,24 @@ class AsyncSessionsResource(AsyncAPIResource):
           integrations: Array of integrations to load in the browser session. Integrations must be
           previously created using the Integrations API.
           identities: Activates an authenticated session.
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          identity_async_auth: Run identity authentication in the background and return the session
+          immediately.
         """
         return await self._post(
             "/v1/sessions",
             body=strip_not_given(
-                {"session": session, "browser": browser, "integrations": integrations, "identities": identities}
+                {
+                    "session": session,
+                    "browser": browser,
+                    "integrations": integrations,
+                    "identities": identities,
+                    "identity_skip_validation": identity_skip_validation,
+                    "identity_async_auth": identity_async_auth,
+                }
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1116,6 +1251,8 @@ class AsyncSessionsResource(AsyncAPIResource):
         browser: params.BrowserConfig | NotGiven = not_given,
         integrations: Iterable[params.Integration] | NotGiven = not_given,
         identities: Iterable[Dict[str, object]] | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        identity_async_auth: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -1136,11 +1273,24 @@ class AsyncSessionsResource(AsyncAPIResource):
           integrations: Array of integrations to load in the browser session. Integrations must be
           previously created using the Integrations API.
           identities: Activates an authenticated session.
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          identity_async_auth: Run identity authentication in the background and return the session
+          immediately.
         """
         return await self._post(
             "/v1/sessions/async",
             body=strip_not_given(
-                {"session": session, "browser": browser, "integrations": integrations, "identities": identities}
+                {
+                    "session": session,
+                    "browser": browser,
+                    "integrations": integrations,
+                    "identities": identities,
+                    "identity_skip_validation": identity_skip_validation,
+                    "identity_async_auth": identity_async_auth,
+                }
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1208,7 +1358,6 @@ class AsyncSessionsResource(AsyncAPIResource):
         created_to: str | NotGiven = not_given,
         batch_id: str | NotGiven = not_given,
         task_initiated: bool | NotGiven = not_given,
-        playground: bool | NotGiven = not_given,
         proxy: bool | NotGiven = not_given,
         extra_stealth: bool | NotGiven = not_given,
         profile_name: str | NotGiven = not_given,
@@ -1231,7 +1380,6 @@ class AsyncSessionsResource(AsyncAPIResource):
           created_to: Include sessions created at or before this timestamp (ISO 8601).
           batch_id: Filter sessions by batch identifier.
           task_initiated: Filter by whether the session was initiated by a task.
-          playground: Filter by whether the session is a playground session.
           proxy: Filter by whether proxy was active for the session.
           extra_stealth: Filter by whether extra stealth mode was active for the session.
           profile_name: Filter sessions by browser profile name (case-insensitive partial match).
@@ -1251,7 +1399,6 @@ class AsyncSessionsResource(AsyncAPIResource):
                         "created_to": created_to,
                         "batch_id": batch_id,
                         "task_initiated": task_initiated,
-                        "playground": playground,
                         "proxy": proxy,
                         "extra_stealth": extra_stealth,
                         "profile_name": profile_name,
@@ -1378,6 +1525,91 @@ class AsyncSessionsResource(AsyncAPIResource):
             cast_to=models.SuccessResponse,
         )
 
+    async def get_session_tags(
+        self,
+        session_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.SessionTagsResponse:
+        """
+        Get Session Tags
+
+        Retrieves the tags associated with a specific browser session.
+
+        Args:
+          session_id: The ID of the session to retrieve tags for.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._get(
+            path_template("/v1/sessions/{session_id}/tags", session_id=session_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.SessionTagsResponse,
+        )
+
+    async def put_session_tags(
+        self,
+        session_id: str,
+        *,
+        tags: Iterable[str],
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.SessionTagsMutationResponse:
+        """
+        Put Session Tags
+
+        Create or replace tags on a browser session. This overwrites any existing tags
+        with the provided list. See [Session Tags](/advanced/session-tags).
+
+        Args:
+          session_id: The ID of the session to update tags for.
+          tags: Tags to set on the session. Replaces any existing tags.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._put(
+            path_template("/v1/sessions/{session_id}/tags", session_id=session_id),
+            body=strip_not_given({"tags": tags}),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.SessionTagsMutationResponse,
+        )
+
+    async def delete_session_tags(
+        self,
+        session_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> models.SessionTagsMutationResponse:
+        """
+        Delete Session Tags
+
+        Clears all tags from a browser session.
+
+        Args:
+          session_id: The ID of the session to clear tags for.
+        """
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._delete(
+            path_template("/v1/sessions/{session_id}/tags", session_id=session_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=models.SessionTagsMutationResponse,
+        )
+
     async def get_session_pages(
         self,
         session_id: str,
@@ -1410,6 +1642,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         session_id: str,
         *,
         file: FileTypes,
+        extract: Literal["true", "false"] | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -1420,11 +1653,20 @@ class AsyncSessionsResource(AsyncAPIResource):
 
         Upload files directly to a browser session for use with web forms and file inputs.
 
-        Files are saved to the session's uploads directory and can be referenced in CDP commands.
+        Files are saved to the session's uploads directory and can be referenced in CDP commands
+        (for example `DOM.setFileInputFiles`). The saved paths are returned in `file_paths`.
+
+        A `.zip` upload is unpacked into the uploads directory by default and the archive itself is
+        not kept. Pass `extract=false` to store the archive as-is, for example to attach the zip
+        itself to a file input.
 
         Args:
           session_id: The browser session ID
           file: File to upload to the browser session
+          extract: Whether a `.zip` upload is unpacked into the uploads directory. Defaults to
+          `true`.
+          Set to `false` to keep the archive itself so it can be attached to a file input as-is.
+          Any other value is treated as `true`. Has no effect on non-zip files.
         """
         if not session_id:
             raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
@@ -1436,7 +1678,11 @@ class AsyncSessionsResource(AsyncAPIResource):
             body=body,
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=strip_not_given({"extract": extract}),
             ),
             cast_to=models.SessionsUploadFileResponse,
         )
