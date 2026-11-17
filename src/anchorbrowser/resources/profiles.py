@@ -36,7 +36,7 @@ class ProfilesResource(SyncAPIResource):
         cache.
 
         Args:
-          name: The name of the profile.
+          name: Profile name, unique within your team.
           description: A description of the profile.
           source: The source of the profile data. currently only `session` is supported.
           session_id: The browser session ID is required if the source is set to `session`. The
@@ -159,7 +159,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         cache.
 
         Args:
-          name: The name of the profile.
+          name: Profile name, unique within your team.
           description: A description of the profile.
           source: The source of the profile data. currently only `session` is supported.
           session_id: The browser session ID is required if the source is set to `session`. The
