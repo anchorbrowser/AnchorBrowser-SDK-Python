@@ -405,9 +405,18 @@ class TestAnchorbrowser:
         assert request.headers.get("anchor-api-key") == api_key
 
         with pytest.raises(AnchorbrowserError):
-            with update_env(**{"ANCHORBROWSER_API_KEY": Omit()}):
+            with update_env(**{"ANCHORBROWSER_API_KEY": Omit(), "ANCHOR_API_KEY": Omit()}):
                 client2 = Anchorbrowser(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
+
+    def test_api_key_env_fallback(self) -> None:
+        with update_env(**{"ANCHORBROWSER_API_KEY": Omit(), "ANCHOR_API_KEY": "fallback-key"}):
+            client = Anchorbrowser(base_url=base_url, api_key=None)
+        assert client.api_key == "fallback-key"
+
+        with update_env(ANCHORBROWSER_API_KEY="primary-key", ANCHOR_API_KEY="fallback-key"):
+            client = Anchorbrowser(base_url=base_url, api_key=None)
+        assert client.api_key == "primary-key"
 
     def test_default_query_option(self) -> None:
         client = Anchorbrowser(
@@ -1332,9 +1341,18 @@ class TestAsyncAnchorbrowser:
         assert request.headers.get("anchor-api-key") == api_key
 
         with pytest.raises(AnchorbrowserError):
-            with update_env(**{"ANCHORBROWSER_API_KEY": Omit()}):
+            with update_env(**{"ANCHORBROWSER_API_KEY": Omit(), "ANCHOR_API_KEY": Omit()}):
                 client2 = AsyncAnchorbrowser(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
+
+    def test_api_key_env_fallback(self) -> None:
+        with update_env(**{"ANCHORBROWSER_API_KEY": Omit(), "ANCHOR_API_KEY": "fallback-key"}):
+            client = AsyncAnchorbrowser(base_url=base_url, api_key=None)
+        assert client.api_key == "fallback-key"
+
+        with update_env(ANCHORBROWSER_API_KEY="primary-key", ANCHOR_API_KEY="fallback-key"):
+            client = AsyncAnchorbrowser(base_url=base_url, api_key=None)
+        assert client.api_key == "primary-key"
 
     async def test_default_query_option(self) -> None:
         client = AsyncAnchorbrowser(

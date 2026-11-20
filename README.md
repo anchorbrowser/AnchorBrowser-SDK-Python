@@ -43,6 +43,7 @@ While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
 to add `ANCHORBROWSER_API_KEY="Your API Key"` to your `.env` file
 so that your API Key is not stored in source control.
+If `ANCHORBROWSER_API_KEY` is not set, the client reads `ANCHOR_API_KEY`.
 
 Every resource is an attribute on the client with one method per API operation:
 
