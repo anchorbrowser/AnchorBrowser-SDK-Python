@@ -79,13 +79,15 @@ class Anchorbrowser(SyncResourcesMixin, SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Anchorbrowser client instance.
 
-        This automatically infers the `api_key` argument from the `ANCHORBROWSER_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `ANCHORBROWSER_API_KEY` environment variable, or `ANCHOR_API_KEY` when that is unset, if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("ANCHORBROWSER_API_KEY")
         if api_key is None:
+            api_key = os.environ.get("ANCHOR_API_KEY")
+        if api_key is None:
             raise AnchorbrowserError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the ANCHORBROWSER_API_KEY environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the ANCHORBROWSER_API_KEY (or ANCHOR_API_KEY) environment variable"
             )
         self.api_key = api_key
 
@@ -261,13 +263,15 @@ class AsyncAnchorbrowser(AsyncResourcesMixin, AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncAnchorbrowser client instance.
 
-        This automatically infers the `api_key` argument from the `ANCHORBROWSER_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `ANCHORBROWSER_API_KEY` environment variable, or `ANCHOR_API_KEY` when that is unset, if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("ANCHORBROWSER_API_KEY")
         if api_key is None:
+            api_key = os.environ.get("ANCHOR_API_KEY")
+        if api_key is None:
             raise AnchorbrowserError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the ANCHORBROWSER_API_KEY environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the ANCHORBROWSER_API_KEY (or ANCHOR_API_KEY) environment variable"
             )
         self.api_key = api_key
 
