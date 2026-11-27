@@ -24,6 +24,8 @@ class TasksResource(SyncAPIResource):
         identity_id: str | NotGiven = not_given,
         session_id: str | NotGiven = not_given,
         cleanup_sessions: bool | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        sync: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -40,6 +42,11 @@ class TasksResource(SyncAPIResource):
           identity_id: Optional identity ID to use for the task
           session_id: Optional session ID to run the task in
           cleanup_sessions: Whether to clean up sessions after execution (default: true)
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          sync: Wait for the task to complete before returning. Defaults to `false`.
         """
         if not task_id:
             raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
@@ -51,6 +58,8 @@ class TasksResource(SyncAPIResource):
                     "identity_id": identity_id,
                     "session_id": session_id,
                     "cleanup_sessions": cleanup_sessions,
+                    "identity_skip_validation": identity_skip_validation,
+                    "sync": sync,
                 }
             ),
             options=make_request_options(
@@ -190,6 +199,8 @@ class AsyncTasksResource(AsyncAPIResource):
         identity_id: str | NotGiven = not_given,
         session_id: str | NotGiven = not_given,
         cleanup_sessions: bool | NotGiven = not_given,
+        identity_skip_validation: bool | NotGiven = not_given,
+        sync: bool | NotGiven = not_given,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
@@ -206,6 +217,11 @@ class AsyncTasksResource(AsyncAPIResource):
           identity_id: Optional identity ID to use for the task
           session_id: Optional session ID to run the task in
           cleanup_sessions: Whether to clean up sessions after execution (default: true)
+          identity_skip_validation: When `true` (default), skip profile validation for active
+          identities and reuse the saved
+          browser profile. Set to `false` to validate the profile and re-authenticate if it is no
+          longer signed in. Pending identities still authenticate on first use.
+          sync: Wait for the task to complete before returning. Defaults to `false`.
         """
         if not task_id:
             raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
@@ -217,6 +233,8 @@ class AsyncTasksResource(AsyncAPIResource):
                     "identity_id": identity_id,
                     "session_id": session_id,
                     "cleanup_sessions": cleanup_sessions,
+                    "identity_skip_validation": identity_skip_validation,
+                    "sync": sync,
                 }
             ),
             options=make_request_options(
